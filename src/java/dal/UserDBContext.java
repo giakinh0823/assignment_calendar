@@ -20,7 +20,7 @@ import model.User;
 public class UserDBContext extends DBContext<User> {
 
     public User getUser(String username, String password) {
-        String sql = "SELECT TOP (1000) [id]\n"
+        String sql = "SELECT [id]\n"
                 + "      ,[username]\n"
                 + "      ,[password]\n"
                 + "      ,[first_name]\n"
@@ -68,7 +68,7 @@ public class UserDBContext extends DBContext<User> {
     }
     
     public User findOne(String field, String value) {
-        String sql = "SELECT TOP (1000) [id]\n"
+        String sql = "SELECT [id]\n"
                 + "      ,[username]\n"
                 + "      ,[password]\n"
                 + "      ,[first_name]\n"
@@ -119,7 +119,49 @@ public class UserDBContext extends DBContext<User> {
 
     @Override
     public User get(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String sql = "SELECT [id]\n"
+                + "      ,[username]\n"
+                + "      ,[password]\n"
+                + "      ,[first_name]\n"
+                + "      ,[last_name]\n"
+                + "      ,[email]\n"
+                + "      ,[phone]\n"
+                + "      ,[gender]\n"
+                + "      ,[is_super]\n"
+                + "      ,[is_active]\n"
+                + "      ,[permission]\n"
+                + "      ,[created_at]\n"
+                + "      ,[updated_at]\n"
+                + "      ,[birthday]\n"
+                + "  FROM [user]\n"
+                + " WHERE id = ? ";
+        PreparedStatement statement = null;
+        try {
+            statement = connection.prepareStatement(sql);
+            statement.setInt(1, id);
+            ResultSet result = statement.executeQuery();
+            while (result.next()) {
+                User user = new User();
+                user.setId(result.getInt("id"));
+                user.setUsername(result.getString("username"));
+                user.setPassword(result.getString("password"));
+                user.setEmail(result.getString("email"));
+                user.setFirst_name(result.getString("first_name"));
+                user.setLast_name(result.getString("last_name"));
+                user.setBirthday(result.getDate("birthday"));
+                user.setPhone(result.getString("phone"));
+                user.setGender(result.getBoolean("gender"));
+                user.setPermission(result.getString("permission"));
+                user.setIs_active(result.getBoolean("is_active"));
+                user.setIs_super(result.getBoolean("is_super"));
+                user.setCreated_at(result.getTimestamp("created_at"));
+                user.setUpdated_at(result.getTimestamp("updated_at"));
+                return user;
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } 
+        return null;
     }
 
     @Override

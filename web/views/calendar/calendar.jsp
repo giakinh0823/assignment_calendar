@@ -4,224 +4,207 @@
     Author     : giaki
 --%>
 
+<%@page import="model.Calendar"%>
+<%@page import="java.util.ArrayList"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
 <jsp:include page="../base/header.jsp" />
+<!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.2/main.min.css">
-        <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.2/main.min.js"></script>
     </head>
+    <style>
+        .fc-button-primary{
+            background-color: #fff!important;
+            border-color: #fff!important;
+            color: black!important;
+            padding: 10px 15px!important;
+            box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+        }
+        
+        .fc-button-primary:focus{
+            box-shadow: none!important;
+        }
+        .fc-button-group .fc-button{
+            margin: 0 2px!important;
+            border-radius: 10px!important;
+        }
+
+        .fc-view .fc-col-header-cell{
+            padding-top: 10px!important;
+            padding-bottom: 10px!important;
+        }
+
+        .fc-theme-standard td, .fc-theme-standard th{
+            border: 1px solid #ebebeb;
+        }
+        
+        .fc-daygrid-day-top{
+            font-size: 20px;
+        }
+        
+        .fc-col-header-cell-cushion {
+            font-size: 24px;
+            font-weight: 400!important;
+        }
+        
+        .fc-event-time{
+            font-size: 18px;
+        }
+        
+        .fc-event-title{
+            font-size: 18px;
+        }
+    </style>
+    <%
+        ArrayList<Calendar> calendars = (ArrayList<Calendar>) request.getAttribute("calendars");
+    %>
     <body>
         <jsp:include page="../dashboard/navbar.jsp" />
-        <div class="w-[calc(100%_-_15rem)] ml-auto p-5 min-h-screen">
+        <!--<div class="w-[calc(100%_-_15rem)] ml-auto p-5 min-h-screen">-->
+        <div class="ml-auto p-5 min-h-screen">
             <div class="flex">
-                <div class="w-60">
-                    <div class="block p-6 rounded-lg shadow-lg bg-white max-w-md">
-                        <form action="/calendar" name="form-add-event" id="form-add-event" method="POST">
-                            <div class="form-group mb-6">
-                                <input type="text" class="form-control block
-                                       w-full
-                                       px-3
-                                       py-1.5
-                                       text-base
-                                       font-normal
-                                       text-gray-700
-                                       bg-white bg-clip-padding
-                                       border border-solid border-gray-300
-                                       rounded
-                                       transition
-                                       ease-in-out
-                                       m-0
-                                       focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" id="exampleInput125"
-                                       placeholder="Name Event" name="name" id="nameEvent">
-                            </div>
-                            <div class="form-group mb-6">
-                                <textarea
-                                    class="
-                                    form-control
-                                    block
-                                    w-full
-                                    px-3
-                                    py-1.5
-                                    text-base
-                                    font-normal
-                                    text-gray-700
-                                    bg-white bg-clip-padding
-                                    border border-solid border-gray-300
-                                    rounded
-                                    transition
-                                    ease-in-out
-                                    m-0
-                                    focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none
-                                    "
-                                    id="description"
-                                    rows="3"
-                                    placeholder="Description"
-                                    name="description"
-                                    id="description"
-                                    ></textarea>
-                            </div>
-                            <div>
-                                <div class="flex items-center justify-center">
-                                    <div class="datepicker relative form-floating mb-5 xl:w-96">
-                                        <input type="text"
-                                               class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                                               placeholder="Start date" name="start_date" id="startDate"/>
-                                        <label for="floatingInput" class="text-gray-700">Start date</label>
-                                    </div>
+                <div class="w-60 md:w-64 lg:w-80">
+                    <div class="px-5 pt-3">
+                        <fieldset>
+                            <c:forEach items="${calendars}" var="calendar">
+                                <div class="flex items-center mb-4">
+                                    <input id="calendar-${calendar.getId()}" aria-describedby="checkbox-1" type="checkbox" class="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500" checked>
+                                    <label for="calendar-${calendar.getId()}" class="ml-3 text-md font-medium">${calendar.getName()}</label>
                                 </div>
-                                <div class="flex justify-center">
-                                    <div class="timepicker relative form-floating mb-5 xl:w-96" data-mdb-with-icon="false" id="input-toggle-timepicker">
-                                        <input type="text"
-                                               class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                                               placeholder="Start time" data-mdb-toggle="input-toggle-timepicker"  name="start_time" id="startTime"/>
-                                        <label for="floatingInput" class="text-gray-700">Start time</label>
-                                    </div>
-                                </div>
-                            </div>
-                            <div>
-                                <div class="flex items-center justify-center">
-                                    <div class="datepicker relative form-floating mb-5 xl:w-96">
-                                        <input type="text"
-                                               class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                                               placeholder="Start date" name="end_date" id="endDate"/>
-                                        <label for="floatingInput" class="text-gray-700">End date</label>
-                                    </div>
-                                </div>
-                                <div class="flex justify-center">
-                                    <div class="timepicker relative form-floating mb-5 xl:w-96" data-mdb-with-icon="false" id="input-toggle-timepicker">
-                                        <input type="text"
-                                               class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                                               placeholder="End time" data-mdb-toggle="input-toggle-timepicker"  name="end_time" id="endTime"/>
-                                        <label for="floatingInput" class="text-gray-700">End time</label>
-                                    </div>
-                                </div>
-                            </div>
-                            <button type="submit" class="
-                                    w-full
-                                    px-6
-                                    py-2.5
-                                    bg-blue-600
-                                    text-white
-                                    font-medium
-                                    text-xs
-                                    leading-tight
-                                    uppercase
-                                    rounded
-                                    shadow-md
-                                    hover:bg-blue-700 hover:shadow-lg
-                                    focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0
-                                    active:bg-blue-800 active:shadow-lg
-                                    transition
-                                    duration-150
-                                    ease-in-out" id="addEvent">Add event</button>
-                        </form>
+                            </c:forEach>
+                        </fieldset>
                     </div>
                 </div>
-                <div class="w-[calc(100%_-_15rem)] px-5">
+                <div class="w-full px-5">
                     <div id="calendar" class="max-h-screen w-full"></div>
+                </div>
+                <div class="w-60 md:w-64 lg:w-80">
+                    <div class="mb-8">
+                        <jsp:include page="addCalendar.jsp" />
+                    </div>
+                    <div>
+                        <jsp:include page="addEvent.jsp" />
+                    </div>
                 </div>
             </div>
         </div>
+        <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.2/main.min.js"></script>
         <script>
-
             const events = [
                 {
                     colorId: 1,
                     title: 'Business Lunch',
-                    start: '2020-09-03T13:00:00',
+                    start: '2022-02-03T13:00:00',
                     constraint: 'businessHours'
                 },
                 {
                     colorId: 1,
                     title: 'Meeting',
-                    start: '2020-09-13T11:00:00',
-                    constraint: 'availableForMeeting', // Không được kéo
-                    color: '#257e4a' // color nút tròn nhỏ
+                    start: '2022-02-13T11:00:00',
+                    constraint: 'availableForMeeting',
+                    color: '#257e4a'
                 },
                 {
                     colorId: 1,
                     title: 'Conference',
-                    start: '2020-09-18',
-                    end: '2020-09-20'
+                    start: '2022-02-12',
+                    end: '2022-02-13',
                 },
                 {
                     colorId: 1,
                     title: 'Party',
-                    start: '2020-09-29T20:00:00'
+                    start: '2022-02-29T20:00:00'
                 },
-
                 // các khu vực phải bỏ "Cuộc họp"
                 {
                     colorId: 1,
                     groupId: 'availableForMeeting',
-                    start: '2020-09-11T10:00:00',
-                    end: '2020-09-11T16:00:00',
-                    display: 'background'
+                    start: '2020-02-11T10:00:00',
+                    end: '2020-02-11T16:00:00',
+                    display: 'background',
                 },
                 {
                     colorId: 1,
                     groupId: 'availableForMeeting',
-                    start: '2020-09-13T10:00:00',
-                    end: '2020-09-13T16:00:00',
-                    display: 'background'
+                    start: '2022-02-13T10:00:00',
+                    end: '2022-02-13T16:00:00',
+                    display: 'background',
                 },
-
                 // khu vực màu đỏ nơi không có sự kiện nào có thể bị bỏ
                 {
                     colorId: 1,
-                    start: '2020-09-24',
-                    end: '2020-09-28',
+                    start: '2022-02-24',
+                    end: '2022-02-28',
                     overlap: false,
                     display: 'background',
                     color: '#ff9f89'
                 },
                 {
                     colorId: 1,
-                    start: '2020-09-06',
-                    end: '2020-09-08',
+                    start: '2022-02-06',
+                    end: '2022-02-08',
                     overlap: false,
                     display: 'background',
                     color: '#ff9f89'
                 }
             ]
 
-            document.addEventListener('DOMContentLoaded', function () {
-                var calendarEl = document.getElementById('calendar');
-
-                var calendar = new FullCalendar.Calendar(calendarEl, {
-                    headerToolbar: {
-                        left: 'prev,next today',
-                        center: 'title',
-                        right: 'dayGridMonth,timeGridWeek,timeGridDay,listMonth'
-                    },
-                    initialDate: '2020-09-12',
-                    navLinks: true, // có thể nhấp vào tên ngày / tuần để điều hướng chế độ xem
-                    businessHours: true, // hiển thị giờ làm việc
-                    editable: true,
-                    selectable: true,
-                    dayMaxEventRows: true,
-                    eventClick: function (info) {
-                        alert("On Click");
-                    },
-                    events: events,
-                });
-
-                calendar.render();
-
-                $("#form-add-event").on("submit", function (e) {
-                    e.preventDefault();
-                    events.push({
-                        title: $("#eventName").val(),
-                        start: $("#fromDate").val(),
-                        end: $("#toDate").val(),
-                        className: 'modal-add',
-                    })
-                    calendar.refetchEvents();
-                });
+            const calendarEl = document.getElementById('calendar');
+            const calendar = new FullCalendar.Calendar(calendarEl, {
+                headerToolbar: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'dayGridMonth,timeGridWeek,timeGridDay,listMonth'
+                },
+                initialDate: new Date(),
+                navLinks: true, // có thể nhấp vào tên ngày / tuần để điều hướng chế độ xem
+                businessHours: true, // hiển thị giờ làm việc
+                editable: true,
+                selectable: true,
+                droppable: true,
+                dayMaxEventRows: true,
+                eventClick: function (info) {
+                    alert(info.event.extendedProps.colorId);
+                },
+                events: function (info, successCallback, failureCallback) {
+                    successCallback(events);
+                },
+            });
+            calendar.render();
+            $("#form-add-event").on("submit", function (e) {
+                e.preventDefault();
+                const event = {
+                    title: $("#nameEvent").val(),
+                    description: $("#description").val(),
+                    start: $("#startDate").val(),
+                    color: $("input:radio[name=color]:checked").val(),
+                    category: $("#category").val(),
+                }
+                if ($("#startTime").val()) {
+                    event.start = event.start + "T" + $("#startTime").val();
+                }
+                if ($("#endDate").val()) {
+                    event.end = $("#endDate").val();
+                    if ($("#endTime").val()) {
+                        event.end = event.end + "T" + $("#endTime").val();
+                    }
+                }
+                if ($("#display").val() != "default") {
+                    event.display = $("#display").val();
+                }
+                if ($("#overlap").is(':checked')) {
+                    event.overlap = true;
+                }
+                if ($("#location").val() && $("#location").val() != "" && $("#location").val() != null) {
+                    event.location = $("#location").val();
+                }
+                events.push(event);
+                console.log(event);
+                calendar.refetchEvents();
             });
         </script>
     </body>

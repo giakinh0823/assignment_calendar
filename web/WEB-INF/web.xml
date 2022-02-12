@@ -25,6 +25,10 @@
         <servlet-name>CalendarController</servlet-name>
         <servlet-class>controller.calendar.CalendarController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AddCalendarController</servlet-name>
+        <servlet-class>controller.calendar.AddCalendarController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginController</servlet-name>
         <url-pattern>/login</url-pattern>
@@ -40,6 +44,10 @@
     <servlet-mapping>
         <servlet-name>CalendarController</servlet-name>
         <url-pattern>/calendar</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddCalendarController</servlet-name>
+        <url-pattern>/calendar/addCalendar</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
