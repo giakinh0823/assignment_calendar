@@ -15,6 +15,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import model.User;
 import utils.HashPass;
 import utils.Validate;
@@ -30,7 +31,13 @@ public class SignupController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher("/views/auth/signup.jsp").forward(request, response);
+        HttpSession session = request.getSession(false);
+        boolean loggedIn = session != null && session.getAttribute("user") != null;
+        if (loggedIn) {
+            response.sendRedirect("/");
+        }else{
+            request.getRequestDispatcher("/views/auth/signup.jsp").forward(request, response);
+        }
     }
 
     @Override
@@ -56,19 +63,19 @@ public class SignupController extends HttpServlet {
                 UserDBContext db = new UserDBContext();
                 try {
                     String field_username = validate.fieldString(username, "^[a-zA-Z0-9._-]{3,}$", "Username not work! Please enter new username");
-                    if(db.findOne("username", field_username) != null){
+                    if (db.findOne("username", field_username) != null) {
                         request.setAttribute("error", "Username has exist! Please try new username!");
                         request.getRequestDispatcher("/views/auth/signup.jsp").forward(request, response);
                         return;
                     }
-                    
+
                     String field_email = validate.fieldString(email, "(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|\"(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21\\x23-\\x5b\\x5d-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])*\")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21-\\x5a\\x53-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])+)\\])", "Email wrong! please enter new email");
-                    if(db.findOne("email", field_email) != null){
+                    if (db.findOne("email", field_email) != null) {
                         request.setAttribute("error", "Email has exist! Please try new email!");
                         request.getRequestDispatcher("/views/auth/signup.jsp").forward(request, response);
                         return;
                     }
-                    
+
                     String field_phone = validate.fieldString(phone, "(\\+84|0)([3|5|7|8|9])+([0-9]{8})", "Phone is wrong please enter new phone!");
                     Boolean field_gender = gender.equals("male") ? true : false;
                     Date field_birthday = validate.fieldDate(birthday, "Birthday is wrong! Please try again");
@@ -86,6 +93,8 @@ public class SignupController extends HttpServlet {
                     user.setIs_super(is_super);
                     user.setPermission(permission);
                     db.insert(user);
+                    HttpSession session = request.getSession();
+                    session.setAttribute("user", user.getUsername());
                     response.sendRedirect("/");
                 } catch (Exception e) {
                     request.setAttribute("error", e.getMessage());

@@ -3,9 +3,9 @@
     Created on : Jan 21, 2022, 11:50:53 AM
     Author     : giaki
 --%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<jsp:include page="../base/base.jsp" />
+<jsp:include page="../base/header.jsp" />
 <!DOCTYPE html>
 <html>
     <head>
@@ -31,13 +31,13 @@
                 <h3 class="text-4xl font-bold text-center mt-3">Login</h3>
                 <form action="/login" autocomplete="off" method="POST">
                     <div class="mt-6 sm:w-80 md:w-96">
-                        <%if(error!=null){%>
+                        <c:if test="${error!=null}">
                         <div>
                             <div class="bg-red-100 rounded-lg py-5 px-6 mb-4 text-base text-red-700 mb-3" role="alert">
                                 <%=error%>
                             </div>
                         </div>
-                        <%}%>
+                        </c:if>
                         <div>
                             <label class="block" for="username">Username or Email</label>
                             <input type="text" placeholder="Username or Email" autocomplete="off" name="username" required
@@ -62,3 +62,4 @@
         </div>
     </body>
 </html>
+ <jsp:include page="../base/footer.jsp" />

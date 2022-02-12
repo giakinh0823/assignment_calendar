@@ -12,6 +12,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import model.User;
 import utils.HashPass;
 import utils.Validate;
@@ -27,7 +28,13 @@ public class LoginController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher("/views/auth/login.jsp").forward(request, response);
+        HttpSession session = request.getSession(false);
+        boolean loggedIn = session != null && session.getAttribute("user") != null;
+        if (loggedIn) {
+            response.sendRedirect("/");
+        }else{
+            request.getRequestDispatcher("/views/auth/login.jsp").forward(request, response);
+        }
     }
 
     @Override
@@ -40,6 +47,8 @@ public class LoginController extends HttpServlet {
             HashPass hashPass = new HashPass();
             User user = db.getUser(username, hashPass.hashPassword(password));
             if (user != null) {
+                HttpSession session = request.getSession();
+                session.setAttribute("user", user.getUsername());
                 response.sendRedirect("/");
             } else {
                 request.setAttribute("error", "Username or password wrong!");
