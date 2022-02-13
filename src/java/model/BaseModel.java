@@ -20,6 +20,11 @@ public class BaseModel {
     public BaseModel() {
     }
 
+    public BaseModel(int id) {
+        this.id = id;
+    }
+
+    
     public BaseModel(int id, Timestamp created_at, Timestamp updated_at) {
         this.id = id;
         this.created_at = created_at;

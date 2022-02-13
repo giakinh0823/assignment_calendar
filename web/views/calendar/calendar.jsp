@@ -4,6 +4,7 @@
     Author     : giaki
 --%>
 
+<%@page import="model.CategoryCalendar"%>
 <%@page import="model.Calendar"%>
 <%@page import="java.util.ArrayList"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -61,14 +62,30 @@
     </style>
     <%
         ArrayList<Calendar> calendars = (ArrayList<Calendar>) request.getAttribute("calendars");
+        ArrayList<CategoryCalendar> listCategory = (ArrayList<CategoryCalendar>) request.getAttribute("listCategory");
     %>
     <body>
         <jsp:include page="../dashboard/navbar.jsp" />
         <!--<div class="w-[calc(100%_-_15rem)] ml-auto p-5 min-h-screen">-->
         <div class="ml-auto p-5 min-h-screen">
             <div class="flex">
-                <div class="w-60 md:w-64 lg:w-80">
-                    <div class="px-5 pt-3">
+                <div class="w-60 md:w-64 lg:w-80 px-5 pt-3">
+                    <div class="mb-5">
+                        <div class="mb-5 flex justify-between">
+                            <h2 class="text-xl">Category</h2>
+                        </div>
+                        <fieldset>
+                            <c:forEach items="${listCategory}" var="category">
+                                <div class="flex justify-between items-center  mb-2">
+                                    <div class="flex items-center">
+                                        <input id="category-${category.getId()}" aria-describedby="checkbox-1" type="checkbox" class="w-4 h-4 border-[#1c64f2] bg-white checked:bg-[#1c64f2] checked:border-[#1c64f2] bg-gray-100 rounded border-gray-300 focus:ring-blue-500" checked>
+                                        <label for="category-${category.getId()}" class="ml-3 text-md font-medium">${category.getName()}</label>
+                                    </div>
+                                </div>
+                            </c:forEach>
+                        </fieldset>
+                    </div>
+                    <div class="mb-5">
                         <div class="mb-5 flex justify-between">
                             <h2 class="text-xl">My Calendars</h2>
                             <button type="button" data-modal-toggle="addCalendar-modal">
@@ -158,8 +175,8 @@
                                             {
                                                 colorId: 1,
                                                 groupId: 'availableForMeeting',
-                                                start: '2020-02-11T10:00:00',
-                                                end: '2020-02-11T16:00:00',
+                                                start: '2022-02-11T10:00:00',
+                                                end: '2022-02-11T16:00:00',
                                                 display: 'background',
                                             },
                                             {
@@ -169,7 +186,7 @@
                                                 end: '2022-02-13T16:00:00',
                                                 display: 'background',
                                             },
-                                            // khu vực màu đỏ nơi không có sự kiện nào có thể bị bỏ
+                                            // khu vực màu đỏ nơi không có sự kiện nào có thể bỏ vào
                                             {
                                                 colorId: 1,
                                                 start: '2022-02-24',
@@ -219,27 +236,28 @@
                                         $("#form-add-event").on("submit", function (e) {
                                             e.preventDefault();
                                             const event = {
-                                                title: $("#nameEvent").val(),
+                                                title: $("#titleEvent").val(),
                                                 description: $("#description").val(),
                                                 start: $("#startDate").val(),
-                                                color: $("input:radio[name=color]:checked").val(),
+                                                color: $("#colorEvent").val(),
                                                 category: $("#category").val(),
-                                                calendar: $("#calendar").val(),
+                                                calendar: $("#calendarGroup").val(),
+                                                overlap: $("#overlap").is(':checked'),
+                                                isOnlyDate: true,
                                             }
                                             if ($("#startTime").val()) {
                                                 event.start = event.start + "T" + $("#startTime").val();
+                                                event.isOnlyDate = false;
                                             }
                                             if ($("#endDate").val()) {
                                                 event.end = $("#endDate").val();
                                                 if ($("#endTime").val()) {
                                                     event.end = event.end + "T" + $("#endTime").val();
+                                                    event.isOnlyDate = false;
                                                 }
                                             }
                                             if ($("#display").val() != "default") {
                                                 event.display = $("#display").val();
-                                            }
-                                            if ($("#overlap").is(':checked')) {
-                                                event.overlap = true;
                                             }
                                             if ($("#location").val() && $("#location").val() != "" && $("#location").val() != null) {
                                                 event.location = $("#location").val();
@@ -256,6 +274,14 @@
             $("#confirm-delete-calendar").on('click', (e) => {
                 alert($("#confirm-delete-calendar").attr("data-id"));
             })
+        </script>
+
+        <script>
+            $("#calendarGroup").on('change', (e) => {
+                const color = event.target[event.target.selectedIndex].getAttribute("data-color");
+                $("#colorEvent").val(color);
+                $("#colorEvent").css("color", color);
+            });
         </script>
     </body>
 </html>

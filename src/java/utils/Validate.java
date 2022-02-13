@@ -6,6 +6,7 @@
 package utils;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import javax.servlet.http.HttpServletRequest;
 
@@ -72,5 +73,15 @@ public class Validate {
             throw new Exception(message);
         }
         return date;
+    }
+    
+    public Timestamp fieldTimestamp(String value, String message) throws Exception {
+        Timestamp timestamp = null;
+        try {
+            timestamp = Timestamp.valueOf(value);
+        } catch (Exception e) {
+            throw new Exception(message);
+        }
+        return timestamp;
     }
 }

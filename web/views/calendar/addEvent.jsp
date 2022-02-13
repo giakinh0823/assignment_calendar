@@ -4,14 +4,16 @@
     Author     : giaki
 --%>
 
+<%@page import="model.CategoryCalendar"%>
 <%@page import="model.Calendar"%>
 <%@page import="java.util.ArrayList"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
+<html>        
     <%
         ArrayList<Calendar> calendars = (ArrayList<Calendar>) request.getAttribute("calendars");
+        ArrayList<CategoryCalendar> listCategory = (ArrayList<CategoryCalendar>) request.getAttribute("listCategory");
     %>
     <body>
         <div class="block p-6 rounded-lg shadow-lg bg-white max-w-md">
@@ -20,6 +22,7 @@
             </div>
             <form action="/calendar" name="form-add-event" id="form-add-event" method="POST">
                 <div class="form-group mb-5">
+                    <label for="titleEvent" class="block text-sm font-medium text-gray-900 mr-2">Title</label>
                     <input type="text" class="form-control block
                            w-full
                            px-3
@@ -34,12 +37,13 @@
                            ease-in-out
                            m-0
                            focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                           placeholder="Name Event" name="name" id="nameEvent" required>
+                           placeholder="Title event" name="title" id="titleEvent" required>
                 </div>
-                <div class="mb-5">
+                <div class="mb-3">
                     <div class="flex justify-center">
                         <div class="mb-3 xl:w-96">
-                            <select name="calendar" id="calendar" required class="appearance-none
+                            <label for="calendarGroup" class="block text-sm font-medium text-gray-900 mr-2">Calendar</label>
+                            <select name="calendar" id="calendarGroup" required class="appearance-none
                                     block
                                     w-full
                                     px-3
@@ -55,35 +59,36 @@
                                     m-0
                                     focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" aria-label="Default select example">
                                 <c:forEach items="${calendars}" var="calendar">
-                                    <option value="${calendar.getId()}">${calendar.getName()}</option>
+                                    <option value="${calendar.getId()}" data-color="${calendar.getColor()}" class="font-semibold text-[${calendar.getColor()}]">
+                                        ${calendar.getName()}
+                                    </option>
                                 </c:forEach>
                             </select>
                         </div>
                     </div>
                 </div>
-                <div class="flex justify-center flex-wrap mb-5">
-                    <div class="m-2">
-                        <input class="appearance-none rounded-full h-4 w-4 border border-[#8136E0] bg-white checked:bg-[#8136E0] checked:border-[#8136E0] focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer" type="radio" class="color" name="color" value="#8136E0" checked>
-                    </div>
-                    <div class="m-2">
-                        <input class="appearance-none rounded-full h-4 w-4 border border-[#E0211F] bg-white checked:bg-[#E0211F] checked:border-[#E0211F] focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer" type="radio" class="color" name="color" value="#E0211F">
-                    </div>
-                    <div class="m-2">
-                        <input class="appearance-none rounded-full h-4 w-4 border border-[#E09D41] bg-white checked:bg-[#E09D41] checked:border-[#E09D41] focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer" type="radio" class="color" name="color" value="#E09D41">
-                    </div>
-                    <div class="m-2">
-                        <input class="appearance-none rounded-full h-4 w-4 border border-[#2B3DE0] bg-white checked:bg-[#2B3DE0] checked:border-[#2B3DE0] focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer" type="radio" class="color" name="color" value="#2B3DE0">
-                    </div>
-                    <div class="m-2">
-                        <input class=" appearance-none rounded-full h-4 w-4 border border-[#E0DD14] bg-white checked:bg-[#E0DD14] checked:border-[#E0DD14] focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer" type="radio" class="color" name="color" value="#E0DD14">
-                    </div>
-                    <div class="m-2">
-                        <input class="appearance-none rounded-full h-4 w-4 border border-[#1F98E0] bg-white checked:bg-[#1F98E0] checked:border-[#1F98E0] focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer" type="radio" class="color" name="color" value="#1F98E0">
-                    </div>
+                <div class="form-group mb-5">
+                    <label for="colorEvent" class="block text-sm font-medium text-gray-900 mr-2">Color</label>
+                    <input type="text" class="form-control block
+                           w-full
+                           px-3
+                           py-1.5
+                           text-base
+                           font-normal
+                           text-gray-700
+                           bg-white bg-clip-padding
+                           border border-solid border-gray-300
+                           rounded
+                           transition
+                           ease-in-out
+                           m-0
+                           focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none disabled"
+                           placeholder="Color" name="color" value="<%=(calendars != null && calendars.size() > 0) ? calendars.get(0).getColor() : ""%>" style="color: <%=(calendars != null && calendars.size() > 0) ? calendars.get(0).getColor() : ""%>" id="colorEvent" disabled>
                 </div>
-                <div class="mb-5">
+                <div class="mb-3">
                     <div class="flex justify-center">
                         <div class="mb-3 xl:w-96">
+                            <label for="category" class="block text-sm font-medium text-gray-900 mr-2">Category</label>
                             <select name="category" id="category" required class="appearance-none
                                     block
                                     w-full
@@ -99,23 +104,23 @@
                                     ease-in-out
                                     m-0
                                     focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" aria-label="Default select example">
-                                <option value="event">Event</option>
-                                <option value="todo">Todo</option>
-                                <option value="task">Task</option>
-                                <option value="orther">Orther</option>
+                                <c:forEach items="${listCategory}" var="category">
+                                    <option value="${category.getId()}">${category.getName()}</option>
+                                </c:forEach>
                             </select>
                         </div>
                     </div>
                 </div>
                 <div class="mb-5">
                     <div class="flex items-center mb-4">
-                        <input id="overlap" name="overlap" aria-describedby="overlap" type="checkbox" class="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" checked>
+                        <input id="overlap" name="overlap" aria-describedby="overlap" type="checkbox" class="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500" checked>
                         <label for="overlap" class="ml-3 text-sm font-medium">Overlap</label>
                     </div>
                 </div>
-                <div class="mb-5">
+                <div class="mb-3">
                     <div class="flex justify-center">
                         <div class="mb-3 xl:w-96">
+                            <label for="display" class="block text-sm font-medium text-gray-900 mr-2">Display</label>
                             <select name="display" id="display" required class="appearance-none
                                     block
                                     w-full
@@ -138,6 +143,7 @@
                     </div>
                 </div>
                 <div class="form-group mb-5">
+                    <label for="location" class="block text-sm font-medium text-gray-900 mr-2">Location</label>
                     <input type="text" class="form-control block
                            w-full
                            px-3
@@ -155,6 +161,7 @@
                            placeholder="Location" name="location" id="location">
                 </div>
                 <div class="form-group mb-6">
+                    <label for="description" class="block text-sm font-medium text-gray-900 mr-2">Description</label>
                     <textarea
                         class="
                         block
