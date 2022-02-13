@@ -63,10 +63,10 @@ public class UserDBContext extends DBContext<User> {
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
-        } 
+        }
         return null;
     }
-    
+
     public User findOne(String field, String value) {
         String sql = "SELECT [id]\n"
                 + "      ,[username]\n"
@@ -85,7 +85,7 @@ public class UserDBContext extends DBContext<User> {
                 + "  FROM [user]\n";
         PreparedStatement statement = null;
         try {
-            sql += " WHERE "+field+" = '"+value+"'";
+            sql += " WHERE " + field + " = '" + value + "'";
             statement = connection.prepareStatement(sql);
             ResultSet result = statement.executeQuery();
             while (result.next()) {
@@ -108,7 +108,7 @@ public class UserDBContext extends DBContext<User> {
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
-        } 
+        }
         return null;
     }
 
@@ -160,12 +160,12 @@ public class UserDBContext extends DBContext<User> {
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
-        } 
+        }
         return null;
     }
 
     @Override
-    public void insert(User user) {
+    public User insert(User user) {
         PreparedStatement statement = null;
         try {
             String sql = "INSERT INTO [user]\n"
@@ -198,6 +198,8 @@ public class UserDBContext extends DBContext<User> {
             statement.setTimestamp(12, user.getCreated_at());
             statement.setTimestamp(13, user.getUpdated_at());
             statement.executeUpdate();
+            User new_user = findOne("username", user.getUsername());
+            return new_user;
         } catch (SQLException ex) {
             Logger.getLogger(UserDBContext.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
@@ -216,6 +218,7 @@ public class UserDBContext extends DBContext<User> {
                 }
             }
         }
+        return null;
     }
 
     @Override

@@ -27,15 +27,15 @@ public class EventCalendarDBContext extends DBContext<EventCalendar> {
         UserDBContext userDB = new UserDBContext();
         AdditionalCalendarDBContext additionalDB = new AdditionalCalendarDBContext();
         ArrayList<EventCalendar> events = new ArrayList<>();
-        String sql = "SELECT [id]\n" +
-                    "      ,[title]\n" +
-                    "      ,[description]\n" +
-                    "      ,[location]\n" +
-                    "      ,[updated_at]\n" +
-                    "      ,[created_at]\n" +
-                    "      ,[userId]\n" +
-                    "      ,[additionalId]\n" +
-                    "  FROM [event]";
+        String sql = "SELECT [id]\n"
+                + "      ,[title]\n"
+                + "      ,[description]\n"
+                + "      ,[location]\n"
+                + "      ,[updated_at]\n"
+                + "      ,[created_at]\n"
+                + "      ,[userId]\n"
+                + "      ,[additionalId]\n"
+                + "  FROM [event]";
         PreparedStatement statement = null;
         try {
             statement = connection.prepareStatement(sql);
@@ -50,10 +50,10 @@ public class EventCalendarDBContext extends DBContext<EventCalendar> {
                 eventCalendar.setUpdated_at(result.getTimestamp("updated_at"));
                 eventCalendar.setUserId(result.getInt("userId"));
                 eventCalendar.setAdditionalId(result.getInt("additionalId"));
-                
+
                 User user = userDB.get(eventCalendar.getUserId());
                 AdditionalCalendar additionalCalendar = additionalDB.get(eventCalendar.getAdditionalId());
-                
+
                 eventCalendar.setUser(user);
                 eventCalendar.setAdditional(additionalCalendar);
                 events.add(eventCalendar);
@@ -68,17 +68,16 @@ public class EventCalendarDBContext extends DBContext<EventCalendar> {
     public EventCalendar get(int id) {
         UserDBContext userDB = new UserDBContext();
         AdditionalCalendarDBContext additionalDB = new AdditionalCalendarDBContext();
-        ArrayList<EventCalendar> events = new ArrayList<>();
-        String sql = "SELECT [id]\n" +
-                    "      ,[title]\n" +
-                    "      ,[description]\n" +
-                    "      ,[location]\n" +
-                    "      ,[updated_at]\n" +
-                    "      ,[created_at]\n" +
-                    "      ,[userId]\n" +
-                    "      ,[additionalId]\n" +
-                    "  FROM [event]\n" + 
-                    " WHERE id = ?";
+        String sql = "SELECT [id]\n"
+                + "      ,[title]\n"
+                + "      ,[description]\n"
+                + "      ,[location]\n"
+                + "      ,[updated_at]\n"
+                + "      ,[created_at]\n"
+                + "      ,[userId]\n"
+                + "      ,[additionalId]\n"
+                + "  FROM [event]\n"
+                + " WHERE id = ?";
         PreparedStatement statement = null;
         try {
             statement = connection.prepareStatement(sql);
@@ -94,10 +93,10 @@ public class EventCalendarDBContext extends DBContext<EventCalendar> {
                 eventCalendar.setUpdated_at(result.getTimestamp("updated_at"));
                 eventCalendar.setUserId(result.getInt("userId"));
                 eventCalendar.setAdditionalId(result.getInt("additionalId"));
-                
+
                 User user = userDB.get(eventCalendar.getUserId());
                 AdditionalCalendar additionalCalendar = additionalDB.get(eventCalendar.getAdditionalId());
-                
+
                 eventCalendar.setUser(user);
                 eventCalendar.setAdditional(additionalCalendar);
                 return eventCalendar;
@@ -109,18 +108,97 @@ public class EventCalendarDBContext extends DBContext<EventCalendar> {
     }
 
     @Override
-    public void insert(EventCalendar model) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public EventCalendar insert(EventCalendar model) {
+        PreparedStatement statement = null;
+        try {
+            String sql = "INSERT INTO [event]\n"
+                    + "           ([title]\n"
+                    + "           ,[description]\n"
+                    + "           ,[location]\n"
+                    + "           ,[updated_at]\n"
+                    + "           ,[created_at]\n"
+                    + "           ,[userId]\n"
+                    + "           ,[additionalId])\n"
+                    + "     VALUES(?, ?, ?, ?, ?, ?, ?)";
+            statement = connection.prepareStatement(sql);
+            statement.setString(1, model.getTitle());
+            statement.setString(2, model.getDescription());
+            statement.setString(3, model.getLocation());
+            statement.setTimestamp(4, model.getCreated_at());
+            statement.setTimestamp(5, model.getUpdated_at());
+            statement.setInt(6, model.getUserId());
+            statement.setInt(7, model.getAdditionalId());
+            statement.executeUpdate();
+            ArrayList<EventCalendar> events = list();
+            EventCalendar new_event= events.get(events.size()-1);
+            return new_event;
+        } catch (SQLException ex) {
+            Logger.getLogger(EventCalendarDBContext.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            if (statement != null) {
+                try {
+                    statement.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(EventCalendarDBContext.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(EventCalendarDBContext.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+        return null;
     }
 
     @Override
     public void update(EventCalendar model) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        PreparedStatement statement = null;
+        try {
+            String sql = "UPDATE [event]\n"
+                    + "   SET [title] = ?\n"
+                    + "      ,[description] = ?\n"
+                    + "      ,[location] = ?\n"
+                    + "      ,[updated_at] = ?\n"
+                    + "      ,[created_at] = ?\n"
+                    + "      ,[userId] = ?\n"
+                    + "      ,[additionalId] = ?\n"
+                    + " WHERE id = ?";
+            statement = connection.prepareStatement(sql);
+            statement.setString(1, model.getTitle());
+            statement.setString(2, model.getDescription());
+            statement.setString(3, model.getLocation());
+            statement.setTimestamp(4, model.getCreated_at());
+            statement.setTimestamp(5, model.getUpdated_at());
+            statement.setInt(6, model.getUserId());
+            statement.setInt(7, model.getAdditionalId());
+            statement.setInt(8, model.getId());
+            statement.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(EventCalendarDBContext.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            if (statement != null) {
+                try {
+                    statement.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(EventCalendarDBContext.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(EventCalendarDBContext.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
     }
 
     @Override
     public void delete(int id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
 }

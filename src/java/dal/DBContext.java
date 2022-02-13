@@ -39,7 +39,7 @@ public abstract class DBContext<T extends BaseModel> {
 
     public abstract T get(int id);
 
-    public abstract void insert(T model);
+    public abstract T insert(T model);
 
     public abstract void update(T model);
 

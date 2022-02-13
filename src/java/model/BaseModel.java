@@ -31,6 +31,11 @@ public class BaseModel {
         this.updated_at = updated_at;
     }
 
+    public BaseModel(Timestamp created_at, Timestamp updated_at) {
+        this.created_at = created_at;
+        this.updated_at = updated_at;
+    }
+
     public int getId() {
         return id;
     }

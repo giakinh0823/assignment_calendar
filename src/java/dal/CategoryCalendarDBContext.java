@@ -43,9 +43,9 @@ public class CategoryCalendarDBContext extends DBContext<CategoryCalendar>{
     public CategoryCalendar get(int id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
+    
     @Override
-    public void insert(CategoryCalendar model) {
+    public CategoryCalendar insert(CategoryCalendar model) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

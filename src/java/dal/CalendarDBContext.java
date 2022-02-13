@@ -79,11 +79,35 @@ public class CalendarDBContext extends DBContext<Calendar> {
 
     @Override
     public Calendar get(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        UserDBContext userDB = new UserDBContext();
+        String sql = "SELECT id, name, color, userId, created_at, updated_at FROM [calendar]\n"
+                + " WHERE id = ?";
+        PreparedStatement statement = null;
+        try {
+            statement = connection.prepareStatement(sql);
+            statement.setInt(1, id);
+            ResultSet result = statement.executeQuery();
+            while (result.next()) {
+                Calendar calendar = new Calendar();
+                calendar.setId(result.getInt("id"));
+                calendar.setName(result.getString("name"));
+                calendar.setColor(result.getString("color"));
+                calendar.setUserId(result.getInt("userId"));
+                calendar.setCreated_at(result.getTimestamp("created_at"));
+                calendar.setUpdated_at(result.getTimestamp("updated_at"));
+
+                User user = userDB.get(calendar.getUserId());
+                calendar.setUser(user);
+                return calendar;
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return null;
     }
 
     @Override
-    public void insert(Calendar calendar) {
+    public Calendar insert(Calendar calendar) {
         PreparedStatement statement = null;
         String sql = "INSERT INTO [dbo].[calendar]\n"
                 + "           ([name]\n"
@@ -100,6 +124,9 @@ public class CalendarDBContext extends DBContext<Calendar> {
             statement.setTimestamp(4, calendar.getCreated_at());
             statement.setTimestamp(5, calendar.getUpdated_at());
             statement.executeUpdate();
+            ArrayList<Calendar> calendars = list();
+            Calendar new_calendar = calendars.get(calendars.size()-1);
+            return new_calendar;
         } catch (SQLException ex) {
             Logger.getLogger(CalendarDBContext.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
@@ -118,6 +145,7 @@ public class CalendarDBContext extends DBContext<Calendar> {
                 }
             }
         }
+        return null;
     }
 
     @Override

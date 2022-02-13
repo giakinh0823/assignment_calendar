@@ -4,6 +4,7 @@
     Author     : giaki
 --%>
 
+<%@page import="model.EventCalendar"%>
 <%@page import="model.CategoryCalendar"%>
 <%@page import="model.Calendar"%>
 <%@page import="java.util.ArrayList"%>
@@ -61,6 +62,7 @@
         }
     </style>
     <%
+        ArrayList<EventCalendar> events = (ArrayList<EventCalendar>) request.getAttribute("events");
         ArrayList<Calendar> calendars = (ArrayList<Calendar>) request.getAttribute("calendars");
         ArrayList<CategoryCalendar> listCategory = (ArrayList<CategoryCalendar>) request.getAttribute("listCategory");
     %>
@@ -147,62 +149,20 @@
         <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.2/main.min.js"></script>
         <script>
                                         const events = [
+                                            <%for (EventCalendar event : events) {%>
                                             {
-                                                colorId: 1,
-                                                title: 'Business Lunch',
-                                                start: '2022-02-03T13:00:00',
-                                                constraint: 'businessHours'
+                                                id: <%=event.getId()%>,
+                                                title: "<%=event.getTitle()%>",
+                                                start: <%= event.getAdditional().isIsOnlyDate() ? "new Date('"+event.getAdditional().getStartDate()+"').toJSON().split('T')[0]":"new Date('"+event.getAdditional().getStartDate()+"').toISOString()"%>,
+                                                end: <%= event.getAdditional().isIsOnlyDate() ? "new Date('"+event.getAdditional().getEndDate()+"').toJSON().split('T')[0]":"new Date('"+event.getAdditional().getEndDate()+"').toISOString()"%>,
+                                                color: "<%=event.getAdditional().getCalendar().getColor()%>",
+                                                description: "<%=event.getDescription()%>",
+                                                location: "<%=event.getLocation()%>",
+                                                <%if(event.getAdditional().getDisplay()!=null){%>
+                                                display: <%=event.getAdditional().getDisplay()!=null?""+event.getAdditional().getDisplay()+"":"undefined"%>,
+                                                <%}%>
                                             },
-                                            {
-                                                colorId: 1,
-                                                title: 'Meeting',
-                                                start: '2022-02-13T11:00:00',
-                                                constraint: 'availableForMeeting',
-                                                color: '#257e4a'
-                                            },
-                                            {
-                                                colorId: 1,
-                                                title: 'Conference',
-                                                start: '2022-02-12',
-                                                end: '2022-02-13',
-                                            },
-                                            {
-                                                colorId: 1,
-                                                title: 'Party',
-                                                start: '2022-02-29T20:00:00'
-                                            },
-                                            // các khu vực phải bỏ "Cuộc họp"
-                                            {
-                                                colorId: 1,
-                                                groupId: 'availableForMeeting',
-                                                start: '2022-02-11T10:00:00',
-                                                end: '2022-02-11T16:00:00',
-                                                display: 'background',
-                                            },
-                                            {
-                                                colorId: 1,
-                                                groupId: 'availableForMeeting',
-                                                start: '2022-02-13T10:00:00',
-                                                end: '2022-02-13T16:00:00',
-                                                display: 'background',
-                                            },
-                                            // khu vực màu đỏ nơi không có sự kiện nào có thể bỏ vào
-                                            {
-                                                colorId: 1,
-                                                start: '2022-02-24',
-                                                end: '2022-02-28',
-                                                overlap: false,
-                                                display: 'background',
-                                                color: '#ff9f89'
-                                            },
-                                            {
-                                                colorId: 1,
-                                                start: '2022-02-06',
-                                                end: '2022-02-08',
-                                                overlap: false,
-                                                display: 'background',
-                                                color: '#ff9f89'
-                                            }
+                                            <%}%>
                                         ]
 
                                         const calendarEl = document.getElementById('calendar');
@@ -263,8 +223,16 @@
                                                 event.location = $("#location").val();
                                             }
                                             events.push(event);
-                                            console.log(event);
                                             calendar.refetchEvents();
+                                            event.start = new Date(event.start).getTime();
+                                            event.end = new Date(event.end).getTime();
+                                            $.ajax({
+                                                method: "POST",
+                                                url: "/calendar/addEvent",
+                                                data: event,
+                                            }).done(function (data) {
+                                                console.log(data);
+                                            });
                                         });
         </script>
         <script>

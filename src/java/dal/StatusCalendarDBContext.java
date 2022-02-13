@@ -18,7 +18,7 @@ import model.StatusCalendar;
  *
  * @author giaki
  */
-public class StatusCalendarDBContext extends DBContext {
+public class StatusCalendarDBContext extends DBContext<StatusCalendar> {
 
     @Override
     public ArrayList list() {
@@ -41,17 +41,17 @@ public class StatusCalendarDBContext extends DBContext {
     }
 
     @Override
-    public BaseModel get(int id) {
+    public StatusCalendar get(int id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void insert(BaseModel model) {
+    public StatusCalendar insert(StatusCalendar model) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void update(BaseModel model) {
+    public void update(StatusCalendar model) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

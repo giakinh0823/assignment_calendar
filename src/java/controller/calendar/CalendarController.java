@@ -5,8 +5,10 @@
  */
 package controller.calendar;
 
+import dal.AdditionalCalendarDBContext;
 import dal.CalendarDBContext;
 import dal.CategoryCalendarDBContext;
+import dal.EventCalendarDBContext;
 import dal.StatusCalendarDBContext;
 import dal.UserDBContext;
 import java.io.IOException;
@@ -19,6 +21,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import model.Calendar;
 import model.CategoryCalendar;
+import model.EventCalendar;
 import model.StatusCalendar;
 import model.User;
 
@@ -34,6 +37,8 @@ public class CalendarController extends HttpServlet {
         CalendarDBContext calendarDB = new CalendarDBContext();
         CategoryCalendarDBContext categoryDB = new CategoryCalendarDBContext();
         StatusCalendarDBContext statusDB = new StatusCalendarDBContext();
+        EventCalendarDBContext eventDB = new EventCalendarDBContext();
+        
         HttpSession session = request.getSession();
         String username = (String) session.getAttribute("user");
         
@@ -43,10 +48,13 @@ public class CalendarController extends HttpServlet {
         ArrayList<Calendar> calendars = calendarDB.listByUser(user.getId());
         ArrayList<CategoryCalendar> listCategory = categoryDB.list();
         ArrayList<StatusCalendar> listStatus = statusDB.list();
+        ArrayList<EventCalendar> events = eventDB.list();
         
         request.setAttribute("calendars", calendars);
         request.setAttribute("listCategory", listCategory);
         request.setAttribute("listStatus", listStatus);
+        request.setAttribute("events", events);
+        
         request.getRequestDispatcher("/views/calendar/calendar.jsp").forward(request, response);
     }
 

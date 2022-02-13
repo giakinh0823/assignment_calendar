@@ -20,7 +20,7 @@
             <div class="mb-5 flex justify-center">
                 <h1 class="text-2xl">Add event</h1>
             </div>
-            <form action="/calendar" name="form-add-event" id="form-add-event" method="POST">
+            <form action="/calendar/addEvent" name="form-add-event" id="form-add-event" method="POST">
                 <div class="form-group mb-5">
                     <label for="titleEvent" class="block text-sm font-medium text-gray-900 mr-2">Title</label>
                     <input type="text" class="form-control block

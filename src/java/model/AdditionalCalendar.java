@@ -20,6 +20,7 @@ public class AdditionalCalendar extends BaseModel {
     private int statusId;
     private int categoryId;
     private int calendarId;
+    private Calendar calendar;
 
     public AdditionalCalendar() {
     }
@@ -47,8 +48,8 @@ public class AdditionalCalendar extends BaseModel {
         this.calendarId = calendarId;
     }
 
-    public AdditionalCalendar(Timestamp startDate, Timestamp endDate, boolean overlap, String display, boolean isOnlyDate, int statusId, int categoryId, int calendarId, int id, Timestamp created_at, Timestamp updated_at) {
-        super(id, created_at, updated_at);
+    public AdditionalCalendar(Timestamp startDate, Timestamp endDate, boolean overlap, String display, boolean isOnlyDate, int statusId, int categoryId, int calendarId, Timestamp created_at, Timestamp updated_at) {
+        super(created_at, updated_at);
         this.startDate = startDate;
         this.endDate = endDate;
         this.overlap = overlap;
@@ -57,6 +58,14 @@ public class AdditionalCalendar extends BaseModel {
         this.statusId = statusId;
         this.categoryId = categoryId;
         this.calendarId = calendarId;
+    }
+
+    public Calendar getCalendar() {
+        return calendar;
+    }
+
+    public void setCalendar(Calendar calendar) {
+        this.calendar = calendar;
     }
 
     public Timestamp getStartDate() {

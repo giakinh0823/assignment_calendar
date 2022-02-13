@@ -92,10 +92,8 @@ public class SignupController extends HttpServlet {
                     user.setIs_active(is_active);
                     user.setIs_super(is_super);
                     user.setPermission(permission);
-                    db.insert(user);
-                    HttpSession session = request.getSession();
-                    session.setAttribute("user", user.getUsername());
-                    response.sendRedirect("/");
+                    user = db.insert(user);
+                    response.sendRedirect("/login");
                 } catch (Exception e) {
                     request.setAttribute("error", e.getMessage());
                     request.getRequestDispatcher("/views/auth/signup.jsp").forward(request, response);

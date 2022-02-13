@@ -16,8 +16,25 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class Validate {
 
-    public String getField(HttpServletRequest request, String fieldName, boolean required) throws Exception{
-        String value = new String(request.getParameter(fieldName).getBytes("iso-8859-1"), "utf-8");
+    public String getField(HttpServletRequest request, String fieldName, boolean required) throws Exception {
+        String value = null;
+        try {
+            value = new String(request.getParameter(fieldName).getBytes("iso-8859-1"), "utf-8");
+        } catch (Exception e) {
+            if (value == null || value.trim().isEmpty()) {
+                if (required) {
+                    throw new Exception("Field is required");
+                } else {
+                    value = null; // Make empty string null so that you don't need to hassle with equals("") afterwards.
+                }
+            }
+        }
+        return value;
+    }
+
+    public String getFieldAjax(HttpServletRequest request, String fieldName, boolean required) throws Exception {
+        String value = null;
+        value = request.getParameter(fieldName);
         if (value == null || value.trim().isEmpty()) {
             if (required) {
                 throw new Exception("Field is required");
@@ -38,7 +55,7 @@ public class Validate {
         return number;
     }
 
-    public double fieldDouble(String value , String message) throws Exception {
+    public double fieldDouble(String value, String message) throws Exception {
         double number = 0;
         try {
             number = Double.parseDouble(value);
@@ -74,11 +91,11 @@ public class Validate {
         }
         return date;
     }
-    
+
     public Timestamp fieldTimestamp(String value, String message) throws Exception {
         Timestamp timestamp = null;
         try {
-            timestamp = Timestamp.valueOf(value);
+            timestamp = new Timestamp(new java.util.Date(Long.parseLong(value)).getTime());
         } catch (Exception e) {
             throw new Exception(message);
         }

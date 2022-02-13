@@ -12,16 +12,18 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.AdditionalCalendar;
+import model.Calendar;
 
 /**
  *
  * @author giaki
  */
 public class AdditionalCalendarDBContext extends DBContext<AdditionalCalendar> {
-    
+
     @Override
     public ArrayList<AdditionalCalendar> list() {
         ArrayList<AdditionalCalendar> listAdditional = new ArrayList<>();
+        CalendarDBContext calendarDB = new CalendarDBContext();
         String sql = "SELECT [id]\n"
                 + "      ,[start_date]\n"
                 + "      ,[end_date]\n"
@@ -50,6 +52,8 @@ public class AdditionalCalendarDBContext extends DBContext<AdditionalCalendar> {
                 additional.setCalendarId(result.getInt("calendarId"));
                 additional.setStatusId(result.getInt("statusId"));
                 additional.setCategoryId(result.getInt("categoryId"));
+                Calendar calendar = calendarDB.get(additional.getCalendarId());
+                additional.setCalendar(calendar);
                 listAdditional.add(additional);
             }
         } catch (SQLException ex) {
@@ -57,9 +61,10 @@ public class AdditionalCalendarDBContext extends DBContext<AdditionalCalendar> {
         }
         return listAdditional;
     }
-    
+
     @Override
     public AdditionalCalendar get(int id) {
+        CalendarDBContext calendarDB = new CalendarDBContext();
         String sql = "SELECT [id]\n"
                 + "      ,[start_date]\n"
                 + "      ,[end_date]\n"
@@ -90,6 +95,8 @@ public class AdditionalCalendarDBContext extends DBContext<AdditionalCalendar> {
                 additional.setCalendarId(result.getInt("calendarId"));
                 additional.setStatusId(result.getInt("statusId"));
                 additional.setCategoryId(result.getInt("categoryId"));
+                Calendar calendar = calendarDB.get(additional.getCalendarId());
+                additional.setCalendar(calendar);
                 return additional;
             }
         } catch (SQLException ex) {
@@ -97,20 +104,111 @@ public class AdditionalCalendarDBContext extends DBContext<AdditionalCalendar> {
         }
         return null;
     }
-    
+
     @Override
-    public void insert(AdditionalCalendar model) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public AdditionalCalendar insert(AdditionalCalendar model) {
+        PreparedStatement statement = null;
+        try {
+            String sql = "INSERT INTO [additional_calendar]\n"
+                    + "           ([start_date]\n"
+                    + "           ,[end_date]\n"
+                    + "           ,[overlap]\n"
+                    + "           ,[display]\n"
+                    + "           ,[isOnlyDate]\n"
+                    + "           ,[created_at]\n"
+                    + "           ,[updated_at]\n"
+                    + "           ,[calendarId]\n"
+                    + "           ,[statusId]\n"
+                    + "           ,[categoryId])\n"
+                    + "     VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            statement = connection.prepareStatement(sql);
+            statement.setTimestamp(1, model.getStartDate());
+            statement.setTimestamp(2, model.getEndDate());
+            statement.setBoolean(3, model.isOverlap());
+            statement.setString(4, model.getDisplay());
+            statement.setBoolean(5, model.isIsOnlyDate());
+            statement.setTimestamp(6, model.getCreated_at());
+            statement.setTimestamp(7, model.getUpdated_at());
+            statement.setInt(8, model.getCalendarId());
+            statement.setInt(9, model.getStatusId());
+            statement.setInt(10, model.getCategoryId());
+            statement.executeUpdate();
+            ArrayList<AdditionalCalendar> additionals = list();
+            AdditionalCalendar additional = additionals.get(additionals.size() - 1);
+            return additional;
+        } catch (SQLException ex) {
+            Logger.getLogger(AdditionalCalendarDBContext.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            if (statement != null) {
+                try {
+                    statement.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(AdditionalCalendarDBContext.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(AdditionalCalendarDBContext.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+        return null;
     }
-    
+
     @Override
     public void update(AdditionalCalendar model) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        PreparedStatement statement = null;
+        try {
+            String sql = "UPDATE [additional_calendar]\n"
+                    + "   SET [start_date] = ?\n"
+                    + "      ,[end_date] = ?\n"
+                    + "      ,[overlap] = ?\n"
+                    + "      ,[display] = ?\n"
+                    + "      ,[isOnlyDate] = ?\n"
+                    + "      ,[created_at] = ?\n"
+                    + "      ,[updated_at] = ?\n"
+                    + "      ,[calendarId] = ?\n"
+                    + "      ,[statusId] = ?\n"
+                    + "      ,[categoryId] = ?\n"
+                    + " WHERE id = ?";
+            statement = connection.prepareStatement(sql);
+            statement.setTimestamp(1, model.getStartDate());
+            statement.setTimestamp(2, model.getEndDate());
+            statement.setBoolean(3, model.isOverlap());
+            statement.setString(4, model.getDisplay());
+            statement.setBoolean(5, model.isIsOnlyDate());
+            statement.setTimestamp(6, model.getCreated_at());
+            statement.setTimestamp(7, model.getUpdated_at());
+            statement.setInt(8, model.getCalendarId());
+            statement.setInt(9, model.getStatusId());
+            statement.setInt(10, model.getCategoryId());
+            statement.setInt(11, model.getId());
+            statement.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(AdditionalCalendarDBContext.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            if (statement != null) {
+                try {
+                    statement.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(AdditionalCalendarDBContext.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(AdditionalCalendarDBContext.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
     }
-    
+
     @Override
     public void delete(int id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
 }
