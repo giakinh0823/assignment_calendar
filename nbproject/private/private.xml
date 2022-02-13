@@ -3,15 +3,25 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/FPT%20UNIVERSITY/STUDY/KY%204/JAVA%20WEB%20TEST/WWW/ass_CLife/src/java/controller/calendar/AddCalendarController.java</file>
+            <file>file:/D:/FPT%20UNIVERSITY/STUDY/KY%204/JAVA%20WEB%20TEST/WWW/ass_CLife/src/java/dal/CategoryCalendarDBContext.java</file>
             <file>file:/D:/FPT%20UNIVERSITY/STUDY/KY%204/JAVA%20WEB%20TEST/WWW/ass_CLife/src/java/dal/UserDBContext.java</file>
+            <file>file:/D:/FPT%20UNIVERSITY/STUDY/KY%204/JAVA%20WEB%20TEST/WWW/ass_CLife/src/java/dal/EventCalendarDBContext.java</file>
+            <file>file:/D:/FPT%20UNIVERSITY/STUDY/KY%204/JAVA%20WEB%20TEST/WWW/ass_CLife/src/java/model/StatusCalendar.java</file>
+            <file>file:/D:/FPT%20UNIVERSITY/STUDY/KY%204/JAVA%20WEB%20TEST/WWW/ass_CLife/src/java/model/AdditionalCalendar.java</file>
             <file>file:/D:/FPT%20UNIVERSITY/STUDY/KY%204/JAVA%20WEB%20TEST/WWW/ass_CLife/web/views/calendar/addEvent.jsp</file>
-            <file>file:/D:/FPT%20UNIVERSITY/STUDY/KY%204/JAVA%20WEB%20TEST/WWW/ass_CLife/web/views/dashboard/navbar.jsp</file>
+            <file>file:/D:/FPT%20UNIVERSITY/STUDY/KY%204/JAVA%20WEB%20TEST/WWW/ass_CLife/src/java/model/CategoryCalendar.java</file>
+            <file>file:/D:/FPT%20UNIVERSITY/STUDY/KY%204/JAVA%20WEB%20TEST/WWW/ass_CLife/src/java/model/BaseModel.java</file>
+            <file>file:/D:/FPT%20UNIVERSITY/STUDY/KY%204/JAVA%20WEB%20TEST/WWW/ass_CLife/src/java/controller/calendar/EventController.java</file>
             <file>file:/D:/FPT%20UNIVERSITY/STUDY/KY%204/JAVA%20WEB%20TEST/WWW/ass_CLife/src/java/dal/CalendarDBContext.java</file>
             <file>file:/D:/FPT%20UNIVERSITY/STUDY/KY%204/JAVA%20WEB%20TEST/WWW/ass_CLife/src/java/controller/calendar/CalendarController.java</file>
-            <file>file:/D:/FPT%20UNIVERSITY/STUDY/KY%204/JAVA%20WEB%20TEST/WWW/ass_CLife/web/views/auth/signup.jsp</file>
             <file>file:/D:/FPT%20UNIVERSITY/STUDY/KY%204/JAVA%20WEB%20TEST/WWW/ass_CLife/web/views/calendar/addCalendar.jsp</file>
+            <file>file:/D:/FPT%20UNIVERSITY/STUDY/KY%204/JAVA%20WEB%20TEST/WWW/ass_CLife/src/java/dal/StatusCalendarDBContext.java</file>
             <file>file:/D:/FPT%20UNIVERSITY/STUDY/KY%204/JAVA%20WEB%20TEST/WWW/ass_CLife/web/views/calendar/calendar.jsp</file>
+            <file>file:/D:/FPT%20UNIVERSITY/STUDY/KY%204/JAVA%20WEB%20TEST/WWW/ass_CLife/src/java/controller/calendar/AddCalendarController.java</file>
+            <file>file:/D:/FPT%20UNIVERSITY/STUDY/KY%204/JAVA%20WEB%20TEST/WWW/ass_CLife/src/java/dal/AdditionalCalendarDBContext.java</file>
+            <file>file:/D:/FPT%20UNIVERSITY/STUDY/KY%204/JAVA%20WEB%20TEST/WWW/ass_CLife/src/java/dal/DBContext.java</file>
+            <file>file:/D:/FPT%20UNIVERSITY/STUDY/KY%204/JAVA%20WEB%20TEST/WWW/ass_CLife/src/java/utils/Validate.java</file>
+            <file>file:/D:/FPT%20UNIVERSITY/STUDY/KY%204/JAVA%20WEB%20TEST/WWW/ass_CLife/src/java/model/EventCalendar.java</file>
         </group>
     </open-files>
 </project-private>

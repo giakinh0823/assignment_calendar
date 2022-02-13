@@ -18,37 +18,17 @@ public class EventCalendar extends BaseModel {
     private int userId;
     private int additionalId;
     private AdditionalCalendar additional;
+    private User user;
 
     public EventCalendar() {
     }
 
-    public EventCalendar(String title, String description, String location, int userId, int additionalId, AdditionalCalendar additional) {
-        this.title = title;
-        this.description = description;
-        this.location = location;
-        this.userId = userId;
-        this.additionalId = additionalId;
-        this.additional = additional;
+    public User getUser() {
+        return user;
     }
 
-    public EventCalendar(String title, String description, String location, int userId, int additionalId, AdditionalCalendar additional, int id) {
-        super(id);
-        this.title = title;
-        this.description = description;
-        this.location = location;
-        this.userId = userId;
-        this.additionalId = additionalId;
-        this.additional = additional;
-    }
-
-    public EventCalendar(String title, String description, String location, int userId, int additionalId, AdditionalCalendar additional, int id, Timestamp created_at, Timestamp updated_at) {
-        super(id, created_at, updated_at);
-        this.title = title;
-        this.description = description;
-        this.location = location;
-        this.userId = userId;
-        this.additionalId = additionalId;
-        this.additional = additional;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public String getTitle() {
