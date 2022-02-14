@@ -171,8 +171,11 @@
                                                 description: "<%=event.getDescription()%>",
                                                 location: "<%=event.getLocation()%>",
                                                 overlap: <%=event.getAdditional().isOverlap()%>,
-                                                category: "<%=event.getAdditional().getCategory().getName()%>",
-                                                status: "<%=event.getAdditional().getStatus().getName()%>",
+                                                category: "<%=event.getAdditional().getCategory().getId()%>",
+                                                categoryName: "<%=event.getAdditional().getCategory().getName()%>",
+                                                status: "<%=event.getAdditional().getStatus().getId()%>",
+                                                statusName: "<%=event.getAdditional().getStatus().getName()%>",
+                                                isOnlyDate: <%=event.getAdditional().isIsOnlyDate()%>,
                                             <%if (event.getAdditional().getDisplay() != null) {%>
                                                 display: <%=event.getAdditional().getDisplay() != null ? "'" + event.getAdditional().getDisplay() + "'" : "undefined"%>,
                                             <%}%>
@@ -180,13 +183,13 @@
                                         <%}%>
                                         ]
 
-                                                const calendarEl = document.getElementById('calendar');
+                                        const calendarEl = document.getElementById('calendar');
                                         const calendar = new FullCalendar.Calendar(calendarEl, {
                                         headerToolbar: {
-                                        left: 'prev,next today',
+                                            left: 'prev,next today',
                                                 center: 'title',
-                                                right: 'dayGridMonth,timeGridWeek,timeGridDay,listMonth'
-                                        },
+                                                right: 'dayGridMonth,timeGridWeek,timeGridDay,listMonth',
+                                            },
                                                 initialDate: new Date(),
                                                 navLinks: true, // có thể nhấp vào tên ngày / tuần để điều hướng chế độ xem
                                                 businessHours: true, // hiển thị giờ làm việc
@@ -195,16 +198,65 @@
                                                 droppable: true,
                                                 dayMaxEventRows: true,
                                                 eventClick: function (info) {
-                                                alert(info.event.extendedProps.colorId);
+                                                    alert(info.event.title);
                                                 },
                                                 eventDrop: function (info) {
-                                                alert(info.event.title + " was dropped on " + info.event.start.toISOString() + " - " + info.event.start.toISOString());
+                                                    const start = new Date(info.event.start);
+                                                    const end = new Date(info.event.end);
+                                                    console.log(info.event);
+                                                    if(info.event.allDay){
+                                                        start.setDate(start.getDate()+1);
+                                                        end.setDate(end.getDate()+1);
+                                                    }
+                                                    const event = {
+                                                        id: info.event.id,
+                                                        start: start.getTime(),
+                                                        end: end.getTime(),
+                                                        isOnlyDate: info.event.extendedProps.isOnlyDate,
+                                                    }
+                                                    if(info.event._def.hasEnd){
+                                                        event.isOnlyDate = false;
+                                                    } else{
+                                                        event.isOnlyDate = true;
+                                                    }
+                                                    $.ajax({
+                                                        method: "POST",
+                                                        url: "/calendar/updateEvent",
+                                                        data: event,
+                                                    }).done(function (data) {
+                                                        // update event thành công
+                                                    });
                                                 },
                                                 eventResize: function (info) {
-                                                alert(info.event.title + " was dropped on " + info.event.start.toISOString() + " - " + info.event.start.toISOString());
+                                                    const start = new Date(info.event.start);
+                                                    const end = new Date(info.event.end);
+                                                    console.log(info.event);
+                                                    if((info.event.allDay || info.event.extendedProps.isOnlyDate) && !info.event._def.hasEnd){
+                                                        start.setDate(start.getDate()+1);
+                                                        end.setDate(end.getDate()+1);
+                                                    }
+                                                    const event = {
+                                                        id: info.event.id,
+                                                        start: start.getTime(),
+                                                        end: end.getTime(),
+                                                        isOnlyDate: info.event.extendedProps.isOnlyDate,
+                                                    }
+                                                    if(info.event._def.hasEnd){
+                                                        event.isOnlyDate = false;
+                                                    } else{
+                                                        event.isOnlyDate = true;
+                                                    }
+                                                    console.log(info.event._def.hasEnd);
+                                                    $.ajax({
+                                                        method: "POST",
+                                                        url: "/calendar/updateEvent",
+                                                        data: event,
+                                                    }).done(function (data) {
+                                                        // update event thành công
+                                                    });
                                                 },
                                                 events: function (info, successCallback, failureCallback, dropInfo) {
-                                                successCallback(events);
+                                                    successCallback(events);
                                                 },
                                         });
                                         calendar.render();
@@ -252,10 +304,13 @@
                                                     location: data?.location,
                                                     color: data?.additional?.calendar.color,
                                                     overlap: data?.additional?.overlap,
-                                                    category:data?.additional?.category?.name,
-                                                    status: data?.additional?.status?.name,
-                                                    start: data?.additional?.isOnlyDate ? new Date(data?.additional?.startDate).toJSON().split('T')[0] : new Date(data?.additional?.endDate).toISOString(),
+                                                    category:data?.additional?.category?.id,
+                                                    categoryName:data?.additional?.category?.name,
+                                                    status: data?.additional?.status?.id,
+                                                    statusName:data?.additional?.status?.name,
+                                                    start: data?.additional?.isOnlyDate ? new Date(data?.additional?.startDate).toJSON().split('T')[0] : new Date(data?.additional?.startDate).toISOString(),
                                                     end: data?.additional?.isOnlyDate ? new Date(data?.additional?.endDate).toJSON().split('T')[0] : new Date(data?.additional?.endDate).toISOString(),
+                                                    isOnlyDate: data?.additional?.isOnlyDate,
                                                 }
                                                 if (data?.additional?.display){
                                                     event.display = data?.additional?.display;
