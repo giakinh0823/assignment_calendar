@@ -42,7 +42,23 @@ public class StatusCalendarDBContext extends DBContext<StatusCalendar> {
 
     @Override
     public StatusCalendar get(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String sql = "SELECT id, name FROM [status_calendar]\n"
+                + " WHERE id = ?";
+        PreparedStatement statement = null;
+        try {
+            statement = connection.prepareStatement(sql);
+            statement.setInt(1, id);
+            ResultSet result = statement.executeQuery();
+            while (result.next()) {
+                StatusCalendar status = new StatusCalendar();
+                status.setId(result.getInt("id"));
+                status.setName(result.getString("name"));
+                return status;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(StatusCalendarDBContext.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
     }
 
     @Override

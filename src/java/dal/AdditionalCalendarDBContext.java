@@ -13,6 +13,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.AdditionalCalendar;
 import model.Calendar;
+import model.CategoryCalendar;
+import model.StatusCalendar;
 
 /**
  *
@@ -24,6 +26,9 @@ public class AdditionalCalendarDBContext extends DBContext<AdditionalCalendar> {
     public ArrayList<AdditionalCalendar> list() {
         ArrayList<AdditionalCalendar> listAdditional = new ArrayList<>();
         CalendarDBContext calendarDB = new CalendarDBContext();
+        CategoryCalendarDBContext categoryDB = new CategoryCalendarDBContext();
+        StatusCalendarDBContext statusDB = new StatusCalendarDBContext();
+        
         String sql = "SELECT [id]\n"
                 + "      ,[start_date]\n"
                 + "      ,[end_date]\n"
@@ -46,6 +51,7 @@ public class AdditionalCalendarDBContext extends DBContext<AdditionalCalendar> {
                 additional.setStartDate(result.getTimestamp("start_date"));
                 additional.setEndDate(result.getTimestamp("end_date"));
                 additional.setOverlap(result.getBoolean("overlap"));
+                additional.setDisplay(result.getString("display"));
                 additional.setIsOnlyDate(result.getBoolean("isOnlyDate"));
                 additional.setCreated_at(result.getTimestamp("created_at"));
                 additional.setUpdated_at(result.getTimestamp("updated_at"));
@@ -54,6 +60,10 @@ public class AdditionalCalendarDBContext extends DBContext<AdditionalCalendar> {
                 additional.setCategoryId(result.getInt("categoryId"));
                 Calendar calendar = calendarDB.get(additional.getCalendarId());
                 additional.setCalendar(calendar);
+                CategoryCalendar category = categoryDB.get(additional.getCategoryId());
+                additional.setCategory(category);
+                StatusCalendar status = statusDB.get(additional.getStatusId());
+                additional.setStatus(status);
                 listAdditional.add(additional);
             }
         } catch (SQLException ex) {
@@ -65,6 +75,8 @@ public class AdditionalCalendarDBContext extends DBContext<AdditionalCalendar> {
     @Override
     public AdditionalCalendar get(int id) {
         CalendarDBContext calendarDB = new CalendarDBContext();
+        CategoryCalendarDBContext categoryDB = new CategoryCalendarDBContext();
+        StatusCalendarDBContext statusDB = new StatusCalendarDBContext();
         String sql = "SELECT [id]\n"
                 + "      ,[start_date]\n"
                 + "      ,[end_date]\n"
@@ -89,6 +101,7 @@ public class AdditionalCalendarDBContext extends DBContext<AdditionalCalendar> {
                 additional.setStartDate(result.getTimestamp("start_date"));
                 additional.setEndDate(result.getTimestamp("end_date"));
                 additional.setOverlap(result.getBoolean("overlap"));
+                additional.setDisplay(result.getString("display"));
                 additional.setIsOnlyDate(result.getBoolean("isOnlyDate"));
                 additional.setCreated_at(result.getTimestamp("created_at"));
                 additional.setUpdated_at(result.getTimestamp("updated_at"));
@@ -97,6 +110,10 @@ public class AdditionalCalendarDBContext extends DBContext<AdditionalCalendar> {
                 additional.setCategoryId(result.getInt("categoryId"));
                 Calendar calendar = calendarDB.get(additional.getCalendarId());
                 additional.setCalendar(calendar);
+                CategoryCalendar category = categoryDB.get(additional.getCategoryId());
+                additional.setCategory(category);
+                StatusCalendar status = statusDB.get(additional.getStatusId());
+                additional.setStatus(status);
                 return additional;
             }
         } catch (SQLException ex) {

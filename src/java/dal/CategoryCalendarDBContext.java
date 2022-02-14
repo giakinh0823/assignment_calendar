@@ -41,7 +41,23 @@ public class CategoryCalendarDBContext extends DBContext<CategoryCalendar>{
 
     @Override
     public CategoryCalendar get(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String sql = "SELECT id, name FROM [category_calendar]\n"
+                + " WHERE id = ?";
+        PreparedStatement statement = null;
+        try {
+            statement = connection.prepareStatement(sql);
+            statement.setInt(1, id);
+            ResultSet result = statement.executeQuery();
+            while (result.next()) {
+                 CategoryCalendar category = new CategoryCalendar();
+                 category.setId(result.getInt("id"));
+                 category.setName(result.getString("name"));
+                 return category;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(CategoryCalendarDBContext.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
     }
     
     @Override

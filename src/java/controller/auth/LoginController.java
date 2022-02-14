@@ -48,7 +48,7 @@ public class LoginController extends HttpServlet {
             User user = db.getUser(username, hashPass.hashPassword(password));
             if (user != null) {
                 HttpSession session = request.getSession();
-                session.setAttribute("user", user.getUsername());
+                session.setAttribute("user", user);
                 response.sendRedirect("/");
             } else {
                 request.setAttribute("error", "Username or password wrong!");

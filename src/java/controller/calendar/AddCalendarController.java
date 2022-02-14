@@ -40,10 +40,8 @@ public class AddCalendarController extends HttpServlet {
             String name = validate.getField(request, "nameCalendar", true);
             String color = validate.getField(request, "colorCalendar", true);
             HttpSession session = request.getSession();
-            String username = (String) session.getAttribute("user");
+            User user = (User) session.getAttribute("user");
             
-            UserDBContext userDB = new UserDBContext();
-            User user = userDB.findOne("username", username);
             Calendar calendar = new Calendar(name, color, user.getId(), user);
             Timestamp created_at = new Timestamp(System.currentTimeMillis());
             Timestamp updated_at = new Timestamp(System.currentTimeMillis());

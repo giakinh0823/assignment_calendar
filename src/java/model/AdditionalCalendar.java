@@ -12,6 +12,7 @@ import java.sql.Timestamp;
  * @author giaki
  */
 public class AdditionalCalendar extends BaseModel {
+
     private Timestamp startDate;
     private Timestamp endDate;
     private boolean overlap;
@@ -21,6 +22,8 @@ public class AdditionalCalendar extends BaseModel {
     private int categoryId;
     private int calendarId;
     private Calendar calendar;
+    private StatusCalendar status;
+    private CategoryCalendar category;
 
     public AdditionalCalendar() {
     }
@@ -58,6 +61,22 @@ public class AdditionalCalendar extends BaseModel {
         this.statusId = statusId;
         this.categoryId = categoryId;
         this.calendarId = calendarId;
+    }
+
+    public StatusCalendar getStatus() {
+        return status;
+    }
+
+    public void setStatus(StatusCalendar status) {
+        this.status = status;
+    }
+
+    public CategoryCalendar getCategory() {
+        return category;
+    }
+
+    public void setCategory(CategoryCalendar category) {
+        this.category = category;
     }
 
     public Calendar getCalendar() {
@@ -131,6 +150,5 @@ public class AdditionalCalendar extends BaseModel {
     public void setCalendarId(int calendarId) {
         this.calendarId = calendarId;
     }
-    
-    
+
 }

@@ -30,7 +30,7 @@ import model.User;
  * @author giaki
  */
 public class CalendarController extends HttpServlet {
-    
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -38,31 +38,27 @@ public class CalendarController extends HttpServlet {
         CategoryCalendarDBContext categoryDB = new CategoryCalendarDBContext();
         StatusCalendarDBContext statusDB = new StatusCalendarDBContext();
         EventCalendarDBContext eventDB = new EventCalendarDBContext();
-        
+
         HttpSession session = request.getSession();
-        String username = (String) session.getAttribute("user");
-        
-        UserDBContext userDB = new UserDBContext();
-        User user = userDB.findOne("username", username);
-        
+        User user = (User) session.getAttribute("user");
+
         ArrayList<Calendar> calendars = calendarDB.listByUser(user.getId());
         ArrayList<CategoryCalendar> listCategory = categoryDB.list();
         ArrayList<StatusCalendar> listStatus = statusDB.list();
         ArrayList<EventCalendar> events = eventDB.list();
-        
+
         request.setAttribute("calendars", calendars);
         request.setAttribute("listCategory", listCategory);
         request.setAttribute("listStatus", listStatus);
         request.setAttribute("events", events);
-        
+
         request.getRequestDispatcher("/views/calendar/calendar.jsp").forward(request, response);
     }
 
-    
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+
     }
 
     /**

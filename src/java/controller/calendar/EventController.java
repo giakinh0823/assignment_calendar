@@ -68,10 +68,7 @@ public class EventController extends HttpServlet {
 
             // Get user
             HttpSession session = request.getSession();
-            String username = (String) session.getAttribute("user");
-
-            UserDBContext userDB = new UserDBContext();
-            User user = userDB.findOne("username", username);
+            User user = (User) session.getAttribute("user");
 
             // insert additional
             AdditionalCalendarDBContext additionalDB = new AdditionalCalendarDBContext();

@@ -43,6 +43,10 @@
         .fc-theme-standard td, .fc-theme-standard th{
             border: 1px solid #ebebeb;
         }
+        
+        .fc-daygrid-event{
+            opacity: 0.7!important;
+        }
 
         .fc-daygrid-day-top{
             font-size: 18px;
@@ -58,6 +62,14 @@
         }
 
         .fc-event-title{
+            font-size: 16px;
+        }
+        
+        .fc .fc-bg-event{
+            opacity: 0.4!important;
+        }
+        .fc-bg-event.fc-event .fc-event-title{
+            font-weight: bold;
             font-size: 16px;
         }
     </style>
@@ -149,54 +161,57 @@
         <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.2/main.min.js"></script>
         <script>
                                         const events = [
-                                            <%for (EventCalendar event : events) {%>
+                                        <%for (EventCalendar event : events) {%>
                                             {
                                                 id: <%=event.getId()%>,
                                                 title: "<%=event.getTitle()%>",
-                                                start: <%= event.getAdditional().isIsOnlyDate() ? "new Date('"+event.getAdditional().getStartDate()+"').toJSON().split('T')[0]":"new Date('"+event.getAdditional().getStartDate()+"').toISOString()"%>,
-                                                end: <%= event.getAdditional().isIsOnlyDate() ? "new Date('"+event.getAdditional().getEndDate()+"').toJSON().split('T')[0]":"new Date('"+event.getAdditional().getEndDate()+"').toISOString()"%>,
+                                                start: <%= event.getAdditional().isIsOnlyDate() ? "new Date('" + event.getAdditional().getStartDate() + "').toJSON().split('T')[0]" : "new Date('" + event.getAdditional().getStartDate() + "').toISOString()"%>,
+                                                end: <%= event.getAdditional().isIsOnlyDate() ? "new Date('" + event.getAdditional().getEndDate() + "').toJSON().split('T')[0]" : "new Date('" + event.getAdditional().getEndDate() + "').toISOString()"%>,
                                                 color: "<%=event.getAdditional().getCalendar().getColor()%>",
                                                 description: "<%=event.getDescription()%>",
                                                 location: "<%=event.getLocation()%>",
-                                                <%if(event.getAdditional().getDisplay()!=null){%>
-                                                display: <%=event.getAdditional().getDisplay()!=null?""+event.getAdditional().getDisplay()+"":"undefined"%>,
-                                                <%}%>
-                                            },
+                                                overlap: <%=event.getAdditional().isOverlap()%>,
+                                                category: "<%=event.getAdditional().getCategory().getName()%>",
+                                                status: "<%=event.getAdditional().getStatus().getName()%>",
+                                            <%if (event.getAdditional().getDisplay() != null) {%>
+                                                display: <%=event.getAdditional().getDisplay() != null ? "'" + event.getAdditional().getDisplay() + "'" : "undefined"%>,
                                             <%}%>
+                                            },
+                                        <%}%>
                                         ]
 
-                                        const calendarEl = document.getElementById('calendar');
+                                                const calendarEl = document.getElementById('calendar');
                                         const calendar = new FullCalendar.Calendar(calendarEl, {
-                                            headerToolbar: {
-                                                left: 'prev,next today',
+                                        headerToolbar: {
+                                        left: 'prev,next today',
                                                 center: 'title',
                                                 right: 'dayGridMonth,timeGridWeek,timeGridDay,listMonth'
-                                            },
-                                            initialDate: new Date(),
-                                            navLinks: true, // có thể nhấp vào tên ngày / tuần để điều hướng chế độ xem
-                                            businessHours: true, // hiển thị giờ làm việc
-                                            editable: true,
-                                            selectable: true,
-                                            droppable: true,
-                                            dayMaxEventRows: true,
-                                            eventClick: function (info) {
+                                        },
+                                                initialDate: new Date(),
+                                                navLinks: true, // có thể nhấp vào tên ngày / tuần để điều hướng chế độ xem
+                                                businessHours: true, // hiển thị giờ làm việc
+                                                editable: true,
+                                                selectable: true,
+                                                droppable: true,
+                                                dayMaxEventRows: true,
+                                                eventClick: function (info) {
                                                 alert(info.event.extendedProps.colorId);
-                                            },
-                                            eventDrop: function (info) {
+                                                },
+                                                eventDrop: function (info) {
                                                 alert(info.event.title + " was dropped on " + info.event.start.toISOString() + " - " + info.event.start.toISOString());
-                                            },
-                                            eventResize: function (info) {
+                                                },
+                                                eventResize: function (info) {
                                                 alert(info.event.title + " was dropped on " + info.event.start.toISOString() + " - " + info.event.start.toISOString());
-                                            },
-                                            events: function (info, successCallback, failureCallback, dropInfo) {
+                                                },
+                                                events: function (info, successCallback, failureCallback, dropInfo) {
                                                 successCallback(events);
-                                            },
+                                                },
                                         });
                                         calendar.render();
                                         $("#form-add-event").on("submit", function (e) {
                                             e.preventDefault();
                                             const event = {
-                                                title: $("#titleEvent").val(),
+                                            title: $("#titleEvent").val(),
                                                 description: $("#description").val(),
                                                 start: $("#startDate").val(),
                                                 color: $("#colorEvent").val(),
@@ -215,40 +230,57 @@
                                                     event.end = event.end + "T" + $("#endTime").val();
                                                     event.isOnlyDate = false;
                                                 }
-                                            }
+                                            }   
                                             if ($("#display").val() != "default") {
                                                 event.display = $("#display").val();
                                             }
                                             if ($("#location").val() && $("#location").val() != "" && $("#location").val() != null) {
                                                 event.location = $("#location").val();
                                             }
-                                            events.push(event);
-                                            calendar.refetchEvents();
                                             event.start = new Date(event.start).getTime();
                                             event.end = new Date(event.end).getTime();
+                                            console.log(event);
                                             $.ajax({
                                                 method: "POST",
                                                 url: "/calendar/addEvent",
                                                 data: event,
                                             }).done(function (data) {
+                                                const event = {
+                                                    id: data.id,
+                                                    title: data.title,
+                                                    description: data?.description,
+                                                    location: data?.location,
+                                                    color: data?.additional?.calendar.color,
+                                                    overlap: data?.additional?.overlap,
+                                                    category:data?.additional?.category?.name,
+                                                    status: data?.additional?.status?.name,
+                                                    start: data?.additional?.isOnlyDate ? new Date(data?.additional?.startDate).toJSON().split('T')[0] : new Date(data?.additional?.endDate).toISOString(),
+                                                    end: data?.additional?.isOnlyDate ? new Date(data?.additional?.endDate).toJSON().split('T')[0] : new Date(data?.additional?.endDate).toISOString(),
+                                                }
+                                                if (data?.additional?.display){
+                                                    event.display = data?.additional?.display;
+                                                }
                                                 console.log(data);
+                                                console.log(event);
+                                                events.push(event);
+                                                calendar.refetchEvents();
                                             });
                                         });
         </script>
         <script>
             const deleteCalendar = (id) => {
-                $("#confirm-delete-calendar").attr("data-id", id);
+            $("#confirm-delete-calendar").attr("data-id", id);
             }
             $("#confirm-delete-calendar").on('click', (e) => {
-                alert($("#confirm-delete-calendar").attr("data-id"));
+            alert($("#confirm-delete-calendar").attr("data-id"));
             })
         </script>
 
         <script>
-            $("#calendarGroup").on('change', (e) => {
-                const color = event.target[event.target.selectedIndex].getAttribute("data-color");
-                $("#colorEvent").val(color);
-                $("#colorEvent").css("color", color);
+                    $("#calendarGroup").on('change', (e) => {
+            const color = event.target[event.target.selectedIndex].getAttribute("data-color");
+            $("#colorEvent").val(color);
+            $("#colorEvent").css("color", color);
             });
         </script>
     </body>
