@@ -5,6 +5,7 @@
  */
 package controller.auth;
 
+import dal.CalendarDBContext;
 import dal.UserDBContext;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -16,6 +17,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import model.Calendar;
 import model.User;
 import utils.HashPass;
 import utils.Validate;
@@ -35,7 +37,7 @@ public class SignupController extends HttpServlet {
         boolean loggedIn = session != null && session.getAttribute("user") != null;
         if (loggedIn) {
             response.sendRedirect("/");
-        }else{
+        } else {
             request.getRequestDispatcher("/views/auth/signup.jsp").forward(request, response);
         }
     }
@@ -93,6 +95,15 @@ public class SignupController extends HttpServlet {
                     user.setIs_super(is_super);
                     user.setPermission(permission);
                     user = db.insert(user);
+
+                    String name = "Home";
+                    String color = "#E0211F";
+                    Calendar calendar = new Calendar(name, color, user.getId(), user);
+                    calendar.setCreated_at(created_at);
+                    calendar.setUpdated_at(updated_at);
+                    CalendarDBContext calendarDBContext = new CalendarDBContext();
+                    calendarDBContext.insert(calendar);
+                    
                     response.sendRedirect("/login");
                 } catch (Exception e) {
                     request.setAttribute("error", e.getMessage());
