@@ -43,12 +43,14 @@ public class UpdateEventController extends HttpServlet {
             String id = validate.getFieldAjax(request, "id", true);
             String startDate = validate.getFieldAjax(request, "start", true);
             String endDate = validate.getFieldAjax(request, "end", false);
-            String isOnlyDate = validate.getFieldAjax(request, "isOnlyDate", true);
+            String isAllDay = validate.getFieldAjax(request, "allDay", true);
+            String isHasEnd = validate.getFieldAjax(request, "hasEnd", false);
             
             int field_id = validate.fieldInt(id, "Error set field id");
             Timestamp field_startDate = validate.fieldTimestamp(startDate, "Error set field start date");
             Timestamp field_endDate = validate.fieldTimestamp(endDate, "Error set field end date");
-            boolean field_isOnlyDate = validate.fieldBoolean(isOnlyDate, "Error set field isOnlyDate");
+            boolean field_isAllDay = validate.fieldBoolean(isAllDay, "Error set field AllDay");
+            boolean field_isHasEnd = validate.fieldBoolean(isHasEnd, "Error set field HasEnd");
              
             Timestamp updated_at = new Timestamp(System.currentTimeMillis());
             
@@ -60,7 +62,8 @@ public class UpdateEventController extends HttpServlet {
             AdditionalCalendar additional = additionalDB.get(event.getAdditionalId());
             additional.setStartDate(field_startDate);
             additional.setEndDate(field_endDate);
-            additional.setIsOnlyDate(field_isOnlyDate);
+            additional.setIsAllDay(field_isAllDay);
+            additional.setIsHasEnd(field_isHasEnd);
             additional.setUpdated_at(updated_at);
             
             additionalDB.update(additional);

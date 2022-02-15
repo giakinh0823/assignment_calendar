@@ -17,6 +17,11 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.2/main.min.css">
+        <%
+            ArrayList<EventCalendar> events = (ArrayList<EventCalendar>) request.getAttribute("events");
+            ArrayList<Calendar> calendars = (ArrayList<Calendar>) request.getAttribute("calendars");
+            ArrayList<CategoryCalendar> listCategory = (ArrayList<CategoryCalendar>) request.getAttribute("listCategory");
+        %>
     </head>
     <style>
         .fc-button-primary{
@@ -73,11 +78,6 @@
             font-size: 16px;
         }
     </style>
-    <%
-        ArrayList<EventCalendar> events = (ArrayList<EventCalendar>) request.getAttribute("events");
-        ArrayList<Calendar> calendars = (ArrayList<Calendar>) request.getAttribute("calendars");
-        ArrayList<CategoryCalendar> listCategory = (ArrayList<CategoryCalendar>) request.getAttribute("listCategory");
-    %>
     <body>
         <jsp:include page="../dashboard/navbar.jsp" />
         <!--<div class="w-[calc(100%_-_15rem)] ml-auto p-5 min-h-screen">-->
@@ -134,7 +134,7 @@
                 </div>
             </div>
         </div>
-
+        
 
         <div class="hidden overflow-y-auto overflow-x-hidden fixed right-0 left-0 top-4 z-50 justify-center items-center md:inset-0 h-modal sm:h-full" id="confirm-delete-calendar-modal">
             <div class="relative px-4 w-full max-w-md h-full md:h-auto">
@@ -158,170 +158,133 @@
                 </div>
             </div>
         </div>
+                    
+         <button class="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center" type="button" data-modal-toggle="model-info-event">
+  Toggle modal
+</button>
+        <div id="model-info-event" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed right-0 left-0 top-4 z-50 justify-center items-center h-modal md:h-full md:inset-0">
+            <div class="relative px-4 w-full max-w-2xl h-full md:h-auto">
+                <!-- Modal content -->
+                <div class="relative bg-white rounded-lg shadow">
+                    <!-- Modal header -->
+                    <div class="flex justify-between items-start p-5 rounded-t border-b">
+                        <h3 class="text-xl font-semibold text-gray-900 lg:text-2xl">
+                            Terms of Service
+                        </h3>
+                        <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center" data-modal-toggle="model-info-event">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>  
+                        </button>
+                    </div>
+                    <!-- Modal body -->
+                    <div class="p-6 space-y-6">
+                        <jsp:include page="infoEvent.jsp" />
+                    </div>
+                    <!-- Modal footer -->
+                    <div class="flex items-center p-6 space-x-2 rounded-b border-t border-gray-200">
+                        <button data-modal-toggle="model-info-event" type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">I accept</button>
+                        <button data-modal-toggle="model-info-event" type="button" class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:ring-gray-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10">Decline</button>
+                    </div>
+                </div>
+            </div>
+        </div>
         <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.2/main.min.js"></script>
+        <script src="/assets/js/calendar/calendar.js"></script>
         <script>
-                                        const events = [
-                                        <%for (EventCalendar event : events) {%>
-                                            {
-                                                id: <%=event.getId()%>,
-                                                title: "<%=event.getTitle()%>",
-                                                start: <%= event.getAdditional().isIsOnlyDate() ? "new Date('" + event.getAdditional().getStartDate() + "').toJSON().split('T')[0]" : "new Date('" + event.getAdditional().getStartDate() + "').toISOString()"%>,
-                                                end: <%= event.getAdditional().isIsOnlyDate() ? "new Date('" + event.getAdditional().getEndDate() + "').toJSON().split('T')[0]" : "new Date('" + event.getAdditional().getEndDate() + "').toISOString()"%>,
-                                                color: "<%=event.getAdditional().getCalendar().getColor()%>",
-                                                description: "<%=event.getDescription()%>",
-                                                location: "<%=event.getLocation()%>",
-                                                overlap: <%=event.getAdditional().isOverlap()%>,
-                                                category: "<%=event.getAdditional().getCategory().getId()%>",
-                                                categoryName: "<%=event.getAdditional().getCategory().getName()%>",
-                                                status: "<%=event.getAdditional().getStatus().getId()%>",
-                                                statusName: "<%=event.getAdditional().getStatus().getName()%>",
-                                                isOnlyDate: <%=event.getAdditional().isIsOnlyDate()%>,
-                                            <%if (event.getAdditional().getDisplay() != null) {%>
-                                                display: <%=event.getAdditional().getDisplay() != null ? "'" + event.getAdditional().getDisplay() + "'" : "undefined"%>,
-                                            <%}%>
-                                            },
-                                        <%}%>
-                                        ]
-
-                                        const calendarEl = document.getElementById('calendar');
-                                        const calendar = new FullCalendar.Calendar(calendarEl, {
-                                        headerToolbar: {
-                                            left: 'prev,next today',
-                                                center: 'title',
-                                                right: 'dayGridMonth,timeGridWeek,timeGridDay,listMonth',
-                                            },
-                                                initialDate: new Date(),
-                                                navLinks: true, // có thể nhấp vào tên ngày / tuần để điều hướng chế độ xem
-                                                businessHours: true, // hiển thị giờ làm việc
-                                                editable: true,
-                                                selectable: true,
-                                                droppable: true,
-                                                dayMaxEventRows: true,
-                                                eventClick: function (info) {
-                                                    alert(info.event.title);
-                                                },
-                                                eventDrop: function (info) {
-                                                    const start = new Date(info.event.start);
-                                                    const end = new Date(info.event.end);
-                                                    console.log(info.event);
-                                                    if(info.event.allDay){
-                                                        start.setDate(start.getDate()+1);
-                                                        end.setDate(end.getDate()+1);
-                                                    }
-                                                    const event = {
-                                                        id: info.event.id,
-                                                        start: start.getTime(),
-                                                        end: end.getTime(),
-                                                        isOnlyDate: info.event.extendedProps.isOnlyDate,
-                                                    }
-                                                    if(info.event._def.hasEnd){
-                                                        event.isOnlyDate = false;
-                                                    } else{
-                                                        event.isOnlyDate = true;
-                                                    }
-                                                    $.ajax({
-                                                        method: "POST",
-                                                        url: "/calendar/updateEvent",
-                                                        data: event,
-                                                    }).done(function (data) {
-                                                        // update event thành công
-                                                    });
-                                                },
-                                                eventResize: function (info) {
-                                                    const start = new Date(info.event.start);
-                                                    const end = new Date(info.event.end);
-                                                    console.log(info.event);
-                                                    if((info.event.allDay || info.event.extendedProps.isOnlyDate) && !info.event._def.hasEnd){
-                                                        start.setDate(start.getDate()+1);
-                                                        end.setDate(end.getDate()+1);
-                                                    }
-                                                    const event = {
-                                                        id: info.event.id,
-                                                        start: start.getTime(),
-                                                        end: end.getTime(),
-                                                        isOnlyDate: info.event.extendedProps.isOnlyDate,
-                                                    }
-                                                    if(info.event._def.hasEnd){
-                                                        event.isOnlyDate = false;
-                                                    } else{
-                                                        event.isOnlyDate = true;
-                                                    }
-                                                    console.log(info.event._def.hasEnd);
-                                                    $.ajax({
-                                                        method: "POST",
-                                                        url: "/calendar/updateEvent",
-                                                        data: event,
-                                                    }).done(function (data) {
-                                                        // update event thành công
-                                                    });
-                                                },
-                                                events: function (info, successCallback, failureCallback, dropInfo) {
-                                                    successCallback(events);
-                                                },
-                                        });
-                                        calendar.render();
-                                        $("#form-add-event").on("submit", function (e) {
-                                            e.preventDefault();
-                                            const event = {
-                                            title: $("#titleEvent").val(),
-                                                description: $("#description").val(),
-                                                start: $("#startDate").val(),
-                                                color: $("#colorEvent").val(),
-                                                category: $("#category").val(),
-                                                calendar: $("#calendarGroup").val(),
-                                                overlap: $("#overlap").is(':checked'),
-                                                isOnlyDate: true,
-                                            }
-                                            if ($("#startTime").val()) {
-                                                event.start = event.start + "T" + $("#startTime").val();
-                                                event.isOnlyDate = false;
-                                            }
-                                            if ($("#endDate").val()) {
-                                                event.end = $("#endDate").val();
-                                                if ($("#endTime").val()) {
-                                                    event.end = event.end + "T" + $("#endTime").val();
-                                                    event.isOnlyDate = false;
-                                                }
-                                            }   
-                                            if ($("#display").val() != "default") {
-                                                event.display = $("#display").val();
-                                            }
-                                            if ($("#location").val() && $("#location").val() != "" && $("#location").val() != null) {
-                                                event.location = $("#location").val();
-                                            }
-                                            event.start = new Date(event.start).getTime();
-                                            event.end = new Date(event.end).getTime();
-                                            console.log(event);
-                                            $.ajax({
-                                                method: "POST",
-                                                url: "/calendar/addEvent",
-                                                data: event,
-                                            }).done(function (data) {
-                                                const event = {
-                                                    id: data.id,
-                                                    title: data.title,
-                                                    description: data?.description,
-                                                    location: data?.location,
-                                                    color: data?.additional?.calendar.color,
-                                                    overlap: data?.additional?.overlap,
-                                                    category:data?.additional?.category?.id,
-                                                    categoryName:data?.additional?.category?.name,
-                                                    status: data?.additional?.status?.id,
-                                                    statusName:data?.additional?.status?.name,
-                                                    start: data?.additional?.isOnlyDate ? new Date(data?.additional?.startDate).toJSON().split('T')[0] : new Date(data?.additional?.startDate).toISOString(),
-                                                    end: data?.additional?.isOnlyDate ? new Date(data?.additional?.endDate).toJSON().split('T')[0] : new Date(data?.additional?.endDate).toISOString(),
-                                                    isOnlyDate: data?.additional?.isOnlyDate,
-                                                }
-                                                if (data?.additional?.display){
-                                                    event.display = data?.additional?.display;
-                                                }
-                                                console.log(data);
-                                                console.log(event);
-                                                events.push(event);
-                                                calendar.refetchEvents();
-                                            });
-                                        });
+            const events = []
+                <%for (EventCalendar event : events) {%>
+                    events.push({
+                        id: <%=event.getId()%>,
+                        title: "<%=event.getTitle()%>",
+                        start: <%="new Date('" + event.getAdditional().getStartDate() + "').toISOString()"%>,
+                        end: <%="new Date('" + event.getAdditional().getEndDate() + "').toISOString()"%>,
+                        color: "<%=event.getAdditional().getCalendar().getColor()%>",
+                        description: "<%=event.getDescription()%>",
+                        location: "<%=event.getLocation()%>",
+                        overlap: <%=event.getAdditional().isOverlap()%>,
+                        category: "<%=event.getAdditional().getCategory().getId()%>",
+                        categoryName: "<%=event.getAdditional().getCategory().getName()%>",
+                        status: "<%=event.getAdditional().getStatus().getId()%>",
+                        statusName: "<%=event.getAdditional().getStatus().getName()%>",
+                        allDay: <%=event.getAdditional().isIsAllDay()%>,
+                        hasEnd: <%=event.getAdditional().isIsHasEnd()%>,
+                        <%if (event.getAdditional().getDisplay() != null) {%>
+                            display: <%=event.getAdditional().getDisplay() != null ? "'" + event.getAdditional().getDisplay() + "'" : "undefined"%>,
+                        <%}%>
+                    })
+                <%}%>
+            
+                                        
+            const calendarEl = document.getElementById('calendar');
+            const calendar = new FullCalendar.Calendar(calendarEl, calenderHandle(events));
+            calendar.render();
+                                        
+            $("#form-add-event").on("submit", function (e) {
+                e.preventDefault();
+                const event = {
+                    title: $("#titleEvent").val(),
+                    description: $("#description").val(),
+                    start: $("#startDate").val(),
+                    color: $("#colorEvent").val(),
+                    category: $("#category").val(),
+                    calendar: $("#calendarGroup").val(),
+                    overlap: $("#overlap").is(':checked'),
+                    allDay: true,
+                    hasEnd: false,
+                }
+                if ($("#startTime").val()) {
+                    event.start = event.start + "T" + $("#startTime").val();
+                }
+                if ($("#endDate").val()) {
+                    event.end = $("#endDate").val();
+                    if ($("#endTime").val()) {
+                        event.end = event.end + "T" + $("#endTime").val();
+                        event.hasEnd = true;
+                    }
+                }   
+                if ($("#display").val() != "default") {
+                    event.display = $("#display").val();
+                }
+                if ($("#location").val() && $("#location").val() != "" && $("#location").val() != null) {
+                    event.location = $("#location").val();
+                }
+                if(new Date(event.end).getDate()-new Date(event.start).getDate()<=0){
+                    event.allDay=false;
+                }
+                event.start = new Date(event.start).getTime();
+                event.end = new Date(event.end).getTime();
+                console.log(event);
+                $.ajax({
+                    method: "POST",
+                    url: "/calendar/addEvent",
+                    data: event,
+                }).done(function (data) {
+                    const event = {
+                        id: data.id,
+                        title: data.title,
+                        description: data?.description,
+                        location: data?.location,
+                        color: data?.additional?.calendar.color,
+                        overlap: data?.additional?.overlap,
+                        category:data?.additional?.category?.id,
+                        categoryName:data?.additional?.category?.name,
+                        status: data?.additional?.status?.id,
+                        statusName:data?.additional?.status?.name,
+                        start: new Date(data?.additional?.startDate).toISOString() ,
+                        end: new Date(data?.additional?.endDate).toISOString(),
+                        allDay: data?.additional?.isAllDay,
+                        hasEnd: data?.additional?.isHasEnd,
+                    }
+                    if (data?.additional?.display){
+                        event.display = data?.additional?.display;
+                    }
+                    console.log(data);
+                    console.log(event);
+                    events.push(event);
+                    calendar.refetchEvents();
+                });
+            });
         </script>
+ 
         <script>
             const deleteCalendar = (id) => {
             $("#confirm-delete-calendar").attr("data-id", id);
@@ -332,10 +295,10 @@
         </script>
 
         <script>
-                    $("#calendarGroup").on('change', (e) => {
-            const color = event.target[event.target.selectedIndex].getAttribute("data-color");
-            $("#colorEvent").val(color);
-            $("#colorEvent").css("color", color);
+            $("#calendarGroup").on('change', (e) => {
+                const color = event.target[event.target.selectedIndex].getAttribute("data-color");
+                $("#colorEvent").val(color);
+                $("#colorEvent").css("color", color);
             });
         </script>
     </body>

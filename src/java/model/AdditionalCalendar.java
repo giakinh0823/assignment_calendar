@@ -12,80 +12,18 @@ import java.sql.Timestamp;
  * @author giaki
  */
 public class AdditionalCalendar extends BaseModel {
-
     private Timestamp startDate;
     private Timestamp endDate;
     private boolean overlap;
     private String display;
-    private boolean isOnlyDate;
+    private boolean isAllDay;
+    private boolean isHasEnd;
     private int statusId;
     private int categoryId;
     private int calendarId;
     private Calendar calendar;
     private StatusCalendar status;
     private CategoryCalendar category;
-
-    public AdditionalCalendar() {
-    }
-
-    public AdditionalCalendar(Timestamp startDate, Timestamp endDate, boolean overlap, String display, boolean isOnlyDate, int statusId, int categoryId, int calendarId) {
-        this.startDate = startDate;
-        this.endDate = endDate;
-        this.overlap = overlap;
-        this.display = display;
-        this.isOnlyDate = isOnlyDate;
-        this.statusId = statusId;
-        this.categoryId = categoryId;
-        this.calendarId = calendarId;
-    }
-
-    public AdditionalCalendar(Timestamp startDate, Timestamp endDate, boolean overlap, String display, boolean isOnlyDate, int statusId, int categoryId, int calendarId, int id) {
-        super(id);
-        this.startDate = startDate;
-        this.endDate = endDate;
-        this.overlap = overlap;
-        this.display = display;
-        this.isOnlyDate = isOnlyDate;
-        this.statusId = statusId;
-        this.categoryId = categoryId;
-        this.calendarId = calendarId;
-    }
-
-    public AdditionalCalendar(Timestamp startDate, Timestamp endDate, boolean overlap, String display, boolean isOnlyDate, int statusId, int categoryId, int calendarId, Timestamp created_at, Timestamp updated_at) {
-        super(created_at, updated_at);
-        this.startDate = startDate;
-        this.endDate = endDate;
-        this.overlap = overlap;
-        this.display = display;
-        this.isOnlyDate = isOnlyDate;
-        this.statusId = statusId;
-        this.categoryId = categoryId;
-        this.calendarId = calendarId;
-    }
-
-    public StatusCalendar getStatus() {
-        return status;
-    }
-
-    public void setStatus(StatusCalendar status) {
-        this.status = status;
-    }
-
-    public CategoryCalendar getCategory() {
-        return category;
-    }
-
-    public void setCategory(CategoryCalendar category) {
-        this.category = category;
-    }
-
-    public Calendar getCalendar() {
-        return calendar;
-    }
-
-    public void setCalendar(Calendar calendar) {
-        this.calendar = calendar;
-    }
 
     public Timestamp getStartDate() {
         return startDate;
@@ -119,12 +57,20 @@ public class AdditionalCalendar extends BaseModel {
         this.display = display;
     }
 
-    public boolean isIsOnlyDate() {
-        return isOnlyDate;
+    public boolean isIsAllDay() {
+        return isAllDay;
     }
 
-    public void setIsOnlyDate(boolean isOnlyDate) {
-        this.isOnlyDate = isOnlyDate;
+    public void setIsAllDay(boolean isAllDay) {
+        this.isAllDay = isAllDay;
+    }
+
+    public boolean isIsHasEnd() {
+        return isHasEnd;
+    }
+
+    public void setIsHasEnd(boolean isHasEnd) {
+        this.isHasEnd = isHasEnd;
     }
 
     public int getStatusId() {
@@ -150,5 +96,31 @@ public class AdditionalCalendar extends BaseModel {
     public void setCalendarId(int calendarId) {
         this.calendarId = calendarId;
     }
+
+    public Calendar getCalendar() {
+        return calendar;
+    }
+
+    public void setCalendar(Calendar calendar) {
+        this.calendar = calendar;
+    }
+
+    public StatusCalendar getStatus() {
+        return status;
+    }
+
+    public void setStatus(StatusCalendar status) {
+        this.status = status;
+    }
+
+    public CategoryCalendar getCategory() {
+        return category;
+    }
+
+    public void setCategory(CategoryCalendar category) {
+        this.category = category;
+    }
+
+    
 
 }

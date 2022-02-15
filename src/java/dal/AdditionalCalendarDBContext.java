@@ -34,7 +34,8 @@ public class AdditionalCalendarDBContext extends DBContext<AdditionalCalendar> {
                 + "      ,[end_date]\n"
                 + "      ,[overlap]\n"
                 + "      ,[display]\n"
-                + "      ,[isOnlyDate]\n"
+                + "      ,[isAllDay]\n"
+                + "      ,[isHasEnd]\n"
                 + "      ,[created_at]\n"
                 + "      ,[updated_at]\n"
                 + "      ,[calendarId]\n"
@@ -52,7 +53,8 @@ public class AdditionalCalendarDBContext extends DBContext<AdditionalCalendar> {
                 additional.setEndDate(result.getTimestamp("end_date"));
                 additional.setOverlap(result.getBoolean("overlap"));
                 additional.setDisplay(result.getString("display"));
-                additional.setIsOnlyDate(result.getBoolean("isOnlyDate"));
+                additional.setIsAllDay(result.getBoolean("isAllDay"));
+                additional.setIsHasEnd(result.getBoolean("isHasEnd"));
                 additional.setCreated_at(result.getTimestamp("created_at"));
                 additional.setUpdated_at(result.getTimestamp("updated_at"));
                 additional.setCalendarId(result.getInt("calendarId"));
@@ -82,7 +84,8 @@ public class AdditionalCalendarDBContext extends DBContext<AdditionalCalendar> {
                 + "      ,[end_date]\n"
                 + "      ,[overlap]\n"
                 + "      ,[display]\n"
-                + "      ,[isOnlyDate]\n"
+                + "      ,[isAllDay]\n"
+                + "      ,[isHasEnd]\n"
                 + "      ,[created_at]\n"
                 + "      ,[updated_at]\n"
                 + "      ,[calendarId]\n"
@@ -102,7 +105,8 @@ public class AdditionalCalendarDBContext extends DBContext<AdditionalCalendar> {
                 additional.setEndDate(result.getTimestamp("end_date"));
                 additional.setOverlap(result.getBoolean("overlap"));
                 additional.setDisplay(result.getString("display"));
-                additional.setIsOnlyDate(result.getBoolean("isOnlyDate"));
+                additional.setIsAllDay(result.getBoolean("isAllDay"));
+                additional.setIsHasEnd(result.getBoolean("isHasEnd"));
                 additional.setCreated_at(result.getTimestamp("created_at"));
                 additional.setUpdated_at(result.getTimestamp("updated_at"));
                 additional.setCalendarId(result.getInt("calendarId"));
@@ -131,24 +135,26 @@ public class AdditionalCalendarDBContext extends DBContext<AdditionalCalendar> {
                     + "           ,[end_date]\n"
                     + "           ,[overlap]\n"
                     + "           ,[display]\n"
-                    + "           ,[isOnlyDate]\n"
+                    + "           ,[isAllDay]\n"
+                    + "           ,[isHasEnd]\n"
                     + "           ,[created_at]\n"
                     + "           ,[updated_at]\n"
                     + "           ,[calendarId]\n"
                     + "           ,[statusId]\n"
                     + "           ,[categoryId])\n"
-                    + "     VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                    + "     VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             statement = connection.prepareStatement(sql);
             statement.setTimestamp(1, model.getStartDate());
             statement.setTimestamp(2, model.getEndDate());
             statement.setBoolean(3, model.isOverlap());
             statement.setString(4, model.getDisplay());
-            statement.setBoolean(5, model.isIsOnlyDate());
-            statement.setTimestamp(6, model.getCreated_at());
-            statement.setTimestamp(7, model.getUpdated_at());
-            statement.setInt(8, model.getCalendarId());
-            statement.setInt(9, model.getStatusId());
-            statement.setInt(10, model.getCategoryId());
+            statement.setBoolean(5, model.isIsAllDay());
+            statement.setBoolean(6, model.isIsHasEnd());
+            statement.setTimestamp(7, model.getCreated_at());
+            statement.setTimestamp(8, model.getUpdated_at());
+            statement.setInt(9, model.getCalendarId());
+            statement.setInt(10, model.getStatusId());
+            statement.setInt(11, model.getCategoryId());
             statement.executeUpdate();
             ArrayList<AdditionalCalendar> additionals = list();
             AdditionalCalendar additional = additionals.get(additionals.size() - 1);
@@ -183,7 +189,8 @@ public class AdditionalCalendarDBContext extends DBContext<AdditionalCalendar> {
                     + "      ,[end_date] = ?\n"
                     + "      ,[overlap] = ?\n"
                     + "      ,[display] = ?\n"
-                    + "      ,[isOnlyDate] = ?\n"
+                    + "      ,[isAllDay] = ?\n"
+                    + "      ,[isHasEnd] = ?\n"
                     + "      ,[created_at] = ?\n"
                     + "      ,[updated_at] = ?\n"
                     + "      ,[calendarId] = ?\n"
@@ -195,13 +202,14 @@ public class AdditionalCalendarDBContext extends DBContext<AdditionalCalendar> {
             statement.setTimestamp(2, model.getEndDate());
             statement.setBoolean(3, model.isOverlap());
             statement.setString(4, model.getDisplay());
-            statement.setBoolean(5, model.isIsOnlyDate());
-            statement.setTimestamp(6, model.getCreated_at());
-            statement.setTimestamp(7, model.getUpdated_at());
-            statement.setInt(8, model.getCalendarId());
-            statement.setInt(9, model.getStatusId());
-            statement.setInt(10, model.getCategoryId());
-            statement.setInt(11, model.getId());
+            statement.setBoolean(5, model.isIsAllDay());
+            statement.setBoolean(6, model.isIsHasEnd());
+            statement.setTimestamp(7, model.getCreated_at());
+            statement.setTimestamp(8, model.getUpdated_at());
+            statement.setInt(9, model.getCalendarId());
+            statement.setInt(10, model.getStatusId());
+            statement.setInt(11, model.getCategoryId());
+            statement.setInt(12, model.getId());
             statement.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(AdditionalCalendarDBContext.class.getName()).log(Level.SEVERE, null, ex);

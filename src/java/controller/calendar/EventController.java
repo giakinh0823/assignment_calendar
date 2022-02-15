@@ -53,15 +53,17 @@ public class EventController extends HttpServlet {
             String description = validate.getFieldAjax(request, "description", false);
             String startDate = validate.getFieldAjax(request, "start", true);
             String endDate = validate.getFieldAjax(request, "end", false);
-            String isOnlyDate = validate.getFieldAjax(request, "isOnlyDate", true);
-
+            String isAllDay = validate.getFieldAjax(request, "allDay", true);
+            String isHasEnd = validate.getFieldAjax(request, "hasEnd", false);
+            
             // process field
             int field_calendar = validate.fieldInt(calendar, "Error set field calendar");
             int field_category = validate.fieldInt(category, "Error set field category");
             boolean field_overlap = validate.fieldBoolean(overlap, "Error set field overlap");
             Timestamp field_startDate = validate.fieldTimestamp(startDate, "Error set field start date");
             Timestamp field_endDate = validate.fieldTimestamp(endDate, "Error set field end date");
-            boolean field_isOnlyDate = validate.fieldBoolean(isOnlyDate, "Error set field isOnlyDate");
+            boolean field_isAllDay = validate.fieldBoolean(isAllDay, "Error set field AllDay");
+            boolean field_isHasEnd = validate.fieldBoolean(isHasEnd, "Error set field HasEnd");
 
             Timestamp created_at = new Timestamp(System.currentTimeMillis());
             Timestamp updated_at = new Timestamp(System.currentTimeMillis());
@@ -72,11 +74,29 @@ public class EventController extends HttpServlet {
 
             // insert additional
             AdditionalCalendarDBContext additionalDB = new AdditionalCalendarDBContext();
-            AdditionalCalendar additional = new AdditionalCalendar(field_startDate, field_endDate, field_overlap, display, field_isOnlyDate, 1, field_category, field_calendar, created_at, updated_at);
+            AdditionalCalendar additional = new AdditionalCalendar();
+            additional.setStartDate(field_startDate);
+            additional.setEndDate(field_endDate);
+            additional.setOverlap(field_overlap);
+            additional.setDisplay(display);
+            additional.setIsAllDay(field_isAllDay);
+            additional.setIsHasEnd(field_isHasEnd);
+            additional.setStatusId(1);
+            additional.setCalendarId(field_calendar);
+            additional.setCategoryId(field_category);
+            additional.setCreated_at(created_at);
+            additional.setUpdated_at(updated_at);
             additional = additionalDB.insert(additional);
 
             //inser event
-            EventCalendar event = new EventCalendar(title, description, location, user.getId(), additional.getId(), additional, user, created_at, updated_at);
+            EventCalendar event = new EventCalendar();
+            event.setTitle(title);
+            event.setDescription(description);
+            event.setLocation(location);
+            event.setUserId(user.getId());
+            event.setAdditionalId(additional.getId());
+            event.setCreated_at(created_at);
+            event.setUpdated_at(updated_at);
             EventCalendarDBContext eventDB = new EventCalendarDBContext();
             event = eventDB.insert(event);
 
