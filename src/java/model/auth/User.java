@@ -3,10 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package model;
+package model.auth;
 
 import java.sql.Date;
 import java.sql.Timestamp;
+import model.BaseModel;
 
 /**
  *
@@ -24,36 +25,21 @@ public class User extends BaseModel{
     private boolean is_super;
     private boolean is_active;
     private String permission;
+    private Permission user_permission;
 
     public User() {
     }
 
-    public User(String username, String email, String password, String phone, String first_name, String last_name, Boolean gender, Date birthday, boolean is_super, boolean is_active, String permission, int id, Timestamp created_at, Timestamp updated_at) {
-        super(id, created_at, updated_at);
-        this.username = username;
-        this.email = email;
-        this.password = password;
-        this.phone = phone;
-        this.first_name = first_name;
-        this.last_name = last_name;
-        this.gender = gender;
-        this.birthday = birthday;
-        this.is_super = is_super;
-        this.is_active = is_active;
-        this.permission = permission;
+    public Permission getUser_permission() {
+        return user_permission;
     }
 
-    public User(String username, String email, String password, String phone, String first_name, String last_name, Boolean gender, Date birthday) {
-        this.username = username;
-        this.email = email;
-        this.password = password;
-        this.phone = phone;
-        this.first_name = first_name;
-        this.last_name = last_name;
-        this.gender = gender;
-        this.birthday = birthday;
+    public void setUser_permission(Permission user_permission) {
+        this.user_permission = user_permission;
     }
 
+    
+    
     public String getUsername() {
         return username;
     }

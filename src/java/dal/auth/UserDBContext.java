@@ -3,21 +3,25 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package dal;
+package dal.auth;
 
+import dal.DBContext;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import model.User;
+import model.auth.User;
+import model.auth.UserPermission;
 
 /**
  *
  * @author giaki
  */
+
 public class UserDBContext extends DBContext<User> {
+    
 
     public User getUser(String username, String password) {
         String sql = "SELECT [id]\n"
@@ -85,8 +89,10 @@ public class UserDBContext extends DBContext<User> {
                 + "  FROM [user]\n";
         PreparedStatement statement = null;
         try {
-            sql += " WHERE " + field + " = '" + value + "'";
+            sql += " WHERE ? = ?";
             statement = connection.prepareStatement(sql);
+            statement.setString(1, field);
+            statement.setString(2, value);
             ResultSet result = statement.executeQuery();
             while (result.next()) {
                 User user = new User();
@@ -167,6 +173,7 @@ public class UserDBContext extends DBContext<User> {
     @Override
     public User insert(User user) {
         PreparedStatement statement = null;
+        UserPermissionDBContext userPermissionDB = new UserPermissionDBContext();
         try {
             String sql = "INSERT INTO [user]\n"
                     + "           ([username]\n"
@@ -199,6 +206,11 @@ public class UserDBContext extends DBContext<User> {
             statement.setTimestamp(13, user.getUpdated_at());
             statement.executeUpdate();
             User new_user = findOne("username", user.getUsername());
+            
+            UserPermission userPermission = new UserPermission();
+            userPermission.setUserId(user.getId());
+            userPermission.setPermissionId(user.getUser_permission().getId());
+            userPermissionDB.insert(userPermission);
             return new_user;
         } catch (SQLException ex) {
             Logger.getLogger(UserDBContext.class.getName()).log(Level.SEVERE, null, ex);

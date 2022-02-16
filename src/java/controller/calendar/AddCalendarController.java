@@ -5,8 +5,8 @@
  */
 package controller.calendar;
 
-import dal.CalendarDBContext;
-import dal.UserDBContext;
+import dal.calendar.CalendarDBContext;
+import dal.auth.UserDBContext;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Timestamp;
@@ -15,8 +15,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import model.Calendar;
-import model.User;
+import model.calendar.Calendar;
+import model.auth.User;
 import utils.Validate;
 
 /**

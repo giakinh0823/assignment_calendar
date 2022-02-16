@@ -5,12 +5,12 @@
  */
 package controller.calendar;
 
-import dal.AdditionalCalendarDBContext;
-import dal.CalendarDBContext;
-import dal.CategoryCalendarDBContext;
-import dal.EventCalendarDBContext;
-import dal.StatusCalendarDBContext;
-import dal.UserDBContext;
+import dal.calendar.AdditionalCalendarDBContext;
+import dal.calendar.CalendarDBContext;
+import dal.calendar.CategoryCalendarDBContext;
+import dal.calendar.EventCalendarDBContext;
+import dal.calendar.StatusCalendarDBContext;
+import dal.auth.UserDBContext;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -19,11 +19,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import model.Calendar;
-import model.CategoryCalendar;
-import model.EventCalendar;
-import model.StatusCalendar;
-import model.User;
+import model.calendar.Calendar;
+import model.calendar.CategoryCalendar;
+import model.calendar.EventCalendar;
+import model.calendar.StatusCalendar;
+import model.auth.User;
 
 /**
  *

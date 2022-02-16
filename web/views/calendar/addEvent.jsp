@@ -4,8 +4,8 @@
     Author     : giaki
 --%>
 
-<%@page import="model.CategoryCalendar"%>
-<%@page import="model.Calendar"%>
+<%@page import="model.calendar.CategoryCalendar"%>
+<%@page import="model.calendar.Calendar"%>
 <%@page import="java.util.ArrayList"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>

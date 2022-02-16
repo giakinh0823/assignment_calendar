@@ -6,9 +6,9 @@
 package controller.calendar;
 
 import com.google.gson.Gson;
-import dal.AdditionalCalendarDBContext;
-import dal.EventCalendarDBContext;
-import dal.UserDBContext;
+import dal.calendar.AdditionalCalendarDBContext;
+import dal.calendar.EventCalendarDBContext;
+import dal.auth.UserDBContext;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Timestamp;
@@ -19,9 +19,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import model.AdditionalCalendar;
-import model.EventCalendar;
-import model.User;
+import model.calendar.AdditionalCalendar;
+import model.calendar.EventCalendar;
+import model.auth.User;
 import utils.Validate;
 
 /**

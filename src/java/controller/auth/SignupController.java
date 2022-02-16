@@ -5,8 +5,9 @@
  */
 package controller.auth;
 
-import dal.CalendarDBContext;
-import dal.UserDBContext;
+import dal.auth.PermissionDBContext;
+import dal.calendar.CalendarDBContext;
+import dal.auth.UserDBContext;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Date;
@@ -17,8 +18,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import model.Calendar;
-import model.User;
+import model.auth.Permission;
+import model.calendar.Calendar;
+import model.auth.User;
+import model.auth.UserPermission;
 import utils.HashPass;
 import utils.Validate;
 
@@ -83,17 +86,29 @@ public class SignupController extends HttpServlet {
                     Date field_birthday = validate.fieldDate(birthday, "Birthday is wrong! Please try again");
                     System.out.println(field_birthday);
                     String field_password = hashPass.hashPassword(password);
-                    User user = new User(field_username, field_email, field_password, field_phone, first_name, last_name, field_gender, field_birthday);
+                    User user = new User();
+                    user.setUsername(field_username);
+                    user.setEmail(field_email);
+                    user.setPassword(field_password);
+                    user.setPhone(field_phone);
+                    user.setFirst_name(first_name);
+                    user.setLast_name(last_name);
+                    user.setGender(field_gender);
+                    user.setBirthday(field_birthday);
                     Timestamp created_at = new Timestamp(System.currentTimeMillis());
                     Timestamp updated_at = new Timestamp(System.currentTimeMillis());
                     Boolean is_super = false;
                     Boolean is_active = true;
-                    String permission = "user";
                     user.setCreated_at(created_at);
                     user.setUpdated_at(updated_at);
                     user.setIs_active(is_active);
                     user.setIs_super(is_super);
-                    user.setPermission(permission);
+                    
+                    PermissionDBContext permissionDB = new PermissionDBContext();
+                    Permission per = permissionDB.findOne("User");
+                    
+                    user.setPermission(per.getName());
+                    user.setUser_permission(per);
                     user = db.insert(user);
 
                     String name = "Home";

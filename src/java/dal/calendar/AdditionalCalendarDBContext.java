@@ -3,18 +3,19 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package dal;
+package dal.calendar;
 
+import dal.DBContext;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import model.AdditionalCalendar;
-import model.Calendar;
-import model.CategoryCalendar;
-import model.StatusCalendar;
+import model.calendar.AdditionalCalendar;
+import model.calendar.Calendar;
+import model.calendar.CategoryCalendar;
+import model.calendar.StatusCalendar;
 
 /**
  *

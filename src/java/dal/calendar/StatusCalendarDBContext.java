@@ -3,45 +3,47 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package dal;
+package dal.calendar;
 
+import dal.DBContext;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import model.CategoryCalendar;
+import model.BaseModel;
+import model.calendar.StatusCalendar;
 
 /**
  *
  * @author giaki
  */
-public class CategoryCalendarDBContext extends DBContext<CategoryCalendar>{
+public class StatusCalendarDBContext extends DBContext<StatusCalendar> {
 
     @Override
-    public ArrayList<CategoryCalendar> list() {
-        ArrayList<CategoryCalendar> categorys = new ArrayList<>();
-        String sql = "SELECT id, name FROM [category_calendar]";
+    public ArrayList list() {
+        ArrayList<StatusCalendar> statuss = new ArrayList<>();
+        String sql = "SELECT id, name FROM [status_calendar]";
         PreparedStatement statement = null;
         try {
             statement = connection.prepareStatement(sql);
             ResultSet result = statement.executeQuery();
             while (result.next()) {
-                 CategoryCalendar category = new CategoryCalendar();
-                 category.setId(result.getInt("id"));
-                 category.setName(result.getString("name"));
-                 categorys.add(category);
+                StatusCalendar status = new StatusCalendar();
+                status.setId(result.getInt("id"));
+                status.setName(result.getString("name"));
+                statuss.add(status);
             }
         } catch (SQLException ex) {
-            Logger.getLogger(CategoryCalendarDBContext.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(StatusCalendarDBContext.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return categorys;
+        return statuss;
     }
 
     @Override
-    public CategoryCalendar get(int id) {
-        String sql = "SELECT id, name FROM [category_calendar]\n"
+    public StatusCalendar get(int id) {
+        String sql = "SELECT id, name FROM [status_calendar]\n"
                 + " WHERE id = ?";
         PreparedStatement statement = null;
         try {
@@ -49,24 +51,24 @@ public class CategoryCalendarDBContext extends DBContext<CategoryCalendar>{
             statement.setInt(1, id);
             ResultSet result = statement.executeQuery();
             while (result.next()) {
-                 CategoryCalendar category = new CategoryCalendar();
-                 category.setId(result.getInt("id"));
-                 category.setName(result.getString("name"));
-                 return category;
+                StatusCalendar status = new StatusCalendar();
+                status.setId(result.getInt("id"));
+                status.setName(result.getString("name"));
+                return status;
             }
         } catch (SQLException ex) {
-            Logger.getLogger(CategoryCalendarDBContext.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(StatusCalendarDBContext.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }
-    
+
     @Override
-    public CategoryCalendar insert(CategoryCalendar model) {
+    public StatusCalendar insert(StatusCalendar model) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void update(CategoryCalendar model) {
+    public void update(StatusCalendar model) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -74,5 +76,5 @@ public class CategoryCalendarDBContext extends DBContext<CategoryCalendar>{
     public void delete(int id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
 }
