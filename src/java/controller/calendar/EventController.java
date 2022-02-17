@@ -6,6 +6,7 @@
 package controller.calendar;
 
 import com.google.gson.Gson;
+import controller.auth.BaseAuthController;
 import dal.calendar.AdditionalCalendarDBContext;
 import dal.calendar.EventCalendarDBContext;
 import dal.auth.UserDBContext;
@@ -28,18 +29,36 @@ import utils.Validate;
  *
  * @author giaki
  */
-public class EventController extends HttpServlet {
+public class EventController extends BaseAuthController {
 
     private final Validate validate = new Validate();
+    
+    @Override
+    protected boolean isPermissionGet(HttpServletRequest request) {
+        UserDBContext userDB = new UserDBContext();
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("user");
+        int numReadEvent = userDB.getNumberOfPermission(user.getId(), "EVENT", "READ");
+        return numReadEvent >= 1;
+    }
+    
+    @Override
+    protected boolean isPermissionPost(HttpServletRequest request) {
+        UserDBContext userDB = new UserDBContext();
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("user");
+        int numCreateEvent = userDB.getNumberOfPermission(user.getId(), "EVENT", "CREATE");
+        return numCreateEvent >= 1;
+    }
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+    protected void processGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.sendRedirect("/calendar");
     }
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+    protected void processPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
             // get params

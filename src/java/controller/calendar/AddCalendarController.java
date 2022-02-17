@@ -5,6 +5,7 @@
  */
 package controller.calendar;
 
+import controller.auth.BaseAuthController;
 import dal.calendar.CalendarDBContext;
 import dal.auth.UserDBContext;
 import java.io.IOException;
@@ -23,18 +24,37 @@ import utils.Validate;
  *
  * @author giaki
  */
-public class AddCalendarController extends HttpServlet {
+public class AddCalendarController extends BaseAuthController {
 
     private final Validate validate = new Validate();
+    
+    @Override
+    protected boolean isPermissionGet(HttpServletRequest request) {
+        UserDBContext userDB = new UserDBContext();
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("user");
+        int numReadCalendar = userDB.getNumberOfPermission(user.getId(), "CALENDAR", "READ");
+        return numReadCalendar >= 1;
+    }
+    
+    @Override
+    protected boolean isPermissionPost(HttpServletRequest request) {
+        UserDBContext userDB = new UserDBContext();
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("user");
+        int numCreateCalendar = userDB.getNumberOfPermission(user.getId(), "CALENDAR", "CREATE");
+        return numCreateCalendar >= 1;
+    }
+
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+    protected void processGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.sendRedirect("/calendar");
     }
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+    protected void processPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
             String name = validate.getField(request, "nameCalendar", true);
@@ -66,5 +86,6 @@ public class AddCalendarController extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+
 
 }

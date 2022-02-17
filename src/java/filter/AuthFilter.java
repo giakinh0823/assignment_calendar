@@ -5,6 +5,7 @@
  */
 package filter;
 
+import dal.auth.UserDBContext;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.io.PrintWriter;

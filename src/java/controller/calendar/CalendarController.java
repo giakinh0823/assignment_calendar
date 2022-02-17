@@ -5,6 +5,7 @@
  */
 package controller.calendar;
 
+import controller.auth.BaseAuthController;
 import dal.calendar.AdditionalCalendarDBContext;
 import dal.calendar.CalendarDBContext;
 import dal.calendar.CategoryCalendarDBContext;
@@ -29,10 +30,25 @@ import model.auth.User;
  *
  * @author giaki
  */
-public class CalendarController extends HttpServlet {
+public class CalendarController extends BaseAuthController {
+    
+    @Override
+    protected boolean isPermissionGet(HttpServletRequest request) {
+        UserDBContext userDB = new UserDBContext();
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("user");
+        int numReadCalendar = userDB.getNumberOfPermission(user.getId(), "CALENDAR", "READ");
+        int numReadEvent = userDB.getNumberOfPermission(user.getId(), "EVENT", "READ");
+        return numReadCalendar >= 1 && numReadEvent >= 1;
+    }
+    
+    @Override
+    protected boolean isPermissionPost(HttpServletRequest request) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+    protected void processGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         CalendarDBContext calendarDB = new CalendarDBContext();
         CategoryCalendarDBContext categoryDB = new CategoryCalendarDBContext();
@@ -56,9 +72,8 @@ public class CalendarController extends HttpServlet {
     }
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+    protected void processPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
     }
 
     /**
@@ -70,5 +85,6 @@ public class CalendarController extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+
 
 }

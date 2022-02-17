@@ -6,6 +6,8 @@
 package controller.calendar;
 
 import com.google.gson.Gson;
+import controller.auth.BaseAuthController;
+import dal.auth.UserDBContext;
 import dal.calendar.AdditionalCalendarDBContext;
 import dal.calendar.EventCalendarDBContext;
 import java.io.IOException;
@@ -17,6 +19,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import model.auth.User;
 import model.calendar.AdditionalCalendar;
 import model.calendar.EventCalendar;
 import utils.Validate;
@@ -25,19 +29,37 @@ import utils.Validate;
  *
  * @author giaki
  */
-public class UpdateEventController extends HttpServlet {
+public class UpdateEventController extends BaseAuthController {
 
     private final Validate validate = new Validate();
     
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+    protected boolean isPermissionGet(HttpServletRequest request) {
+        UserDBContext userDB = new UserDBContext();
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("user");
+        int numReadEvent = userDB.getNumberOfPermission(user.getId(), "EVENT", "READ");
+        return numReadEvent >= 1;
+    }
+    
+    @Override
+    protected boolean isPermissionPost(HttpServletRequest request) {
+        UserDBContext userDB = new UserDBContext();
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("user");
+        int numEditEvent = userDB.getNumberOfPermission(user.getId(), "EVENT", "EDIT");
+        return numEditEvent >= 1;
+    }
+    
+    @Override
+    protected void processGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.sendRedirect("/calendar");
     }
 
     
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+    protected void processPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
             String id = validate.getFieldAjax(request, "id", true);
