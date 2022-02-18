@@ -98,7 +98,7 @@ public class UserDBContext extends DBContext<User> {
                 + "ON [permission].[id] = [user_per].[permissionId]\n";
         PreparedStatement statement = null;
         try {
-            sql += " WHERE [user].[?] = ?";
+            sql += " WHERE [user].["+field+"] = ?";
             statement = connection.prepareStatement(sql);
             statement.setString(1, field);
             statement.setString(2, value);

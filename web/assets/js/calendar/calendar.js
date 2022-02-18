@@ -27,7 +27,15 @@ const calenderHandle = (events) => ({
         droppable: true,
         dayMaxEventRows: true,
         eventClick: function (info) {
-            alert(info.event.title);
+            console.log(info.event)
+            $("#titleDetailEvent").text(info.event.title);
+            $("#timeDetailEvent").text(`${new Date(info.event.start).toLocaleString()} - ${new Date(info.event.end).toLocaleString()}`);
+            $("#descriptionDetailEvent").text(info.event.extendedProps.description);
+            $("#locationDetailEvent").text(info.event.extendedProps.location);
+            $("#statusDetailEvent").text(info.event.extendedProps.statusName);
+            $("#categoryDetailEvent").text(info.event.extendedProps.categoryName);
+            $("#calendarDetailEvent").text(info.event.extendedProps.calendar);
+            $("#buttonOpenModelDetailEvent").click();
         },
         eventDrop: function (info) {
             const start = new Date(info.event.start);
