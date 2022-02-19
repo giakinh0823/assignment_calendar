@@ -119,7 +119,7 @@ public class SignupController extends HttpServlet {
                     CalendarDBContext calendarDBContext = new CalendarDBContext();
                     calendarDBContext.insert(calendar);
                     
-                    response.sendRedirect("/login");
+                    response.sendRedirect("/");
                 } catch (Exception e) {
                     request.setAttribute("error", e.getMessage());
                     request.getRequestDispatcher("/views/auth/signup.jsp").forward(request, response);

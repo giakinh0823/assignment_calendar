@@ -158,57 +158,7 @@
                 </div>
             </div>
         </div>
-                    
-    <button id="buttonOpenModelDetailEvent" class="hidden text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center" type="button" data-modal-toggle="modelCalendarEvent">
-        Toggle modal
-    </button>
-
-    <!-- Main modal -->
-        <div id="modelCalendarEvent" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed right-0 left-0 top-4 z-50 justify-center items-center h-modal md:h-full md:inset-0">
-            <div class="relative px-4 w-full max-w-2xl h-full md:h-auto">
-                <!-- Modal content -->
-                <div class="relative bg-white rounded-lg shadow">
-                    <!-- Modal header -->
-                    <div class="flex justify-between items-start p-5 rounded-t border-b">
-                        <h3 class="text-xl font-semibold text-gray-900 lg:text-2xl">
-                            Event
-                        </h3>
-                        <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center" data-modal-toggle="modelCalendarEvent">
-                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>  
-                        </button>
-                    </div>
-                    <!-- Modal body -->
-                    <div class="p-5 space-y-6">
-                        <p class="text-3xl" id="titleDetailEvent">Đi họp lớp</p>
-                        <p class="text-lg flex items-center">
-                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg> 
-                            <span class="ml-2" id="timeDetailEvent">Friday, 18 February - Friday, 20 February </span>
-                        </p>
-                        <p class="text-lg flex items-center">
-                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
-                            <span class="ml-2" id="locationDetailEvent">FPT University</span>
-                        </p>
-                        <p class="text-lg" id="descriptionDetailEvent">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries</p>
-                        <p class="text-lg flex items-center">
-                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13"></path></svg>                            
-                            <span class="ml-2" id="categoryDetailEvent">Event</span>
-                        </p>
-                        <p class="text-lg flex items-center">
-                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
-                            <span class="ml-2" id="calendarDetailEvent">Home</span>
-                        </p>
-                        <p class="text-lg flex items-center">
-                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.636 18.364a9 9 0 010-12.728m12.728 0a9 9 0 010 12.728m-9.9-2.829a5 5 0 010-7.07m7.072 0a5 5 0 010 7.07M13 12a1 1 0 11-2 0 1 1 0 012 0z"></path></svg>
-                            <span class="ml-2" id="statusDetailEvent">Doing</span>
-                        </p>
-                    </div>
-                    <!-- Modal footer -->
-                    <div class="flex justify-end items-center p-6 space-x-2 rounded-b border-t border-gray-200">
-                        <button data-modal-toggle="modelCalendarEvent" type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Close</button>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <jsp:include page="infoEvent.jsp" />
         <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.2/main.min.js"></script>
         <script src="/assets/js/calendar/calendar.js"></script>
         <script>
@@ -229,7 +179,8 @@
                         statusName: "<%=event.getAdditional().getStatus().getName()%>",
                         allDay: <%=event.getAdditional().isIsAllDay()%>,
                         hasEnd: <%=event.getAdditional().isIsHasEnd()%>,
-                        calendar: "<%=event.getAdditional().getCalendar().getName()%>",
+                        calendarName: "<%=event.getAdditional().getCalendar().getName()%>",
+                        calendar: <%=event.getAdditional().getCalendar().getId()%>,
                         <%if (event.getAdditional().getDisplay() != null) {%>
                             display: <%=event.getAdditional().getDisplay() != null ? "'" + event.getAdditional().getDisplay() + "'" : "undefined"%>,
                         <%}%>
@@ -281,8 +232,8 @@
                     data: event,
                 }).done(function (data) {
                     const event = {
-                        id: data.id,
-                        title: data.title,
+                        id: data?.id,
+                        title: data?.title,
                         description: data?.description,
                         location: data?.location,
                         color: data?.additional?.calendar.color,
@@ -291,7 +242,9 @@
                         categoryName:data?.additional?.category?.name,
                         status: data?.additional?.status?.id,
                         statusName:data?.additional?.status?.name,
-                        start: new Date(data?.additional?.startDate).toISOString() ,
+                        calendarName: data?.additional?.calendar?.name,
+                        calendar: data?.additional?.calendar?.id,
+                        start: new Date(data?.additional?.startDate).toISOString(),
                         end: new Date(data?.additional?.endDate).toISOString(),
                         allDay: data?.additional?.isAllDay,
                         hasEnd: data?.additional?.isHasEnd,
@@ -304,6 +257,78 @@
                     events.push(event);
                     calendar.refetchEvents();
                     $("#form-add-event")[0].reset();
+                });
+            });
+            
+            $("#form-edit-event").on("submit", function (e) {
+                e.preventDefault();
+                const event = {
+                    id: $("#idEditEvent").val(),
+                    title: $("#titleEditEvent").val(),
+                    description: $("#descriptionEditEvent").val(),
+                    start: $("#startDateEditEvent").val(),
+                    color: $("#colorEditEvent").val(),
+                    category: $("#categoryEditEvent").val(),
+                    calendar: $("#calendarGroupEditEvent").val(),
+                    overlap: $("#overlapEditEvent").is(':checked'),
+                    allDay: true,
+                    hasEnd: false,
+                }
+                if ($("#startTimeEditEvent").val()) {
+                    event.start = event.start + "T" + $("#startTimeEditEvent").val();
+                }
+                if ($("#endDateEditEvent").val()) {
+                    event.end = $("#endDateEditEvent").val();
+                    if ($("#endTimeEditEvent").val()) {
+                        event.end = event.end + "T" + $("#endTimeEditEvent").val();
+                        event.hasEnd = true;
+                    }
+                }   
+                if ($("#locationEditEvent").val() && $("#locationEditEvent").val() != "" && $("#locationEditEvent").val() != null) {
+                    event.location = $("#locationEditEvent").val();
+                }
+                if(new Date(event.end).getDate()-new Date(event.start).getDate()<=0){
+                    event.allDay=false;
+                }
+                 if ($("#displayEditEvent").val() != "default") {
+                    event.display = $("#displayEditEvent").val();
+                    event.allDay = true;
+                }
+                event.start = new Date(event.start).getTime();
+                event.end = new Date(event.end).getTime();
+                console.log(event);
+                $.ajax({
+                    method: "POST",
+                    url: "/calendar/editEvent",
+                    data: event,
+                }).done(function (data) {
+                    const event = {
+                        id: data?.id,
+                        title: data?.title,
+                        description: data?.description,
+                        location: data?.location,
+                        color: data?.additional?.calendar.color,
+                        overlap: data?.additional?.overlap,
+                        category:data?.additional?.category?.id,
+                        categoryName:data?.additional?.category?.name,
+                        status: data?.additional?.status?.id,
+                        statusName:data?.additional?.status?.name,
+                        calendarName: data?.additional?.calendar?.name,
+                        calendar: data?.additional?.calendar?.id,
+                        start: new Date(data?.additional?.startDate).toISOString(),
+                        end: new Date(data?.additional?.endDate).toISOString(),
+                        allDay: data?.additional?.isAllDay,
+                        hasEnd: data?.additional?.isHasEnd,
+                    }
+                    if (data?.additional?.display){
+                        event.display = data?.additional?.display;
+                    }
+                    var indexEvent = events.findIndex((item) => {
+                        return item?.id == event?.id;
+                    })
+                    events[indexEvent] = event;
+                    calendar.refetchEvents();
+                    $("#buttonCloseInfoEvent").click();
                 });
             });
         </script>
