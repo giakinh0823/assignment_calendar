@@ -41,6 +41,7 @@ const calenderHandle = (events) => ({
             $("#buttonOpenModelDetailEvent").click();
             $("#infoEventContent").removeClass("hidden");
             $("#editEventContent").addClass("hidden");
+            $("#confirm-delete-event").attr("data-id", info.event.id);
 
             $("#idEditEvent").val(info.event.id);
             $("#titleEditEvent").val(info.event.title);

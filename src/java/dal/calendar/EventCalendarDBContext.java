@@ -23,6 +23,49 @@ import model.auth.User;
  * @author giaki
  */
 public class EventCalendarDBContext extends DBContext<EventCalendar> {
+    
+    
+    public EventCalendar findOne(String field, String value) {
+        UserDBContext userDB = new UserDBContext();
+        AdditionalCalendarDBContext additionalDB = new AdditionalCalendarDBContext();
+        String sql = "SELECT [id]\n"
+                + "      ,[title]\n"
+                + "      ,[description]\n"
+                + "      ,[location]\n"
+                + "      ,[updated_at]\n"
+                + "      ,[created_at]\n"
+                + "      ,[userId]\n"
+                + "      ,[additionalId]\n"
+                + "  FROM [event]\n"
+                + " WHERE "+field+" = ?";
+        PreparedStatement statement = null;
+        try {
+            statement = connection.prepareStatement(sql);
+            statement.setString(1, value);
+            ResultSet result = statement.executeQuery();
+            while (result.next()) {
+                EventCalendar eventCalendar = new EventCalendar();
+                eventCalendar.setId(result.getInt("id"));
+                eventCalendar.setTitle(result.getString("title"));
+                eventCalendar.setDescription(result.getString("description"));
+                eventCalendar.setLocation(result.getString("location"));
+                eventCalendar.setCreated_at(result.getTimestamp("created_at"));
+                eventCalendar.setUpdated_at(result.getTimestamp("updated_at"));
+                eventCalendar.setUserId(result.getInt("userId"));
+                eventCalendar.setAdditionalId(result.getInt("additionalId"));
+
+                User user = userDB.get(eventCalendar.getUserId());
+                AdditionalCalendar additionalCalendar = additionalDB.get(eventCalendar.getAdditionalId());
+
+                eventCalendar.setUser(user);
+                eventCalendar.setAdditional(additionalCalendar);
+                return eventCalendar;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(AdditionalCalendarDBContext.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
 
     @Override
     public ArrayList<EventCalendar> list() {
@@ -164,7 +207,6 @@ public class EventCalendarDBContext extends DBContext<EventCalendar> {
                     + "      ,[description] = ?\n"
                     + "      ,[location] = ?\n"
                     + "      ,[updated_at] = ?\n"
-                    + "      ,[created_at] = ?\n"
                     + "      ,[userId] = ?\n"
                     + "      ,[additionalId] = ?\n"
                     + " WHERE id = ?";
@@ -172,11 +214,10 @@ public class EventCalendarDBContext extends DBContext<EventCalendar> {
             statement.setString(1, model.getTitle());
             statement.setString(2, model.getDescription());
             statement.setString(3, model.getLocation());
-            statement.setTimestamp(4, model.getCreated_at());
-            statement.setTimestamp(5, model.getUpdated_at());
-            statement.setInt(6, model.getUserId());
-            statement.setInt(7, model.getAdditionalId());
-            statement.setInt(8, model.getId());
+            statement.setTimestamp(4, model.getUpdated_at());
+            statement.setInt(5, model.getUserId());
+            statement.setInt(6, model.getAdditionalId());
+            statement.setInt(7, model.getId());
             statement.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(EventCalendarDBContext.class.getName()).log(Level.SEVERE, null, ex);
@@ -200,7 +241,15 @@ public class EventCalendarDBContext extends DBContext<EventCalendar> {
 
     @Override
     public void delete(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            String sql = "DELETE FROM [event]\n"
+                    + "WHERE id = ? ";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setInt(1, id);
+            statement.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(EventCalendarDBContext.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
 }

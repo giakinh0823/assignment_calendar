@@ -22,6 +22,111 @@ import model.calendar.StatusCalendar;
  * @author giaki
  */
 public class AdditionalCalendarDBContext extends DBContext<AdditionalCalendar> {
+    
+    public AdditionalCalendar findOne(String field, String value) {
+        CalendarDBContext calendarDB = new CalendarDBContext();
+        CategoryCalendarDBContext categoryDB = new CategoryCalendarDBContext();
+        StatusCalendarDBContext statusDB = new StatusCalendarDBContext();
+        String sql = "SELECT [id]\n"
+                + "      ,[start_date]\n"
+                + "      ,[end_date]\n"
+                + "      ,[overlap]\n"
+                + "      ,[display]\n"
+                + "      ,[isAllDay]\n"
+                + "      ,[isHasEnd]\n"
+                + "      ,[created_at]\n"
+                + "      ,[updated_at]\n"
+                + "      ,[calendarId]\n"
+                + "      ,[statusId]\n"
+                + "      ,[categoryId]\n"
+                + "  FROM [additional_calendar]\n"
+                + " WHERE "+field+" = ?";
+        PreparedStatement statement = null;
+        try {
+            statement = connection.prepareStatement(sql);
+            statement.setString(1, value);
+            ResultSet result = statement.executeQuery();
+            while (result.next()) {
+                AdditionalCalendar additional = new AdditionalCalendar();
+                additional.setId(result.getInt("id"));
+                additional.setStartDate(result.getTimestamp("start_date"));
+                additional.setEndDate(result.getTimestamp("end_date"));
+                additional.setOverlap(result.getBoolean("overlap"));
+                additional.setDisplay(result.getString("display"));
+                additional.setIsAllDay(result.getBoolean("isAllDay"));
+                additional.setIsHasEnd(result.getBoolean("isHasEnd"));
+                additional.setCreated_at(result.getTimestamp("created_at"));
+                additional.setUpdated_at(result.getTimestamp("updated_at"));
+                additional.setCalendarId(result.getInt("calendarId"));
+                additional.setStatusId(result.getInt("statusId"));
+                additional.setCategoryId(result.getInt("categoryId"));
+                Calendar calendar = calendarDB.get(additional.getCalendarId());
+                additional.setCalendar(calendar);
+                CategoryCalendar category = categoryDB.get(additional.getCategoryId());
+                additional.setCategory(category);
+                StatusCalendar status = statusDB.get(additional.getStatusId());
+                additional.setStatus(status);
+                return additional;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(AdditionalCalendarDBContext.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+    
+    
+    public ArrayList<AdditionalCalendar> findMany(String field, String value) {
+        ArrayList<AdditionalCalendar> listAdditional = new ArrayList<>();
+        CalendarDBContext calendarDB = new CalendarDBContext();
+        CategoryCalendarDBContext categoryDB = new CategoryCalendarDBContext();
+        StatusCalendarDBContext statusDB = new StatusCalendarDBContext();
+        
+        String sql = "SELECT [id]\n"
+                + "      ,[start_date]\n"
+                + "      ,[end_date]\n"
+                + "      ,[overlap]\n"
+                + "      ,[display]\n"
+                + "      ,[isAllDay]\n"
+                + "      ,[isHasEnd]\n"
+                + "      ,[created_at]\n"
+                + "      ,[updated_at]\n"
+                + "      ,[calendarId]\n"
+                + "      ,[statusId]\n"
+                + "      ,[categoryId]\n"
+                + "  FROM [additional_calendar]\n"
+                + " WHERE "+field+" = ?";
+        PreparedStatement statement = null;
+        try {
+            statement = connection.prepareStatement(sql);
+            statement.setString(1, value);
+            ResultSet result = statement.executeQuery();
+            while (result.next()) {
+                AdditionalCalendar additional = new AdditionalCalendar();
+                additional.setId(result.getInt("id"));
+                additional.setStartDate(result.getTimestamp("start_date"));
+                additional.setEndDate(result.getTimestamp("end_date"));
+                additional.setOverlap(result.getBoolean("overlap"));
+                additional.setDisplay(result.getString("display"));
+                additional.setIsAllDay(result.getBoolean("isAllDay"));
+                additional.setIsHasEnd(result.getBoolean("isHasEnd"));
+                additional.setCreated_at(result.getTimestamp("created_at"));
+                additional.setUpdated_at(result.getTimestamp("updated_at"));
+                additional.setCalendarId(result.getInt("calendarId"));
+                additional.setStatusId(result.getInt("statusId"));
+                additional.setCategoryId(result.getInt("categoryId"));
+                Calendar calendar = calendarDB.get(additional.getCalendarId());
+                additional.setCalendar(calendar);
+                CategoryCalendar category = categoryDB.get(additional.getCategoryId());
+                additional.setCategory(category);
+                StatusCalendar status = statusDB.get(additional.getStatusId());
+                additional.setStatus(status);
+                listAdditional.add(additional);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(AdditionalCalendarDBContext.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return listAdditional;
+    }
 
     @Override
     public ArrayList<AdditionalCalendar> list() {
@@ -192,7 +297,6 @@ public class AdditionalCalendarDBContext extends DBContext<AdditionalCalendar> {
                     + "      ,[display] = ?\n"
                     + "      ,[isAllDay] = ?\n"
                     + "      ,[isHasEnd] = ?\n"
-                    + "      ,[created_at] = ?\n"
                     + "      ,[updated_at] = ?\n"
                     + "      ,[calendarId] = ?\n"
                     + "      ,[statusId] = ?\n"
@@ -205,12 +309,11 @@ public class AdditionalCalendarDBContext extends DBContext<AdditionalCalendar> {
             statement.setString(4, model.getDisplay());
             statement.setBoolean(5, model.isIsAllDay());
             statement.setBoolean(6, model.isIsHasEnd());
-            statement.setTimestamp(7, model.getCreated_at());
-            statement.setTimestamp(8, model.getUpdated_at());
-            statement.setInt(9, model.getCalendarId());
-            statement.setInt(10, model.getStatusId());
-            statement.setInt(11, model.getCategoryId());
-            statement.setInt(12, model.getId());
+            statement.setTimestamp(7, model.getUpdated_at());
+            statement.setInt(8, model.getCalendarId());
+            statement.setInt(9, model.getStatusId());
+            statement.setInt(10, model.getCategoryId());
+            statement.setInt(11, model.getId());
             statement.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(AdditionalCalendarDBContext.class.getName()).log(Level.SEVERE, null, ex);
@@ -234,7 +337,15 @@ public class AdditionalCalendarDBContext extends DBContext<AdditionalCalendar> {
 
     @Override
     public void delete(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            String sql = "DELETE FROM [additional_calendar]\n"
+                    + "WHERE id = ? ";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setInt(1, id);
+            statement.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(AdditionalCalendarDBContext.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
 }

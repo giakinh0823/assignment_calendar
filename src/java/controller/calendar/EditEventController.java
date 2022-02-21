@@ -82,7 +82,6 @@ public class EditEventController extends BaseAuthController {
             boolean field_isAllDay = validate.fieldBoolean(isAllDay, "Error set field AllDay");
             boolean field_isHasEnd = validate.fieldBoolean(isHasEnd, "Error set field HasEnd");
 
-            Timestamp created_at = new Timestamp(System.currentTimeMillis());
             Timestamp updated_at = new Timestamp(System.currentTimeMillis());
 
             // Get user
@@ -101,7 +100,6 @@ public class EditEventController extends BaseAuthController {
             additional.setStatusId(1);
             additional.setCalendarId(field_calendar);
             additional.setCategoryId(field_category);
-            additional.setCreated_at(created_at);
             additional.setUpdated_at(updated_at);
             additional = additionalDB.insert(additional);
 
@@ -114,7 +112,6 @@ public class EditEventController extends BaseAuthController {
             event.setLocation(location);
             event.setUserId(user.getId());
             event.setAdditionalId(additional.getId());
-            event.setCreated_at(created_at);
             event.setUpdated_at(updated_at);
             EventCalendarDBContext eventDB = new EventCalendarDBContext();
             eventDB.update(event);

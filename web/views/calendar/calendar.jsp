@@ -108,7 +108,7 @@
                         </div>
                         <fieldset>
                             <c:forEach items="${calendars}" var="calendar">
-                                <div class="flex justify-between items-center  mb-2">
+                                <div class="flex justify-between items-center  mb-2 calendar-item-${calendar.getId()}">
                                     <div class="flex items-center">
                                         <input id="calendar-${calendar.getId()}" aria-describedby="checkbox-1" type="checkbox" class="w-4 h-4 border-[${calendar.getColor()}] bg-white checked:bg-[${calendar.getColor()}] checked:border-[${calendar.getColor()}] bg-gray-100 rounded border-gray-300 focus:ring-blue-500" checked>
                                         <label for="calendar-${calendar.getId()}" class="ml-3 text-md font-medium">${calendar.getName()}</label>
@@ -328,18 +328,52 @@
                     })
                     events[indexEvent] = event;
                     calendar.refetchEvents();
-                    $("#buttonCloseInfoEvent").click();
                 });
             });
+            
+            
+            $("#confirm-delete-event").on('click', (e) => {
+                const event = {
+                    id: $("#confirm-delete-event").attr("data-id"),
+                }
+                $.ajax({
+                    method: "POST",
+                    url: "/calendar/deleteEvent",
+                    data: event,
+                }).done(function () {
+                    events.forEach((item, index)=> {
+                        if(item.id == event.id){
+                            events.splice(index, 1); 
+                        }
+                    })
+                    calendar.refetchEvents();
+                })
+            })
+             $("#confirm-delete-calendar").on('click', (e) => {
+                const data = {
+                    id: $("#confirm-delete-calendar").attr("data-id"),
+                }
+                $.ajax({
+                    method: "POST",
+                    url: "/calendar/deleteCalendar",
+                    data: data,
+                }).done(function () {
+                    $('.calendar-item-'+data.id).remove();
+                    ${calendar.getId()}
+                    events.forEach((item, index)=> {
+                        if(item.calendar == data.id){
+                            events.splice(index, 1); 
+                        }
+                    })
+                    calendar.refetchEvents();
+                })
+            })
         </script>
  
         <script>
             const deleteCalendar = (id) => {
-            $("#confirm-delete-calendar").attr("data-id", id);
+                $("#confirm-delete-calendar").attr("data-id", id);
             }
-            $("#confirm-delete-calendar").on('click', (e) => {
-            alert($("#confirm-delete-calendar").attr("data-id"));
-            })
         </script>
 
         <script>

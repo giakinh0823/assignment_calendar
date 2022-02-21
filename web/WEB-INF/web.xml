@@ -41,6 +41,14 @@
         <servlet-name>EditEventController</servlet-name>
         <servlet-class>controller.calendar.EditEventController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>DeleteEventController</servlet-name>
+        <servlet-class>controller.calendar.DeleteEventController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteCalendar</servlet-name>
+        <servlet-class>controller.calendar.DeleteCalendar</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginController</servlet-name>
         <url-pattern>/login</url-pattern>
@@ -72,6 +80,14 @@
     <servlet-mapping>
         <servlet-name>EditEventController</servlet-name>
         <url-pattern>/calendar/editEvent</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteEventController</servlet-name>
+        <url-pattern>/calendar/deleteEvent</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteCalendar</servlet-name>
+        <url-pattern>/calendar/deleteCalendar</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

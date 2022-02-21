@@ -111,7 +111,7 @@ public class CalendarDBContext extends DBContext<Calendar> {
     @Override
     public Calendar insert(Calendar calendar) {
         PreparedStatement statement = null;
-        String sql = "INSERT INTO [dbo].[calendar]\n"
+        String sql = "INSERT INTO [calendar]\n"
                 + "           ([name]\n"
                 + "           ,[color]\n"
                 + "           ,[userId]\n"
@@ -157,7 +157,15 @@ public class CalendarDBContext extends DBContext<Calendar> {
 
     @Override
     public void delete(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            String sql = "DELETE FROM [calendar]\n"
+                    + "WHERE id = ? ";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setInt(1, id);
+            statement.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(AdditionalCalendarDBContext.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
 }
