@@ -77,6 +77,9 @@
             font-weight: bold;
             font-size: 16px;
         }
+        a.fc-event.hidden {
+            display: none;
+        }
     </style>
     <body>
         <jsp:include page="../dashboard/navbar.jsp" />
@@ -92,7 +95,7 @@
                             <c:forEach items="${listCategory}" var="category">
                                 <div class="flex justify-between items-center  mb-2">
                                     <div class="flex items-center">
-                                        <input id="category-${category.getId()}" aria-describedby="checkbox-1" type="checkbox" class="w-4 h-4 border-[#1c64f2] bg-white checked:bg-[#1c64f2] checked:border-[#1c64f2] bg-gray-100 rounded border-gray-300 focus:ring-blue-500" checked>
+                                        <input id="category-${category.getId()}" value="${category.getId()}" name="filter-event-category" aria-describedby="checkbox-1" type="checkbox" class="w-4 h-4 border-[#1c64f2] bg-white checked:bg-[#1c64f2] checked:border-[#1c64f2] bg-gray-100 rounded border-gray-300 focus:ring-blue-500" checked>
                                         <label for="category-${category.getId()}" class="ml-3 text-md font-medium">${category.getName()}</label>
                                     </div>
                                 </div>
@@ -110,7 +113,7 @@
                             <c:forEach items="${calendars}" var="calendar">
                                 <div class="flex justify-between items-center  mb-2 calendar-item-${calendar.getId()}">
                                     <div class="flex items-center">
-                                        <input id="calendar-${calendar.getId()}" aria-describedby="checkbox-1" type="checkbox" class="w-4 h-4 border-[${calendar.getColor()}] bg-white checked:bg-[${calendar.getColor()}] checked:border-[${calendar.getColor()}] bg-gray-100 rounded border-gray-300 focus:ring-blue-500" checked>
+                                        <input id="calendar-${calendar.getId()}" value="${calendar.getId()}" name="filter-event-calendar" onchange="handleChangeCalendar(${calendar.getId()})" aria-describedby="checkbox-1" type="checkbox" class="w-4 h-4 border-[${calendar.getColor()}] bg-white checked:bg-[${calendar.getColor()}] checked:border-[${calendar.getColor()}] bg-gray-100 rounded border-gray-300 focus:ring-blue-500" checked>
                                         <label for="calendar-${calendar.getId()}" class="ml-3 text-md font-medium">${calendar.getName()}</label>
                                     </div>
                                     <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm inline-flex items-center p-1.5" data-modal-toggle="confirm-delete-calendar-modal" onclick="deleteCalendar(${calendar.getId()})">
@@ -173,7 +176,7 @@
                         description: "<%=event.getDescription()%>",
                         location: "<%=event.getLocation()%>",
                         overlap: <%=event.getAdditional().isOverlap()%>,
-                        category: "<%=event.getAdditional().getCategory().getId()%>",
+                        category: <%=event.getAdditional().getCategory().getId()%>,
                         categoryName: "<%=event.getAdditional().getCategory().getName()%>",
                         status: "<%=event.getAdditional().getStatus().getId()%>",
                         statusName: "<%=event.getAdditional().getStatus().getName()%>",
@@ -202,6 +205,7 @@
                     overlap: $("#overlap").is(':checked'),
                     allDay: true,
                     hasEnd: false,
+                    display: 'auto',
                 }
                 if ($("#startTime").val()) {
                     event.start = event.start + "T" + $("#startTime").val();
@@ -273,6 +277,7 @@
                     overlap: $("#overlapEditEvent").is(':checked'),
                     allDay: true,
                     hasEnd: false,
+                    display: 'auto',
                 }
                 if ($("#startTimeEditEvent").val()) {
                     event.start = event.start + "T" + $("#startTimeEditEvent").val();
@@ -367,6 +372,12 @@
                     })
                     calendar.refetchEvents();
                 })
+            })
+            $("input[name='filter-event-category']").on("change", function(){
+                calendar.render();
+            })
+            $("input[name='filter-event-calendar']").on("change", function(){
+                calendar.render();
             })
         </script>
  

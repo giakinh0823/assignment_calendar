@@ -125,4 +125,20 @@ const calenderHandle = (events) => ({
         events: function (info, successCallback, failureCallback, dropInfo) {
             successCallback(events);
         },
+        eventClassNames: function (info) {
+            var result = true;
+            var calendars = [];
+            var categories = []
+            $("input[name='filter-event-calendar']:checked").each(function () {
+                calendars.push(Number.parseInt($(this).val()));
+            });
+            $("input[name='filter-event-category']:checked").each(function () {
+                categories.push(Number.parseInt($(this).val()));
+            });
+            result = calendars.indexOf(info.event.extendedProps.calendar) >= 0 && categories.indexOf(info.event.extendedProps.category) >= 0;
+            if (!result) {
+                result = "hidden";
+            }
+            return result;
+        }
     })
