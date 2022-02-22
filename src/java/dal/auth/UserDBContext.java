@@ -35,6 +35,7 @@ public class UserDBContext extends DBContext<User> {
                 + "      ,[user].[is_super]\n"
                 + "      ,[user].[is_active]\n"
                 + "      ,[user].[permission]\n"
+                + "      ,[user].[avatar]\n"
                 + "      ,[user].[created_at]\n"
                 + "      ,[user].[updated_at], [user_per].[permissionId], [permission].[name] as 'permissionName'\n"
                 + "FROM [user] INNER JOIN [user_permission] as [user_per]\n"
@@ -65,6 +66,7 @@ public class UserDBContext extends DBContext<User> {
                 user.setIs_super(result.getBoolean("is_super"));
                 user.setCreated_at(result.getTimestamp("created_at"));
                 user.setUpdated_at(result.getTimestamp("updated_at"));
+                user.setAvatar(result.getString("avatar"));
                 Permission permission = new Permission();
                 permission.setId(result.getInt("permissionId"));
                 permission.setName(result.getString("permissionName"));
@@ -90,6 +92,7 @@ public class UserDBContext extends DBContext<User> {
                 + "      ,[user].[is_super]\n"
                 + "      ,[user].[is_active]\n"
                 + "      ,[user].[permission]\n"
+                + "      ,[user].[avatar]\n"
                 + "      ,[user].[created_at]\n"
                 + "      ,[user].[updated_at], [user_per].[permissionId], [permission].[name] as 'permissionName'\n"
                 + "FROM [user] INNER JOIN [user_permission] as [user_per]\n"
@@ -119,6 +122,7 @@ public class UserDBContext extends DBContext<User> {
                 user.setIs_super(result.getBoolean("is_super"));
                 user.setCreated_at(result.getTimestamp("created_at"));
                 user.setUpdated_at(result.getTimestamp("updated_at"));
+                user.setAvatar(result.getString("avatar"));
                 Permission permission = new Permission();
                 permission.setId(result.getInt("permissionId"));
                 permission.setName(result.getString("permissionName"));
@@ -180,6 +184,7 @@ public class UserDBContext extends DBContext<User> {
                 + "      ,[user].[is_super]\n"
                 + "      ,[user].[is_active]\n"
                 + "      ,[user].[permission]\n"
+                + "      ,[user].[avatar]\n"
                 + "      ,[user].[created_at]\n"
                 + "      ,[user].[updated_at], [user_per].[permissionId], [permission].[name] as 'permissionName'\n"
                 + "FROM [user] INNER JOIN [user_permission] as [user_per]\n"
@@ -208,6 +213,7 @@ public class UserDBContext extends DBContext<User> {
                 user.setIs_super(result.getBoolean("is_super"));
                 user.setCreated_at(result.getTimestamp("created_at"));
                 user.setUpdated_at(result.getTimestamp("updated_at"));
+                user.setAvatar(result.getString("avatar"));
                 Permission permission = new Permission();
                 permission.setId(result.getInt("permissionId"));
                 permission.setName(result.getString("permissionName"));

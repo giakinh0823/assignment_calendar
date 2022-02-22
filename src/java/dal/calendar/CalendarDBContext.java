@@ -21,8 +21,8 @@ import model.auth.User;
  * @author giaki
  */
 public class CalendarDBContext extends DBContext<Calendar> {
-    
-     public ArrayList<Calendar> listByUser(int userId) {
+
+    public ArrayList<Calendar> listByUser(int userId) {
         ArrayList<Calendar> calendars = new ArrayList<>();
         UserDBContext userDB = new UserDBContext();
         String sql = "SELECT id, name, color, userId, created_at, updated_at FROM [calendar]"
@@ -127,7 +127,7 @@ public class CalendarDBContext extends DBContext<Calendar> {
             statement.setTimestamp(5, calendar.getUpdated_at());
             statement.executeUpdate();
             ArrayList<Calendar> calendars = list();
-            Calendar new_calendar = calendars.get(calendars.size()-1);
+            Calendar new_calendar = calendars.get(calendars.size() - 1);
             return new_calendar;
         } catch (SQLException ex) {
             Logger.getLogger(CalendarDBContext.class.getName()).log(Level.SEVERE, null, ex);
@@ -151,8 +151,40 @@ public class CalendarDBContext extends DBContext<Calendar> {
     }
 
     @Override
-    public void update(Calendar model) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void update(Calendar calendar) {
+        PreparedStatement statement = null;
+        String sql = "UPDATE [calendar]\n"
+                + "   SET [name] = ?\n"
+                + "      ,[color] = ?\n"
+                + "      ,[userId] = ?\n"
+                + "      ,[updated_at] = ?\n"
+                + " WHERE id = ?";
+        try {
+            statement = connection.prepareStatement(sql);
+            statement.setString(1, calendar.getName());
+            statement.setString(2, calendar.getColor());
+            statement.setInt(3, calendar.getUserId());
+            statement.setTimestamp(4, calendar.getUpdated_at());
+            statement.setInt(5, calendar.getId());
+            statement.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(CalendarDBContext.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            if (statement != null) {
+                try {
+                    statement.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(CalendarDBContext.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(CalendarDBContext.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
     }
 
     @Override

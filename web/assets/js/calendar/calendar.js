@@ -1,6 +1,6 @@
 const calenderHandle = (events) => ({
         headerToolbar: {
-            left: 'prev,next today',
+            left: 'prevYear,prev,next,nextYear today',
             center: 'title',
             right: 'dayGridMonth,timeGridWeek,timeGridDay,listMonth',
         },

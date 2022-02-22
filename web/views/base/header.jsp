@@ -35,16 +35,10 @@
                         </div>
                         <ul class="py-1" aria-labelledby="dropdown">
                             <li>
-                                <a href="#" class="block py-2 px-4 text-md  hover:bg-gray-100 ">Dashboard</a>
+                                <a href="/profile" class="block py-2 px-4 text-md hover:bg-gray-100">Profile</a>
                             </li>
                             <li>
-                                <a href="#" class="block py-2 px-4 text-md hover:bg-gray-100">Settings</a>
-                            </li>
-                            <li>
-                                <a href="#" class="block py-2 px-4 text-md hover:bg-gray-100">Earnings</a>
-                            </li>
-                            <li>
-                                <a href="#" class="block py-2 px-4 text-md hover:bg-gray-100">Sign out</a>
+                                <a href="/logout" class="block py-2 px-4 text-md hover:bg-gray-100">Sign out</a>
                             </li>
                         </ul>
                     </div>
@@ -56,21 +50,12 @@
                 </div>
                 <div class="hidden justify-between items-center w-full md:flex md:w-auto md:order-1" id="mobile-menu-2">
                     <ul class="flex flex-col mt-4 md:flex-row md:space-x-8 md:mt-0 md:text-md md:font-medium">
-                        <li>
+<!--                        <li>
                             <a href="#" class="block py-2 pr-4 pl-3 text-white rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white" aria-current="page">Home</a>
                         </li>
                         <li>
                             <a href="#" class="block py-2 pr-4 pl-3 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0">About</a>
-                        </li>
-                        <li>
-                            <a href="#" class="block py-2 pr-4 pl-3 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0">Services</a>
-                        </li>
-                        <li>
-                            <a href="#" class="block py-2 pr-4 pl-3 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0">Pricing</a>
-                        </li>
-                        <li>
-                            <a href="#" class="block py-2 pr-4 pl-3 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0">Contact</a>
-                        </li>
+                        </li>-->
                     </ul>
                 </div>
             </div>

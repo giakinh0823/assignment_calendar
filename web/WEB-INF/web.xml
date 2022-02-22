@@ -49,6 +49,10 @@
         <servlet-name>DeleteCalendar</servlet-name>
         <servlet-class>controller.calendar.DeleteCalendar</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>EditCalendar</servlet-name>
+        <servlet-class>controller.calendar.EditCalendar</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginController</servlet-name>
         <url-pattern>/login</url-pattern>
@@ -88,6 +92,10 @@
     <servlet-mapping>
         <servlet-name>DeleteCalendar</servlet-name>
         <url-pattern>/calendar/deleteCalendar</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditCalendar</servlet-name>
+        <url-pattern>/calendar/editCalendar</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

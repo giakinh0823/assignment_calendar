@@ -26,10 +26,19 @@ public class User extends BaseModel{
     private boolean is_active;
     private String permission;
     private Permission user_permission;
+    private String avatar;
 
     public User() {
     }
 
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
+    
     public Permission getUser_permission() {
         return user_permission;
     }

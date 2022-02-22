@@ -102,6 +102,18 @@
                             </c:forEach>
                         </fieldset>
                     </div>
+                    <div class="mb-5 w-full relative">
+                        <div class="flex lg:justify-center">
+                            <button type="button" id="buttonOpenAddEvent" class="flex items-center text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">
+                                <span class="text-lg mr-2">Add Event</span><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path></svg>
+                            </button>
+                        </div>
+                        <div id="addEventFormContainer" class="hidden w-60 md:w-64 lg:w-80 absolute -top-[300%] left-[90%] z-[1000]">
+                            <div>
+                                <jsp:include page="addEvent.jsp" />
+                            </div>
+                        </div>
+                    </div>
                     <div class="mb-5">
                         <div class="mb-5 flex justify-between">
                             <h2 class="text-xl">My Calendars</h2>
@@ -116,27 +128,25 @@
                                         <input id="calendar-${calendar.getId()}" value="${calendar.getId()}" name="filter-event-calendar" onchange="handleChangeCalendar(${calendar.getId()})" aria-describedby="checkbox-1" type="checkbox" class="w-4 h-4 border-[${calendar.getColor()}] bg-white checked:bg-[${calendar.getColor()}] checked:border-[${calendar.getColor()}] bg-gray-100 rounded border-gray-300 focus:ring-blue-500" checked>
                                         <label for="calendar-${calendar.getId()}" class="ml-3 text-md font-medium">${calendar.getName()}</label>
                                     </div>
-                                    <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm inline-flex items-center p-1.5" data-modal-toggle="confirm-delete-calendar-modal" onclick="deleteCalendar(${calendar.getId()})">
-                                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>  
-                                    </button>
+                                    <div class="flex justify-end items-center">
+                                        <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm inline-flex items-center p-1.5" data-modal-toggle="confirm-delete-calendar-modal" onclick="deleteCalendar(${calendar.getId()})">
+                                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>  
+                                        </button>
+                                        <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm inline-flex items-center p-1.5" data-modal-toggle="editCalendar-modal" onclick="editSetValueCalendar({id: ${calendar.getId()}, name:'${calendar.getName()}', color: '${calendar.getColor()}' })">
+                                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z"></path></svg>
+                                        </button>
+                                    </div>
                                 </div>
                             </c:forEach>
                         </fieldset>
                     </div>
                 </div>
                 <div class="w-full px-5">
-                    <div id="calendar" class="max-h-screen w-full"></div>
-                </div>
-                <div class="w-60 md:w-64 lg:w-80">
-                    <div class="mb-8">
-                        <jsp:include page="addCalendar.jsp" />
-                    </div>
-                    <div>
-                        <jsp:include page="addEvent.jsp" />
-                    </div>
+                    <div id="calendar" class="max-h-[93vh] w-full"></div>
                 </div>
             </div>
         </div>
+        <jsp:include page="addCalendar.jsp" />
         
 
         <div class="hidden overflow-y-auto overflow-x-hidden fixed right-0 left-0 top-4 z-50 justify-center items-center md:inset-0 h-modal sm:h-full" id="confirm-delete-calendar-modal">
@@ -162,9 +172,12 @@
             </div>
         </div>
         <jsp:include page="infoEvent.jsp" />
+        <jsp:include page="editCalendar.jsp" />
         <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.2/main.min.js"></script>
         <script src="/assets/js/calendar/calendar.js"></script>
         <script>
+            
+            //events from database
             const events = []
                 <%for (EventCalendar event : events) {%>
                     events.push({
@@ -188,11 +201,21 @@
                             display: <%=event.getAdditional().getDisplay() != null ? "'" + event.getAdditional().getDisplay() + "'" : "undefined"%>,
                         <%}%>
                     })
-                <%}%>                        
+                <%}%>  
+                
+            // init calendar rerender
             const calendarEl = document.getElementById('calendar');
             const calendar = new FullCalendar.Calendar(calendarEl, calenderHandle(events));
             calendar.render();
-                                        
+            
+            // change event calendar form
+            $("#calendarGroup").on('change', (e) => {
+                const color = event.target[event.target.selectedIndex].getAttribute("data-color");
+                $("#colorEvent").val(color);
+                $("#colorEvent").css("color", color);
+            });
+            
+            // add event handle
             $("#form-add-event").on("submit", function (e) {
                 e.preventDefault();
                 const event = {
@@ -263,6 +286,7 @@
                 });
             });
             
+            // edit form event handle
             $("#form-edit-event").on("submit", function (e) {
                 e.preventDefault();
                 const event = {
@@ -336,7 +360,7 @@
                 });
             });
             
-            
+            // delete event
             $("#confirm-delete-event").on('click', (e) => {
                 const event = {
                     id: $("#confirm-delete-event").attr("data-id"),
@@ -354,7 +378,13 @@
                     calendar.refetchEvents();
                 })
             })
-             $("#confirm-delete-calendar").on('click', (e) => {
+            
+            //detele calendar 
+            const deleteCalendar = (id) => {
+                $("#confirm-delete-calendar").attr("data-id", id);
+            }
+            
+            $("#confirm-delete-calendar").on('click', (e) => {
                 const data = {
                     id: $("#confirm-delete-calendar").attr("data-id"),
                 }
@@ -373,27 +403,38 @@
                     calendar.refetchEvents();
                 })
             })
+            
+            // Event checkbox category and calendar handle
             $("input[name='filter-event-category']").on("change", function(){
                 calendar.render();
             })
             $("input[name='filter-event-calendar']").on("change", function(){
                 calendar.render();
             })
-        </script>
- 
-        <script>
-            const deleteCalendar = (id) => {
-                $("#confirm-delete-calendar").attr("data-id", id);
+            
+            // Event handle form add event
+            $("#buttonOpenAddEvent").on('click',() => {
+                $("#addEventFormContainer").removeClass("hidden")
+            });
+            $("#buttonCloseAddFormEvent").on('click', () => {
+                $("#addEventFormContainer").addClass("hidden");
+            })
+            
+            //click outside event
+            $(document).mouseup(function (e) {
+                if ($(e.target).closest("#addEventFormContainer").length=== 0 && !$("#addEventFormContainer").hasClass("hidden")) {
+                    $("#addEventFormContainer").addClass("hidden");
+                }
+            });
+            // edit calendar handle
+            const editSetValueCalendar = (value) => {
+                $("#idCalendar").val(value.id);
+                $("#nameEditCalendar").val(value.name);
+                $("#colorEditCalendar").val(value.color);
             }
+            
         </script>
 
-        <script>
-            $("#calendarGroup").on('change', (e) => {
-                const color = event.target[event.target.selectedIndex].getAttribute("data-color");
-                $("#colorEvent").val(color);
-                $("#colorEvent").css("color", color);
-            });
-        </script>
     </body>
 </html>
 <jsp:include page="../base/footer.jsp" />

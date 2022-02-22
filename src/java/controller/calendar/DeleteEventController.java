@@ -35,8 +35,8 @@ public class DeleteEventController extends BaseAuthController {
         UserDBContext userDB = new UserDBContext();
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");
-        int numEditEvent = userDB.getNumberOfPermission(user.getId(), "EVENT", "DELETE");
-        return numEditEvent >= 1;
+        int numDeleteEvent = userDB.getNumberOfPermission(user.getId(), "EVENT", "DELETE");
+        return numDeleteEvent >= 1;
     }
 
     @Override
@@ -44,8 +44,8 @@ public class DeleteEventController extends BaseAuthController {
         UserDBContext userDB = new UserDBContext();
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");
-        int numEditEvent = userDB.getNumberOfPermission(user.getId(), "EVENT", "DELETE");
-        return numEditEvent >= 1;
+        int numDeleteEvent = userDB.getNumberOfPermission(user.getId(), "EVENT", "DELETE");
+        return numDeleteEvent >= 1;
     }
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
@@ -61,7 +61,7 @@ public class DeleteEventController extends BaseAuthController {
             additionalDB.delete(event.getAdditional().getId());
             eventDB.delete(event.getId());
         } catch (Exception ex) {
-             String json = new Gson().toJson(new Error(ex.getMessage()));
+            String json = new Gson().toJson(new Error(ex.getMessage()));
             response.setContentType("application/json");
             response.setCharacterEncoding("UTF-8");
             response.getWriter().write(json);
