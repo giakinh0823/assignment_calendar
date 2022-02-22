@@ -80,11 +80,16 @@
         a.fc-event.hidden {
             display: none;
         }
+        @media only screen and (max-width: 800px) {
+        #navBarCalendar {
+            display: none;
+        }
+    }
     </style>
     <body>
-        <div class="ml-auto p-5 min-h-screen">
-            <div class="flex">
-                <div class="w-60 md:w-64 lg:w-80 px-5 pt-3">
+        <div class="ml-auto pt-4 max-h-screen">
+            <div class="flex" >
+                <div class="w-60 md:w-64 lg:w-80 px-6 pt-3" id="navBarCalendar">
                     <div class="mb-5">
                         <div class="mb-5 flex justify-between">
                             <h2 class="text-xl">Category</h2>
@@ -431,6 +436,19 @@
                 $("#nameEditCalendar").val(value.name);
                 $("#colorEditCalendar").val(value.color);
             }
+            
+            //open navbar calendar
+            $("#buttonMenuNavBarCalendar").on("click", function(e) {
+                if($("#navBarCalendar").hasClass("hidden") || $("#navBarCalendar").css("display")=="none"){
+                    $("#navBarCalendar").removeClass("hidden")
+                    $("#navBarCalendar").css("display", "block")
+                    calendar.render();
+                }else{
+                    $("#navBarCalendar").addClass("hidden")
+                    $("#navBarCalendar").css("display", "none")
+                    calendar.render();
+                }
+            })
             
         </script>
 
