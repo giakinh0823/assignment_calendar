@@ -205,7 +205,7 @@
                     overlap: $("#overlap").is(':checked'),
                     allDay: true,
                     hasEnd: false,
-                    display: 'auto',
+                    display: $("#display").val(),
                 }
                 if ($("#startTime").val()) {
                     event.start = event.start + "T" + $("#startTime").val();
@@ -223,9 +223,8 @@
                 if(new Date(event.end).getDate()-new Date(event.start).getDate()<=0){
                     event.allDay=false;
                 }
-                 if ($("#display").val() != "default") {
-                    event.display = $("#display").val();
-                    event.allDay = true;
+                if(event.display == 'background' || event.display == 'inverse-background'){
+                    event.allDay=true;
                 }
                 event.start = new Date(event.start).getTime();
                 event.end = new Date(event.end).getTime();
@@ -277,16 +276,18 @@
                     overlap: $("#overlapEditEvent").is(':checked'),
                     allDay: true,
                     hasEnd: false,
-                    display: 'auto',
+                    display: $("#displayEditEvent").val(),
                 }
                 if ($("#startTimeEditEvent").val()) {
                     event.start = event.start + "T" + $("#startTimeEditEvent").val();
+                    event.allDay=false;
                 }
                 if ($("#endDateEditEvent").val()) {
                     event.end = $("#endDateEditEvent").val();
                     if ($("#endTimeEditEvent").val()) {
                         event.end = event.end + "T" + $("#endTimeEditEvent").val();
                         event.hasEnd = true;
+                        event.allDay=false;
                     }
                 }   
                 if ($("#locationEditEvent").val() && $("#locationEditEvent").val() != "" && $("#locationEditEvent").val() != null) {
@@ -295,9 +296,8 @@
                 if(new Date(event.end).getDate()-new Date(event.start).getDate()<=0){
                     event.allDay=false;
                 }
-                 if ($("#displayEditEvent").val() != "default") {
-                    event.display = $("#displayEditEvent").val();
-                    event.allDay = true;
+                if(event.display == 'background' || event.display == 'inverse-background'){
+                    event.allDay=true;
                 }
                 event.start = new Date(event.start).getTime();
                 event.end = new Date(event.end).getTime();

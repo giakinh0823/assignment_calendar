@@ -51,7 +51,7 @@ const calenderHandle = (events) => ({
             $("#calendarGroupEditEvent").val(info.event.extendedProps.calendar);
             $("#categoryEditEvent").val(info.event.extendedProps.category);
             if (info.event._def.ui.display) {
-                $("#displayEditEvent").val('background');
+                $("#displayEditEvent").val(info.event._def.ui.display);
             }
             $("#locationEditEvent").val(info.event.extendedProps.location);
             const startDate = new Date(info.event.start);

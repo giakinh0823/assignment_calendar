@@ -132,8 +132,12 @@
                                             <div class="mb-3 w-full">
                                                 <label for="display" class="block text-sm font-medium text-gray-900 mr-2">Display</label>
                                                 <select name="display" id="displayEditEvent" required class="appearance-none block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" aria-label="Default select example">
-                                                    <option value="default">Default</option>
+                                                    <option value="auto">Auto</option>
+                                                    <option value="block">Block</option>
+                                                    <option value="list-item">List item</option>
                                                     <option value="background">Background</option>
+                                                    <option value="inverse-background">Inverse Background</option>
+                                                    <option value="none">None</option>
                                                 </select>
                                             </div>
                                         </div>
