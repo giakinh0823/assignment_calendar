@@ -82,8 +82,6 @@
         }
     </style>
     <body>
-        <jsp:include page="../dashboard/navbar.jsp" />
-        <!--<div class="w-[calc(100%_-_15rem)] ml-auto p-5 min-h-screen">-->
         <div class="ml-auto p-5 min-h-screen">
             <div class="flex">
                 <div class="w-60 md:w-64 lg:w-80 px-5 pt-3">
@@ -400,6 +398,7 @@
                             events.splice(index, 1); 
                         }
                     })
+                    $('.option-calendar-'+data.id).remove();
                     calendar.refetchEvents();
                 })
             })

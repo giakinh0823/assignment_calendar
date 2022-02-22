@@ -3,21 +3,7 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/FPT%20UNIVERSITY/STUDY/KY%204/JAVA%20WEB%20TEST/WWW/ass_CLife/web/views/calendar/infoEvent.jsp</file>
-            <file>file:/D:/FPT%20UNIVERSITY/STUDY/KY%204/JAVA%20WEB%20TEST/WWW/ass_CLife/web/views/calendar/addEvent.jsp</file>
-            <file>file:/D:/FPT%20UNIVERSITY/STUDY/KY%204/JAVA%20WEB%20TEST/WWW/ass_CLife/src/java/controller/calendar/EventController.java</file>
-            <file>file:/D:/FPT%20UNIVERSITY/STUDY/KY%204/JAVA%20WEB%20TEST/WWW/ass_CLife/src/java/controller/calendar/CalendarController.java</file>
-            <file>file:/D:/FPT%20UNIVERSITY/STUDY/KY%204/JAVA%20WEB%20TEST/WWW/ass_CLife/web/WEB-INF/web.xml</file>
-            <file>file:/D:/FPT%20UNIVERSITY/STUDY/KY%204/JAVA%20WEB%20TEST/WWW/ass_CLife/src/java/controller/calendar/DeleteCalendar.java</file>
-            <file>file:/D:/FPT%20UNIVERSITY/STUDY/KY%204/JAVA%20WEB%20TEST/WWW/ass_CLife/web/assets/js/calendar/calendar.js</file>
-            <file>file:/D:/FPT%20UNIVERSITY/STUDY/KY%204/JAVA%20WEB%20TEST/WWW/ass_CLife/web/views/calendar/addCalendar.jsp</file>
-            <file>file:/D:/FPT%20UNIVERSITY/STUDY/KY%204/JAVA%20WEB%20TEST/WWW/ass_CLife/web/views/calendar/calendar.jsp</file>
-            <file>file:/D:/FPT%20UNIVERSITY/STUDY/KY%204/JAVA%20WEB%20TEST/WWW/ass_CLife/src/java/controller/calendar/AddCalendarController.java</file>
-            <file>file:/D:/FPT%20UNIVERSITY/STUDY/KY%204/JAVA%20WEB%20TEST/WWW/ass_CLife/src/java/controller/calendar/EditEventController.java</file>
             <file>file:/D:/FPT%20UNIVERSITY/STUDY/KY%204/JAVA%20WEB%20TEST/WWW/ass_CLife/src/java/dal/calendar/AdditionalCalendarDBContext.java</file>
-            <file>file:/D:/FPT%20UNIVERSITY/STUDY/KY%204/JAVA%20WEB%20TEST/WWW/ass_CLife/src/java/dal/calendar/CalendarDBContext.java</file>
-            <file>file:/D:/FPT%20UNIVERSITY/STUDY/KY%204/JAVA%20WEB%20TEST/WWW/ass_CLife/src/java/controller/calendar/DeleteEventController.java</file>
-            <file>file:/D:/FPT%20UNIVERSITY/STUDY/KY%204/JAVA%20WEB%20TEST/WWW/ass_CLife/src/java/dal/calendar/EventCalendarDBContext.java</file>
         </group>
     </open-files>
 </project-private>

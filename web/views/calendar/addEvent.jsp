@@ -62,7 +62,7 @@
                                     m-0
                                     focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" aria-label="Default select example">
                                 <c:forEach items="${calendars}" var="calendar">
-                                    <option value="${calendar.getId()}" data-color="${calendar.getColor()}" class="font-semibold text-[${calendar.getColor()}]">
+                                    <option value="${calendar.getId()}" class="option-calendar-${calendar.getId()}" data-color="${calendar.getColor()}" class="font-semibold text-[${calendar.getColor()}]">
                                         ${calendar.getName()}
                                     </option>
                                 </c:forEach>

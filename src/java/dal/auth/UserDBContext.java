@@ -290,8 +290,46 @@ public class UserDBContext extends DBContext<User> {
     }
 
     @Override
-    public void update(User model) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void update(User user) {
+        PreparedStatement statement = null;
+        UserPermissionDBContext userPermissionDB = new UserPermissionDBContext();
+        try {
+            String sql = "UPDATE [user]\n" +
+                        " SET [first_name] = ?\n"
+                    + "      ,[last_name] = ?\n"
+                    + "      ,[birthday] = ?\n"
+                    + "      ,[email] = ?\n"
+                    + "      ,[phone] = ?\n"
+                    + "      ,[gender] = ?\n"
+                    + "      ,[updated_at] = ?\n"
+                    + " WHERE id = ?";
+            statement = connection.prepareStatement(sql);
+            statement.setString(1, user.getFirst_name());
+            statement.setString(2, user.getLast_name());
+            statement.setDate(3, user.getBirthday());
+            statement.setString(4, user.getEmail());
+            statement.setString(5, user.getPhone());
+            statement.setBoolean(6, user.getGender());
+            statement.setTimestamp(7, user.getUpdated_at());
+            statement.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDBContext.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            if (statement != null) {
+                try {
+                    statement.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(UserDBContext.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(UserDBContext.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
     }
 
     @Override
