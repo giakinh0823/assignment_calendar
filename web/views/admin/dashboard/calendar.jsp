@@ -128,7 +128,7 @@
                             <c:forEach items="${calendars}" var="calendar">
                                 <div class="flex justify-between items-center  mb-2 calendar-item-${calendar.getId()}">
                                     <div class="flex items-center">
-                                        <input id="calendar-${calendar.getId()}" value="${calendar.getId()}" name="filter-event-calendar" onchange="handleChangeCalendar(${calendar.getId()})" aria-describedby="checkbox-1" type="checkbox" class="w-4 h-4 border-[${calendar.getColor()}] bg-white checked:bg-[${calendar.getColor()}] checked:border-[${calendar.getColor()}] bg-gray-100 rounded border-gray-300 focus:ring-blue-500" checked>
+                                        <input style="border-color: ${calendar.getColor()}; background-color: ${calendar.getColor()}" id="calendar-${calendar.getId()}" value="${calendar.getId()}" name="filter-event-calendar" aria-describedby="checkbox-1" type="checkbox" class="w-4 h-4 border-[${calendar.getColor()}] bg-white checked:bg-[${calendar.getColor()}] checked:border-[${calendar.getColor()}] bg-gray-100 rounded border-gray-300 focus:ring-blue-500" checked>
                                         <label for="calendar-${calendar.getId()}" class="ml-3 text-md font-medium">${calendar.getName()}</label>
                                     </div>
                                     <div class="flex justify-end items-center">

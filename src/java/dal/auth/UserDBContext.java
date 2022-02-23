@@ -39,7 +39,7 @@ public class UserDBContext extends DBContext<User> {
                 + "      ,[user].[created_at]\n"
                 + "      ,[user].[updated_at], [user_per].[permissionId], [permission].[name] as 'permissionName'\n"
                 + "FROM [user] INNER JOIN [user_permission] as [user_per]\n"
-                + "ON user_per.id = [user].[id]\n"
+                + "ON [user_per].[userId] = [user].[id]\n"
                 + "INNER JOIN [permission]\n"
                 + "ON [permission].[id] = [user_per].[permissionId]\n"
                 + " WHERE ([user].[username] = ? or [user].[email] = ?) and [user].[password] = ? ";
@@ -96,7 +96,7 @@ public class UserDBContext extends DBContext<User> {
                 + "      ,[user].[created_at]\n"
                 + "      ,[user].[updated_at], [user_per].[permissionId], [permission].[name] as 'permissionName'\n"
                 + "FROM [user] INNER JOIN [user_permission] as [user_per]\n"
-                + "ON user_per.id = [user].[id]\n"
+                + "ON [user_per].[userId] = [user].[id]\n"
                 + "INNER JOIN [permission]\n"
                 + "ON [permission].[id] = [user_per].[permissionId]\n";
         PreparedStatement statement = null;
@@ -164,10 +164,140 @@ public class UserDBContext extends DBContext<User> {
         }
         return -1;
     }
+    
+    
+    public ArrayList<User> getUsers(int pageIndex, int pageSize) {
+        ArrayList<User> users = new ArrayList<User>();
+        String sql = "SELECT * FROM \n"
+                + "(SELECT [user].[id]\n"
+                + "      ,[user].[username]\n"
+                + "      ,[user].[password]\n"
+                + "      ,[user].[first_name]\n"
+                + "      ,[user].[last_name]\n"
+                + "      ,[user].[birthday]\n"
+                + "      ,[user].[email]\n"
+                + "      ,[user].[phone]\n"
+                + "      ,[user].[gender]\n"
+                + "      ,[user].[is_super]\n"
+                + "      ,[user].[is_active]\n"
+                + "      ,[user].[permission]\n"
+                + "      ,[user].[avatar]\n"
+                + "      ,[user].[created_at]\n"
+                + "      ,[user].[updated_at]\n"
+                + "      ,[user_per].[permissionId]\n"
+                + "      ,[permission].[name] as 'permissionName'\n"
+                + "      ,ROW_NUMBER() OVER (ORDER BY [user].[id] ASC) as row_index\n"
+                + "FROM [user] INNER JOIN [user_permission] as [user_per]\n"
+                + "ON [user_per].[userId] = [user].[id]\n"
+                + "INNER JOIN [permission]\n"
+                + "ON [permission].[id] = [user_per].[permissionId]) [user]\n"
+                + "WHERE row_index >= (? - 1) * ? + 1 AND row_index <= ? * ?";
+        PreparedStatement statement = null;
+        try {
+            statement = connection.prepareStatement(sql);
+            statement.setInt(1, pageIndex);
+            statement.setInt(2, pageSize);
+            statement.setInt(3, pageIndex);
+            statement.setInt(4, pageSize);
+            ResultSet result = statement.executeQuery();
+            while (result.next()) {
+                User user = new User();
+                user.setId(result.getInt("id"));
+                user.setUsername(result.getString("username"));
+                user.setPassword(result.getString("password"));
+                user.setEmail(result.getString("email"));
+                user.setFirst_name(result.getString("first_name"));
+                user.setLast_name(result.getString("last_name"));
+                user.setBirthday(result.getDate("birthday"));
+                user.setPhone(result.getString("phone"));
+                user.setGender(result.getBoolean("gender"));
+                user.setPermission(result.getString("permission"));
+                user.setIs_active(result.getBoolean("is_active"));
+                user.setIs_super(result.getBoolean("is_super"));
+                user.setCreated_at(result.getTimestamp("created_at"));
+                user.setUpdated_at(result.getTimestamp("updated_at"));
+                user.setAvatar(result.getString("avatar"));
+                Permission permission = new Permission();
+                permission.setId(result.getInt("permissionId"));
+                permission.setName(result.getString("permissionName"));
+                user.setUser_permission(permission);
+                users.add(user);
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return users;
+    }
+    
+    public int getSize(){
+        String sql = "SELECT COUNT([user].[id]) as 'size'  FROM [user]";
+        PreparedStatement statement = null;
+        try {
+            statement = connection.prepareStatement(sql);
+            ResultSet result = statement.executeQuery();
+            while (result.next()) {
+                int size = result.getInt("size");
+                return size;
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return 0;
+    }
 
     @Override
     public ArrayList<User> list() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        ArrayList<User> users = new ArrayList<User>();
+        String sql = "SELECT [user].[id]\n"
+                + "      ,[user].[username]\n"
+                + "      ,[user].[password]\n"
+                + "      ,[user].[first_name]\n"
+                + "      ,[user].[last_name]\n"
+                + "      ,[user].[birthday]\n"
+                + "      ,[user].[email]\n"
+                + "      ,[user].[phone]\n"
+                + "      ,[user].[gender]\n"
+                + "      ,[user].[is_super]\n"
+                + "      ,[user].[is_active]\n"
+                + "      ,[user].[permission]\n"
+                + "      ,[user].[avatar]\n"
+                + "      ,[user].[created_at]\n"
+                + "      ,[user].[updated_at], [user_per].[permissionId], [permission].[name] as 'permissionName'\n"
+                + "FROM [user] INNER JOIN [user_permission] as [user_per]\n"
+                + "ON [user_per].[userId] = [user].[id]\n"
+                + "INNER JOIN [permission]\n"
+                + "ON [permission].[id] = [user_per].[permissionId]\n";
+        PreparedStatement statement = null;
+        try {
+            statement = connection.prepareStatement(sql);
+            ResultSet result = statement.executeQuery();
+            while (result.next()) {
+                User user = new User();
+                user.setId(result.getInt("id"));
+                user.setUsername(result.getString("username"));
+                user.setPassword(result.getString("password"));
+                user.setEmail(result.getString("email"));
+                user.setFirst_name(result.getString("first_name"));
+                user.setLast_name(result.getString("last_name"));
+                user.setBirthday(result.getDate("birthday"));
+                user.setPhone(result.getString("phone"));
+                user.setGender(result.getBoolean("gender"));
+                user.setPermission(result.getString("permission"));
+                user.setIs_active(result.getBoolean("is_active"));
+                user.setIs_super(result.getBoolean("is_super"));
+                user.setCreated_at(result.getTimestamp("created_at"));
+                user.setUpdated_at(result.getTimestamp("updated_at"));
+                user.setAvatar(result.getString("avatar"));
+                Permission permission = new Permission();
+                permission.setId(result.getInt("permissionId"));
+                permission.setName(result.getString("permissionName"));
+                user.setUser_permission(permission);
+                users.add(user);
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return users;
     }
 
     @Override
@@ -188,7 +318,7 @@ public class UserDBContext extends DBContext<User> {
                 + "      ,[user].[created_at]\n"
                 + "      ,[user].[updated_at], [user_per].[permissionId], [permission].[name] as 'permissionName'\n"
                 + "FROM [user] INNER JOIN [user_permission] as [user_per]\n"
-                + "ON user_per.id = [user].[id]\n"
+                + "ON [user_per].[userId] = [user].[id]\n"
                 + "INNER JOIN [permission]\n"
                 + "ON [permission].[id] = [user_per].[permissionId]\n"
                 + " WHERE [user].[id] = ? ";

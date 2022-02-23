@@ -9,13 +9,13 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Admin dashboard</title>
     </head>
     <jsp:include page="../base/header.jsp" />
     <body>
         <div class="flex">
             <div class="w-64">
-                <jsp:include page="navbar.jsp" />
+                <jsp:include page="../base/navbar.jsp" />
             </div>
             <div class="w-full p-5">
                 <div class="flex justify-between">

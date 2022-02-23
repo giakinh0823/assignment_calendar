@@ -36,7 +36,7 @@ public class FileManage {
             File outputFilePath = new File(Paths.get(path.toString(), file).toString());
             if (outputFilePath.exists()) {
                 Random random = new Random();
-                file = random.nextInt(1000000000)+"-"+file;
+                file = random.nextInt(1000000000)+"-"+file.replaceAll("\\s+", "-");
                 outputFilePath = new File(Paths.get(path.toString(), file).toString());
             }
             inputStream = part.getInputStream();

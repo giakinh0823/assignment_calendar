@@ -33,7 +33,7 @@ public class UserController extends BaseAuthController {
         UserDBContext userDB = new UserDBContext();
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");
-        int numRead = userDB.getNumberOfPermission(user.getId(), "PROFILE", "READ");
+        int numRead = userDB.getNumberOfPermission(user.getId(), "USER", "READ");
         return numRead >= 1;
     }
 
@@ -42,7 +42,7 @@ public class UserController extends BaseAuthController {
         UserDBContext userDB = new UserDBContext();
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");
-        int numEdit = userDB.getNumberOfPermission(user.getId(), "PROFILE", "EDIT");
+        int numEdit = userDB.getNumberOfPermission(user.getId(), "USER", "EDIT");
         return numEdit >= 1;
     }
 
