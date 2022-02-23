@@ -20,10 +20,30 @@
         <div class="h-[20rem] bg-gray-100 w-full relative bg-sky-200/50">
             <div class="absolute top-[100%] left-[50%] -translate-y-2/4 -translate-x-2/4">
                 <div class="rounded-full border-solid border-4 border-blue-400 w-[200px] h-[200px] overflow-hidden" >
-                    <img src='<%=user.getAvatar()!=null?user.getAvatar():"/assets/images/default.png"%>' class="w-full h-full"/>
+                    <img src='<%=user.getAvatar()!=null?"assets/images/user/"+user.getAvatar():"/assets/images/default.png"%>' id="avatar" class="w-full h-full align-middle"/>
+                    <div class="absolute top-5 right-2">
+                        <div class="p-1 bg-white shadow-sm rounded-full border-solid border-2 border-white cursor-pointer">
+                            <label for="image-avatar-upload" class="cursor-pointer">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path></svg>
+                            </label>
+                        </div>
+                    </div>
+                    <form enctype="multipart/form-data" action="/profile/editAvatar" id="form-avatar" method="POST">
+                        <div class="avatar-edit" style="display: none">
+                            <input type='file' id="image-avatar-upload" accept=".png, .jpg, .jpeg" name="avatar"/>
+                        </div>
+                    </form>
                 </div>
                 <div class="text-center mt-3">
                     <p class="text-2xl font-bold display-username"><%=user.getFirst_name()%> <%=user.getLast_name()%></p>
+                </div>
+                <div class="hidden mt-3 flex items-center justify-center" id="buttonHandleAvatarContainer">
+                    <button type="button" id="buttonSaveAvatar" class="flex items-center text-white bg-green-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-3 py-2 text-center mr-2 mb-2">
+                        <span class="text-md">Save</span>
+                    </button>
+                    <button type="button" id="buttonCancelAvatar" class="flex items-center text-white bg-gray-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-3 py-2 text-center mr-2 mb-2">
+                        <span class="text-md">Cancel</span>
+                    </button>
                 </div>
             </div>
         </div>
@@ -113,6 +133,47 @@
                     }
                 })
             })
+            var currenAvatar = $("#avatar").attr("src")
+            var file;
+            $("#image-avatar-upload").on('change', function(e){
+                if (file) {
+                    URL.revokeObjectURL(file.preview);
+                }
+                file = e.target.files[0];
+                file.preview = URL.createObjectURL(file);
+                $("#avatar").attr("src", file.preview);
+                $("#buttonHandleAvatarContainer").removeClass("hidden")
+            })
+            
+            $("#buttonSaveAvatar").on('click', function(){
+                URL.revokeObjectURL(file.preview);
+                $("#form-avatar").submit()
+//                $.ajax({
+//                    method: "POST",
+//                    url: "/profile/editAvatar",
+//                    contentType: "multipart/form-data",
+//                    data: $("#form-avatar").serialize(),
+//                    cache: false,
+//                    contentType: false,
+//                    processData: false,
+//                }).done(function(data){
+//                    console.log(data)
+//                    URL.revokeObjectURL(file.preview);
+//                    $("#avatar").attr("src", data?.avatar)
+//                    $("#buttonHandleAvatarContainer").addClass("hidden")
+//                })
+                
+            })
+            
+            $("#buttonCancelAvatar").on('click', function(){
+                $("#avatar").attr("src", currenAvatar)
+                $("#buttonHandleAvatarContainer").addClass("hidden")
+                URL.revokeObjectURL(file.preview);
+            })
+            
+            window.onbeforeunload = function (e) {
+                URL.revokeObjectURL(file.preview);
+            };
         </script>
     </body>
     <jsp:include page="../base/footer.jsp" />

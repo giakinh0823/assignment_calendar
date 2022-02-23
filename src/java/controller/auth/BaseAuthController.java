@@ -19,6 +19,7 @@ import model.auth.User;
  *
  * @author SAP-LAP-FPT
  */
+
 public abstract class BaseAuthController extends HttpServlet {
     
     protected abstract boolean isPermissionGet(HttpServletRequest request);

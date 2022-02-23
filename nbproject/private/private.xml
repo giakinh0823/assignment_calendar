@@ -3,7 +3,16 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/FPT%20UNIVERSITY/STUDY/KY%204/JAVA%20WEB%20TEST/WWW/ass_CLife/src/java/dal/calendar/AdditionalCalendarDBContext.java</file>
+            <file>file:/D:/FPT%20UNIVERSITY/STUDY/KY%204/JAVA%20WEB%20TEST/WWW/ass_CLife/src/java/controller/calendar/EditCalendar.java</file>
+            <file>file:/D:/FPT%20UNIVERSITY/STUDY/KY%204/JAVA%20WEB%20TEST/WWW/ass_CLife/web/views/user/profile.jsp</file>
+            <file>file:/D:/FPT%20UNIVERSITY/STUDY/KY%204/JAVA%20WEB%20TEST/WWW/ass_CLife/src/java/dal/auth/UserDBContext.java</file>
+            <file>file:/D:/FPT%20UNIVERSITY/STUDY/KY%204/JAVA%20WEB%20TEST/WWW/ass_CLife/src/java/utils/FileManage.java</file>
+            <file>file:/D:/FPT%20UNIVERSITY/STUDY/KY%204/JAVA%20WEB%20TEST/WWW/ass_CLife/src/java/utils/Validate.java</file>
+            <file>file:/D:/FPT%20UNIVERSITY/STUDY/KY%204/JAVA%20WEB%20TEST/WWW/ass_CLife/src/java/controller/user/AvatarController.java</file>
+            <file>file:/D:/FPT%20UNIVERSITY/STUDY/KY%204/JAVA%20WEB%20TEST/WWW/ass_CLife/src/java/controller/auth/BaseAuthController.java</file>
+            <file>file:/D:/FPT%20UNIVERSITY/STUDY/KY%204/JAVA%20WEB%20TEST/WWW/ass_CLife/web/views/calendar/calendar.jsp</file>
+            <file>file:/D:/FPT%20UNIVERSITY/STUDY/KY%204/JAVA%20WEB%20TEST/WWW/ass_CLife/src/java/controller/user/UserController.java</file>
+            <file>file:/D:/FPT%20UNIVERSITY/STUDY/KY%204/JAVA%20WEB%20TEST/WWW/ass_CLife/web/views/base/header.jsp</file>
         </group>
     </open-files>
 </project-private>

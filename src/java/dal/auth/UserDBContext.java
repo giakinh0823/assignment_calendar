@@ -311,6 +311,40 @@ public class UserDBContext extends DBContext<User> {
             statement.setString(5, user.getPhone());
             statement.setBoolean(6, user.getGender());
             statement.setTimestamp(7, user.getUpdated_at());
+            statement.setInt(8, user.getId());
+            statement.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDBContext.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            if (statement != null) {
+                try {
+                    statement.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(UserDBContext.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(UserDBContext.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+    }
+    
+    public void updateAvatar(User user) {
+        PreparedStatement statement = null;
+        UserPermissionDBContext userPermissionDB = new UserPermissionDBContext();
+        try {
+            String sql = "UPDATE [user]\n" +
+                        " SET [avatar] = ?\n"
+                    + "      ,[updated_at] = ?\n"
+                    + " WHERE id = ?";
+            statement = connection.prepareStatement(sql);
+            statement.setString(1, user.getFirst_name());
+            statement.setTimestamp(2, user.getUpdated_at());
+            statement.setInt(3, user.getId());
             statement.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(UserDBContext.class.getName()).log(Level.SEVERE, null, ex);

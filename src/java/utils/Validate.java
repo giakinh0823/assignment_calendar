@@ -9,6 +9,7 @@ import java.sql.Date;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.Part;
 
 /**
  *
@@ -27,6 +28,19 @@ public class Validate {
                 } else {
                     value = null; // Make empty string null so that you don't need to hassle with equals("") afterwards.
                 }
+            }
+        }
+        return value;
+    }
+    
+    public Part getFieldAjaxFile(HttpServletRequest request, String fieldName, boolean required) throws Exception {
+        Part value = null;
+        value = request.getPart(fieldName);
+        if (value == null) {
+            if (required) {
+                throw new Exception("Field is required");
+            } else {
+                value = null; // Make empty string null so that you don't need to hassle with equals("") afterwards.
             }
         }
         return value;

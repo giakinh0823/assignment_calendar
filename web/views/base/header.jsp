@@ -36,7 +36,7 @@
                     <c:if test="${user!=null}">
                         <button type="button" class="flex mr-3 text-sm bg-gray-800 rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300" id="user-menu-button" aria-expanded="false" type="button" data-dropdown-toggle="dropdown">
                             <span class="sr-only">Open user menu</span>
-                            <img class="w-8 h-8 rounded-full" src='<%=user.getAvatar() != null ? user.getAvatar() : "/assets/images/default.png"%>' alt="user photo">
+                            <img class="w-8 h-8 rounded-full" src='<%=user.getAvatar() != null ? "assets/images/user/"+user.getAvatar() : "/assets/images/default.png"%>' alt="user photo">
                         </button>
                         <!-- Dropdown menu -->
                         <div class="hidden z-50 my-4 text-base list-none bg-white rounded divide-y divide-gray-100 shadow" id="dropdown">
