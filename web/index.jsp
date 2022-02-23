@@ -4,12 +4,17 @@
     Author     : giaki
 --%>
 
+<%@page import="model.auth.User"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Calendar</title>
+        <%
+            User user = (User) request.getSession().getAttribute("user");
+        %>
     </head>
     <jsp:include page="/views/base/header.jsp" />
     <body>
@@ -21,14 +26,23 @@
                     </h1>
                     <p class="mb-8 leading-relaxed">Time is free, but it's priceless. You can't own it, but you can use it. You can't keep it, but you can spend it. Once you lose it, you can never get it back.</p>
                     <div class="flex justify-center">
-                        <a href="/login" type="button" class="flex items-center text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">
-                            <span class="text-lg mr-2">Login</span>
-                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>                        
-                        </a>
-                        <a href="/signup" type="button" class="flex items-center ml-2 text-black bg-gray-200 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">
-                            <span class="text-lg mr-2">Singup</span>
-                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>                        
-                        </a>
+                        <c:if test="${user!=null}">
+                            <a href="/calendar" type="button" class="flex items-center text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">
+                                <span class="text-lg mr-2">Calendar</span>
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>                        
+                            </a>
+                        </c:if>
+                        <c:if test="${user==null}">
+                            <a href="/login" type="button" class="flex items-center text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">
+                                <span class="text-lg mr-2">Login</span>
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>                        
+                            </a>
+                            <a href="/signup" type="button" class="flex items-center ml-2 text-black bg-gray-200 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">
+                                <span class="text-lg mr-2">Singup</span>
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>                        
+                            </a>
+                        </c:if>
+                        
                     </div>
                 </div>
                 <div class="lg:max-w-[700px] lg:w-full md:w-1/2 w-5/6">

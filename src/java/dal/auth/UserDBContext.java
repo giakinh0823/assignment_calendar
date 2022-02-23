@@ -342,7 +342,7 @@ public class UserDBContext extends DBContext<User> {
                     + "      ,[updated_at] = ?\n"
                     + " WHERE id = ?";
             statement = connection.prepareStatement(sql);
-            statement.setString(1, user.getFirst_name());
+            statement.setString(1, user.getAvatar());
             statement.setTimestamp(2, user.getUpdated_at());
             statement.setInt(3, user.getId());
             statement.executeUpdate();

@@ -8,6 +8,7 @@
         <filter-name>AuthFilter</filter-name>
         <url-pattern>/profile/*</url-pattern>
         <url-pattern>/calendar/*</url-pattern>
+        <url-pattern>/logout/*</url-pattern>
         <url-pattern>/views/*</url-pattern>
     </filter-mapping>
     <servlet>
@@ -62,6 +63,18 @@
         <servlet-name>AvatarController</servlet-name>
         <servlet-class>controller.user.AvatarController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>LogoutController</servlet-name>
+        <servlet-class>controller.auth.LogoutController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>LoginAdminController</servlet-name>
+        <servlet-class>controller.admin.auth.LoginAdminController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DashboardController</servlet-name>
+        <servlet-class>controller.admin.dashboard.DashboardController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginController</servlet-name>
         <url-pattern>/login</url-pattern>
@@ -113,6 +126,18 @@
     <servlet-mapping>
         <servlet-name>AvatarController</servlet-name>
         <url-pattern>/profile/editAvatar</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LogoutController</servlet-name>
+        <url-pattern>/logout</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LoginAdminController</servlet-name>
+        <url-pattern>/admin/login</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DashboardController</servlet-name>
+        <url-pattern>/admin</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

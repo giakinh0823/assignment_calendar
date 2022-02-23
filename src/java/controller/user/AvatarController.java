@@ -72,7 +72,10 @@ public class AvatarController extends BaseAuthController {
             userDB.updateAvatar(user);
             HttpSession session = request.getSession();
             session.setAttribute("user", user);
-            response.sendRedirect("/profile");
+            String json = new Gson().toJson(user);
+            response.setContentType("application/json");
+            response.setCharacterEncoding("UTF-8");
+            response.getWriter().write(json);
         } catch (Exception e) {
             String json = new Gson().toJson(new Error(e.getMessage()));
             response.setContentType("application/json");

@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package controller.auth;
+package controller.admin.auth;
 
+import controller.auth.*;
 import dal.auth.UserDBContext;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -20,14 +21,14 @@ import model.auth.User;
  * @author SAP-LAP-FPT
  */
 
-public abstract class BaseAuthController extends HttpServlet {
+public abstract class BaseAuthAdminController extends HttpServlet {
     
     protected abstract boolean isPermissionGet(HttpServletRequest request);
     protected abstract boolean isPermissionPost(HttpServletRequest request);
 
     private boolean isAuth(HttpServletRequest request) {
-        User user = (User) request.getSession().getAttribute("user");
-        if (user == null) {
+        User user = (User) request.getSession().getAttribute("admin");
+        if (user == null || user.isIs_super() == false ) {
             return false;
         } else {
             return request.getMethod().equals("GET") ? isPermissionGet(request) : isPermissionPost(request);

@@ -146,22 +146,20 @@
             })
             
             $("#buttonSaveAvatar").on('click', function(){
-                URL.revokeObjectURL(file.preview);
-                $("#form-avatar").submit()
-//                $.ajax({
-//                    method: "POST",
-//                    url: "/profile/editAvatar",
-//                    contentType: "multipart/form-data",
-//                    data: $("#form-avatar").serialize(),
-//                    cache: false,
-//                    contentType: false,
-//                    processData: false,
-//                }).done(function(data){
-//                    console.log(data)
-//                    URL.revokeObjectURL(file.preview);
-//                    $("#avatar").attr("src", data?.avatar)
-//                    $("#buttonHandleAvatarContainer").addClass("hidden")
-//                })
+                $.ajax({
+                    method: "POST",
+                    url: "/profile/editAvatar",
+                    miniType: "multipart/form-data",
+                    data: new FormData(document.getElementById("form-avatar")),
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                }).done(function(data){
+                    console.log(data)
+                    URL.revokeObjectURL(file.preview);
+                    $("#avatar").attr("src", "assets/images/user/"+data?.avatar)
+                    $("#buttonHandleAvatarContainer").addClass("hidden")
+                })
                 
             })
             
