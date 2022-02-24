@@ -10,17 +10,15 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
     </head>
-    <jsp:include page="../base/header.jsp" />
     <%
-        User user = (User) request.getSession().getAttribute("user");
+        User user = (User) request.getAttribute("user");
     %>
     <body>
         <div class="h-[20rem] bg-gray-100 w-full relative bg-sky-200/50">
             <div class="absolute top-[100%] left-[50%] -translate-y-2/4 -translate-x-2/4">
                 <div class="rounded-full border-solid border-4 border-blue-400 w-[200px] h-[200px] overflow-hidden" >
-                    <img src='<%=user.getAvatar()!=null?"assets/images/user/"+user.getAvatar():"/assets/images/default.png"%>' id="avatar" class="w-full h-full align-middle"/>
+                    <img src='<%=user.getAvatar()!=null?"/assets/images/user/"+user.getAvatar():"/assets/images/default.png"%>' id="avatar" class="w-full h-full align-middle"/>
                     <div class="absolute top-5 right-2">
                         <div class="p-1 bg-white shadow-sm rounded-full border-solid border-2 border-white cursor-pointer">
                             <label for="image-avatar-upload" class="cursor-pointer">
@@ -28,8 +26,9 @@
                             </label>
                         </div>
                     </div>
-                    <form enctype="multipart/form-data" action="/profile/editAvatar" id="form-avatar" method="POST">
+                    <form enctype="multipart/form-data" action="/admin/users/editAvatar" id="form-avatar" method="POST">
                         <div class="avatar-edit" style="display: none">
+                            <input type="hidden" name="id" value="<%=user.getId()%>"/>
                             <input type='file' id="image-avatar-upload" accept=".png, .jpg, .jpeg" name="avatar"/>
                         </div>
                     </form>
@@ -48,7 +47,8 @@
             </div>
         </div>
         <div class="mt-[160px] max-w-lg mx-auto">
-            <form action="/profile" method="post" id="form-profile-edit">
+            <form action="/admin/users/edit" method="post" id="form-profile-edit">
+                <input type="hidden" name="id" value="<%=user.getId()%>">
                 <div id="showErrorForm" class="hidden">
                     <div id="contentErrorForm" class="bg-red-100 rounded-lg py-5 px-6 mb-4 text-base text-red-700 mb-3" role="alert">
                     </div>
@@ -58,8 +58,8 @@
                 </div>
                 <div class="mb-6">
                     <label for="username" class="block mb-2 text-sm font-medium text-gray-900">username</label>
-                    <input class="disabled bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                           type="text" id="username" name="username" required disabled value="<%=user.getUsername()%>"/>
+                    <input class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                           type="text" id="username" name="username" required value="<%=user.getUsername()%>"/>
                 </div>
                 <div class="mb-6">
                     <label for="email" class="block mb-2 text-sm font-medium text-gray-900">email</label>
@@ -101,24 +101,39 @@
                     <input class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                            type="date" id="birthday" name="birthday" required value="<%=user.getBirthday()%>"/>
                 </div>
-                <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>
+                <div class="mb-6">
+                    <label for="permission" class="block mb-2 text-sm font-medium text-gray-900">permission</label>
+                    <input class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                           type="text" id="permission" name="permission" required value="<%=user.getPermission()%>"/>
+                </div>
+                <div class="mb-6">
+                    <div class="flex items-center">
+                        <input id="isSuper" name="isSuper" aria-describedby="checkbox-1" type="checkbox" class="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500" <%=user.isIs_super()?"checked":""%>>
+                        <label for="isSuper" class="ml-3 text-sm font-medium text-gray-900 dark:text-gray-300">Is Super</label>
+                    </div>
+                </div>
+                <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center">Submit</button>
             </form>
         </div>
         <script>
             $("#form-profile-edit").on('submit', (e) => {
                 e.preventDefault();
                 const data = {
+                    id: $("input[name='id']").val(),
+                    username: $("input[name='username']").val(),
                     email: $("input[name='email']").val(),
                     phone: $("input[name='phone']").val(),
                     first_name: $("input[name='first_name']").val(),
                     last_name: $("input[name='last_name']").val(),
                     birthday: $("input[name='birthday']").val(),
                     gender: $("input[name='gender']:checked").val(),
+                    isSuper: $("input[name='isSuper']").is(":checked"),
+                    permission: $("input[name='permission']").val(),
                 }
            
                 $.ajax({
                     method: "POST",
-                    url: "/profile",
+                    url: "/admin/users/edit",
                     data: data,
                 }).done(function (data) {
                     if (data?.detailMessage) {
@@ -148,7 +163,7 @@
             $("#buttonSaveAvatar").on('click', function(){
                 $.ajax({
                     method: "POST",
-                    url: "/profile/editAvatar",
+                    url: "/admin/users/editAvatar",
                     miniType: "multipart/form-data",
                     data: new FormData(document.getElementById("form-avatar")),
                     cache: false,
@@ -158,7 +173,6 @@
                     console.log(data)
                     URL.revokeObjectURL(file.preview);
                     $("#avatar").attr("src", "/assets/images/user/"+data?.avatar)
-                    $("#headerAvatar").attr("src", "/assets/images/user/"+data?.avatar)
                     $("#buttonHandleAvatarContainer").addClass("hidden")
                 })
                 
@@ -175,5 +189,4 @@
             };
         </script>
     </body>
-    <jsp:include page="../base/footer.jsp" />
 </html>

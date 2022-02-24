@@ -103,8 +103,7 @@ public class UserDBContext extends DBContext<User> {
         try {
             sql += " WHERE [user].["+field+"] = ?";
             statement = connection.prepareStatement(sql);
-            statement.setString(1, field);
-            statement.setString(2, value);
+            statement.setString(1, value);
             ResultSet result = statement.executeQuery();
             while (result.next()) {
                 User user = new User();
@@ -419,6 +418,57 @@ public class UserDBContext extends DBContext<User> {
         return null;
     }
 
+    public void updateByAmin(User user) {
+        PreparedStatement statement = null;
+        UserPermissionDBContext userPermissionDB = new UserPermissionDBContext();
+        try {
+            String sql = "UPDATE [user]\n" +
+                        " SET [username] = ?\n" +
+                        "    ,[first_name] = ?\n" +
+                        "    ,[last_name] = ?\n" +
+                        "    ,[birthday] = ?\n" +
+                        "    ,[email] = ?\n" +
+                        "    ,[phone] = ?\n" +
+                        "    ,[gender] = ?\n" +
+                        "    ,[is_super] = ?\n" +
+                        "    ,[is_active] = ?\n" +
+                        "    ,[permission] = ?\n" +
+                        "    ,[updated_at] = ?\n" +
+                        " WHERE id = ? ";
+            statement = connection.prepareStatement(sql);
+            statement.setString(1, user.getUsername());
+            statement.setString(2, user.getFirst_name());
+            statement.setString(3, user.getLast_name());
+            statement.setDate(4, user.getBirthday());
+            statement.setString(5, user.getEmail());
+            statement.setString(6, user.getPhone());
+            statement.setBoolean(7, user.getGender());
+            statement.setBoolean(8, user.isIs_super());
+            statement.setBoolean(9, user.isIs_active());
+            statement.setString(10, user.getPermission());
+            statement.setTimestamp(11, user.getUpdated_at());
+            statement.setInt(12, user.getId());
+            statement.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDBContext.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            if (statement != null) {
+                try {
+                    statement.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(UserDBContext.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(UserDBContext.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+    }
+    
     @Override
     public void update(User user) {
         PreparedStatement statement = null;

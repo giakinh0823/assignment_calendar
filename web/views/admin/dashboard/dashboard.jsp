@@ -14,7 +14,7 @@
     <jsp:include page="../base/header.jsp" />
     <body>
         <div class="flex">
-            <div class="w-64">
+            <div class="w-64  bg-gray-50">
                 <jsp:include page="../base/navbar.jsp" />
             </div>
             <div class="w-full p-5">

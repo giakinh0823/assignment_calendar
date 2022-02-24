@@ -49,7 +49,7 @@ public class UserManageController extends BaseAuthAdminController {
             throws ServletException, IOException {
         try {
             Validate validate = new Validate();
-            int pageSize = 12;
+            int pageSize = 24;
             String page = validate.getField(request, "page", false);
             if (page == null || page.trim().length() == 0) {
                 page = "1";

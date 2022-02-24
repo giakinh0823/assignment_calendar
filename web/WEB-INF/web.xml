@@ -15,6 +15,7 @@
     <filter-mapping>
         <filter-name>AuthFilter</filter-name>
         <url-pattern>/profile/*</url-pattern>
+        <url-pattern>/calendar/*</url-pattern>
     </filter-mapping>
     <servlet>
         <servlet-name>LoginController</servlet-name>
@@ -84,6 +85,14 @@
         <servlet-name>UserManageController</servlet-name>
         <servlet-class>controller.admin.user.UserManageController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>EditUserManageController</servlet-name>
+        <servlet-class>controller.admin.user.EditUserManageController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EditAvatarUserManage</servlet-name>
+        <servlet-class>controller.admin.user.EditAvatarUserManage</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginController</servlet-name>
         <url-pattern>/login</url-pattern>
@@ -151,6 +160,14 @@
     <servlet-mapping>
         <servlet-name>UserManageController</servlet-name>
         <url-pattern>/admin/users</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditUserManageController</servlet-name>
+        <url-pattern>/admin/users/edit</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditAvatarUserManage</servlet-name>
+        <url-pattern>/admin/users/editAvatar</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

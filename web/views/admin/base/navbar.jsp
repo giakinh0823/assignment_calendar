@@ -13,7 +13,7 @@
     </head>
     <jsp:include page="../base/header.jsp" />
     <body>
-        <aside class="w-64" aria-label="Sidebar">
+        <aside class="w-64 fixed top-0 left-0" aria-label="Sidebar">
             <div class="px-3 py-4 overflow-y-auto rounded bg-gray-50 min-h-screen">
                 <ul class="space-y-2">
                     <li>

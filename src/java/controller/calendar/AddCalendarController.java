@@ -71,7 +71,7 @@ public class AddCalendarController extends BaseAuthController {
             
             CalendarDBContext calendarDBContext = new CalendarDBContext();
             calendarDBContext.insert(calendar);
-            response.sendRedirect("/calendar");
+            response.sendRedirect(request.getHeader("referer"));
         } catch (Exception e) {
             String json = new Gson().toJson(new Error(e.getMessage()));
             response.setContentType("application/json");

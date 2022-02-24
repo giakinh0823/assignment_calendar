@@ -38,7 +38,7 @@ public class Validate {
         value = request.getPart(fieldName);
         if (value == null) {
             if (required) {
-                throw new Exception("Field is required");
+                throw new Exception("Field "+fieldName+" is required");
             } else {
                 value = null; // Make empty string null so that you don't need to hassle with equals("") afterwards.
             }

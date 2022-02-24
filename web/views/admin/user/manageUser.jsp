@@ -22,7 +22,7 @@
     <jsp:include page="../base/header.jsp" />
     <body>
         <div class="flex">
-            <div class="w-64">
+            <div class="w-64  bg-gray-50">
                 <jsp:include page="../base/navbar.jsp" />
             </div>
             <div class="w-full p-5">
@@ -39,8 +39,8 @@
                                 </div>
                             </div>
                             <div class="overflow-hidden">
-                                <table class="min-w-full divide-y divide-gray-200 table-fixed dark:divide-gray-700">
-                                    <thead class="bg-gray-100 dark:bg-gray-700">
+                                <table class="min-w-full divide-y divide-gray-200 table-fixed">
+                                    <thead class="bg-gray-100">
                                         <tr>
                                             <th scope="col" class="p-4">
                                                 <div class="flex items-center">
@@ -115,8 +115,8 @@
                                                 </td>
                                                 <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap">${user.getPermission()}</td>
                                                 <td class="py-4 px-6 text-sm font-medium text-center whitespace-nowrap">
-                                                    <a href="/admin/user/edit?id=${user.getId()}" class="text-blue-600 hover:underline">Edit</a>
-                                                    <a href="/admin/user/delete?id=${user.getId()}" class="ml-3 text-red-600 hover:underline">Delete</a>
+                                                    <a href="/admin/users/edit?id=${user.getId()}" class="text-blue-600 hover:underline">Edit</a>
+                                                    <a href="/admin/users/delete?id=${user.getId()}" class="ml-3 text-red-600 hover:underline">Delete</a>
                                                 </td>
                                             </tr>
                                         </c:forEach>
