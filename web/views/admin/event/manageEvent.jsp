@@ -14,7 +14,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Calendar admin</title>
+        <title>Event admin</title>
         <%
             ArrayList<EventCalendar> events = (ArrayList<EventCalendar>) request.getAttribute("events");
             Pagination pagination = (Pagination) request.getAttribute("pagination");

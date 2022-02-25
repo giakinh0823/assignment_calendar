@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package controller.calendar;
+package controller.admin.event;
 
 import com.google.gson.Gson;
-import controller.auth.BaseAuthController;
+import controller.admin.auth.BaseAuthAdminController;
 import dal.auth.UserDBContext;
 import dal.calendar.AdditionalCalendarDBContext;
 import dal.calendar.EventCalendarDBContext;
@@ -20,7 +20,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import model.auth.User;
-import model.calendar.AdditionalCalendar;
 import model.calendar.EventCalendar;
 import utils.Validate;
 
@@ -28,15 +27,15 @@ import utils.Validate;
  *
  * @author giaki
  */
-public class DeleteEventController extends BaseAuthController {
-    
+public class DeleteEventManageController extends BaseAuthAdminController {
+
     @Override
     protected boolean isPermissionGet(HttpServletRequest request) {
         UserDBContext userDB = new UserDBContext();
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");
-        int numDeleteEvent = userDB.getNumberOfPermission(user.getId(), "EVENT", "DELETE");
-        return numDeleteEvent >= 1;
+        int numDelete = userDB.getNumberOfPermission(user.getId(), "EVENT", "DELETE");
+        return numDelete >= 1;
     }
 
     @Override
@@ -44,27 +43,26 @@ public class DeleteEventController extends BaseAuthController {
         UserDBContext userDB = new UserDBContext();
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");
-        int numDeleteEvent = userDB.getNumberOfPermission(user.getId(), "EVENT", "DELETE");
-        return numDeleteEvent >= 1;
+        int numDelete = userDB.getNumberOfPermission(user.getId(), "EVENT", "DELETE");
+        return numDelete >= 1;
     }
+    
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         Validate validate = new Validate();
         try {
-            String idString = validate.getFieldAjax(request, "id", true);
+            String idString = validate.getField(request, "id", true);
             int id = validate.fieldInt(idString, "Error get field id");
             
             EventCalendarDBContext eventDB = new EventCalendarDBContext();
             AdditionalCalendarDBContext additionalDB = new AdditionalCalendarDBContext();
             EventCalendar event = eventDB.get(id);
-             eventDB.delete(event.getId());
+            eventDB.delete(event.getId());
             additionalDB.delete(event.getAdditional().getId());
+            response.sendRedirect(request.getHeader("referer"));
         } catch (Exception ex) {
-            String json = new Gson().toJson(new Error(ex.getMessage()));
-            response.setContentType("application/json");
-            response.setCharacterEncoding("UTF-8");
-            response.getWriter().write(json);
+             Logger.getLogger(DeleteEventManageController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -82,7 +80,11 @@ public class DeleteEventController extends BaseAuthController {
         processRequest(request, response);
     }
 
-   
+    /**
+     * Returns a short description of the servlet.
+     *
+     * @return a String containing servlet description
+     */
     @Override
     public String getServletInfo() {
         return "Short description";

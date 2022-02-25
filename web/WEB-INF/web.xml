@@ -133,6 +133,14 @@
         <servlet-name>EventManageController</servlet-name>
         <servlet-class>controller.admin.event.EventManageController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>EditEventManageController</servlet-name>
+        <servlet-class>controller.admin.event.EditEventManageController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteEventManageController</servlet-name>
+        <servlet-class>controller.admin.event.DeleteEventManageController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginController</servlet-name>
         <url-pattern>/login</url-pattern>
@@ -248,6 +256,14 @@
     <servlet-mapping>
         <servlet-name>EventManageController</servlet-name>
         <url-pattern>/admin/event</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditEventManageController</servlet-name>
+        <url-pattern>/admin/event/edit</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteEventManageController</servlet-name>
+        <url-pattern>/admin/event/delete</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
