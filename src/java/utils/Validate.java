@@ -22,7 +22,7 @@ public class Validate {
         try {
             value = new String(request.getParameter(fieldName).getBytes("iso-8859-1"), "utf-8");
         } catch (Exception e) {
-            if (value == null || value.trim().isEmpty()) {
+            if (value == null || value.trim().isEmpty() || value.equals("")) {
                 if (required) {
                     throw new Exception("Field "+fieldName+" is required");
                 } else {
@@ -49,7 +49,7 @@ public class Validate {
     public String getFieldAjax(HttpServletRequest request, String fieldName, boolean required) throws Exception {
         String value = null;
         value = request.getParameter(fieldName);
-        if (value == null || value.trim().isEmpty()) {
+        if (value == null || value.trim().isEmpty() || value.equals("")) {
             if (required) {
                 throw new Exception("Field is required");
             } else {

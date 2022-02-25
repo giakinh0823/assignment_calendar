@@ -97,6 +97,26 @@
         <servlet-name>DeleteUserManageController</servlet-name>
         <servlet-class>controller.admin.user.DeleteUserManageController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>CategoryManageController</servlet-name>
+        <servlet-class>controller.admin.category.CategoryManageController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EditCategoryManageController</servlet-name>
+        <servlet-class>controller.admin.category.EditCategoryManageController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CreateCategoryManageController</servlet-name>
+        <servlet-class>controller.admin.category.CreateCategoryManageController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteCategoryManageController</servlet-name>
+        <servlet-class>controller.admin.category.DeleteCategoryManageController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>LogoutAdminController</servlet-name>
+        <servlet-class>controller.admin.auth.LogoutAdminController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginController</servlet-name>
         <url-pattern>/login</url-pattern>
@@ -176,6 +196,26 @@
     <servlet-mapping>
         <servlet-name>DeleteUserManageController</servlet-name>
         <url-pattern>/admin/users/delete</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CategoryManageController</servlet-name>
+        <url-pattern>/admin/category</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditCategoryManageController</servlet-name>
+        <url-pattern>/admin/category/edit</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CreateCategoryManageController</servlet-name>
+        <url-pattern>/admin/category/add</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteCategoryManageController</servlet-name>
+        <url-pattern>/admin/category/delete</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LogoutAdminController</servlet-name>
+        <url-pattern>/admin/logout</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

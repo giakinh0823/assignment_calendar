@@ -238,6 +238,18 @@ public class EventCalendarDBContext extends DBContext<EventCalendar> {
             }
         }
     }
+    
+    public void deleteByAdditional(int id) {
+        try {
+            String sql = "DELETE FROM [event]\n"
+                    + "WHERE [additionalId] = ? ";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setInt(1, id);
+            statement.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(EventCalendarDBContext.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 
     @Override
     public void delete(int id) {

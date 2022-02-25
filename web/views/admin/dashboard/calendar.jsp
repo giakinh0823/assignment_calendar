@@ -111,7 +111,7 @@
                                 <span class="text-lg mr-2">Add Event</span><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path></svg>
                             </button>
                         </div>
-                        <div id="addEventFormContainer" class="hidden w-60 md:w-64 lg:w-80 absolute -top-[360%] left-[90%] z-[1000]">
+                        <div id="addEventFormContainer" class="hidden w-60 md:w-64 lg:w-80 absolute left-[90%] z-[1000]" style="top: -480%">
                             <div>
                                 <jsp:include page="addEvent.jsp" />
                             </div>

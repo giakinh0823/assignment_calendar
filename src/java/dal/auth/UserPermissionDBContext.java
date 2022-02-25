@@ -93,7 +93,33 @@ public class UserPermissionDBContext extends DBContext<UserPermission> {
 
     @Override
     public void update(UserPermission model) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        PreparedStatement statement = null;
+        try {
+            String sql = "UPDATE [user_permission]\n"
+                    + "         SET  [permissionId] = ?\n"
+                    + " WHERE userId = ? ";
+            statement = connection.prepareStatement(sql);
+            statement.setInt(1, model.getPermissionId());
+            statement.setInt(2, model.getUserId());
+            statement.executeUpdate();
+        } catch (Exception ex) {
+            Logger.getLogger(UserPermissionDBContext.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            if (statement != null) {
+                try {
+                    statement.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(UserPermissionDBContext.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(UserPermissionDBContext.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
     }
 
     @Override
@@ -108,8 +134,7 @@ public class UserPermissionDBContext extends DBContext<UserPermission> {
             Logger.getLogger(UserPermissionDBContext.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-    
+
     public void deleteByUser(int userId) {
         try {
             String sql = "DELETE FROM [user_permission]\n"

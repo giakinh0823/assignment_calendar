@@ -105,7 +105,7 @@ public class SignupController extends HttpServlet {
                     user.setIs_super(is_super);
                     
                     PermissionDBContext permissionDB = new PermissionDBContext();
-                    Permission per = permissionDB.findOne("User");
+                    Permission per = permissionDB.findOne("user");
                     
                     user.setPermission(per.getName());
                     user.setUser_permission(per);

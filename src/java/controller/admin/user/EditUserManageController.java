@@ -7,6 +7,7 @@ package controller.admin.user;
 
 import com.google.gson.Gson;
 import controller.admin.auth.BaseAuthAdminController;
+import dal.auth.PermissionDBContext;
 import dal.auth.UserDBContext;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -17,6 +18,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import model.auth.Permission;
 import model.auth.User;
 import utils.Validate;
 
@@ -115,6 +117,17 @@ public class EditUserManageController extends BaseAuthAdminController {
                 user.setBirthday(field_birthday);
                 user.setIs_super(field_isSuper);
                 user.setPermission(permission);
+                if(field_isSuper){
+                    PermissionDBContext permissionDB = new PermissionDBContext();
+                    Permission per = permissionDB.findOne("admin");
+                    user.setPermission(per.getName());
+                    user.setUser_permission(per);
+                }else{
+                    PermissionDBContext permissionDB = new PermissionDBContext();
+                    Permission per = permissionDB.findOne("user");
+                    user.setPermission(per.getName());
+                    user.setUser_permission(per);
+                }
                 Timestamp updated_at = new Timestamp(System.currentTimeMillis());
                 user.setUpdated_at(updated_at);
                 db.updateByAmin(user);

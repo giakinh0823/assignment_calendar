@@ -395,7 +395,7 @@ public class UserDBContext extends DBContext<User> {
             UserPermission userPermission = new UserPermission();
             userPermission.setUserId(user.getId());
             userPermission.setPermissionId(user.getUser_permission().getId());
-            userPermissionDB.insert(userPermission);
+            userPermissionDB.update(userPermission);
             return new_user;
         } catch (SQLException ex) {
             Logger.getLogger(UserDBContext.class.getName()).log(Level.SEVERE, null, ex);
@@ -449,6 +449,11 @@ public class UserDBContext extends DBContext<User> {
             statement.setTimestamp(11, user.getUpdated_at());
             statement.setInt(12, user.getId());
             statement.executeUpdate();
+            
+            UserPermission userPermission = new UserPermission();
+            userPermission.setUserId(user.getId());
+            userPermission.setPermissionId(user.getUser_permission().getId());
+            userPermissionDB.update(userPermission);
         } catch (SQLException ex) {
             Logger.getLogger(UserDBContext.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
