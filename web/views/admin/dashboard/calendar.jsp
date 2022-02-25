@@ -241,6 +241,7 @@
                     if ($("#endTime").val()) {
                         event.end = event.end + "T" + $("#endTime").val();
                         event.hasEnd = true;
+                        event.allDay=false;
                     }
                 }   
                 if ($("#location").val() && $("#location").val() != "" && $("#location").val() != null) {

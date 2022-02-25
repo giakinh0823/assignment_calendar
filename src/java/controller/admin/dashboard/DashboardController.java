@@ -6,6 +6,7 @@
 package controller.admin.dashboard;
 
 import controller.admin.auth.BaseAuthAdminController;
+import dal.auth.UserDBContext;
 import dal.calendar.CalendarDBContext;
 import dal.calendar.CategoryCalendarDBContext;
 import dal.calendar.EventCalendarDBContext;
@@ -48,6 +49,7 @@ public class DashboardController extends BaseAuthAdminController {
         CategoryCalendarDBContext categoryDB = new CategoryCalendarDBContext();
         StatusCalendarDBContext statusDB = new StatusCalendarDBContext();
         EventCalendarDBContext eventDB = new EventCalendarDBContext();
+        UserDBContext userDB = new UserDBContext();
 
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("admin");
@@ -56,6 +58,10 @@ public class DashboardController extends BaseAuthAdminController {
         ArrayList<CategoryCalendar> listCategory = categoryDB.list();
         ArrayList<StatusCalendar> listStatus = statusDB.list();
         ArrayList<EventCalendar> events = eventDB.list();
+        
+        request.setAttribute("userSize", userDB.getSize());
+        request.setAttribute("calendarSize", calendarDB.getSize());
+        request.setAttribute("eventSize", eventDB.getSize());
 
         request.setAttribute("calendars", calendars);
         request.setAttribute("listCategory", listCategory);
