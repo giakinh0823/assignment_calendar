@@ -87,8 +87,10 @@ public class EditUserManageController extends BaseAuthAdminController {
 
                 String field_username = validate.fieldString(username, "^[a-zA-Z0-9._-]{3,}$", "Username not work! Please enter new username");
                 if (!user.getUsername().equalsIgnoreCase(field_username) && db.findOne("username", field_username) != null) {
-                    request.setAttribute("error", "Username has exist! Please try new username!");
-                    request.getRequestDispatcher("/views/auth/signup.jsp").forward(request, response);
+                    String json = new Gson().toJson(new Error("Username has exist! Please try new username!"));
+                    response.setContentType("application/json");
+                    response.setCharacterEncoding("UTF-8");
+                    response.getWriter().write(json);
                     return;
                 }
 

@@ -548,7 +548,17 @@ public class UserDBContext extends DBContext<User> {
 
     @Override
     public void delete(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        UserPermissionDBContext userPermissionDB = new UserPermissionDBContext();
+        try {
+            userPermissionDB.deleteByUser(id);
+            String sql = "DELETE FROM [user]\n"
+                    + "WHERE id = ? ";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setInt(1, id);
+            statement.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDBContext.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
 }

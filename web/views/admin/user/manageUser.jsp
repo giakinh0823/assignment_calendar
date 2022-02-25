@@ -80,9 +80,9 @@
                                             </th>
                                         </tr>
                                     </thead>
-                                    <tbody class="bg-white divide-y divide-gray-200">
+                                    <tbody class="bg-white divide-y divide-gray-200" id="tbodyUser">
                                         <c:forEach items="${users}" var="user">
-                                            <tr class="hover:bg-gray-100">
+                                            <tr class="hover:bg-gray-100" id="user-item-${user.getId()}">
                                                 <td class="p-4 w-4">
                                                     <div class="flex items-center">
                                                         <input id="checkbox-search-1" type="checkbox" class="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 focus:ring-2">
@@ -116,7 +116,7 @@
                                                 <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap">${user.getPermission()}</td>
                                                 <td class="py-4 px-6 text-sm font-medium text-center whitespace-nowrap">
                                                     <a href="/admin/users/edit?id=${user.getId()}" class="text-blue-600 hover:underline">Edit</a>
-                                                    <a href="/admin/users/delete?id=${user.getId()}" class="ml-3 text-red-600 hover:underline">Delete</a>
+                                                    <a href="/admin/users/delete?id=${user.getId()}" class="ml-3 text-red-600 hover:underline">Delete</button>
                                                 </td>
                                             </tr>
                                         </c:forEach>
@@ -162,7 +162,7 @@
                     </nav>
                 </div>
             </div>
-        </div>
+        </div>     
         <jsp:include page="../base/footer.jsp" />
     </body>
 </html>
