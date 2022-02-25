@@ -33,7 +33,7 @@ public class DeleteUserManageController extends BaseAuthAdminController {
     protected boolean isPermissionGet(HttpServletRequest request) {
         UserDBContext userDB = new UserDBContext();
         HttpSession session = request.getSession();
-        User user = (User) session.getAttribute("user");
+        User user = (User) session.getAttribute("admin");
         int numDelete = userDB.getNumberOfPermission(user.getId(), "USER", "DELETE");
         return numDelete >= 1;
     }
@@ -42,7 +42,7 @@ public class DeleteUserManageController extends BaseAuthAdminController {
     protected boolean isPermissionPost(HttpServletRequest request) {
         UserDBContext userDB = new UserDBContext();
         HttpSession session = request.getSession();
-        User user = (User) session.getAttribute("user");
+        User user = (User) session.getAttribute("admin");
         int numDelete = userDB.getNumberOfPermission(user.getId(), "USER", "DELETE");
         return numDelete >= 1;
     }

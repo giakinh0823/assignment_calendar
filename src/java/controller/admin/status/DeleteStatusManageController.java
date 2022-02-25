@@ -3,13 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package controller.admin.event;
+package controller.admin.status;
 
-import com.google.gson.Gson;
 import controller.admin.auth.BaseAuthAdminController;
 import dal.auth.UserDBContext;
-import dal.calendar.AdditionalCalendarDBContext;
-import dal.calendar.EventCalendarDBContext;
+import dal.calendar.StatusCalendarDBContext;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.logging.Level;
@@ -20,21 +18,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import model.auth.User;
-import model.calendar.EventCalendar;
 import utils.Validate;
 
 /**
  *
  * @author giaki
  */
-public class DeleteEventManageController extends BaseAuthAdminController {
+public class DeleteStatusManageController extends BaseAuthAdminController {
 
     @Override
     protected boolean isPermissionGet(HttpServletRequest request) {
         UserDBContext userDB = new UserDBContext();
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("admin");
-        int numDelete = userDB.getNumberOfPermission(user.getId(), "EVENT", "DELETE");
+        int numDelete = userDB.getNumberOfPermission(user.getId(), "STATUS", "CREATE");
         return numDelete >= 1;
     }
 
@@ -43,10 +40,9 @@ public class DeleteEventManageController extends BaseAuthAdminController {
         UserDBContext userDB = new UserDBContext();
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("admin");
-        int numDelete = userDB.getNumberOfPermission(user.getId(), "EVENT", "DELETE");
+        int numDelete = userDB.getNumberOfPermission(user.getId(), "STATUS", "CREATE");
         return numDelete >= 1;
     }
-    
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -54,15 +50,11 @@ public class DeleteEventManageController extends BaseAuthAdminController {
         try {
             String idString = validate.getField(request, "id", true);
             int id = validate.fieldInt(idString, "Error get field id");
-            
-            EventCalendarDBContext eventDB = new EventCalendarDBContext();
-            AdditionalCalendarDBContext additionalDB = new AdditionalCalendarDBContext();
-            EventCalendar event = eventDB.get(id);
-            eventDB.delete(event.getId());
-            additionalDB.delete(event.getAdditional().getId());
+            StatusCalendarDBContext statusDB = new StatusCalendarDBContext();
+            statusDB.delete(id);
             response.sendRedirect(request.getHeader("referer"));
         } catch (Exception ex) {
-             Logger.getLogger(DeleteEventManageController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DeleteStatusManageController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

@@ -3,39 +3,35 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package controller.admin.event;
+package controller.admin.status;
 
-import com.google.gson.Gson;
 import controller.admin.auth.BaseAuthAdminController;
 import dal.auth.UserDBContext;
-import dal.calendar.AdditionalCalendarDBContext;
-import dal.calendar.EventCalendarDBContext;
+import dal.calendar.StatusCalendarDBContext;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import model.auth.User;
-import model.calendar.EventCalendar;
-import utils.Validate;
+import model.calendar.StatusCalendar;
 
 /**
  *
  * @author giaki
  */
-public class DeleteEventManageController extends BaseAuthAdminController {
+public class StatusManageController extends BaseAuthAdminController {
 
     @Override
     protected boolean isPermissionGet(HttpServletRequest request) {
         UserDBContext userDB = new UserDBContext();
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("admin");
-        int numDelete = userDB.getNumberOfPermission(user.getId(), "EVENT", "DELETE");
-        return numDelete >= 1;
+        int numRead = userDB.getNumberOfPermission(user.getId(), "STATUS", "READ");
+        return numRead >= 1;
     }
 
     @Override
@@ -43,30 +39,19 @@ public class DeleteEventManageController extends BaseAuthAdminController {
         UserDBContext userDB = new UserDBContext();
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("admin");
-        int numDelete = userDB.getNumberOfPermission(user.getId(), "EVENT", "DELETE");
-        return numDelete >= 1;
+        int numRead = userDB.getNumberOfPermission(user.getId(), "STATUS", "READ");
+        return numRead >= 1;
     }
-    
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        Validate validate = new Validate();
-        try {
-            String idString = validate.getField(request, "id", true);
-            int id = validate.fieldInt(idString, "Error get field id");
-            
-            EventCalendarDBContext eventDB = new EventCalendarDBContext();
-            AdditionalCalendarDBContext additionalDB = new AdditionalCalendarDBContext();
-            EventCalendar event = eventDB.get(id);
-            eventDB.delete(event.getId());
-            additionalDB.delete(event.getAdditional().getId());
-            response.sendRedirect(request.getHeader("referer"));
-        } catch (Exception ex) {
-             Logger.getLogger(DeleteEventManageController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        StatusCalendarDBContext statusDB = new StatusCalendarDBContext();
+        ArrayList<StatusCalendar> listStatus = statusDB.list();
+        request.setAttribute("listStatus", listStatus);
+        request.getRequestDispatcher("/views/admin/status/manageStatus.jsp").forward(request, response);
     }
 
-    
+  
     @Override
     protected void processGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

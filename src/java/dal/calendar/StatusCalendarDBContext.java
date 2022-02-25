@@ -64,17 +64,79 @@ public class StatusCalendarDBContext extends DBContext<StatusCalendar> {
 
     @Override
     public StatusCalendar insert(StatusCalendar model) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String sql = "INSERT INTO [status_calendar]\n"
+                + " ([name])\n"
+                + " VALUES(?)";
+        PreparedStatement statement = null;
+        try {
+            statement = connection.prepareStatement(sql);
+            statement.setString(1, model.getName());
+            statement.executeUpdate();
+            ArrayList<StatusCalendar> statuss = list();
+            return statuss.get(statuss.size()-1);
+        } catch (SQLException ex) {
+            Logger.getLogger(StatusCalendarDBContext.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            if (statement != null) {
+                try {
+                    statement.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(StatusCalendarDBContext.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(StatusCalendarDBContext.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+        return null;
     }
 
     @Override
     public void update(StatusCalendar model) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String sql = "UPDATE [status_calendar]\n"
+                + " SET name = ?\n"
+                + " WHERE id = ?";
+        PreparedStatement statement = null;
+        try {
+            statement = connection.prepareStatement(sql);
+            statement.setString(1, model.getName());
+            statement.setInt(2, model.getId());
+            statement.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(StatusCalendarDBContext.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            if (statement != null) {
+                try {
+                    statement.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(StatusCalendarDBContext.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(StatusCalendarDBContext.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
     }
 
     @Override
     public void delete(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            String sql = "DELETE FROM [status_calendar]\n"
+                    + "WHERE id = ? ";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setInt(1, id);
+            statement.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(StatusCalendarDBContext.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
 }

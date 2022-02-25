@@ -33,7 +33,7 @@ public class EditAvatarUserManage extends BaseAuthAdminController {
     protected boolean isPermissionGet(HttpServletRequest request) {
         UserDBContext userDB = new UserDBContext();
         HttpSession session = request.getSession();
-        User user = (User) session.getAttribute("user");
+        User user = (User) session.getAttribute("admin");
         int numRead = userDB.getNumberOfPermission(user.getId(), "USER", "READ");
         return numRead >= 1;
     }
@@ -42,7 +42,7 @@ public class EditAvatarUserManage extends BaseAuthAdminController {
     protected boolean isPermissionPost(HttpServletRequest request) {
         UserDBContext userDB = new UserDBContext();
         HttpSession session = request.getSession();
-        User user = (User) session.getAttribute("user");
+        User user = (User) session.getAttribute("admin");
         int numRead = userDB.getNumberOfPermission(user.getId(), "USER", "READ");
         int numEdit = userDB.getNumberOfPermission(user.getId(), "USER", "EDIT");
         return numRead >= 1 && numEdit >= 1;

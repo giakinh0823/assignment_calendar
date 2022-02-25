@@ -141,6 +141,22 @@
         <servlet-name>DeleteEventManageController</servlet-name>
         <servlet-class>controller.admin.event.DeleteEventManageController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>StatusManageController</servlet-name>
+        <servlet-class>controller.admin.status.StatusManageController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EditStatusManageController</servlet-name>
+        <servlet-class>controller.admin.status.EditStatusManageController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CreateStatusManageController</servlet-name>
+        <servlet-class>controller.admin.status.CreateStatusManageController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteStatusManageController</servlet-name>
+        <servlet-class>controller.admin.status.DeleteStatusManageController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginController</servlet-name>
         <url-pattern>/login</url-pattern>
@@ -264,6 +280,22 @@
     <servlet-mapping>
         <servlet-name>DeleteEventManageController</servlet-name>
         <url-pattern>/admin/event/delete</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>StatusManageController</servlet-name>
+        <url-pattern>/admin/status</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditStatusManageController</servlet-name>
+        <url-pattern>/admin/status/edit</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CreateStatusManageController</servlet-name>
+        <url-pattern>/admin/status/add</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteStatusManageController</servlet-name>
+        <url-pattern>/admin/status/delete</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

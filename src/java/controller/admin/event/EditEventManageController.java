@@ -44,7 +44,7 @@ public class EditEventManageController extends BaseAuthAdminController {
     protected boolean isPermissionGet(HttpServletRequest request) {
         UserDBContext userDB = new UserDBContext();
         HttpSession session = request.getSession();
-        User user = (User) session.getAttribute("user");
+        User user = (User) session.getAttribute("admin");
         int numEdit = userDB.getNumberOfPermission(user.getId(), "EVENT", "EDIT");
         return numEdit >= 1;
     }
@@ -53,7 +53,7 @@ public class EditEventManageController extends BaseAuthAdminController {
     protected boolean isPermissionPost(HttpServletRequest request) {
         UserDBContext userDB = new UserDBContext();
         HttpSession session = request.getSession();
-        User user = (User) session.getAttribute("user");
+        User user = (User) session.getAttribute("admin");
         int numEdit = userDB.getNumberOfPermission(user.getId(), "EVENT", "EDIT");
         return numEdit >= 1;
     }

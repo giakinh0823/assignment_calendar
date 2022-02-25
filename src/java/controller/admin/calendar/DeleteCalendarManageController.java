@@ -31,7 +31,7 @@ public class DeleteCalendarManageController extends BaseAuthAdminController {
     protected boolean isPermissionGet(HttpServletRequest request) {
         UserDBContext userDB = new UserDBContext();
         HttpSession session = request.getSession();
-        User user = (User) session.getAttribute("user");
+        User user = (User) session.getAttribute("admin");
         int numDelete = userDB.getNumberOfPermission(user.getId(), "CALENDAR", "DELETE");
         return numDelete >= 1;
     }
@@ -40,7 +40,7 @@ public class DeleteCalendarManageController extends BaseAuthAdminController {
     protected boolean isPermissionPost(HttpServletRequest request) {
         UserDBContext userDB = new UserDBContext();
         HttpSession session = request.getSession();
-        User user = (User) session.getAttribute("user");
+        User user = (User) session.getAttribute("admin");
         int numDelete = userDB.getNumberOfPermission(user.getId(), "CALENDAR", "DELETE");
         return numDelete >= 1;
     }

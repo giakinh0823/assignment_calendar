@@ -30,7 +30,7 @@ public class CreateCategoryManageController extends BaseAuthAdminController {
     protected boolean isPermissionGet(HttpServletRequest request) {
         UserDBContext userDB = new UserDBContext();
         HttpSession session = request.getSession();
-        User user = (User) session.getAttribute("user");
+        User user = (User) session.getAttribute("admin");
         int numCreate = userDB.getNumberOfPermission(user.getId(), "CATEGORY", "CREATE");
         return numCreate >= 1;
     }
@@ -39,7 +39,7 @@ public class CreateCategoryManageController extends BaseAuthAdminController {
     protected boolean isPermissionPost(HttpServletRequest request) {
         UserDBContext userDB = new UserDBContext();
         HttpSession session = request.getSession();
-        User user = (User) session.getAttribute("user");
+        User user = (User) session.getAttribute("admin");
         int numCreate = userDB.getNumberOfPermission(user.getId(), "CATEGORY", "CREATE");
         return numCreate >= 1;
     }

@@ -32,7 +32,7 @@ public class EditCalendarManageController extends BaseAuthAdminController {
     protected boolean isPermissionGet(HttpServletRequest request) {
         UserDBContext userDB = new UserDBContext();
         HttpSession session = request.getSession();
-        User user = (User) session.getAttribute("user");
+        User user = (User) session.getAttribute("admin");
         int numRead = userDB.getNumberOfPermission(user.getId(), "CALENDAR", "READ");
         return numRead >= 1;
     }
@@ -41,7 +41,7 @@ public class EditCalendarManageController extends BaseAuthAdminController {
     protected boolean isPermissionPost(HttpServletRequest request) {
         UserDBContext userDB = new UserDBContext();
         HttpSession session = request.getSession();
-        User user = (User) session.getAttribute("user");
+        User user = (User) session.getAttribute("admin");
         int numRead = userDB.getNumberOfPermission(user.getId(), "CALENDAR", "EDIT");
         return numRead >= 1;
     }
