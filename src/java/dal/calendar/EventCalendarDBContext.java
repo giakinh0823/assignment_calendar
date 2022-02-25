@@ -264,4 +264,68 @@ public class EventCalendarDBContext extends DBContext<EventCalendar> {
         }
     }
 
+    public int getSize() {
+        String sql = "SELECT COUNT([event].[id]) as 'size'  FROM [event]";
+        PreparedStatement statement = null;
+        try {
+            statement = connection.prepareStatement(sql);
+            ResultSet result = statement.executeQuery();
+            while (result.next()) {
+                int size = result.getInt("size");
+                return size;
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return 0;
+    }
+
+    public ArrayList<EventCalendar> getEvents(int pageIndex, int pageSize) {
+        UserDBContext userDB = new UserDBContext();
+        AdditionalCalendarDBContext additionalDB = new AdditionalCalendarDBContext();
+        ArrayList<EventCalendar> events = new ArrayList<>();
+        String sql = "SELECT * FROM \n"
+                + "(SELECT [id]\n"
+                + "      ,[title]\n"
+                + "      ,[description]\n"
+                + "      ,[location]\n"
+                + "      ,[updated_at]\n"
+                + "      ,[created_at]\n"
+                + "      ,[userId]\n"
+                + "      ,[additionalId]\n"
+                + "      ,ROW_NUMBER() OVER (ORDER BY [event].[id] ASC) as row_index\n"
+                + "  FROM [event]) [event]\n"
+                + " WHERE row_index >= (? - 1) * ? + 1 AND row_index <= ? * ?";
+        PreparedStatement statement = null;
+        try {
+            statement = connection.prepareStatement(sql);
+            statement.setInt(1, pageIndex);
+            statement.setInt(2, pageSize);
+            statement.setInt(3, pageIndex);
+            statement.setInt(4, pageSize);
+            ResultSet result = statement.executeQuery();
+            while (result.next()) {
+                EventCalendar eventCalendar = new EventCalendar();
+                eventCalendar.setId(result.getInt("id"));
+                eventCalendar.setTitle(result.getString("title"));
+                eventCalendar.setDescription(result.getString("description"));
+                eventCalendar.setLocation(result.getString("location"));
+                eventCalendar.setCreated_at(result.getTimestamp("created_at"));
+                eventCalendar.setUpdated_at(result.getTimestamp("updated_at"));
+                eventCalendar.setUserId(result.getInt("userId"));
+                eventCalendar.setAdditionalId(result.getInt("additionalId"));
+
+                User user = userDB.get(eventCalendar.getUserId());
+                AdditionalCalendar additionalCalendar = additionalDB.get(eventCalendar.getAdditionalId());
+
+                eventCalendar.setUser(user);
+                eventCalendar.setAdditional(additionalCalendar);
+                events.add(eventCalendar);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(AdditionalCalendarDBContext.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return events;
+    }
+
 }

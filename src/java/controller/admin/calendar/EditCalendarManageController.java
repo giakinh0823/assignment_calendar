@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package controller.admin.category;
+package controller.admin.calendar;
 
 import com.google.gson.Gson;
 import controller.admin.auth.BaseAuthAdminController;
 import dal.auth.UserDBContext;
-import dal.calendar.CategoryCalendarDBContext;
+import dal.calendar.CalendarDBContext;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.logging.Level;
@@ -19,22 +19,22 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import model.auth.User;
-import model.calendar.CategoryCalendar;
+import model.calendar.Calendar;
 import utils.Validate;
 
 /**
  *
  * @author giaki
  */
-public class EditCategoryManageController extends BaseAuthAdminController {
+public class EditCalendarManageController extends BaseAuthAdminController {
 
     @Override
     protected boolean isPermissionGet(HttpServletRequest request) {
         UserDBContext userDB = new UserDBContext();
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");
-        int numEdit = userDB.getNumberOfPermission(user.getId(), "CATEGORY", "EDIT");
-        return numEdit >= 1;
+        int numRead = userDB.getNumberOfPermission(user.getId(), "CALENDAR", "READ");
+        return numRead >= 1;
     }
 
     @Override
@@ -42,10 +42,10 @@ public class EditCategoryManageController extends BaseAuthAdminController {
         UserDBContext userDB = new UserDBContext();
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");
-        int numEdit = userDB.getNumberOfPermission(user.getId(), "CATEGORY", "EDIT");
-        return numEdit >= 1;
+        int numRead = userDB.getNumberOfPermission(user.getId(), "CALENDAR", "EDIT");
+        return numRead >= 1;
     }
-
+   
     @Override
     protected void processGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -53,15 +53,16 @@ public class EditCategoryManageController extends BaseAuthAdminController {
         try {
             String idString = validate.getField(request, "id", true);
             int id = validate.fieldInt(idString, "Error get field id");
-            CategoryCalendarDBContext categoryDB = new CategoryCalendarDBContext();
-            CategoryCalendar category = categoryDB.get(id);
-            request.setAttribute("category", category);
-            request.getRequestDispatcher("/views/admin/category/editCategory.jsp").forward(request, response);
+            CalendarDBContext calendarDB = new CalendarDBContext();
+            Calendar calendar = calendarDB.get(id);
+            request.setAttribute("calendar", calendar);
+            request.getRequestDispatcher("/views/admin/calendar/editCalendar.jsp").forward(request, response);
         } catch (Exception ex) {
-            Logger.getLogger(EditCategoryManageController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(EditCalendarManageController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
+    
     @Override
     protected void processPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -69,12 +70,14 @@ public class EditCategoryManageController extends BaseAuthAdminController {
         try {
             String idString = validate.getFieldAjax(request, "id", true);
             String name = validate.getFieldAjax(request, "name", true);
+            String color = validate.getFieldAjax(request, "color", true);
             int id = validate.fieldInt(idString, "Error get field id");
-            CategoryCalendarDBContext categoryDB = new CategoryCalendarDBContext();
-            CategoryCalendar category = categoryDB.get(id);
-            category.setName(name);
-            categoryDB.update(category);
-            String json = new Gson().toJson(category);
+            CalendarDBContext calendarDB = new CalendarDBContext();
+            Calendar calendar = calendarDB.get(id);
+            calendar.setName(name);
+            calendar.setColor(color);
+            calendarDB.update(calendar);
+            String json = new Gson().toJson(calendar);
             response.setContentType("application/json");
             response.setCharacterEncoding("UTF-8");
             response.getWriter().write(json);
@@ -95,5 +98,7 @@ public class EditCategoryManageController extends BaseAuthAdminController {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+
+    
 
 }

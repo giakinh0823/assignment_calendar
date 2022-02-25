@@ -200,4 +200,54 @@ public class CalendarDBContext extends DBContext<Calendar> {
         }
     }
 
+    public int getSize() {
+        String sql = "SELECT COUNT([calendar].[id]) as 'size'  FROM [calendar]";
+        PreparedStatement statement = null;
+        try {
+            statement = connection.prepareStatement(sql);
+            ResultSet result = statement.executeQuery();
+            while (result.next()) {
+                int size = result.getInt("size");
+                return size;
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return 0;
+    }
+
+    public ArrayList<Calendar> getCalendars(int pageIndex, int pageSize) {
+        ArrayList<Calendar> calendars = new ArrayList<>();
+        UserDBContext userDB = new UserDBContext();
+        String sql = "SELECT * FROM \n"
+                + " (SELECT id, name, color, userId, created_at, updated_at, ROW_NUMBER() OVER (ORDER BY [calendar].[id] ASC) as row_index\n"
+                + " FROM [calendar]) [calendar]\n"
+                + " WHERE row_index >= (? - 1) * ? + 1 AND row_index <= ? * ?";
+        PreparedStatement statement = null;
+        try {
+            statement = connection.prepareStatement(sql);
+            statement.setInt(1, pageIndex);
+            statement.setInt(2, pageSize);
+            statement.setInt(3, pageIndex);
+            statement.setInt(4, pageSize);
+            ResultSet result = statement.executeQuery();
+            while (result.next()) {
+                Calendar calendar = new Calendar();
+                calendar.setId(result.getInt("id"));
+                calendar.setName(result.getString("name"));
+                calendar.setColor(result.getString("color"));
+                calendar.setUserId(result.getInt("userId"));
+                calendar.setCreated_at(result.getTimestamp("created_at"));
+                calendar.setUpdated_at(result.getTimestamp("updated_at"));
+
+                User user = userDB.get(calendar.getUserId());
+                calendar.setUser(user);
+                calendars.add(calendar);
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return calendars;
+    }
+
 }

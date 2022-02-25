@@ -117,6 +117,22 @@
         <servlet-name>LogoutAdminController</servlet-name>
         <servlet-class>controller.admin.auth.LogoutAdminController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>CalendarManageController</servlet-name>
+        <servlet-class>controller.admin.calendar.CalendarManageController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EditCalendarManageController</servlet-name>
+        <servlet-class>controller.admin.calendar.EditCalendarManageController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteCalendarManageController</servlet-name>
+        <servlet-class>controller.admin.calendar.DeleteCalendarManageController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EventManageController</servlet-name>
+        <servlet-class>controller.admin.event.EventManageController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginController</servlet-name>
         <url-pattern>/login</url-pattern>
@@ -216,6 +232,22 @@
     <servlet-mapping>
         <servlet-name>LogoutAdminController</servlet-name>
         <url-pattern>/admin/logout</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CalendarManageController</servlet-name>
+        <url-pattern>/admin/calendar</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditCalendarManageController</servlet-name>
+        <url-pattern>/admin/calendar/edit</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteCalendarManageController</servlet-name>
+        <url-pattern>/admin/calendar/delete</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EventManageController</servlet-name>
+        <url-pattern>/admin/event</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
