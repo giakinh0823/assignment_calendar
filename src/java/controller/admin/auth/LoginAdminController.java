@@ -24,20 +24,24 @@ import utils.Validate;
 public class LoginAdminController extends HttpServlet {
 
     private final Validate validate = new Validate();
-    
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession(false);
-        boolean loggedIn = session != null && session.getAttribute("admin") != null;
-        if (loggedIn) {
-            response.sendRedirect("/");
-        }else{
-            request.getRequestDispatcher("/views/admin/auth/login.jsp").forward(request, response);
+        boolean loggedInUser = session != null && session.getAttribute("user") != null;
+        boolean loggedInAdmin = session != null && session.getAttribute("admin") != null;
+        if (loggedInUser) {
+            request.getRequestDispatcher("/views/error/accessDenied.jsp").forward(request, response);
+        } else {
+            if (loggedInAdmin) {
+                response.sendRedirect("/admin");
+            } else {
+                request.getRequestDispatcher("/views/admin/auth/login.jsp").forward(request, response);
+            }
         }
     }
 
-    
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

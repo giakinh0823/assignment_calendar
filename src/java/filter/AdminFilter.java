@@ -48,13 +48,18 @@ public class AdminFilter implements Filter {
         HttpSession session = req.getSession(false);
         String loginURI = req.getContextPath() + "/admin/login";
 
-        boolean loggedIn = session != null && session.getAttribute("admin") != null;
-        boolean loginRequest = req.getRequestURI().equals(loginURI);
+        boolean loggedInUser = session != null && session.getAttribute("user") != null;
+        boolean loggedInAdmin = session != null && session.getAttribute("admin") != null;
+        boolean loginRequest = req.getRequestURI().equals(loginURI);    
 
-        if (loggedIn || loginRequest) {
+        if (loggedInAdmin || loginRequest) {
             chain.doFilter(request, response);
         } else {
-            res.sendRedirect(loginURI);
+            if(loggedInUser){
+                request.getRequestDispatcher("/views/error/accessDenied.jsp").forward(request, response);
+            }else{
+                res.sendRedirect(loginURI);
+            }
         }
         
     }
