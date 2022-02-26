@@ -5,6 +5,7 @@
  */
 package controller.auth;
 
+import com.google.gson.Gson;
 import dal.auth.PermissionDBContext;
 import dal.calendar.CalendarDBContext;
 import dal.auth.UserDBContext;
@@ -49,35 +50,42 @@ public class SignupController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
-            String username = validate.getField(request, "username", true);
-            String email = validate.getField(request, "email", true);
-            String password = validate.getField(request, "password", true);
-            String confirm_password = validate.getField(request, "confirm_password", true);
-            String first_name = validate.getField(request, "first_name", true);
-            String last_name = validate.getField(request, "last_name", true);
-            String phone = validate.getField(request, "phone", true);
-            String gender = validate.getField(request, "gender", true);
-            String birthday = validate.getField(request, "birthday", true);
+            String username = validate.getFieldAjax(request, "username", true);
+            String email = validate.getFieldAjax(request, "email", true);
+            String password = validate.getFieldAjax(request, "password", true);
+            String confirm_password = validate.getFieldAjax(request, "confirm_password", true);
+            String first_name = validate.getFieldAjax(request, "first_name", true);
+            String last_name = validate.getFieldAjax(request, "last_name", true);
+            String phone = validate.getFieldAjax(request, "phone", true);
+            String gender = validate.getFieldAjax(request, "gender", true);
+            String birthday = validate.getFieldAjax(request, "birthday", true);
 
             // process field
             if (!password.equals(confirm_password)) {
-                request.setAttribute("error", "Confirm password not match! Please try again!");
-                request.getRequestDispatcher("/views/auth/signup.jsp").forward(request, response);
+                String json = new Gson().toJson(new Error("Confirm password not match! Please try again!"));
+                response.setContentType("application/json");
+                response.setCharacterEncoding("UTF-8");
+                response.getWriter().write(json);
+                return;
             } else {
                 HashPass hashPass = new HashPass();
                 UserDBContext db = new UserDBContext();
                 try {
                     String field_username = validate.fieldString(username, "^[a-zA-Z0-9._-]{3,}$", "Username not work! Please enter new username");
                     if (db.findOne("username", field_username) != null) {
-                        request.setAttribute("error", "Username has exist! Please try new username!");
-                        request.getRequestDispatcher("/views/auth/signup.jsp").forward(request, response);
+                        String json = new Gson().toJson(new Error("Username has exist! Please try new username!"));
+                        response.setContentType("application/json");
+                        response.setCharacterEncoding("UTF-8");
+                        response.getWriter().write(json);
                         return;
                     }
 
                     String field_email = validate.fieldString(email, "(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|\"(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21\\x23-\\x5b\\x5d-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])*\")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21-\\x5a\\x53-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])+)\\])", "Email wrong! please enter new email");
                     if (db.findOne("email", field_email) != null) {
-                        request.setAttribute("error", "Email has exist! Please try new email!");
-                        request.getRequestDispatcher("/views/auth/signup.jsp").forward(request, response);
+                        String json = new Gson().toJson(new Error("Email has exist! Please try new email!"));
+                        response.setContentType("application/json");
+                        response.setCharacterEncoding("UTF-8");
+                        response.getWriter().write(json);
                         return;
                     }
 
@@ -103,10 +111,9 @@ public class SignupController extends HttpServlet {
                     user.setUpdated_at(updated_at);
                     user.setIs_active(is_active);
                     user.setIs_super(is_super);
-                    
+
                     PermissionDBContext permissionDB = new PermissionDBContext();
                     Permission per = permissionDB.findOne("user");
-                    
                     user.setPermission(per.getName());
                     user.setUser_permission(per);
                     user = db.insert(user);
@@ -118,16 +125,23 @@ public class SignupController extends HttpServlet {
                     calendar.setUpdated_at(updated_at);
                     CalendarDBContext calendarDBContext = new CalendarDBContext();
                     calendarDBContext.insert(calendar);
-                    
-                    response.sendRedirect("/");
+
+                    String json = new Gson().toJson("Singup success");
+                    response.setContentType("application/json");
+                    response.setCharacterEncoding("UTF-8");
+                    response.getWriter().write(json);
                 } catch (Exception e) {
-                    request.setAttribute("error", e.getMessage());
-                    request.getRequestDispatcher("/views/auth/signup.jsp").forward(request, response);
+                    String json = new Gson().toJson(new Error(e.getMessage()));
+                    response.setContentType("application/json");
+                    response.setCharacterEncoding("UTF-8");
+                    response.getWriter().write(json);
                 }
             }
         } catch (Exception e) {
-            request.setAttribute("error", e.getMessage());
-            request.getRequestDispatcher("/views/auth/signup.jsp").forward(request, response);
+            String json = new Gson().toJson(e.getMessage());
+            response.setContentType("application/json");
+            response.setCharacterEncoding("UTF-8");
+            response.getWriter().write(json);
         }
 
     }

@@ -95,9 +95,9 @@ public class UserDBContext extends DBContext<User> {
                 + "      ,[user].[avatar]\n"
                 + "      ,[user].[created_at]\n"
                 + "      ,[user].[updated_at], [user_per].[permissionId], [permission].[name] as 'permissionName'\n"
-                + "FROM [user] INNER JOIN [user_permission] as [user_per]\n"
+                + "FROM [user] FULL OUTER JOIN [user_permission] as [user_per]\n"
                 + "ON [user_per].[userId] = [user].[id]\n"
-                + "INNER JOIN [permission]\n"
+                + "FULL OUTER JOIN [permission]\n"
                 + "ON [permission].[id] = [user_per].[permissionId]\n";
         PreparedStatement statement = null;
         try {
@@ -480,11 +480,11 @@ public class UserDBContext extends DBContext<User> {
             statement.setTimestamp(13, user.getUpdated_at());
             statement.executeUpdate();
             User new_user = findOne("username", user.getUsername());
-
             UserPermission userPermission = new UserPermission();
-            userPermission.setUserId(user.getId());
+            userPermission.setUserId(new_user.getId());
             userPermission.setPermissionId(user.getUser_permission().getId());
-            userPermissionDB.update(userPermission);
+            userPermissionDB.insert(userPermission);
+            
             return new_user;
         } catch (SQLException ex) {
             Logger.getLogger(UserDBContext.class.getName()).log(Level.SEVERE, null, ex);
