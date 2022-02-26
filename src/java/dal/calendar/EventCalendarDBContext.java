@@ -279,6 +279,86 @@ public class EventCalendarDBContext extends DBContext<EventCalendar> {
         }
         return 0;
     }
+    
+    public int getSizeSearch(String value) {
+        String sql = "SELECT COUNT([event].[id]) as 'size' FROM [event]\n"
+                + " INNER JOIN [user] on [user].id = [event].[userId]\n"
+                + " WHERE [event].[title] LIKE ? or [event].[location] LIKE ? or \n"
+                + " [user].[username] LIKE ? or [user].[email] LIKE ?\n";
+        PreparedStatement statement = null;
+        try {
+            statement = connection.prepareStatement(sql);
+            statement.setString(1, "%"+value+"%");
+            statement.setString(2, "%"+value+"%");
+            statement.setString(3, "%"+value+"%");
+            statement.setString(4, "%"+value+"%");
+            ResultSet result = statement.executeQuery();
+            while (result.next()) {
+                int size = result.getInt("size");
+                return size;
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return 0;
+    }
+    
+    public ArrayList<EventCalendar> findEvents(String value,int pageIndex, int pageSize) {
+        UserDBContext userDB = new UserDBContext();
+        AdditionalCalendarDBContext additionalDB = new AdditionalCalendarDBContext();
+        ArrayList<EventCalendar> events = new ArrayList<>();
+        String sql = "SELECT * FROM \n"
+                + "(SELECT [event].[id]\n" 
+                + "      ,[event].[title]\n" 
+                + "      ,[event].[description]\n" 
+                + "      ,[event].[location]\n" 
+                + "      ,[event].[updated_at]\n" 
+                + "      ,[event].[created_at]\n" 
+                + "      ,[event].[userId]\n" 
+                + "      ,[event].[additionalId]\n" 
+                + "	 ,[user].[username]\n" 
+                + "	 ,[user].[email]\n"
+                + "      ,ROW_NUMBER() OVER (ORDER BY [event].[id] ASC) as row_index\n"
+                + "  FROM [event]  INNER JOIN [user] on [user].id = [event].[userId]\n"
+                + " WHERE [event].[title] LIKE ? or [event].[location] LIKE ? or \n"
+                + " [user].[username] LIKE ? or [user].[email] LIKE ?) [event]\n"
+                + " WHERE row_index >= (? - 1) * ? + 1 AND row_index <= ? * ?";
+        PreparedStatement statement = null;
+        try {
+            statement = connection.prepareStatement(sql);
+            statement.setString(1, "%"+value+"%");
+            statement.setString(2, "%"+value+"%");
+            statement.setString(3, "%"+value+"%");
+            statement.setString(4, "%"+value+"%");
+            
+            statement.setInt(5, pageIndex);
+            statement.setInt(6, pageSize);
+            statement.setInt(7, pageIndex);
+            statement.setInt(8, pageSize);
+            ResultSet result = statement.executeQuery();
+            while (result.next()) {
+                EventCalendar eventCalendar = new EventCalendar();
+                eventCalendar.setId(result.getInt("id"));
+                eventCalendar.setTitle(result.getString("title"));
+                eventCalendar.setDescription(result.getString("description"));
+                eventCalendar.setLocation(result.getString("location"));
+                eventCalendar.setCreated_at(result.getTimestamp("created_at"));
+                eventCalendar.setUpdated_at(result.getTimestamp("updated_at"));
+                eventCalendar.setUserId(result.getInt("userId"));
+                eventCalendar.setAdditionalId(result.getInt("additionalId"));
+
+                User user = userDB.get(eventCalendar.getUserId());
+                AdditionalCalendar additionalCalendar = additionalDB.get(eventCalendar.getAdditionalId());
+
+                eventCalendar.setUser(user);
+                eventCalendar.setAdditional(additionalCalendar);
+                events.add(eventCalendar);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(AdditionalCalendarDBContext.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return events;
+    }
 
     public ArrayList<EventCalendar> getEvents(int pageIndex, int pageSize) {
         UserDBContext userDB = new UserDBContext();

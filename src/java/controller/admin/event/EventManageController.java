@@ -52,6 +52,7 @@ public class EventManageController extends BaseAuthAdminController {
             Validate validate = new Validate();
             int pageSize = 24;
             String page = validate.getField(request, "page", false);
+            String search = validate.getField(request, "q", false);
             if (page == null || page.trim().length() == 0) {
                 page = "1";
             }
@@ -66,7 +67,14 @@ public class EventManageController extends BaseAuthAdminController {
             }
             EventCalendarDBContext eventDB = new EventCalendarDBContext();
             Pagination pagination = new Pagination(pageIndex, pageSize, eventDB.getSize());
-            ArrayList<EventCalendar> events = eventDB.getEvents(pageIndex, pageSize);
+            ArrayList<EventCalendar> events = new ArrayList<EventCalendar>();
+            if(search!=null && !search.equals("")){
+                events = eventDB.findEvents(search, pageIndex, pageSize);
+                pagination.setSize(eventDB.getSizeSearch(search));
+            }else{
+                events = eventDB.getEvents(pageIndex, pageSize);
+            }
+            
             request.setAttribute("events", events);
             request.setAttribute("pagination", pagination);
             request.getRequestDispatcher("/views/admin/event/manageEvent.jsp").forward(request, response);

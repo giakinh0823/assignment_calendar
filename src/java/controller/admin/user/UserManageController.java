@@ -51,6 +51,7 @@ public class UserManageController extends BaseAuthAdminController {
             Validate validate = new Validate();
             int pageSize = 24;
             String page = validate.getField(request, "page", false);
+            String search = validate.getField(request, "q", false);
             if (page == null || page.trim().length() == 0) {
                 page = "1";
             }
@@ -65,7 +66,14 @@ public class UserManageController extends BaseAuthAdminController {
             }
             UserDBContext userDB = new UserDBContext();
             Pagination pagination = new Pagination(pageIndex, pageSize, userDB.getSize());
-            ArrayList<User> users = userDB.getUsers(pageIndex, pageSize);
+            ArrayList<User> users = new ArrayList<User>();
+            if(search!=null && !search.equals("")){
+                users = userDB.findUsers(search, pageIndex, pageSize);
+                pagination.setSize(userDB.getSizeSearch(search));
+            }else{
+                users = userDB.getUsers(pageIndex, pageSize);
+            }
+            
             request.setAttribute("users", users);
             request.setAttribute("pagination", pagination);
             request.getRequestDispatcher("/views/admin/user/manageUser.jsp").forward(request, response);

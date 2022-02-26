@@ -50,12 +50,14 @@
                         <div class="inline-block min-w-full align-middle">
                             <div class="p-4">
                                 <label for="table-search" class="sr-only">Search</label>
-                                <div class="relative mt-1">
+                                <form form="/admin/event" method="GET">
+                                    <div class="relative mt-1">
                                     <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
                                         <svg class="w-5 h-5 text-gray-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"></path></svg>
                                     </div>
-                                    <input type="text" id="table-search" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-80 pl-10 p-2.5" placeholder="Search for items">
-                                </div>
+                                    <input type="text" name="q" id="search" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-80 pl-10 p-2.5" placeholder="Search for items">
+                                    </div>
+                                </form>
                             </div>
                             <div class="overflow-hidden">
                                 <table class="min-w-full divide-y divide-gray-200 table-fixed">
@@ -162,39 +164,56 @@
                     <nav aria-label="Page navigation example">
                         <ul class="inline-flex -space-x-px">
                             <li>
-                                <a href="/admin/event?page=<%=pagination.getPrev()%>" class="py-2 px-3 ml-0 leading-tight text-gray-500 bg-white rounded-l-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">Previous</a>
+                                <a href="/admin/event?page=<%=pagination.getPrev()%>" data="<%=pagination.getPrev()%>" class="pagination-link py-2 px-3 ml-0 leading-tight text-gray-500 bg-white rounded-l-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">Previous</a>
                             </li>
                             <c:if test="${pagination.getPageIndex()>2}">
                                 <li>
-                                    <a href="/admin/event?page=<%=pagination.getPageIndex() - 2%>" class="py-2 px-3 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"><%=pagination.getPageIndex() - 2%></a>
+                                    <a href="/admin/event?page=<%=pagination.getPageIndex() - 2%>" data="<%=pagination.getPageIndex() - 2%>" class="pagination-link py-2 px-3 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"><%=pagination.getPageIndex() - 2%></a>
                                 </li>
                             </c:if>
                             <c:if test="${pagination.getPageIndex()>1}">
                                 <li>
-                                    <a href="/admin/event?page=<%=pagination.getPageIndex() - 1%>" class="py-2 px-3 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"><%=pagination.getPageIndex() - 1%></a>
+                                    <a href="/admin/event?page=<%=pagination.getPageIndex() - 1%>" data="<%=pagination.getPageIndex() - 1%>" class="pagination-link py-2 px-3 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"><%=pagination.getPageIndex() - 1%></a>
                                 </li>
                             </c:if>
                             <li>
-                                <a href="/admin/event?page=<%=pagination.getPageIndex()%>" aria-current="page" class="py-2 px-3 text-blue-600 bg-blue-50 border border-gray-300 hover:bg-blue-100 hover:text-blue-700 dark:border-gray-700 dark:bg-gray-700 dark:text-white"><%=pagination.getPageIndex()%></a>
+                                <a href="/admin/event?page=<%=pagination.getPageIndex()%>" data="<%=pagination.getPageIndex()%>" aria-current="page" class="pagination-link py-2 px-3 text-blue-600 bg-blue-50 border border-gray-300 hover:bg-blue-100 hover:text-blue-700 dark:border-gray-700 dark:bg-gray-700 dark:text-white"><%=pagination.getPageIndex()%></a>
                             </li>
                             <c:if test="${pagination.getPageIndex()<pagination.getCount()}">
                                 <li>
-                                    <a href="/admin/event?page=<%=pagination.getPageIndex() + 1%>" class="py-2 px-3 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"><%=pagination.getPageIndex() + 1%></a>
+                                    <a href="/admin/event?page=<%=pagination.getPageIndex() + 1%>" data="<%=pagination.getPageIndex() + 1%>" class="pagination-link py-2 px-3 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"><%=pagination.getPageIndex() + 1%></a>
                                 </li>
                             </c:if>
                             <c:if test="${pagination.getPageIndex()+1<pagination.getCount()}">
                                 <li>
-                                    <a href="/admin/event?page=<%=pagination.getPageIndex() + 2%>" class="py-2 px-3 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"><%=pagination.getPageIndex() + 2%></a>
+                                    <a href="/admin/event?page=<%=pagination.getPageIndex() + 2%>" data="<%=pagination.getPageIndex() + 2%>" class="pagination-link py-2 px-3 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"><%=pagination.getPageIndex() + 2%></a>
                                 </li>
                             </c:if>
                             <li>
-                                <a href="/admin/event?page=<%=pagination.getNext()%>" class="py-2 px-3 leading-tight text-gray-500 bg-white rounded-r-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">Next</a>
+                                <a href="/admin/event?page=<%=pagination.getNext()%>" data="<%=pagination.getNext()%>" class="pagination-link py-2 px-3 leading-tight text-gray-500 bg-white rounded-r-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">Next</a>
                             </li>
-                        </ul>
+                        </ul>                    
                     </nav>
                 </div>
             </div>
         </div>
+        <script>
+            const url_string = window.location.href;
+            const url = new URL(url_string);
+            const search = url.searchParams.get("q");
+            const paginationLinks = document.querySelectorAll(".pagination-link");
+            if (paginationLinks) {
+                paginationLinks.forEach(item => {
+                    var search = location.search.substring(1);
+                    const params = search ? JSON.parse('{"' + decodeURI(search).replace(/"/g, '\\"')
+                            .replace(/&/g, '","').replace(/=/g, '":"') + '"}') : {};
+                    const page = item.getAttribute("data");
+                    params.page = page;
+                    const href = new URLSearchParams(params).toString();
+                    item.setAttribute("href", "?" + href);
+                })
+            }
+        </script>
         <jsp:include page="../base/footer.jsp" />
     </body>
 </html>

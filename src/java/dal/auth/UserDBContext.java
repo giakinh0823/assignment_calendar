@@ -165,6 +165,75 @@ public class UserDBContext extends DBContext<User> {
     }
     
     
+    public ArrayList<User> findUsers(String value, int pageIndex, int pageSize) {
+        ArrayList<User> users = new ArrayList<User>();
+        String sql = "SELECT * FROM \n"
+                + "(SELECT [user].[id]\n"
+                + "      ,[user].[username]\n"
+                + "      ,[user].[password]\n"
+                + "      ,[user].[first_name]\n"
+                + "      ,[user].[last_name]\n"
+                + "      ,[user].[birthday]\n"
+                + "      ,[user].[email]\n"
+                + "      ,[user].[phone]\n"
+                + "      ,[user].[gender]\n"
+                + "      ,[user].[is_super]\n"
+                + "      ,[user].[is_active]\n"
+                + "      ,[user].[permission]\n"
+                + "      ,[user].[avatar]\n"
+                + "      ,[user].[created_at]\n"
+                + "      ,[user].[updated_at]\n"
+                + "      ,[user_per].[permissionId]\n"
+                + "      ,[permission].[name] as 'permissionName'\n"
+                + "      ,ROW_NUMBER() OVER (ORDER BY [user].[id] ASC) as row_index\n"
+                + "FROM [user] INNER JOIN [user_permission] as [user_per]\n"
+                + "ON [user_per].[userId] = [user].[id]\n"
+                + "INNER JOIN [permission]\n"
+                + "ON [permission].[id] = [user_per].[permissionId]\n"
+                + " WHERE [user].[username] LIKE ? or [user].[email] LIKE ? or [user].[phone] LIKE ?) [user]\n"
+                + "WHERE row_index >= (? - 1) * ? + 1 AND row_index <= ? * ?";
+        PreparedStatement statement = null;
+        try {
+            statement = connection.prepareStatement(sql);
+            statement.setString(1, "%"+value+"%");
+            statement.setString(2, "%"+value+"%");
+            statement.setString(3, "%"+value+"%");
+         
+            statement.setInt(4, pageIndex);
+            statement.setInt(5, pageSize);
+            statement.setInt(6, pageIndex);
+            statement.setInt(7, pageSize);
+            ResultSet result = statement.executeQuery();
+            while (result.next()) {
+                User user = new User();
+                user.setId(result.getInt("id"));
+                user.setUsername(result.getString("username"));
+                user.setPassword(result.getString("password"));
+                user.setEmail(result.getString("email"));
+                user.setFirst_name(result.getString("first_name"));
+                user.setLast_name(result.getString("last_name"));
+                user.setBirthday(result.getDate("birthday"));
+                user.setPhone(result.getString("phone"));
+                user.setGender(result.getBoolean("gender"));
+                user.setPermission(result.getString("permission"));
+                user.setIs_active(result.getBoolean("is_active"));
+                user.setIs_super(result.getBoolean("is_super"));
+                user.setCreated_at(result.getTimestamp("created_at"));
+                user.setUpdated_at(result.getTimestamp("updated_at"));
+                user.setAvatar(result.getString("avatar"));
+                Permission permission = new Permission();
+                permission.setId(result.getInt("permissionId"));
+                permission.setName(result.getString("permissionName"));
+                user.setUser_permission(permission);
+                users.add(user);
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return users;
+    }
+    
+    
     public ArrayList<User> getUsers(int pageIndex, int pageSize) {
         ArrayList<User> users = new ArrayList<User>();
         String sql = "SELECT * FROM \n"
@@ -226,6 +295,26 @@ public class UserDBContext extends DBContext<User> {
             ex.printStackTrace();
         }
         return users;
+    }
+    
+    public int getSizeSearch(String value){
+        String sql = "SELECT COUNT([user].[id]) as 'size'  FROM [user]\n"
+                + " WHERE [user].[username] LIKE ? or [user].[email] LIKE ? or [user].[phone] LIKE ?";
+        PreparedStatement statement = null;
+        try {
+            statement = connection.prepareStatement(sql);
+            statement.setString(1, "%"+value+"%");
+            statement.setString(2, "%"+value+"%");
+            statement.setString(3, "%"+value+"%");
+            ResultSet result = statement.executeQuery();
+            while (result.next()) {
+                int size = result.getInt("size");
+                return size;
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return 0;
     }
     
     public int getSize(){
