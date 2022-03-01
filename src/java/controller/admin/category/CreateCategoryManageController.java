@@ -56,7 +56,7 @@ public class CreateCategoryManageController extends BaseAuthAdminController {
             throws ServletException, IOException {
         Validate validate = new Validate();
         try {
-            String name = validate.getField(request, "name", true);
+            String name = validate.getFieldAjax(request, "name", true);
             CategoryCalendarDBContext categoryDB = new CategoryCalendarDBContext();
             CategoryCalendar category = new CategoryCalendar();
             category.setName(name);

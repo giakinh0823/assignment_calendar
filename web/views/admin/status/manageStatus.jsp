@@ -45,11 +45,11 @@
                 <div class="mb-6">
                     <a href="/admin/status/add" class="inline-flex items-center py-2 px-4 text-sm font-medium text-center text-gray-900 bg-white rounded-lg border border-gray-300 hover:bg-gray-100 focus:ring-4 focus:ring-blue-300">Add status</a>
                 </div>
-                <div class="flex w-full flex-wrap  space-x-6">
+                <div class="w-full grid lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-6 gap-4">
                     <c:forEach items="${listStatus}" var="status">
                         <div class="min-w-md bg-white rounded-lg border border-gray-200 shadow-md py-8 px-6">
                             <div class="flex flex-col items-center pb-5">
-                                <h3 class="mb-1 text-xl font-medium text-gray-900">${status.getName()}</h3>
+                                <h3 class="mb-1 text-xl font-medium text-gray-900 text-center">${status.getName()}</h3>
                                 <span class="text-sm text-gray-500">id - ${status.getId()}</span>
                                 <div class="flex mt-4 space-x-3">
                                     <a href="/admin/status/edit?id=${status.getId()}" class="inline-flex items-center py-2 px-4 text-sm font-medium text-center text-gray-900 bg-white rounded-lg border border-gray-300 hover:bg-gray-100 focus:ring-4 focus:ring-blue-300">Edit</a>
