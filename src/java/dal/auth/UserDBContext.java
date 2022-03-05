@@ -38,10 +38,10 @@ public class UserDBContext extends DBContext<User> {
                 + "      ,[user].[avatar]\n"
                 + "      ,[user].[created_at]\n"
                 + "      ,[user].[updated_at], [user_per].[permissionId], [permission].[name] as 'permissionName'\n"
-                + "FROM [user] INNER JOIN [user_permission] as [user_per]\n"
-                + "ON [user_per].[userId] = [user].[id]\n"
-                + "INNER JOIN [permission]\n"
-                + "ON [permission].[id] = [user_per].[permissionId]\n"
+                + " FROM [user] INNER JOIN [user_permission] as [user_per]\n"
+                + " ON [user_per].[userId] = [user].[id]\n"
+                + " INNER JOIN [permission]\n"
+                + " ON [permission].[id] = [user_per].[permissionId]\n"
                 + " WHERE ([user].[username] = ? or [user].[email] = ?) and [user].[password] = ? ";
         PreparedStatement statement = null;
         try {

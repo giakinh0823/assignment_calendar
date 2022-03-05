@@ -31,6 +31,7 @@
                     <span id="contentSuccessForm" class="font-medium"></span>
                 </div>
                 <input name="id" id="idEvent" value="<%=event.getId()%>" type="hidden"/>
+                <input name="additional" id="idAdditional" value="<%=event.getAdditional().getId()%>" type="hidden"/>
                 <div class="form-group mb-5">
                     <label for="titleEvent" class="block text-sm font-medium text-gray-900 mr-2">Title</label>
                     <input type="text" class="form-control block
@@ -293,6 +294,7 @@
                     allDay: true,
                     hasEnd: false,
                     display: $("#display").val(),
+                    additional: $("#idAdditional").val(),
                 }
                 if ($("#startTime").val()) {
                     event.start = event.start + "T" + $("#startTime").val();

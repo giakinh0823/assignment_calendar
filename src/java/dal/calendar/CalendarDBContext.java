@@ -13,6 +13,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import model.auth.Permission;
 import model.calendar.Calendar;
 import model.auth.User;
 
@@ -24,9 +25,34 @@ public class CalendarDBContext extends DBContext<Calendar> {
 
     public ArrayList<Calendar> listByUser(int userId) {
         ArrayList<Calendar> calendars = new ArrayList<>();
-        UserDBContext userDB = new UserDBContext();
-        String sql = "SELECT id, name, color, userId, created_at, updated_at FROM [calendar]"
-                + " WHERE userId = ?";
+        String sql = "SELECT [calendar].[id]\n"
+                + "      ,[calendar].[name]\n"
+                + "      ,[calendar].[color]\n"
+                + "      ,[calendar].[userId]\n"
+                + "      ,[calendar].[created_at]\n"
+                + "      ,[calendar].[updated_at]\n"
+                + "	 ,[user].[username]\n"
+                + "      ,[user].[password]\n"
+                + "      ,[user].[first_name]\n"
+                + "      ,[user].[last_name]\n"
+                + "      ,[user].[birthday]\n"
+                + "      ,[user].[email]\n"
+                + "      ,[user].[phone]\n"
+                + "      ,[user].[gender]\n"
+                + "      ,[user].[is_super]\n"
+                + "      ,[user].[is_active]\n"
+                + "      ,[user].[permission]\n"
+                + "      ,[user].[created_at] as 'user_created_at'\n"
+                + "      ,[user].[updated_at] as 'user_updated_at'\n"
+                + "      ,[user].[avatar]\n"
+                + "	  ,[permission].[id] as 'permissionId'\n"
+                + "	  ,[permission].[name] as 'permissionName'\n"
+                + "  FROM [calendar]\n"
+                + "  INNER JOIN [user] ON [user].[id] = [calendar].[userId]\n"
+                + "  INNER JOIN [user_permission] ON [user_permission].[userId] = [user].[id]\n"
+                + "  INNER JOIN [permission]  ON [permission].[id] = [user_permission].[permissionId]\n"
+                + " WHERE [calendar].[userId] = ? ";
+
         PreparedStatement statement = null;
         try {
             statement = connection.prepareStatement(sql);
@@ -41,7 +67,28 @@ public class CalendarDBContext extends DBContext<Calendar> {
                 calendar.setCreated_at(result.getTimestamp("created_at"));
                 calendar.setUpdated_at(result.getTimestamp("updated_at"));
 
-                User user = userDB.get(calendar.getUserId());
+                User user = new User();
+                user.setId(result.getInt("userId"));
+                user.setUsername(result.getString("username"));
+                user.setPassword(result.getString("password"));
+                user.setEmail(result.getString("email"));
+                user.setFirst_name(result.getString("first_name"));
+                user.setLast_name(result.getString("last_name"));
+                user.setBirthday(result.getDate("birthday"));
+                user.setPhone(result.getString("phone"));
+                user.setGender(result.getBoolean("gender"));
+                user.setPermission(result.getString("permission"));
+                user.setIs_active(result.getBoolean("is_active"));
+                user.setIs_super(result.getBoolean("is_super"));
+                user.setCreated_at(result.getTimestamp("user_created_at"));
+                user.setUpdated_at(result.getTimestamp("user_updated_at"));
+                user.setAvatar(result.getString("avatar"));
+
+                Permission permission = new Permission();
+                permission.setId(result.getInt("permissionId"));
+                permission.setName(result.getString("permissionName"));
+                user.setUser_permission(permission);
+
                 calendar.setUser(user);
                 calendars.add(calendar);
             }
@@ -55,7 +102,32 @@ public class CalendarDBContext extends DBContext<Calendar> {
     public ArrayList<Calendar> list() {
         ArrayList<Calendar> calendars = new ArrayList<>();
         UserDBContext userDB = new UserDBContext();
-        String sql = "SELECT id, name, color, userId, created_at, updated_at FROM [calendar]";
+        String sql = "SELECT [calendar].[id]\n"
+                + "      ,[calendar].[name]\n"
+                + "      ,[calendar].[color]\n"
+                + "      ,[calendar].[userId]\n"
+                + "      ,[calendar].[created_at]\n"
+                + "      ,[calendar].[updated_at]\n"
+                + "	  ,[user].[username]\n"
+                + "      ,[user].[password]\n"
+                + "      ,[user].[first_name]\n"
+                + "      ,[user].[last_name]\n"
+                + "      ,[user].[birthday]\n"
+                + "      ,[user].[email]\n"
+                + "      ,[user].[phone]\n"
+                + "      ,[user].[gender]\n"
+                + "      ,[user].[is_super]\n"
+                + "      ,[user].[is_active]\n"
+                + "      ,[user].[permission]\n"
+                + "      ,[user].[created_at] as 'user_created_at'\n"
+                + "      ,[user].[updated_at] as 'user_updated_at'\n"
+                + "      ,[user].[avatar]\n"
+                + "	  ,[permission].[id] as 'permissionId'\n"
+                + "	  ,[permission].[name] as 'permissionName'\n"
+                + "  FROM [calendar]\n"
+                + "  INNER JOIN [user] ON [user].[id] = [calendar].[userId]\n"
+                + "  INNER JOIN [user_permission] ON [user_permission].[userId] = [user].[id]\n"
+                + "  INNER JOIN [permission]  ON [permission].[id] = [user_permission].[permissionId]";
         PreparedStatement statement = null;
         try {
             statement = connection.prepareStatement(sql);
@@ -69,7 +141,28 @@ public class CalendarDBContext extends DBContext<Calendar> {
                 calendar.setCreated_at(result.getTimestamp("created_at"));
                 calendar.setUpdated_at(result.getTimestamp("updated_at"));
 
-                User user = userDB.get(calendar.getUserId());
+                User user = new User();
+                user.setId(result.getInt("userId"));
+                user.setUsername(result.getString("username"));
+                user.setPassword(result.getString("password"));
+                user.setEmail(result.getString("email"));
+                user.setFirst_name(result.getString("first_name"));
+                user.setLast_name(result.getString("last_name"));
+                user.setBirthday(result.getDate("birthday"));
+                user.setPhone(result.getString("phone"));
+                user.setGender(result.getBoolean("gender"));
+                user.setPermission(result.getString("permission"));
+                user.setIs_active(result.getBoolean("is_active"));
+                user.setIs_super(result.getBoolean("is_super"));
+                user.setCreated_at(result.getTimestamp("user_created_at"));
+                user.setUpdated_at(result.getTimestamp("user_updated_at"));
+                user.setAvatar(result.getString("avatar"));
+
+                Permission permission = new Permission();
+                permission.setId(result.getInt("permissionId"));
+                permission.setName(result.getString("permissionName"));
+                user.setUser_permission(permission);
+
                 calendar.setUser(user);
                 calendars.add(calendar);
             }
@@ -82,8 +175,33 @@ public class CalendarDBContext extends DBContext<Calendar> {
     @Override
     public Calendar get(int id) {
         UserDBContext userDB = new UserDBContext();
-        String sql = "SELECT id, name, color, userId, created_at, updated_at FROM [calendar]\n"
-                + " WHERE id = ?";
+        String sql = "SELECT [calendar].[id]\n"
+                + "      ,[calendar].[name]\n"
+                + "      ,[calendar].[color]\n"
+                + "      ,[calendar].[userId]\n"
+                + "      ,[calendar].[created_at]\n"
+                + "      ,[calendar].[updated_at]\n"
+                + "	  ,[user].[username]\n"
+                + "      ,[user].[password]\n"
+                + "      ,[user].[first_name]\n"
+                + "      ,[user].[last_name]\n"
+                + "      ,[user].[birthday]\n"
+                + "      ,[user].[email]\n"
+                + "      ,[user].[phone]\n"
+                + "      ,[user].[gender]\n"
+                + "      ,[user].[is_super]\n"
+                + "      ,[user].[is_active]\n"
+                + "      ,[user].[permission]\n"
+                + "      ,[user].[created_at] as 'user_created_at'\n"
+                + "      ,[user].[updated_at] as 'user_updated_at'\n"
+                + "      ,[user].[avatar]\n"
+                + "	  ,[permission].[id] as 'permissionId'\n"
+                + "	  ,[permission].[name] as 'permissionName'\n"
+                + "  FROM [calendar]\n"
+                + "  INNER JOIN [user] ON [user].[id] = [calendar].[userId]\n"
+                + "  INNER JOIN [user_permission] ON [user_permission].[userId] = [user].[id]\n"
+                + "  INNER JOIN [permission]  ON [permission].[id] = [user_permission].[permissionId]\n"
+                + " WHERE [calendar].[id] = ? ";
         PreparedStatement statement = null;
         try {
             statement = connection.prepareStatement(sql);
@@ -98,7 +216,28 @@ public class CalendarDBContext extends DBContext<Calendar> {
                 calendar.setCreated_at(result.getTimestamp("created_at"));
                 calendar.setUpdated_at(result.getTimestamp("updated_at"));
 
-                User user = userDB.get(calendar.getUserId());
+                User user = new User();
+                user.setId(result.getInt("userId"));
+                user.setUsername(result.getString("username"));
+                user.setPassword(result.getString("password"));
+                user.setEmail(result.getString("email"));
+                user.setFirst_name(result.getString("first_name"));
+                user.setLast_name(result.getString("last_name"));
+                user.setBirthday(result.getDate("birthday"));
+                user.setPhone(result.getString("phone"));
+                user.setGender(result.getBoolean("gender"));
+                user.setPermission(result.getString("permission"));
+                user.setIs_active(result.getBoolean("is_active"));
+                user.setIs_super(result.getBoolean("is_super"));
+                user.setCreated_at(result.getTimestamp("user_created_at"));
+                user.setUpdated_at(result.getTimestamp("user_updated_at"));
+                user.setAvatar(result.getString("avatar"));
+
+                Permission permission = new Permission();
+                permission.setId(result.getInt("permissionId"));
+                permission.setName(result.getString("permissionName"));
+                user.setUser_permission(permission);
+
                 calendar.setUser(user);
                 return calendar;
             }
@@ -218,10 +357,33 @@ public class CalendarDBContext extends DBContext<Calendar> {
 
     public ArrayList<Calendar> getCalendars(int pageIndex, int pageSize) {
         ArrayList<Calendar> calendars = new ArrayList<>();
-        UserDBContext userDB = new UserDBContext();
-        String sql = "SELECT * FROM \n"
-                + " (SELECT id, name, color, userId, created_at, updated_at, ROW_NUMBER() OVER (ORDER BY [calendar].[id] ASC) as row_index\n"
-                + " FROM [calendar]) [calendar]\n"
+        String sql = "SELECT * FROM (SELECT [calendar].[id]\n"
+                + "      ,[calendar].[name]\n"
+                + "      ,[calendar].[color]\n"
+                + "      ,[calendar].[userId]\n"
+                + "      ,[calendar].[created_at]\n"
+                + "      ,[calendar].[updated_at]\n"
+                + "	  ,[user].[username]\n"
+                + "      ,[user].[password]\n"
+                + "      ,[user].[first_name]\n"
+                + "      ,[user].[last_name]\n"
+                + "      ,[user].[birthday]\n"
+                + "      ,[user].[email]\n"
+                + "      ,[user].[phone]\n"
+                + "      ,[user].[gender]\n"
+                + "      ,[user].[is_super]\n"
+                + "      ,[user].[is_active]\n"
+                + "      ,[user].[permission]\n"
+                + "      ,[user].[created_at] as 'user_created_at'\n"
+                + "      ,[user].[updated_at] as 'user_updated_at'\n"
+                + "      ,[user].[avatar]\n"
+                + "	 ,[permission].[id] as 'permissionId'\n"
+                + "	 ,[permission].[name] as 'permissionName'\n"
+                + "      ,ROW_NUMBER() OVER (ORDER BY [calendar].[id] DESC) as row_index\n"
+                + "  FROM [calendar]\n"
+                + "  INNER JOIN [user] ON [user].[id] = [calendar].[userId]\n"
+                + "  INNER JOIN [user_permission] ON [user_permission].[userId] = [user].[id]\n"
+                + "  INNER JOIN [permission]  ON [permission].[id] = [user_permission].[permissionId]) [calendar]\n"
                 + " WHERE row_index >= (? - 1) * ? + 1 AND row_index <= ? * ?";
         PreparedStatement statement = null;
         try {
@@ -240,7 +402,28 @@ public class CalendarDBContext extends DBContext<Calendar> {
                 calendar.setCreated_at(result.getTimestamp("created_at"));
                 calendar.setUpdated_at(result.getTimestamp("updated_at"));
 
-                User user = userDB.get(calendar.getUserId());
+                User user = new User();
+                user.setId(result.getInt("userId"));
+                user.setUsername(result.getString("username"));
+                user.setPassword(result.getString("password"));
+                user.setEmail(result.getString("email"));
+                user.setFirst_name(result.getString("first_name"));
+                user.setLast_name(result.getString("last_name"));
+                user.setBirthday(result.getDate("birthday"));
+                user.setPhone(result.getString("phone"));
+                user.setGender(result.getBoolean("gender"));
+                user.setPermission(result.getString("permission"));
+                user.setIs_active(result.getBoolean("is_active"));
+                user.setIs_super(result.getBoolean("is_super"));
+                user.setCreated_at(result.getTimestamp("user_created_at"));
+                user.setUpdated_at(result.getTimestamp("user_updated_at"));
+                user.setAvatar(result.getString("avatar"));
+
+                Permission permission = new Permission();
+                permission.setId(result.getInt("permissionId"));
+                permission.setName(result.getString("permissionName"));
+                user.setUser_permission(permission);
+
                 calendar.setUser(user);
                 calendars.add(calendar);
             }

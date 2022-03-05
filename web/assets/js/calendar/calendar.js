@@ -44,6 +44,7 @@ const calenderHandle = (events) => ({
             $("#confirm-delete-event").attr("data-id", info.event.id);
 
             $("#idEditEvent").val(info.event.id);
+            $("#idAdditional").val(info.event.extendedProps.additional);
             $("#titleEditEvent").val(info.event.title);
             $("#descriptionEditEvent").val(info.event.extendedProps.description);
             $("#colorEditEvent").val(info.event._def.ui.backgroundColor);
@@ -87,7 +88,8 @@ const calenderHandle = (events) => ({
                 end: end.getTime(),
                 allDay: info.event.allDay,
             }
-            console.log(info.event.allDay)
+            var index = events.findIndex(item => item.id == info.event.id);
+            events[index] = {...events[index], ...event}
             $.ajax({
                 method: "POST",
                 url: "/calendar/updateEvent",
@@ -110,6 +112,8 @@ const calenderHandle = (events) => ({
                 allDay: info.event.allDay,
                 hasEnd: info.event._def.hasEnd,
             }
+            var index = events.findIndex(item => item.id == info.event.id);
+            events[index] = {...events[index], ...event}
             $.ajax({
                 method: "POST",
                 url: "/calendar/updateEvent",

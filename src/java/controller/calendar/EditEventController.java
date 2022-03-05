@@ -71,9 +71,11 @@ public class EditEventController extends BaseAuthController {
             String endDate = validate.getFieldAjax(request, "end", false);
             String isAllDay = validate.getFieldAjax(request, "allDay", true);
             String isHasEnd = validate.getFieldAjax(request, "hasEnd", false);
+            String idAdditional = validate.getFieldAjax(request, "additional", true);
             
             // process field
             int field_id = validate.fieldInt(eventId, "Error set field event");
+            int field_id_additional = validate.fieldInt(idAdditional, "Error set field additional");
             int field_calendar = validate.fieldInt(calendar, "Error set field calendar");
             int field_category = validate.fieldInt(category, "Error set field category");
             boolean field_overlap = validate.fieldBoolean(overlap, "Error set field overlap");
@@ -90,7 +92,7 @@ public class EditEventController extends BaseAuthController {
 
             // insert additional
             AdditionalCalendarDBContext additionalDB = new AdditionalCalendarDBContext();
-            AdditionalCalendar additional = new AdditionalCalendar();
+            AdditionalCalendar additional = additionalDB.get(field_id);
             additional.setStartDate(field_startDate);
             additional.setEndDate(field_endDate);
             additional.setOverlap(field_overlap);
@@ -101,7 +103,7 @@ public class EditEventController extends BaseAuthController {
             additional.setCalendarId(field_calendar);
             additional.setCategoryId(field_category);
             additional.setUpdated_at(updated_at);
-            additional = additionalDB.insert(additional);
+            additionalDB.update(additional);
 
             //inser event
             EventCalendar event = new EventCalendar();

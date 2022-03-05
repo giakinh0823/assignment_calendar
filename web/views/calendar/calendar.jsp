@@ -181,7 +181,7 @@
         <script>
             
             //events from database
-            const events = []
+            var events = []
                 <%for (EventCalendar event : events) {%>
                     events.push({
                         id: <%=event.getId()%>,
@@ -200,6 +200,7 @@
                         hasEnd: <%=event.getAdditional().isIsHasEnd()%>,
                         calendarName: "<%=event.getAdditional().getCalendar().getName()%>",
                         calendar: <%=event.getAdditional().getCalendar().getId()%>,
+                        additional: <%=event.getAdditional().getId()%>,
                         <%if (event.getAdditional().getDisplay() != null) {%>
                             display: <%=event.getAdditional().getDisplay() != null ? "'" + event.getAdditional().getDisplay() + "'" : "undefined"%>,
                         <%}%>
@@ -278,6 +279,7 @@
                         end: new Date(data?.additional?.endDate).toISOString(),
                         allDay: data?.additional?.isAllDay,
                         hasEnd: data?.additional?.isHasEnd,
+                        additional: data?.additional?.id,
                     }
                     if (data?.additional?.display){
                         event.display = data?.additional?.display;
@@ -305,6 +307,7 @@
                     allDay: true,
                     hasEnd: false,
                     display: $("#displayEditEvent").val(),
+                    additional: $("#idAdditional").val(),
                 }
                 if ($("#startTimeEditEvent").val()) {
                     event.start = event.start + "T" + $("#startTimeEditEvent").val();
@@ -352,6 +355,7 @@
                         end: new Date(data?.additional?.endDate).toISOString(),
                         allDay: data?.additional?.isAllDay,
                         hasEnd: data?.additional?.isHasEnd,
+                        additional: data?.additional?.id,
                     }
                     if (data?.additional?.display){
                         event.display = data?.additional?.display;

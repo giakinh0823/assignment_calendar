@@ -49,7 +49,7 @@ public class LoginController extends HttpServlet {
             if (user != null) {
                 HttpSession session = request.getSession();
                 session.setAttribute("user", user);
-                response.sendRedirect("/");
+                response.sendRedirect("/calendar");
             } else {
                 request.setAttribute("error", "Username or password wrong!");
                 request.getRequestDispatcher("/views/auth/login.jsp").forward(request, response);

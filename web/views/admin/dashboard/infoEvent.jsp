@@ -80,6 +80,7 @@
                                 </button>
                                 <form action="/calendar/editEvent" name="form-edit-event" id="form-edit-event" method="POST">
                                     <input name="id" id="idEditEvent" type="hidden"/>
+                                    <input id="idAdditional" name="additional" type="hidden"/>
                                     <div class="form-group mb-5">
                                         <label for="titleEvent" class="block text-sm font-medium text-gray-900 mr-2">Title</label>
                                         <input type="text" class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"

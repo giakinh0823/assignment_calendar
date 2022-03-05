@@ -21,7 +21,7 @@
             <div class="px-3 py-4 overflow-y-auto rounded bg-gray-50 min-h-screen">
                 <div class="mb-10 flex items-center justify-center flex-col">
                     <div class="rounded-full border-solid border-4 border-red-500 w-[150px] h-[150px] overflow-hidden" >
-                        <img src='<%=user.getAvatar() != null ? "/assets/images/user/" + user.getAvatar() : "/assets/images/default.png"%>' id="avatar" class="w-full h-full align-middle"/>
+                        <img src='<%=user.getAvatar() != null ? "/assets/images/user/" + user.getAvatar() : "/assets/images/default.png"%>' class="w-full h-full align-middle"/>
                     </div>
                     <h4 class="text-xl mt-3"><%=user.getUsername()%></h4>
                 </div>

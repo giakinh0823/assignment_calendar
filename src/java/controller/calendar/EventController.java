@@ -92,6 +92,10 @@ public class EventController extends BaseAuthController {
             // Get user
             HttpSession session = request.getSession();
             User user = (User) session.getAttribute("user");
+            
+            // get Calendar
+            CalendarDBContext calendarDB = new CalendarDBContext();
+            Calendar calendar_object = calendarDB.get(field_calendar);
 
             // insert additional
             AdditionalCalendarDBContext additionalDB = new AdditionalCalendarDBContext();
@@ -107,6 +111,7 @@ public class EventController extends BaseAuthController {
             additional.setCategoryId(field_category);
             additional.setCreated_at(created_at);
             additional.setUpdated_at(updated_at);
+            additional.setCalendar(calendar_object);
             additional = additionalDB.insert(additional);
 
             //inser event

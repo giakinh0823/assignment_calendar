@@ -69,14 +69,11 @@ public class EditEventManageController extends BaseAuthAdminController {
             CategoryCalendarDBContext categoryDB = new CategoryCalendarDBContext();
             StatusCalendarDBContext statusDB = new StatusCalendarDBContext();
             EventCalendarDBContext eventDB = new EventCalendarDBContext();
-
-            HttpSession session = request.getSession();
-            User user = (User) session.getAttribute("user");
-
-            ArrayList<Calendar> calendars = calendarDB.listByUser(user.getId());
             ArrayList<CategoryCalendar> listCategory = categoryDB.list();
             ArrayList<StatusCalendar> listStatus = statusDB.list();
+            
             EventCalendar event = eventDB.get(id);
+            ArrayList<Calendar> calendars = calendarDB.listByUser(event.getUser().getId());
 
             request.setAttribute("calendars", calendars);
             request.setAttribute("listCategory", listCategory);
@@ -107,9 +104,11 @@ public class EditEventManageController extends BaseAuthAdminController {
             String endDate = validate.getFieldAjax(request, "end", false);
             String isAllDay = validate.getFieldAjax(request, "allDay", true);
             String isHasEnd = validate.getFieldAjax(request, "hasEnd", false);
+            String idAdditional = validate.getFieldAjax(request, "additional", true);
             
             // process field
             int field_id = validate.fieldInt(eventId, "Error set field event");
+            int field_id_additional = validate.fieldInt(idAdditional, "Error set field additional");
             int field_calendar = validate.fieldInt(calendar, "Error set field calendar");
             int field_category = validate.fieldInt(category, "Error set field category");
             boolean field_overlap = validate.fieldBoolean(overlap, "Error set field overlap");
@@ -126,7 +125,7 @@ public class EditEventManageController extends BaseAuthAdminController {
 
             // insert additional
             AdditionalCalendarDBContext additionalDB = new AdditionalCalendarDBContext();
-            AdditionalCalendar additional = new AdditionalCalendar();
+            AdditionalCalendar additional = additionalDB.get(field_id_additional);
             additional.setStartDate(field_startDate);
             additional.setEndDate(field_endDate);
             additional.setOverlap(field_overlap);
@@ -137,7 +136,7 @@ public class EditEventManageController extends BaseAuthAdminController {
             additional.setCalendarId(field_calendar);
             additional.setCategoryId(field_category);
             additional.setUpdated_at(updated_at);
-            additional = additionalDB.insert(additional);
+            additionalDB.update(additional);
 
             //inser event
             EventCalendar event = new EventCalendar();
