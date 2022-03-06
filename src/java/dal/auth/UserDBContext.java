@@ -101,7 +101,7 @@ public class UserDBContext extends DBContext<User> {
                 + "ON [permission].[id] = [user_per].[permissionId]\n";
         PreparedStatement statement = null;
         try {
-            sql += " WHERE [user].["+field+"] = ?";
+            sql += " WHERE [user].[" + field + "] = ?";
             statement = connection.prepareStatement(sql);
             statement.setString(1, value);
             ResultSet result = statement.executeQuery();
@@ -156,15 +156,14 @@ public class UserDBContext extends DBContext<User> {
             statement.setString(3, code);
             ResultSet result = statement.executeQuery();
             while (result.next()) {
-               return result.getInt("Total");
+                return result.getInt("Total");
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
         return -1;
     }
-    
-    
+
     public ArrayList<User> findUsers(String value, int pageIndex, int pageSize) {
         ArrayList<User> users = new ArrayList<User>();
         String sql = "SELECT * FROM \n"
@@ -195,10 +194,10 @@ public class UserDBContext extends DBContext<User> {
         PreparedStatement statement = null;
         try {
             statement = connection.prepareStatement(sql);
-            statement.setString(1, "%"+value+"%");
-            statement.setString(2, "%"+value+"%");
-            statement.setString(3, "%"+value+"%");
-         
+            statement.setString(1, "%" + value + "%");
+            statement.setString(2, "%" + value + "%");
+            statement.setString(3, "%" + value + "%");
+
             statement.setInt(4, pageIndex);
             statement.setInt(5, pageSize);
             statement.setInt(6, pageIndex);
@@ -232,8 +231,7 @@ public class UserDBContext extends DBContext<User> {
         }
         return users;
     }
-    
-    
+
     public ArrayList<User> getUsers(int pageIndex, int pageSize) {
         ArrayList<User> users = new ArrayList<User>();
         String sql = "SELECT * FROM \n"
@@ -296,16 +294,16 @@ public class UserDBContext extends DBContext<User> {
         }
         return users;
     }
-    
-    public int getSizeSearch(String value){
+
+    public int getSizeSearch(String value) {
         String sql = "SELECT COUNT([user].[id]) as 'size'  FROM [user]\n"
                 + " WHERE [user].[username] LIKE ? or [user].[email] LIKE ? or [user].[phone] LIKE ?";
         PreparedStatement statement = null;
         try {
             statement = connection.prepareStatement(sql);
-            statement.setString(1, "%"+value+"%");
-            statement.setString(2, "%"+value+"%");
-            statement.setString(3, "%"+value+"%");
+            statement.setString(1, "%" + value + "%");
+            statement.setString(2, "%" + value + "%");
+            statement.setString(3, "%" + value + "%");
             ResultSet result = statement.executeQuery();
             while (result.next()) {
                 int size = result.getInt("size");
@@ -316,8 +314,8 @@ public class UserDBContext extends DBContext<User> {
         }
         return 0;
     }
-    
-    public int getSize(){
+
+    public int getSize() {
         String sql = "SELECT COUNT([user].[id]) as 'size'  FROM [user]";
         PreparedStatement statement = null;
         try {
@@ -484,7 +482,7 @@ public class UserDBContext extends DBContext<User> {
             userPermission.setUserId(new_user.getId());
             userPermission.setPermissionId(user.getUser_permission().getId());
             userPermissionDB.insert(userPermission);
-            
+
             return new_user;
         } catch (SQLException ex) {
             Logger.getLogger(UserDBContext.class.getName()).log(Level.SEVERE, null, ex);
@@ -511,19 +509,19 @@ public class UserDBContext extends DBContext<User> {
         PreparedStatement statement = null;
         UserPermissionDBContext userPermissionDB = new UserPermissionDBContext();
         try {
-            String sql = "UPDATE [user]\n" +
-                        " SET [username] = ?\n" +
-                        "    ,[first_name] = ?\n" +
-                        "    ,[last_name] = ?\n" +
-                        "    ,[birthday] = ?\n" +
-                        "    ,[email] = ?\n" +
-                        "    ,[phone] = ?\n" +
-                        "    ,[gender] = ?\n" +
-                        "    ,[is_super] = ?\n" +
-                        "    ,[is_active] = ?\n" +
-                        "    ,[permission] = ?\n" +
-                        "    ,[updated_at] = ?\n" +
-                        " WHERE id = ? ";
+            String sql = "UPDATE [user]\n"
+                    + " SET [username] = ?\n"
+                    + "    ,[first_name] = ?\n"
+                    + "    ,[last_name] = ?\n"
+                    + "    ,[birthday] = ?\n"
+                    + "    ,[email] = ?\n"
+                    + "    ,[phone] = ?\n"
+                    + "    ,[gender] = ?\n"
+                    + "    ,[is_super] = ?\n"
+                    + "    ,[is_active] = ?\n"
+                    + "    ,[permission] = ?\n"
+                    + "    ,[updated_at] = ?\n"
+                    + " WHERE id = ? ";
             statement = connection.prepareStatement(sql);
             statement.setString(1, user.getUsername());
             statement.setString(2, user.getFirst_name());
@@ -538,7 +536,7 @@ public class UserDBContext extends DBContext<User> {
             statement.setTimestamp(11, user.getUpdated_at());
             statement.setInt(12, user.getId());
             statement.executeUpdate();
-            
+
             UserPermission userPermission = new UserPermission();
             userPermission.setUserId(user.getId());
             userPermission.setPermissionId(user.getUser_permission().getId());
@@ -562,14 +560,14 @@ public class UserDBContext extends DBContext<User> {
             }
         }
     }
-    
+
     @Override
     public void update(User user) {
         PreparedStatement statement = null;
         UserPermissionDBContext userPermissionDB = new UserPermissionDBContext();
         try {
-            String sql = "UPDATE [user]\n" +
-                        " SET [first_name] = ?\n"
+            String sql = "UPDATE [user]\n"
+                    + " SET [first_name] = ?\n"
                     + "      ,[last_name] = ?\n"
                     + "      ,[birthday] = ?\n"
                     + "      ,[email] = ?\n"
@@ -606,13 +604,42 @@ public class UserDBContext extends DBContext<User> {
             }
         }
     }
-    
+
+    public void changePassword(int userId, String newPasssword) {
+        PreparedStatement statement = null;
+        try {
+            String sql = "UPDATE [user]\n"
+                    + " SET [password] = ?\n"
+                    + " WHERE id = ?";
+            statement = connection.prepareStatement(sql);
+            statement.setString(1, newPasssword);
+            statement.setInt(2, userId);
+            statement.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDBContext.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            if (statement != null) {
+                try {
+                    statement.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(UserDBContext.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(UserDBContext.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+    }
+
     public void updateAvatar(User user) {
         PreparedStatement statement = null;
-        UserPermissionDBContext userPermissionDB = new UserPermissionDBContext();
         try {
-            String sql = "UPDATE [user]\n" +
-                        " SET [avatar] = ?\n"
+            String sql = "UPDATE [user]\n"
+                    + " SET [avatar] = ?\n"
                     + "      ,[updated_at] = ?\n"
                     + " WHERE id = ?";
             statement = connection.prepareStatement(sql);
