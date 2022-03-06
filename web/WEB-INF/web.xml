@@ -17,6 +17,10 @@
         <param-name>pass</param-name>
         <param-value>giakinh0823</param-value>
     </context-param>
+    <error-page>
+        <exception-type>java.io.IOException</exception-type>
+        <location>/error</location>
+    </error-page>
     <filter>
         <filter-name>AuthFilter</filter-name>
         <filter-class>filter.AuthFilter</filter-class>
@@ -182,6 +186,10 @@
         <servlet-name>ChangePassworControllẻ</servlet-name>
         <servlet-class>controller.auth.ChangePassworControllẻ</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ErrorHandler</servlet-name>
+        <servlet-class>controller.error.ErrorHandler</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginController</servlet-name>
         <url-pattern>/login</url-pattern>
@@ -329,6 +337,10 @@
     <servlet-mapping>
         <servlet-name>ChangePassworControllẻ</servlet-name>
         <url-pattern>/password/change</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ErrorHandler</servlet-name>
+        <url-pattern>/error</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
