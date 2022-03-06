@@ -267,7 +267,7 @@
                         title: data?.title,
                         description: data?.description,
                         location: data?.location,
-                        color: data?.additional?.calendar.color,
+                        color: data?.additional?.calendar?.color,
                         overlap: data?.additional?.overlap,
                         category:data?.additional?.category?.id,
                         categoryName:data?.additional?.category?.name,
@@ -332,7 +332,6 @@
                 }
                 event.start = new Date(event.start).getTime();
                 event.end = new Date(event.end).getTime();
-                console.log(event);
                 $.ajax({
                     method: "POST",
                     url: "/calendar/editEvent",
@@ -343,7 +342,7 @@
                         title: data?.title,
                         description: data?.description,
                         location: data?.location,
-                        color: data?.additional?.calendar.color,
+                        color: data?.additional?.calendar?.color,
                         overlap: data?.additional?.overlap,
                         category:data?.additional?.category?.id,
                         categoryName:data?.additional?.category?.name,
@@ -357,6 +356,7 @@
                         hasEnd: data?.additional?.isHasEnd,
                         additional: data?.additional?.id,
                     }
+                    console.log(event);
                     if (data?.additional?.display){
                         event.display = data?.additional?.display;
                     }

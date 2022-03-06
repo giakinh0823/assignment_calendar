@@ -9,6 +9,7 @@ import com.google.gson.Gson;
 import controller.auth.BaseAuthController;
 import dal.auth.UserDBContext;
 import dal.calendar.AdditionalCalendarDBContext;
+import dal.calendar.CalendarDBContext;
 import dal.calendar.EventCalendarDBContext;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -20,6 +21,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import model.auth.User;
 import model.calendar.AdditionalCalendar;
+import model.calendar.Calendar;
 import model.calendar.EventCalendar;
 import utils.Validate;
 
@@ -89,6 +91,10 @@ public class EditEventController extends BaseAuthController {
             // Get user
             HttpSession session = request.getSession();
             User user = (User) session.getAttribute("user");
+            
+            //get Calendar
+            CalendarDBContext calendarDB = new CalendarDBContext();
+            Calendar calendar_object =  calendarDB.get(field_calendar);
 
             // insert additional
             AdditionalCalendarDBContext additionalDB = new AdditionalCalendarDBContext();
@@ -103,6 +109,7 @@ public class EditEventController extends BaseAuthController {
             additional.setCalendarId(field_calendar);
             additional.setCategoryId(field_category);
             additional.setUpdated_at(updated_at);
+            additional.setCalendar(calendar_object);
             additionalDB.update(additional);
 
             //inser event
