@@ -20,6 +20,27 @@ import model.calendar.StatusCalendar;
  * @author giaki
  */
 public class StatusCalendarDBContext extends DBContext<StatusCalendar> {
+    
+    public StatusCalendar findOne(String field, String value) {
+        ArrayList<StatusCalendar> statuss = new ArrayList<>();
+        String sql = "SELECT id, name FROM [status_calendar]\n"
+                + " WHERE LOWER("+field+") = LOWER(?)";
+        PreparedStatement statement = null;
+        try {
+            statement = connection.prepareStatement(sql);
+            statement.setString(1, value);
+            ResultSet result = statement.executeQuery();
+            while (result.next()) {
+                StatusCalendar status = new StatusCalendar();
+                status.setId(result.getInt("id"));
+                status.setName(result.getString("name"));
+                return status;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(StatusCalendarDBContext.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
 
     @Override
     public ArrayList list() {
