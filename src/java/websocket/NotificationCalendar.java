@@ -5,14 +5,14 @@
  */
 package websocket;
 
+import com.google.gson.Gson;
 import java.io.IOException;
 import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
+import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.websocket.EncodeException;
 import javax.websocket.OnClose;
 import javax.websocket.OnError;
 import javax.websocket.OnMessage;
@@ -20,7 +20,7 @@ import javax.websocket.OnOpen;
 import javax.websocket.Session;
 import javax.websocket.server.PathParam;
 import javax.websocket.server.ServerEndpoint;
-import model.auth.User;
+import model.calendar.EventCalendar;
 
 /**
  *
@@ -28,32 +28,35 @@ import model.auth.User;
  */
 @ServerEndpoint("/ws/calendar/{username}")
 public class NotificationCalendar {
-    
-    static Set<Session> users = Collections.synchronizedSet(new HashSet<Session>()); // trả về một tập hợp được đồng bộ 
+
+    static Map<String, Session> users = Collections.synchronizedMap(new HashMap<String, Session>()); // trả về một tập hợp được đồng bộ 
 
     @OnOpen
     public void onOpen(Session session, @PathParam("username") String username) {
         System.out.println("onOpen::" + username);
+        users.put(username, session);
     }
-    
+
     @OnClose
     public void onClose(Session session) {
-        System.out.println("onClose::" +  session.getId());
+        System.out.println("onClose::" + session.getId());
     }
-    
+
     @OnMessage
-    public void onMessage(String message, Session session) {
-        try {
-            System.out.println("onMessage::From=" + session.getId() + " Message=" + message);
-            session.getBasicRemote().sendText("Hello Client " + session.getId() + "!");
-        } catch (IOException ex) {
-            Logger.getLogger(NotificationCalendar.class.getName()).log(Level.SEVERE, null, ex);
+    public void onMessage(String message) {
+        EventCalendar event = new Gson().fromJson(message, EventCalendar.class);
+        if (users.get(event.getUser().getUsername()) != null) {
+            try {
+                String json = new Gson().toJson(event);
+                users.get(event.getUser().getUsername()).getBasicRemote().sendText(json);
+            } catch (IOException ex) {
+                Logger.getLogger(NotificationCalendar.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
-    
+
     @OnError
     public void onError(Throwable t) {
         System.out.println("onError::" + t.getMessage());
     }
-    
 }

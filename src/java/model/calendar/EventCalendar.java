@@ -79,7 +79,6 @@ public class EventCalendar extends BaseModel {
 
     public void setAdditional(AdditionalCalendar additional) {
         this.additional = additional;
-    }
-    
+    }    
     
 }
