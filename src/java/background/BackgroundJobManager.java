@@ -19,6 +19,7 @@ import javax.servlet.ServletContext;
 import model.calendar.EventCalendar;
 import model.calendar.StatusCalendar;
 import utils.EmailUtility;
+import websocket.NotificationCalendar;
 
 /**
  *
@@ -34,6 +35,10 @@ public class BackgroundJobManager {
 
     @Schedule(hour = "*", minute = "*", second = "*/20", persistent = false)
     public void someFiveSecondelyJob() throws MessagingException {
+        
+        
+        
+        
         Timestamp stamp = new Timestamp(System.currentTimeMillis());
         Date now = new Date(stamp.getTime());
         EventCalendarDBContext eventDB = new EventCalendarDBContext();

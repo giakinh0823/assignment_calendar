@@ -48,7 +48,7 @@
         .fc-theme-standard td, .fc-theme-standard th{
             border: 1px solid #ebebeb;
         }
-        
+
         .fc-daygrid-event{
             opacity: 0.7!important;
         }
@@ -69,7 +69,7 @@
         .fc-event-title{
             font-size: 16px;
         }
-        
+
         .fc .fc-bg-event{
             opacity: 0.4!important;
         }
@@ -81,10 +81,10 @@
             display: none;
         }
         @media only screen and (max-width: 800px) {
-        #navBarCalendar {
-            display: none;
+            #navBarCalendar {
+                display: none;
+            }
         }
-    }
     </style>
     <body>
         <div class="ml-auto pt-4 max-h-screen">
@@ -150,7 +150,7 @@
             </div>
         </div>
         <jsp:include page="addCalendar.jsp" />
-        
+
 
         <div class="hidden overflow-y-auto overflow-x-hidden fixed right-0 left-0 top-4 z-50 justify-center items-center md:inset-0 h-modal sm:h-full" id="confirm-delete-calendar-modal">
             <div class="relative px-4 w-full max-w-md h-full md:h-auto">
@@ -174,289 +174,316 @@
                 </div>
             </div>
         </div>
+        <div class="z-[10000] fixed bottom-8 right-8" id="toast">
+            <div id="toast-default" class="mt-3 flex items-center p-4 w-full max-w-xs text-gray-500 bg-white rounded-lg shadow" role="alert">
+                <div class="inline-flex flex-shrink-0 justify-center items-center w-8 h-8 text-red-500 bg-red-100 rounded-lg">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M12.395 2.553a1 1 0 00-1.45-.385c-.345.23-.614.558-.822.88-.214.33-.403.713-.57 1.116-.334.804-.614 1.768-.84 2.734a31.365 31.365 0 00-.613 3.58 2.64 2.64 0 01-.945-1.067c-.328-.68-.398-1.534-.398-2.654A1 1 0 005.05 6.05 6.981 6.981 0 003 11a7 7 0 1011.95-4.95c-.592-.591-.98-.985-1.348-1.467-.363-.476-.724-1.063-1.207-2.03zM12.12 15.12A3 3 0 017 13s.879.5 2.5.5c0-1 .5-4 1.25-4.5.5 1 .786 1.293 1.371 1.879A2.99 2.99 0 0113 13a2.99 2.99 0 01-.879 2.121z" clip-rule="evenodd"></path></svg>
+                </div>
+                <div class="ml-3 text-sm font-normal" id="toast-message">Set yourself free.</div>
+                <button type="button" class="ml-auto -mx-1.5 -my-1.5 bg-white text-gray-400 hover:text-gray-900 rounded-lg focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-gray-100 inline-flex h-8 w-8" data-collapse-toggle="toast-default" aria-label="Close">
+                    <span class="sr-only">Close</span>
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                </button>
+            </div>
+        </div>
         <jsp:include page="infoEvent.jsp" />
         <jsp:include page="editCalendar.jsp" />
         <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.2/main.min.js"></script>
         <script src="/assets/js/calendar/calendar.js"></script>
         <script>
-            
-            //events from database
-            var events = []
-                <%for (EventCalendar event : events) {%>
-                    events.push({
-                        id: <%=event.getId()%>,
-                        title: "<%=event.getTitle()%>",
-                        start: <%="new Date('" + event.getAdditional().getStartDate() + "').toISOString()"%>,
-                        end: <%="new Date('" + event.getAdditional().getEndDate() + "').toISOString()"%>,
-                        color: "<%=event.getAdditional().getCalendar().getColor()%>",
-                        description: "<%=event.getDescription()%>",
-                        location: "<%=event.getLocation()%>",
-                        overlap: <%=event.getAdditional().isOverlap()%>,
-                        category: <%=event.getAdditional().getCategory().getId()%>,
-                        categoryName: "<%=event.getAdditional().getCategory().getName()%>",
-                        status: "<%=event.getAdditional().getStatus().getId()%>",
-                        statusName: "<%=event.getAdditional().getStatus().getName()%>",
-                        allDay: <%=event.getAdditional().isIsAllDay()%>,
-                        hasEnd: <%=event.getAdditional().isIsHasEnd()%>,
-                        calendarName: "<%=event.getAdditional().getCalendar().getName()%>",
-                        calendar: <%=event.getAdditional().getCalendar().getId()%>,
-                        additional: <%=event.getAdditional().getId()%>,
-                        <%if (event.getAdditional().getDisplay() != null) {%>
-                            display: <%=event.getAdditional().getDisplay() != null ? "'" + event.getAdditional().getDisplay() + "'" : "undefined"%>,
-                        <%}%>
-                    })
-                <%}%>  
-                
-            // init calendar rerender
-            const calendarEl = document.getElementById('calendar');
-            const calendar = new FullCalendar.Calendar(calendarEl, calenderHandle(events));
-            calendar.render();
-            
-            // change event calendar form
-            $("#calendarGroup").on('change', (e) => {
-                const color = event.target[event.target.selectedIndex].getAttribute("data-color");
-                $("#colorEvent").val(color);
-                $("#colorEvent").css("color", color);
-            });
-            
-            // add event handle
-            $("#form-add-event").on("submit", function (e) {
-                e.preventDefault();
-                const event = {
-                    title: $("#titleEvent").val(),
-                    description: $("#description").val(),
-                    start: $("#startDate").val(),
-                    color: $("#colorEvent").val(),
-                    category: $("#category").val(),
-                    calendar: $("#calendarGroup").val(),
-                    overlap: $("#overlap").is(':checked'),
-                    allDay: true,
-                    hasEnd: false,
-                    display: $("#display").val(),
-                }
-                if ($("#startTime").val()) {
-                    event.start = event.start + "T" + $("#startTime").val();
-                }
-                if ($("#endDate").val()) {
-                    event.end = $("#endDate").val();
-                    if ($("#endTime").val()) {
-                        event.end = event.end + "T" + $("#endTime").val();
-                        event.hasEnd = true;
-                        event.allDay=false;
-                    }
-                }   
-                if ($("#location").val() && $("#location").val() != "" && $("#location").val() != null) {
-                    event.location = $("#location").val();
-                }
-                if(new Date(event.end).getDate()-new Date(event.start).getDate()<=0){
-                    event.allDay=false;
-                }
-                if(event.display == 'background' || event.display == 'inverse-background'){
-                    event.allDay=true;
-                }
-                event.start = new Date(event.start).getTime();
-                event.end = new Date(event.end).getTime();
-                console.log(event);
-                $.ajax({
-                    method: "POST",
-                    url: "/calendar/addEvent",
-                    data: event,
-                }).done(function (data) {
-                    const event = {
-                        id: data?.id,
-                        title: data?.title,
-                        description: data?.description,
-                        location: data?.location,
-                        color: data?.additional?.calendar?.color,
-                        overlap: data?.additional?.overlap,
-                        category:data?.additional?.category?.id,
-                        categoryName:data?.additional?.category?.name,
-                        status: data?.additional?.status?.id,
-                        statusName:data?.additional?.status?.name,
-                        calendarName: data?.additional?.calendar?.name,
-                        calendar: data?.additional?.calendar?.id,
-                        start: new Date(data?.additional?.startDate).toISOString(),
-                        end: new Date(data?.additional?.endDate).toISOString(),
-                        allDay: data?.additional?.isAllDay,
-                        hasEnd: data?.additional?.isHasEnd,
-                        additional: data?.additional?.id,
-                    }
-                    if (data?.additional?.display){
-                        event.display = data?.additional?.display;
-                    }
-                    console.log(data);
-                    console.log(event);
-                    events.push(event);
-                    calendar.refetchEvents();
-                    $("#form-add-event")[0].reset();
-                });
-            });
-            
-            // edit form event handle
-            $("#form-edit-event").on("submit", function (e) {
-                e.preventDefault();
-                const event = {
-                    id: $("#idEditEvent").val(),
-                    title: $("#titleEditEvent").val(),
-                    description: $("#descriptionEditEvent").val(),
-                    start: $("#startDateEditEvent").val(),
-                    color: $("#colorEditEvent").val(),
-                    category: $("#categoryEditEvent").val(),
-                    calendar: $("#calendarGroupEditEvent").val(),
-                    overlap: $("#overlapEditEvent").is(':checked'),
-                    allDay: true,
-                    hasEnd: false,
-                    display: $("#displayEditEvent").val(),
-                    additional: $("#idAdditional").val(),
-                }
-                if ($("#startTimeEditEvent").val()) {
-                    event.start = event.start + "T" + $("#startTimeEditEvent").val();
-                    event.allDay=false;
-                }
-                if ($("#endDateEditEvent").val()) {
-                    event.end = $("#endDateEditEvent").val();
-                    if ($("#endTimeEditEvent").val()) {
-                        event.end = event.end + "T" + $("#endTimeEditEvent").val();
-                        event.hasEnd = true;
-                        event.allDay=false;
-                    }
-                }   
-                if ($("#locationEditEvent").val() && $("#locationEditEvent").val() != "" && $("#locationEditEvent").val() != null) {
-                    event.location = $("#locationEditEvent").val();
-                }
-                if(new Date(event.end).getDate()-new Date(event.start).getDate()<=0){
-                    event.allDay=false;
-                }
-                if(event.display == 'background' || event.display == 'inverse-background'){
-                    event.allDay=true;
-                }
-                event.start = new Date(event.start).getTime();
-                event.end = new Date(event.end).getTime();
-                $.ajax({
-                    method: "POST",
-                    url: "/calendar/editEvent",
-                    data: event,
-                }).done(function (data) {
-                    const event = {
-                        id: data?.id,
-                        title: data?.title,
-                        description: data?.description,
-                        location: data?.location,
-                        color: data?.additional?.calendar?.color,
-                        overlap: data?.additional?.overlap,
-                        category:data?.additional?.category?.id,
-                        categoryName:data?.additional?.category?.name,
-                        status: data?.additional?.status?.id,
-                        statusName:data?.additional?.status?.name,
-                        calendarName: data?.additional?.calendar?.name,
-                        calendar: data?.additional?.calendar?.id,
-                        start: new Date(data?.additional?.startDate).toISOString(),
-                        end: new Date(data?.additional?.endDate).toISOString(),
-                        allDay: data?.additional?.isAllDay,
-                        hasEnd: data?.additional?.isHasEnd,
-                        additional: data?.additional?.id,
-                    }
-                    console.log(event);
-                    if (data?.additional?.display){
-                        event.display = data?.additional?.display;
-                    }
-                    var indexEvent = events.findIndex((item) => {
-                        return item?.id == event?.id;
-                    })
-                    events[indexEvent] = event;
-                    calendar.refetchEvents();
-                });
-            });
-            
-            // delete event
-            $("#confirm-delete-event").on('click', (e) => {
-                const event = {
-                    id: $("#confirm-delete-event").attr("data-id"),
-                }
-                $.ajax({
-                    method: "POST",
-                    url: "/calendar/deleteEvent",
-                    data: event,
-                }).done(function () {
-                    events.forEach((item, index)=> {
-                        if(item.id == event.id){
-                            events.splice(index, 1); 
-                        }
-                    })
-                    calendar.refetchEvents();
-                })
-            })
-            
-            //detele calendar 
-            const deleteCalendar = (id) => {
-                $("#confirm-delete-calendar").attr("data-id", id);
-            }
-            
-            $("#confirm-delete-calendar").on('click', (e) => {
-                const data = {
-                    id: $("#confirm-delete-calendar").attr("data-id"),
-                }
-                $.ajax({
-                    method: "POST",
-                    url: "/calendar/deleteCalendar",
-                    data: data,
-                }).done(function () {
-                    $('.calendar-item-'+data.id).remove();
-                    ${calendar.getId()}
-                    events.forEach((item, index)=> {
-                        if(item.calendar == data.id){
-                            events.splice(index, 1); 
-                        }
-                    })
-                    $('.option-calendar-'+data.id).remove();
-                    calendar.refetchEvents();
-                })
-            })
-            
-            // Event checkbox category and calendar handle
-            $("input[name='filter-event-category']").on("change", function(){
-                calendar.render();
-            })
-            $("input[name='filter-event-calendar']").on("change", function(){
-                calendar.render();
-            })
-            
-            // Event handle form add event
-            $("#buttonOpenAddEvent").on('click',() => {
-                $("#addEventFormContainer").removeClass("hidden")
-            });
-            $("#buttonCloseAddFormEvent").on('click', () => {
-                $("#addEventFormContainer").addClass("hidden");
-            })
-            
-            //click outside event
-            $(document).mouseup(function (e) {
-                if ($(e.target).closest("#addEventFormContainer").length=== 0 && !$("#addEventFormContainer").hasClass("hidden")) {
-                    $("#addEventFormContainer").addClass("hidden");
-                }
-            });
-            // edit calendar handle
-            const editSetValueCalendar = (value) => {
-                $("#idCalendar").val(value.id);
-                $("#nameEditCalendar").val(value.name);
-                $("#colorEditCalendar").val(value.color);
-            }
-            
-            //open navbar calendar
-            $("#buttonMenuNavBarCalendar").on("click", function(e) {
-                if($("#navBarCalendar").hasClass("hidden") || $("#navBarCalendar").css("display")=="none"){
-                    $("#navBarCalendar").removeClass("hidden")
-                    $("#navBarCalendar").css("display", "block")
-                    calendar.render();
-                }else{
-                    $("#navBarCalendar").addClass("hidden")
-                    $("#navBarCalendar").css("display", "none")
-                    calendar.render();
-                }
-            })
-            
-        </script>
 
+                                            //events from database
+                                            var events = []
+            <%for (EventCalendar event : events) {%>
+                                            events.push({
+                                            id: <%=event.getId()%>,
+                                                    title: "<%=event.getTitle()%>",
+                                                    start: <%="new Date('" + event.getAdditional().getStartDate() + "').toISOString()"%>,
+                                                    end: <%="new Date('" + event.getAdditional().getEndDate() + "').toISOString()"%>,
+                                                    color: "<%=event.getAdditional().getCalendar().getColor()%>",
+                                                    description: "<%=event.getDescription()%>",
+                                                    location: "<%=event.getLocation()%>",
+                                                    overlap: <%=event.getAdditional().isOverlap()%>,
+                                                    category: <%=event.getAdditional().getCategory().getId()%>,
+                                                    categoryName: "<%=event.getAdditional().getCategory().getName()%>",
+                                                    status: "<%=event.getAdditional().getStatus().getId()%>",
+                                                    statusName: "<%=event.getAdditional().getStatus().getName()%>",
+                                                    allDay: <%=event.getAdditional().isIsAllDay()%>,
+                                                    hasEnd: <%=event.getAdditional().isIsHasEnd()%>,
+                                                    calendarName: "<%=event.getAdditional().getCalendar().getName()%>",
+                                                    calendar: <%=event.getAdditional().getCalendar().getId()%>,
+                                                    additional: <%=event.getAdditional().getId()%>,
+            <%if (event.getAdditional().getDisplay() != null) {%>
+                                            display: <%=event.getAdditional().getDisplay() != null ? "'" + event.getAdditional().getDisplay() + "'" : "undefined"%>,
+            <%}%>
+                                            })
+            <%}%>
+
+                                            // init calendar rerender
+                                            const calendarEl = document.getElementById('calendar');
+                                            const calendar = new FullCalendar.Calendar(calendarEl, calenderHandle(events));
+                                            calendar.render();
+                                            // change event calendar form
+                                            $("#calendarGroup").on('change', (e) => {
+                                            const color = event.target[event.target.selectedIndex].getAttribute("data-color");
+                                            $("#colorEvent").val(color);
+                                            $("#colorEvent").css("color", color);
+                                            });
+                                            // add event handle
+                                            $("#form-add-event").on("submit", function (e) {
+                                            e.preventDefault();
+                                            const event = {
+                                            title: $("#titleEvent").val(),
+                                                    description: $("#description").val(),
+                                                    start: $("#startDate").val(),
+                                                    color: $("#colorEvent").val(),
+                                                    category: $("#category").val(),
+                                                    calendar: $("#calendarGroup").val(),
+                                                    overlap: $("#overlap").is(':checked'),
+                                                    allDay: true,
+                                                    hasEnd: false,
+                                                    display: $("#display").val(),
+                                            }
+                                            if ($("#startTime").val()) {
+                                            event.start = event.start + "T" + $("#startTime").val();
+                                            }
+                                            if ($("#endDate").val()) {
+                                            event.end = $("#endDate").val();
+                                            if ($("#endTime").val()) {
+                                            event.end = event.end + "T" + $("#endTime").val();
+                                            event.hasEnd = true;
+                                            event.allDay = false;
+                                            }
+                                            }
+                                            if ($("#location").val() && $("#location").val() != "" && $("#location").val() != null) {
+                                            event.location = $("#location").val();
+                                            }
+                                            if (new Date(event.end).getDate() - new Date(event.start).getDate() <= 0){
+                                            event.allDay = false;
+                                            }
+                                            if (event.display == 'background' || event.display == 'inverse-background'){
+                                            event.allDay = true;
+                                            }
+                                            event.start = new Date(event.start).getTime();
+                                            event.end = new Date(event.end).getTime();
+                                            console.log(event);
+                                            $.ajax({
+                                            method: "POST",
+                                                    url: "/calendar/addEvent",
+                                                    data: event,
+                                            }).done(function (data) {
+                                            const event = {
+                                            id: data?.id,
+                                                    title: data?.title,
+                                                    description: data?.description,
+                                                    location: data?.location,
+                                                    color: data?.additional?.calendar?.color,
+                                                    overlap: data?.additional?.overlap,
+                                                    category:data?.additional?.category?.id,
+                                                    categoryName:data?.additional?.category?.name,
+                                                    status: data?.additional?.status?.id,
+                                                    statusName:data?.additional?.status?.name,
+                                                    calendarName: data?.additional?.calendar?.name,
+                                                    calendar: data?.additional?.calendar?.id,
+                                                    start: new Date(data?.additional?.startDate).toISOString(),
+                                                    end: new Date(data?.additional?.endDate).toISOString(),
+                                                    allDay: data?.additional?.isAllDay,
+                                                    hasEnd: data?.additional?.isHasEnd,
+                                                    additional: data?.additional?.id,
+                                            }
+                                            if (data?.additional?.display){
+                                            event.display = data?.additional?.display;
+                                            }
+                                            console.log(data);
+                                            console.log(event);
+                                            events.push(event);
+                                            calendar.refetchEvents();
+                                            $("#form-add-event")[0].reset();
+                                            });
+                                            });
+                                            // edit form event handle
+                                            $("#form-edit-event").on("submit", function (e) {
+                                            e.preventDefault();
+                                            const event = {
+                                            id: $("#idEditEvent").val(),
+                                                    title: $("#titleEditEvent").val(),
+                                                    description: $("#descriptionEditEvent").val(),
+                                                    start: $("#startDateEditEvent").val(),
+                                                    color: $("#colorEditEvent").val(),
+                                                    category: $("#categoryEditEvent").val(),
+                                                    calendar: $("#calendarGroupEditEvent").val(),
+                                                    overlap: $("#overlapEditEvent").is(':checked'),
+                                                    allDay: true,
+                                                    hasEnd: false,
+                                                    display: $("#displayEditEvent").val(),
+                                                    additional: $("#idAdditional").val(),
+                                            }
+                                            if ($("#startTimeEditEvent").val()) {
+                                            event.start = event.start + "T" + $("#startTimeEditEvent").val();
+                                            event.allDay = false;
+                                            }
+                                            if ($("#endDateEditEvent").val()) {
+                                            event.end = $("#endDateEditEvent").val();
+                                            if ($("#endTimeEditEvent").val()) {
+                                            event.end = event.end + "T" + $("#endTimeEditEvent").val();
+                                            event.hasEnd = true;
+                                            event.allDay = false;
+                                            }
+                                            }
+                                            if ($("#locationEditEvent").val() && $("#locationEditEvent").val() != "" && $("#locationEditEvent").val() != null) {
+                                            event.location = $("#locationEditEvent").val();
+                                            }
+                                            if (new Date(event.end).getDate() - new Date(event.start).getDate() <= 0){
+                                            event.allDay = false;
+                                            }
+                                            if (event.display == 'background' || event.display == 'inverse-background'){
+                                            event.allDay = true;
+                                            }
+                                            event.start = new Date(event.start).getTime();
+                                            event.end = new Date(event.end).getTime();
+                                            $.ajax({
+                                            method: "POST",
+                                                    url: "/calendar/editEvent",
+                                                    data: event,
+                                            }).done(function (data) {
+                                            const event = {
+                                            id: data?.id,
+                                                    title: data?.title,
+                                                    description: data?.description,
+                                                    location: data?.location,
+                                                    color: data?.additional?.calendar?.color,
+                                                    overlap: data?.additional?.overlap,
+                                                    category:data?.additional?.category?.id,
+                                                    categoryName:data?.additional?.category?.name,
+                                                    status: data?.additional?.status?.id,
+                                                    statusName:data?.additional?.status?.name,
+                                                    calendarName: data?.additional?.calendar?.name,
+                                                    calendar: data?.additional?.calendar?.id,
+                                                    start: new Date(data?.additional?.startDate).toISOString(),
+                                                    end: new Date(data?.additional?.endDate).toISOString(),
+                                                    allDay: data?.additional?.isAllDay,
+                                                    hasEnd: data?.additional?.isHasEnd,
+                                                    additional: data?.additional?.id,
+                                            }
+                                            console.log(event);
+                                            if (data?.additional?.display){
+                                            event.display = data?.additional?.display;
+                                            }
+                                            var indexEvent = events.findIndex((item) => {
+                                            return item?.id == event?.id;
+                                            })
+                                                    events[indexEvent] = event;
+                                            calendar.refetchEvents();
+                                            });
+                                            });
+                                            // delete event
+                                            $("#confirm-delete-event").on('click', (e) => {
+                                            const event = {
+                                            id: $("#confirm-delete-event").attr("data-id"),
+                                            }
+                                            $.ajax({
+                                            method: "POST",
+                                                    url: "/calendar/deleteEvent",
+                                                    data: event,
+                                            }).done(function () {
+                                            events.forEach((item, index) => {
+                                            if (item.id == event.id){
+                                            events.splice(index, 1);
+                                            }
+                                            })
+                                                    calendar.refetchEvents();
+                                            })
+                                            })
+
+                                                    //detele calendar 
+                                                    const deleteCalendar = (id) => {
+                                            $("#confirm-delete-calendar").attr("data-id", id);
+                                            }
+
+                                            $("#confirm-delete-calendar").on('click', (e) => {
+                                            const data = {
+                                            id: $("#confirm-delete-calendar").attr("data-id"),
+                                            }
+                                            $.ajax({
+                                            method: "POST",
+                                                    url: "/calendar/deleteCalendar",
+                                                    data: data,
+                                            }).done(function () {
+                                            $('.calendar-item-' + data.id).remove();
+            ${calendar.getId()}
+                                            events.forEach((item, index) => {
+                                            if (item.calendar == data.id){
+                                            events.splice(index, 1);
+                                            }
+                                            })
+                                                    $('.option-calendar-' + data.id).remove();
+                                            calendar.refetchEvents();
+                                            })
+                                            })
+
+                                                    // Event checkbox category and calendar handle
+                                                    $("input[name='filter-event-category']").on("change", function(){
+                                            calendar.render();
+                                            })
+                                                    $("input[name='filter-event-calendar']").on("change", function(){
+                                            calendar.render();
+                                            })
+
+                                                    // Event handle form add event
+                                                    $("#buttonOpenAddEvent").on('click', () => {
+                                            $("#addEventFormContainer").removeClass("hidden")
+                                            });
+                                            $("#buttonCloseAddFormEvent").on('click', () => {
+                                            $("#addEventFormContainer").addClass("hidden");
+                                            })
+
+                                                    //click outside event
+                                                    $(document).mouseup(function (e) {
+                                            if ($(e.target).closest("#addEventFormContainer").length === 0 && !$("#addEventFormContainer").hasClass("hidden")) {
+                                            $("#addEventFormContainer").addClass("hidden");
+                                            }
+                                            });
+                                            // edit calendar handle
+                                            const editSetValueCalendar = (value) => {
+                                            $("#idCalendar").val(value.id);
+                                            $("#nameEditCalendar").val(value.name);
+                                            $("#colorEditCalendar").val(value.color);
+                                            }
+
+                                            //open navbar calendar
+                                            $("#buttonMenuNavBarCalendar").on("click", function(e) {
+                                            if ($("#navBarCalendar").hasClass("hidden") || $("#navBarCalendar").css("display") == "none"){
+                                            $("#navBarCalendar").removeClass("hidden")
+                                                    $("#navBarCalendar").css("display", "block")
+                                                    calendar.render();
+                                            } else{
+                                            $("#navBarCalendar").addClass("hidden")
+                                                    $("#navBarCalendar").css("display", "none")
+                                                    calendar.render();
+                                            }
+                                            })
+
+        </script>
+         <script>
+            const socketUrl = 'ws://'+window.location.host+'/ws/calendar/${sessionScope.user.username}'
+            const socketGetdata = new WebSocket(socketUrl)
+
+            socketGetdata.onopen = function (e) {
+                console.log("open", e);
+            }
+
+            socketGetdata.onmessage = function (e) {
+                console.log("message", e)
+                const data = JSON.parse(e.data);
+                console.log(data)
+            }
+            socketGetdata.onerror = function (e) {
+                console.log("error", e)
+            }
+            socketGetdata.onclose = function (e) {
+                console.log("close", e)
+            }
+        </script>
     </body>
 </html>
 <jsp:include page="../base/footer.jsp" />
