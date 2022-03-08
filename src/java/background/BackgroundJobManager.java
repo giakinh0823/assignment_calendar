@@ -41,6 +41,7 @@ public class BackgroundJobManager {
 
         for (EventCalendar event : events) {
             Date start_time = new Date(event.getAdditional().getStartDate().getTime());
+            Date end_time = new Date(event.getAdditional().getEndDate().getTime());
             if (event.getAdditional().getStatus().getName().equalsIgnoreCase("pending")
                     && start_time.toString().equalsIgnoreCase(now.toString())) {
 
@@ -56,8 +57,34 @@ public class BackgroundJobManager {
                 //send email 
                 SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
                 if(event.getUser().getEmail()!=null){
-                    Date end_time = new Date(event.getAdditional().getEndDate().getTime());
-                    EmailUtility.sendEmail(host, port, email, pass, event.getUser().getEmail(), "Calendar - "+event.getTitle(),
+                    EmailUtility.sendEmail(host, port, email, pass, event.getUser().getEmail(),  event.getAdditional().getCategory().getName()+" - "+event.getTitle(),
+                        "<p>Event start time: <span style=\"font-weight: bold\">" + simpleDateFormat.format(start_time) +"</span><p/>\n"
+                        + "<p>Event end time: <span style=\"font-weight: bold\">" + simpleDateFormat.format(end_time)+ "</span><p/>\n"
+                        + "<p>Event location: <span style=\"font-weight: bold\">"+ event.getLocation()+ "</span><p/>\n"
+                        + "<p>Event description: "+ event.getDescription()+ "<p/>\n");
+                }
+                
+
+                // send notify websocket
+            }
+            
+            
+            if (event.getAdditional().getStatus().getName().equalsIgnoreCase("in progress")
+                    && end_time.toString().equalsIgnoreCase(now.toString())) {
+
+                // update additional
+                System.out.println(event.getTitle() + " " + event.getDescription());
+                AdditionalCalendarDBContext additionalDB = new AdditionalCalendarDBContext();
+                StatusCalendarDBContext statusDB = new StatusCalendarDBContext();
+                StatusCalendar status = statusDB.findOne("name", "done");
+                event.getAdditional().setStatusId(status.getId());
+                event.getAdditional().setStatus(status);
+                additionalDB.update(event.getAdditional());
+                
+                //send email 
+                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+                if(event.getUser().getEmail()!=null){
+                    EmailUtility.sendEmail(host, port, email, pass, event.getUser().getEmail(), event.getAdditional().getCategory().getName()+" finish - "+event.getTitle(),
                         "<p>Event start time: <span style=\"font-weight: bold\">" + simpleDateFormat.format(start_time) +"</span><p/>\n"
                         + "<p>Event end time: <span style=\"font-weight: bold\">" + simpleDateFormat.format(end_time)+ "</span><p/>\n"
                         + "<p>Event location: <span style=\"font-weight: bold\">"+ event.getLocation()+ "</span><p/>\n"
