@@ -57,18 +57,25 @@ public class BackgroundJobManager {
                 additionalDB.update(event.getAdditional());
 
                 //send email 
-                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-                if (event.getUser().getEmail() != null) {
-                    try {
-                        EmailUtility.sendEmail(host, port, email, pass, event.getUser().getEmail(), event.getAdditional().getCategory().getName() + " - " + event.getTitle(),
-                                "<p>Event start time: <span style=\"font-weight: bold\">" + simpleDateFormat.format(start_time) + "</span><p/>\n"
-                                + "<p>Event end time: <span style=\"font-weight: bold\">" + simpleDateFormat.format(end_time) + "</span><p/>\n"
-                                + "<p>Event location: <span style=\"font-weight: bold\">" + event.getLocation() + "</span><p/>\n"
-                                + "<p>Event description: " + event.getDescription() + "<p/>\n");
-                    } catch (MessagingException ex) {
-                        Logger.getLogger(BackgroundJobManager.class.getName()).log(Level.SEVERE, null, ex);
+                Runnable task = new Runnable() {
+                    public void run() {
+                        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+                        if (event.getUser().getEmail() != null) {
+                            try {
+                                EmailUtility.sendEmail(host, port, email, pass, event.getUser().getEmail(), event.getAdditional().getCategory().getName() + " - " + event.getTitle(),
+                                        "<p>Event start time: <span style=\"font-weight: bold\">" + simpleDateFormat.format(start_time) + "</span><p/>\n"
+                                        + "<p>Event end time: <span style=\"font-weight: bold\">" + simpleDateFormat.format(end_time) + "</span><p/>\n"
+                                        + "<p>Event location: <span style=\"font-weight: bold\">" + event.getLocation() + "</span><p/>\n"
+                                        + "<p>Event description: " + event.getDescription() + "<p/>\n");
+                            } catch (MessagingException ex) {
+                                Logger.getLogger(BackgroundJobManager.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                        }
                     }
-                }
+                };
+
+                Thread sendEmail = new Thread(task);
+                sendEmail.start();
 
                 // send notify websocket
                 try {
@@ -82,7 +89,7 @@ public class BackgroundJobManager {
                 }
             }
 
-            if (event.getAdditional().getStatus().getName().equalsIgnoreCase("in progress")
+            if ((event.getAdditional().getStatus().getName().equalsIgnoreCase("in progress") || event.getAdditional().getStatus().getName().equalsIgnoreCase("pending"))
                     && end_time.toString().equalsIgnoreCase(now.toString())) {
 
                 // update additional
@@ -95,18 +102,25 @@ public class BackgroundJobManager {
                 additionalDB.update(event.getAdditional());
 
                 //send email 
-                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-                if (event.getUser().getEmail() != null) {
-                    try {
-                        EmailUtility.sendEmail(host, port, email, pass, event.getUser().getEmail(), event.getAdditional().getCategory().getName() + " finish - " + event.getTitle(),
-                                "<p>Event start time: <span style=\"font-weight: bold\">" + simpleDateFormat.format(start_time) + "</span><p/>\n"
-                                + "<p>Event end time: <span style=\"font-weight: bold\">" + simpleDateFormat.format(end_time) + "</span><p/>\n"
-                                + "<p>Event location: <span style=\"font-weight: bold\">" + event.getLocation() + "</span><p/>\n"
-                                + "<p>Event description: " + event.getDescription() + "<p/>\n");
-                    } catch (MessagingException ex) {
-                        Logger.getLogger(BackgroundJobManager.class.getName()).log(Level.SEVERE, null, ex);
+                Runnable task = new Runnable() {
+                    public void run() {
+                        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+                        if (event.getUser().getEmail() != null) {
+                            try {
+                                EmailUtility.sendEmail(host, port, email, pass, event.getUser().getEmail(), event.getAdditional().getCategory().getName() + " finish - " + event.getTitle(),
+                                        "<p>Event start time: <span style=\"font-weight: bold\">" + simpleDateFormat.format(start_time) + "</span><p/>\n"
+                                        + "<p>Event end time: <span style=\"font-weight: bold\">" + simpleDateFormat.format(end_time) + "</span><p/>\n"
+                                        + "<p>Event location: <span style=\"font-weight: bold\">" + event.getLocation() + "</span><p/>\n"
+                                        + "<p>Event description: " + event.getDescription() + "<p/>\n");
+                            } catch (MessagingException ex) {
+                                Logger.getLogger(BackgroundJobManager.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                        }
                     }
-                }
+                };
+                
+                Thread sendEmail = new Thread(task);
+                sendEmail.start();
 
                 try {
                     if (event.getUser() != null && event.getUser().getUsername() != null) {
