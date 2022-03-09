@@ -63,10 +63,10 @@ public class BackgroundJobManager {
                         if (event.getUser().getEmail() != null) {
                             try {
                                 EmailUtility.sendEmail(host, port, email, pass, event.getUser().getEmail(), event.getAdditional().getCategory().getName() + " - " + event.getTitle(),
-                                        "<p>Event start time: <span style=\"font-weight: bold\">" + simpleDateFormat.format(start_time) + "</span><p/>\n"
-                                        + "<p>Event end time: <span style=\"font-weight: bold\">" + simpleDateFormat.format(end_time) + "</span><p/>\n"
-                                        + "<p>Event location: <span style=\"font-weight: bold\">" + event.getLocation() + "</span><p/>\n"
-                                        + "<p>Event description: " + event.getDescription() + "<p/>\n");
+                                        "<p>" + event.getAdditional().getCategory().getName() + " start time: <span style=\"font-weight: bold\">" + simpleDateFormat.format(start_time) + "</span><p/>\n"
+                                        + "<p>" + event.getAdditional().getCategory().getName() + " end time: <span style=\"font-weight: bold\">" + simpleDateFormat.format(end_time) + "</span><p/>\n"
+                                        + "<p>" + event.getAdditional().getCategory().getName() + " location: <span style=\"font-weight: bold\">" + event.getLocation() + "</span><p/>\n"
+                                        + "<p>" + event.getAdditional().getCategory().getName() + " description: " + event.getDescription() + "<p/>\n");
                             } catch (MessagingException ex) {
                                 Logger.getLogger(BackgroundJobManager.class.getName()).log(Level.SEVERE, null, ex);
                             }
@@ -108,17 +108,17 @@ public class BackgroundJobManager {
                         if (event.getUser().getEmail() != null) {
                             try {
                                 EmailUtility.sendEmail(host, port, email, pass, event.getUser().getEmail(), event.getAdditional().getCategory().getName() + " finish - " + event.getTitle(),
-                                        "<p>Event start time: <span style=\"font-weight: bold\">" + simpleDateFormat.format(start_time) + "</span><p/>\n"
-                                        + "<p>Event end time: <span style=\"font-weight: bold\">" + simpleDateFormat.format(end_time) + "</span><p/>\n"
-                                        + "<p>Event location: <span style=\"font-weight: bold\">" + event.getLocation() + "</span><p/>\n"
-                                        + "<p>Event description: " + event.getDescription() + "<p/>\n");
+                                        "<p>" + event.getAdditional().getCategory().getName() + " start time: <span style=\"font-weight: bold\">" + simpleDateFormat.format(start_time) + "</span><p/>\n"
+                                        + "<p>" + event.getAdditional().getCategory().getName() + " end time: <span style=\"font-weight: bold\">" + simpleDateFormat.format(end_time) + "</span><p/>\n"
+                                        + "<p>" + event.getAdditional().getCategory().getName() + " location: <span style=\"font-weight: bold\">" + event.getLocation() + "</span><p/>\n"
+                                        + "<p>" + event.getAdditional().getCategory().getName() + " description: " + event.getDescription() + "<p/>\n");
                             } catch (MessagingException ex) {
                                 Logger.getLogger(BackgroundJobManager.class.getName()).log(Level.SEVERE, null, ex);
                             }
                         }
                     }
                 };
-                
+
                 Thread sendEmail = new Thread(task);
                 sendEmail.start();
 
