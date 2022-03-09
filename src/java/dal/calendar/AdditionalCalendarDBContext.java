@@ -313,82 +313,7 @@ public class AdditionalCalendarDBContext extends DBContext<AdditionalCalendar> {
         }
         return null;
     }
-    
-    
-     public AdditionalCalendar getNew(int userId) {
-        CalendarDBContext calendarDB = new CalendarDBContext();
-        CategoryCalendarDBContext categoryDB = new CategoryCalendarDBContext();
-        StatusCalendarDBContext statusDB = new StatusCalendarDBContext();
-        String sql = "SELECT TOP 1 [additional_calendar].[id]\n"
-                + "      ,[additional_calendar].[start_date]\n"
-                + "      ,[additional_calendar].[end_date]\n"
-                + "      ,[additional_calendar].[overlap]\n"
-                + "      ,[additional_calendar].[display]\n"
-                + "      ,[additional_calendar].[created_at]\n"
-                + "      ,[additional_calendar].[updated_at]\n"
-                + "      ,[additional_calendar].[isAllDay]\n"
-                + "      ,[additional_calendar].[isHasEnd]\n"
-                + "      ,[additional_calendar].[calendarId]\n"
-                + "      ,[additional_calendar].[statusId]\n"
-                + "      ,[additional_calendar].[categoryId]\n"
-                + "      ,[calendar].[userId]\n"
-                + "	 ,[calendar].[name] as 'calendarName' \n"
-                + "      ,[calendar].[color]\n"
-                + "      ,[calendar].[created_at] as 'calendar_created_at'\n"
-                + "      ,[calendar].[updated_at] as 'calendar_updated_at'\n"
-                + "	  ,[status_calendar].[name] as 'statusName'\n"
-                + "	  ,[category_calendar].[name] as 'categoryName'\n"
-                + "  FROM [additional_calendar]\n"
-                + "  INNER JOIN [calendar] ON [calendar].[id] = [additional_calendar].[calendarId]\n"
-                + "  INNER JOIN [status_calendar] ON [status_calendar].[id] = [additional_calendar].[statusId]\n"
-                + "  INNER JOIN [category_calendar] ON [category_calendar].[id] = [additional_calendar].[categoryId]\n"
-                + " WHERE [calendar].[userId] = ?\n"
-                + " ORDER BY [additional_calendar].[id] DESC";
-        PreparedStatement statement = null;
-        try {
-            statement = connection.prepareStatement(sql);
-            statement.setInt(1, userId);
-            ResultSet result = statement.executeQuery();
-            while (result.next()) {
-                AdditionalCalendar additional = new AdditionalCalendar();
-                additional.setId(result.getInt("id"));
-                additional.setStartDate(result.getTimestamp("start_date"));
-                additional.setEndDate(result.getTimestamp("end_date"));
-                additional.setOverlap(result.getBoolean("overlap"));
-                additional.setDisplay(result.getString("display"));
-                additional.setIsAllDay(result.getBoolean("isAllDay"));
-                additional.setIsHasEnd(result.getBoolean("isHasEnd"));
-                additional.setCreated_at(result.getTimestamp("created_at"));
-                additional.setUpdated_at(result.getTimestamp("updated_at"));
-                additional.setCalendarId(result.getInt("calendarId"));
-                additional.setStatusId(result.getInt("statusId"));
-                additional.setCategoryId(result.getInt("categoryId"));
 
-                Calendar calendar = new Calendar();
-                calendar.setId(result.getInt("calendarId"));
-                calendar.setName(result.getString("calendarName"));
-                calendar.setColor(result.getString("color"));
-                calendar.setUserId(result.getInt("userId"));
-                calendar.setCreated_at(result.getTimestamp("calendar_created_at"));
-                calendar.setUpdated_at(result.getTimestamp("calendar_updated_at"));
-                additional.setCalendar(calendar);
-
-                CategoryCalendar category = new CategoryCalendar();
-                category.setId(result.getInt("categoryId"));
-                category.setName(result.getString("categoryName"));
-                additional.setCategory(category);
-
-                StatusCalendar status = new StatusCalendar();
-                status.setId(result.getInt("statusId"));
-                status.setName(result.getString("statusName"));
-                additional.setStatus(status);
-                return additional;
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(AdditionalCalendarDBContext.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return null;
-    }
 
     @Override
     public AdditionalCalendar insert(AdditionalCalendar model) {
@@ -407,7 +332,7 @@ public class AdditionalCalendarDBContext extends DBContext<AdditionalCalendar> {
                     + "           ,[statusId]\n"
                     + "           ,[categoryId])\n"
                     + "     VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-            statement = connection.prepareStatement(sql);
+            statement = connection.prepareStatement(sql, statement.RETURN_GENERATED_KEYS);
             statement.setTimestamp(1, model.getStartDate());
             statement.setTimestamp(2, model.getEndDate());
             statement.setBoolean(3, model.isOverlap());
@@ -420,7 +345,11 @@ public class AdditionalCalendarDBContext extends DBContext<AdditionalCalendar> {
             statement.setInt(10, model.getStatusId());
             statement.setInt(11, model.getCategoryId());
             statement.executeUpdate();
-            return getNew(model.getCalendar().getUserId());
+            ResultSet rs = statement.getGeneratedKeys();
+            if (rs.next()) {
+                int id = rs.getInt(1);
+                return get(id);
+            }
         } catch (SQLException ex) {
             Logger.getLogger(AdditionalCalendarDBContext.class.getName()).log(Level.SEVERE, null, ex);
         } finally {

@@ -442,6 +442,54 @@ public class UserDBContext extends DBContext<User> {
         return null;
     }
 
+    public User getUser(int id) {
+        String sql = "SELECT [id]\n"
+                + "      ,[username]\n"
+                + "      ,[password]\n"
+                + "      ,[first_name]\n"
+                + "      ,[last_name]\n"
+                + "      ,[birthday]\n"
+                + "      ,[email]\n"
+                + "      ,[phone]\n"
+                + "      ,[gender]\n"
+                + "      ,[is_super]\n"
+                + "      ,[is_active]\n"
+                + "      ,[permission]\n"
+                + "      ,[created_at]\n"
+                + "      ,[updated_at]\n"
+                + "      ,[avatar]\n"
+                + "  FROM [user]\n"
+                + " WHERE [user].[id] = ? ";
+        PreparedStatement statement = null;
+        try {
+            statement = connection.prepareStatement(sql);
+            statement.setInt(1, id);
+            ResultSet result = statement.executeQuery();
+            while (result.next()) {
+                User user = new User();
+                user.setId(result.getInt("id"));
+                user.setUsername(result.getString("username"));
+                user.setPassword(result.getString("password"));
+                user.setEmail(result.getString("email"));
+                user.setFirst_name(result.getString("first_name"));
+                user.setLast_name(result.getString("last_name"));
+                user.setBirthday(result.getDate("birthday"));
+                user.setPhone(result.getString("phone"));
+                user.setGender(result.getBoolean("gender"));
+                user.setPermission(result.getString("permission"));
+                user.setIs_active(result.getBoolean("is_active"));
+                user.setIs_super(result.getBoolean("is_super"));
+                user.setCreated_at(result.getTimestamp("created_at"));
+                user.setUpdated_at(result.getTimestamp("updated_at"));
+                user.setAvatar(result.getString("avatar"));
+                return user;
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return null;
+    }
+
     @Override
     public User insert(User user) {
         PreparedStatement statement = null;
@@ -462,7 +510,7 @@ public class UserDBContext extends DBContext<User> {
                     + "           ,[created_at]\n"
                     + "           ,[updated_at])\n"
                     + "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-            statement = connection.prepareStatement(sql);
+            statement = connection.prepareStatement(sql, statement.RETURN_GENERATED_KEYS);
             statement.setString(1, user.getUsername());
             statement.setString(2, user.getPassword());
             statement.setString(3, user.getFirst_name());
@@ -477,13 +525,16 @@ public class UserDBContext extends DBContext<User> {
             statement.setTimestamp(12, user.getCreated_at());
             statement.setTimestamp(13, user.getUpdated_at());
             statement.executeUpdate();
-            User new_user = findOne("username", user.getUsername());
-            UserPermission userPermission = new UserPermission();
-            userPermission.setUserId(new_user.getId());
-            userPermission.setPermissionId(user.getUser_permission().getId());
-            userPermissionDB.insert(userPermission);
-
-            return new_user;
+            ResultSet rs = statement.getGeneratedKeys();
+            if (rs.next()) {
+                int id = rs.getInt(1);
+                User new_user = getUser(id);
+                UserPermission userPermission = new UserPermission();
+                userPermission.setUserId(new_user.getId());
+                userPermission.setPermissionId(user.getUser_permission().getId());
+                userPermissionDB.insert(userPermission);
+                return new_user;
+            }
         } catch (SQLException ex) {
             Logger.getLogger(UserDBContext.class.getName()).log(Level.SEVERE, null, ex);
         } finally {

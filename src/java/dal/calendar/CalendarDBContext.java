@@ -258,16 +258,18 @@ public class CalendarDBContext extends DBContext<Calendar> {
                 + "           ,[updated_at])\n"
                 + " VALUES(?, ?, ?, ?, ?)";
         try {
-            statement = connection.prepareStatement(sql);
+            statement = connection.prepareStatement(sql,statement.RETURN_GENERATED_KEYS);
             statement.setString(1, calendar.getName());
             statement.setString(2, calendar.getColor());
             statement.setInt(3, calendar.getUserId());
             statement.setTimestamp(4, calendar.getCreated_at());
             statement.setTimestamp(5, calendar.getUpdated_at());
             statement.executeUpdate();
-            ArrayList<Calendar> calendars = list();
-            Calendar new_calendar = calendars.get(calendars.size() - 1);
-            return new_calendar;
+            ResultSet rs = statement.getGeneratedKeys();
+            if (rs.next()) {
+                int id = rs.getInt(1);
+                return get(id);
+            }
         } catch (SQLException ex) {
             Logger.getLogger(CalendarDBContext.class.getName()).log(Level.SEVERE, null, ex);
         } finally {

@@ -69,11 +69,14 @@ public class CategoryCalendarDBContext extends DBContext<CategoryCalendar> {
                 + " VALUES(?)";
         PreparedStatement statement = null;
         try {
-            statement = connection.prepareStatement(sql);
+            statement = connection.prepareStatement(sql, statement.RETURN_GENERATED_KEYS);
             statement.setString(1, model.getName());
             statement.executeUpdate();
-            ArrayList<CategoryCalendar> categorys = list();
-            return categorys.get(categorys.size()-1);
+            ResultSet rs = statement.getGeneratedKeys();
+            if (rs.next()) {
+                int id = rs.getInt(1);
+                return get(id);
+            }
         } catch (SQLException ex) {
             Logger.getLogger(CategoryCalendarDBContext.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
@@ -131,7 +134,7 @@ public class CategoryCalendarDBContext extends DBContext<CategoryCalendar> {
         try {
             AdditionalCalendarDBContext additionalDB = new AdditionalCalendarDBContext();
             EventCalendarDBContext eventDB = new EventCalendarDBContext();
-            ArrayList<AdditionalCalendar> additionals = additionalDB.findMany("categoryId", id+"");
+            ArrayList<AdditionalCalendar> additionals = additionalDB.findMany("categoryId", id + "");
             for (AdditionalCalendar additional : additionals) {
                 eventDB.deleteByAdditional(additional.getId());
                 additionalDB.delete(additional.getId());

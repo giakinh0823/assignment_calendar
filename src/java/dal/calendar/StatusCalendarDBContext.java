@@ -90,11 +90,14 @@ public class StatusCalendarDBContext extends DBContext<StatusCalendar> {
                 + " VALUES(?)";
         PreparedStatement statement = null;
         try {
-            statement = connection.prepareStatement(sql);
+            statement = connection.prepareStatement(sql, statement.RETURN_GENERATED_KEYS);
             statement.setString(1, model.getName());
             statement.executeUpdate();
-            ArrayList<StatusCalendar> statuss = list();
-            return statuss.get(statuss.size()-1);
+            ResultSet rs = statement.getGeneratedKeys();
+            if (rs.next()) {
+                int id = rs.getInt(1);
+                return get(id);
+            }
         } catch (SQLException ex) {
             Logger.getLogger(StatusCalendarDBContext.class.getName()).log(Level.SEVERE, null, ex);
         } finally {

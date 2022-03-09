@@ -63,13 +63,16 @@ public class UserPermissionDBContext extends DBContext<UserPermission> {
                     + "           ,[userId]\n"
                     + "           ,[permissionId])\n"
                     + "     VALUES(?, ?, ?)";
-            statement = connection.prepareStatement(sql);
+            statement = connection.prepareStatement(sql, statement.RETURN_GENERATED_KEYS);
             statement.setBoolean(1, model.isLicensed());
             statement.setInt(2, model.getUserId());
             statement.setInt(3, model.getPermissionId());
             statement.executeUpdate();
-            ArrayList<UserPermission> userPermissions = list();
-            return userPermissions.get(userPermissions.size() - 1);
+            ResultSet rs = statement.getGeneratedKeys();
+            if (rs.next()) {
+                int id = rs.getInt(1);
+                return get(id);
+            }
         } catch (SQLException ex) {
             Logger.getLogger(UserPermissionDBContext.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
