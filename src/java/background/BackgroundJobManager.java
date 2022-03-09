@@ -42,15 +42,6 @@ public class BackgroundJobManager {
         EventCalendarDBContext eventDB = new EventCalendarDBContext();
         ArrayList<EventCalendar> events = eventDB.list();
         for (EventCalendar event : events) {
-            try {
-                if (event.getUser() != null && event.getUser().getUsername() != null) {
-                    String json = new Gson().toJson(event);
-                    NotificationCalendar notiCalendar = new NotificationCalendar();
-                    notiCalendar.onMessage(json);
-                }
-            } catch (Exception e) {
-                System.out.println(e.getMessage());
-            }
             Date start_time = new Date(event.getAdditional().getStartDate().getTime());
             Date end_time = new Date(event.getAdditional().getEndDate().getTime());
             if (event.getAdditional().getStatus().getName().equalsIgnoreCase("pending")
@@ -80,6 +71,15 @@ public class BackgroundJobManager {
                 }
 
                 // send notify websocket
+                try {
+                    if (event.getUser() != null && event.getUser().getUsername() != null) {
+                        String json = new Gson().toJson(event);
+                        NotificationCalendar notiCalendar = new NotificationCalendar();
+                        notiCalendar.onMessage(json);
+                    }
+                } catch (Exception e) {
+                    System.out.println(e.getMessage());
+                }
             }
 
             if (event.getAdditional().getStatus().getName().equalsIgnoreCase("in progress")
@@ -106,6 +106,16 @@ public class BackgroundJobManager {
                     } catch (MessagingException ex) {
                         Logger.getLogger(BackgroundJobManager.class.getName()).log(Level.SEVERE, null, ex);
                     }
+                }
+
+                try {
+                    if (event.getUser() != null && event.getUser().getUsername() != null) {
+                        String json = new Gson().toJson(event);
+                        NotificationCalendar notiCalendar = new NotificationCalendar();
+                        notiCalendar.onMessage(json);
+                    }
+                } catch (Exception e) {
+                    System.out.println(e.getMessage());
                 }
             }
         }

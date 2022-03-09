@@ -193,7 +193,8 @@
                     var search = location.search.substring(1);
                     const params = search ? JSON.parse('{"' + decodeURI(search).replace(/"/g, '\\"')
                             .replace(/&/g, '","').replace(/=/g, '":"') + '"}') : {};
-                    const page = item.getAttribute("data");
+                    console.log(params);
+                    const page = item.getAttribute("data"); // lấy số number page
                     params.page = page;
                     const href = new URLSearchParams(params).toString();
                     item.setAttribute("href", "?" + href);
