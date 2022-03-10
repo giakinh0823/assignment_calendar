@@ -3,7 +3,6 @@
     Created on : Feb 11, 2022, 1:01:26 PM
     Author     : giaki
 --%>
-
 <%@page import="model.calendar.EventCalendar"%>
 <%@page import="model.calendar.CategoryCalendar"%>
 <%@page import="model.calendar.Calendar"%>
@@ -48,7 +47,7 @@
         .fc-theme-standard td, .fc-theme-standard th{
             border: 1px solid #ebebeb;
         }
-        
+
         .fc-daygrid-event{
             opacity: 0.7!important;
         }
@@ -69,7 +68,7 @@
         .fc-event-title{
             font-size: 16px;
         }
-        
+
         .fc .fc-bg-event{
             opacity: 0.4!important;
         }
@@ -81,10 +80,10 @@
             display: none;
         }
         @media only screen and (max-width: 800px) {
-        #navBarCalendar {
-            display: none;
+            #navBarCalendar {
+                display: none;
+            }
         }
-    }
     </style>
     <body>
         <div class="ml-auto pt-4 max-h-screen">
@@ -111,7 +110,7 @@
                                 <span class="text-lg mr-2">Add Event</span><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path></svg>
                             </button>
                         </div>
-                        <div id="addEventFormContainer" class="hidden w-60 md:w-64 lg:w-80 absolute left-[90%] z-[1000]" style="top: -480%">
+                        <div id="addEventFormContainer" class="hidden w-60 md:w-64 lg:w-80 absolute -top-[300%] left-[90%] z-[1000]">
                             <div>
                                 <jsp:include page="addEvent.jsp" />
                             </div>
@@ -128,7 +127,7 @@
                             <c:forEach items="${calendars}" var="calendar">
                                 <div class="flex justify-between items-center  mb-2 calendar-item-${calendar.getId()}">
                                     <div class="flex items-center">
-                                        <input style="border-color: ${calendar.getColor()}; background-color: ${calendar.getColor()}" id="calendar-${calendar.getId()}" value="${calendar.getId()}" name="filter-event-calendar" aria-describedby="checkbox-1" type="checkbox" class="w-4 h-4 border-[${calendar.getColor()}] bg-white checked:bg-[${calendar.getColor()}] checked:border-[${calendar.getColor()}] bg-gray-100 rounded border-gray-300 focus:ring-blue-500" checked>
+                                        <input id="calendar-${calendar.getId()}" value="${calendar.getId()}" name="filter-event-calendar" aria-describedby="checkbox-1" type="checkbox" class="w-4 h-4 border-[${calendar.getColor()}] bg-white checked:bg-[${calendar.getColor()}] checked:border-[${calendar.getColor()}] bg-gray-100 rounded border-gray-300 focus:ring-blue-500" checked>
                                         <label for="calendar-${calendar.getId()}" class="ml-3 text-md font-medium">${calendar.getName()}</label>
                                     </div>
                                     <div class="flex justify-end items-center">
@@ -145,12 +144,13 @@
                     </div>
                 </div>
                 <div class="w-full">
-                    <div id="calendar" class="max-h-[83vh] w-full"></div>
+                    <div id="calendar" class="max-h-[93vh] w-full"></div>
                 </div>
             </div>
         </div>
         <jsp:include page="addCalendar.jsp" />
-        
+
+
         <div class="hidden overflow-y-auto overflow-x-hidden fixed right-0 left-0 top-4 z-50 justify-center items-center md:inset-0 h-modal sm:h-full" id="confirm-delete-calendar-modal">
             <div class="relative px-4 w-full max-w-md h-full md:h-auto">
                 <!-- Modal content -->
@@ -173,7 +173,8 @@
                 </div>
             </div>
         </div>
-        <div class="z-[10000] fixed bottom-8 right-8" id="toast"></div>
+        <div class="z-[10000] fixed bottom-8 right-8" id="toast">
+        </div>
         <jsp:include page="infoEvent.jsp" />
         <jsp:include page="editCalendar.jsp" />
         <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.2/main.min.js"></script>
@@ -182,26 +183,26 @@
             var events = []
             <c:forEach items="${events}" var="event">
                 events.push({
-                    id: ${event.getId()},
-                    title: "${event.getTitle()}",
-                    start: new Date("${event.getAdditional().getStartDate()}").toISOString(),
-                    end: new Date("${event.getAdditional().getEndDate()}").toISOString(),
-                    color: "${event.getAdditional().getCalendar().getColor()}",
-                    description: "${event.getDescription()}",
-                    location: "${event.getLocation()}",
-                    overlap: ${event.getAdditional().isOverlap()},
-                    category: ${event.getAdditional().getCategory().getId()},
-                    categoryName: "${event.getAdditional().getCategory().getName()}",
-                    status: "${event.getAdditional().getStatus().getId()}",
-                    statusName: "${event.getAdditional().getStatus().getName()}",
-                    allDay: ${event.getAdditional().isIsAllDay()},
-                    hasEnd: ${event.getAdditional().isIsHasEnd()},
-                    calendarName: "${event.getAdditional().getCalendar().getName()}",
-                    calendar: ${event.getAdditional().getCalendar().getId()},
-                    additional: ${event.getAdditional().getId()},
-                    <c:if test="${event.getAdditional().getDisplay() != null}">
-                    display: "${event.getAdditional().getDisplay()}",    
-                    </c:if>
+                id: ${event.getId()},
+                title: `${event.getTitle()}`,
+                start: new Date("${event.getAdditional().getStartDate()}").toISOString(),
+                end: new Date("${event.getAdditional().getEndDate()}").toISOString(),
+                color: `${event.getAdditional().getCalendar().getColor()}`,
+                description: `${event.getDescription()}`,
+                location: `${event.getLocation()}`,
+                overlap: ${event.getAdditional().isOverlap()},
+                category: ${event.getAdditional().getCategory().getId()},
+                categoryName: "${event.getAdditional().getCategory().getName()}",
+                status: "${event.getAdditional().getStatus().getId()}",
+                statusName: "${event.getAdditional().getStatus().getName()}",
+                allDay: ${event.getAdditional().isIsAllDay()},
+                hasEnd: ${event.getAdditional().isIsHasEnd()},
+                calendarName: "${event.getAdditional().getCalendar().getName()}",
+                calendar: ${event.getAdditional().getCalendar().getId()},
+                additional: ${event.getAdditional().getId()},
+                <c:if test="${event.getAdditional().getDisplay() != null}">
+                display: "${event.getAdditional().getDisplay()}",    
+                </c:if>
             })
             </c:forEach>
         </script>

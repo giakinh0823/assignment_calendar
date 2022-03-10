@@ -184,12 +184,12 @@
             <c:forEach items="${events}" var="event">
                 events.push({
                 id: ${event.getId()},
-                title: "${event.getTitle()}",
+                title: `${event.getTitle()}`,
                 start: new Date("${event.getAdditional().getStartDate()}").toISOString(),
                 end: new Date("${event.getAdditional().getEndDate()}").toISOString(),
-                color: "${event.getAdditional().getCalendar().getColor()}",
-                description: "${event.getDescription()}",
-                location: "${event.getLocation()}",
+                color: `${event.getAdditional().getCalendar().getColor()}`,
+                description: `${event.getDescription()}`,
+                location: `${event.getLocation()}`,
                 overlap: ${event.getAdditional().isOverlap()},
                 category: ${event.getAdditional().getCategory().getId()},
                 categoryName: "${event.getAdditional().getCategory().getName()}",
