@@ -17,8 +17,6 @@ git clone https://github.com/giakinh0823/assignment_Clife.git
 
 After run file script sql server in folder [sql](https://github.com/giakinh0823/assignment_Clife/tree/main/sql) in project
 
-Model SQL like this.
-
 
 ## Contributing
 - Hà Gia Kính
