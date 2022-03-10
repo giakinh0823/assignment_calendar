@@ -189,7 +189,7 @@ public class UserDBContext extends DBContext<User> {
                 + "ON [user_per].[userId] = [user].[id]\n"
                 + "INNER JOIN [permission]\n"
                 + "ON [permission].[id] = [user_per].[permissionId]\n"
-                + " WHERE LOWER([user].[username]) LIKE LOWER(?) or LOWER([user].[email]) LIKE LOWER(?) or LOWER([user].[phone]) LIKE LOWER(?)) [user]\n"
+                + " WHERE LOWER([user].[username]) LIKE LOWER(?) or LOWER([user].[email]) LIKE LOWER(?) or LOWER([user].[phone]) LIKE LOWER(?) or LOWER([user].[first_name]) LIKE LOWER(?) or LOWER([user].[last_name]) LIKE LOWER(?)) [user]\n"
                 + "WHERE row_index >= (? - 1) * ? + 1 AND row_index <= ? * ?";
         PreparedStatement statement = null;
         try {
@@ -197,11 +197,13 @@ public class UserDBContext extends DBContext<User> {
             statement.setString(1, "%" + value + "%");
             statement.setString(2, "%" + value + "%");
             statement.setString(3, "%" + value + "%");
+            statement.setString(4, "%" + value + "%");
+            statement.setString(5, "%" + value + "%");
 
-            statement.setInt(4, pageIndex);
-            statement.setInt(5, pageSize);
             statement.setInt(6, pageIndex);
             statement.setInt(7, pageSize);
+            statement.setInt(8, pageIndex);
+            statement.setInt(9, pageSize);
             ResultSet result = statement.executeQuery();
             while (result.next()) {
                 User user = new User();
