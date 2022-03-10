@@ -189,7 +189,7 @@ public class UserDBContext extends DBContext<User> {
                 + "ON [user_per].[userId] = [user].[id]\n"
                 + "INNER JOIN [permission]\n"
                 + "ON [permission].[id] = [user_per].[permissionId]\n"
-                + " WHERE [user].[username] LIKE ? or [user].[email] LIKE ? or [user].[phone] LIKE ?) [user]\n"
+                + " WHERE LOWER([user].[username]) LIKE LOWER(?) or LOWER([user].[email]) LIKE LOWER(?) or LOWER([user].[phone]) LIKE LOWER(?)) [user]\n"
                 + "WHERE row_index >= (? - 1) * ? + 1 AND row_index <= ? * ?";
         PreparedStatement statement = null;
         try {

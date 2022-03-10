@@ -151,7 +151,6 @@
         </div>
         <jsp:include page="addCalendar.jsp" />
         
-
         <div class="hidden overflow-y-auto overflow-x-hidden fixed right-0 left-0 top-4 z-50 justify-center items-center md:inset-0 h-modal sm:h-full" id="confirm-delete-calendar-modal">
             <div class="relative px-4 w-full max-w-md h-full md:h-auto">
                 <!-- Modal content -->
@@ -183,26 +182,26 @@
             var events = []
             <c:forEach items="${events}" var="event">
                 events.push({
-                id: ${event.getId()},
-                title: "${event.getTitle()}",
-                start: new Date("${event.getAdditional().getStartDate()}").toISOString(),
-                end: new Date("${event.getAdditional().getEndDate()}").toISOString(),
-                color: "${event.getAdditional().getCalendar().getColor()}",
-                description: "${event.getDescription()}",
-                location: "${event.getLocation()}",
-                overlap: ${event.getAdditional().isOverlap()},
-                category: ${event.getAdditional().getCategory().getId()},
-                categoryName: "${event.getAdditional().getCategory().getName()}",
-                status: "${event.getAdditional().getStatus().getId()}",
-                statusName: "${event.getAdditional().getStatus().getName()}",
-                allDay: ${event.getAdditional().isIsAllDay()},
-                hasEnd: ${event.getAdditional().isIsHasEnd()},
-                calendarName: "${event.getAdditional().getCalendar().getName()}",
-                calendar: ${event.getAdditional().getCalendar().getId()},
-                additional: ${event.getAdditional().getId()},
-                <c:if test="${event.getAdditional().getDisplay() != null}">
-                display: "${event.getAdditional().getDisplay()}",    
-                </c:if>
+                    id: ${event.getId()},
+                    title: "${event.getTitle()}",
+                    start: new Date("${event.getAdditional().getStartDate()}").toISOString(),
+                    end: new Date("${event.getAdditional().getEndDate()}").toISOString(),
+                    color: "${event.getAdditional().getCalendar().getColor()}",
+                    description: "${event.getDescription()}",
+                    location: "${event.getLocation()}",
+                    overlap: ${event.getAdditional().isOverlap()},
+                    category: ${event.getAdditional().getCategory().getId()},
+                    categoryName: "${event.getAdditional().getCategory().getName()}",
+                    status: "${event.getAdditional().getStatus().getId()}",
+                    statusName: "${event.getAdditional().getStatus().getName()}",
+                    allDay: ${event.getAdditional().isIsAllDay()},
+                    hasEnd: ${event.getAdditional().isIsHasEnd()},
+                    calendarName: "${event.getAdditional().getCalendar().getName()}",
+                    calendar: ${event.getAdditional().getCalendar().getId()},
+                    additional: ${event.getAdditional().getId()},
+                    <c:if test="${event.getAdditional().getDisplay() != null}">
+                    display: "${event.getAdditional().getDisplay()}",    
+                    </c:if>
             })
             </c:forEach>
         </script>
@@ -211,7 +210,6 @@
             const socketUrl = 'ws://' + window.location.host + '/ws/calendar/${sessionScope.user.username}'
         </script>
         <script src="/assets/js/calendar/websocket.js"></script>
-
     </body>
 </html>
 <jsp:include page="../base/footer.jsp" />

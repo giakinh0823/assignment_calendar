@@ -1,6 +1,6 @@
 // init calendar rerender
-const calendarEl = document.getElementById('calendar');
-const calendar = new FullCalendar.Calendar(calendarEl, calenderHandle(events));
+var calendarEl = document.getElementById('calendar');
+var calendar = new FullCalendar.Calendar(calendarEl, calenderHandle(events));
 calendar.render();
 // change event calendar form
 $("#calendarGroup").on('change', (e) => {

@@ -26,6 +26,7 @@
             ArrayList<User> users = (ArrayList<User>) request.getAttribute("users");
         %>
         <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js"></script>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.2/main.min.css">
     </head>
     <jsp:include page="../base/header.jsp" />
     <body>

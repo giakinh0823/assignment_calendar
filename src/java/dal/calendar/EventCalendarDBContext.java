@@ -629,8 +629,8 @@ public class EventCalendarDBContext extends DBContext<EventCalendar> {
                 + "  INNER JOIN [calendar] ON [calendar].[id] = [additional_calendar].[calendarId]\n"
                 + "  INNER JOIN [status_calendar] ON [status_calendar].[id] = [additional_calendar].[statusId]\n"
                 + "  INNER JOIN [category_calendar] ON [category_calendar].[id] = [additional_calendar].[categoryId]\n"
-                + " WHERE [event].[title] LIKE ? or [event].[location] LIKE ? or \n"
-                + " [user].[username] LIKE ? or [user].[email] LIKE ?) [event]\n"
+                + " WHERE LOWER([event].[title]) LIKE LOWER(?) or LOWER([event].[location]) LIKE LOWER(?) or \n"
+                + " LOWER([user].[username]) LIKE LOWER(?) or LOWER([user].[email]) LIKE LOWER(?)) [event]\n"
                 + "  WHERE row_index >= (? - 1) * ? + 1 AND row_index <= ? * ?";
 
         PreparedStatement statement = null;
