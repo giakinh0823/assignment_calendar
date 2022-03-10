@@ -174,6 +174,7 @@
                 </div>
             </div>
         </div>
+        <div class="z-[10000] fixed bottom-8 right-8" id="toast"></div>
         <jsp:include page="infoEvent.jsp" />
         <jsp:include page="editCalendar.jsp" />
         <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.2/main.min.js"></script>

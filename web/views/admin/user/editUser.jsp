@@ -19,7 +19,7 @@
     <jsp:include page="../base/header.jsp" />
     <body>
         <div class="flex">
-            <div class="w-64  bg-gray-50">
+            <div class="w-64  bg-gray-50" style="min-width: 250px">
                 <jsp:include page="../base/navbar.jsp" />
             </div>
             <div class="w-full px-10 py-5">

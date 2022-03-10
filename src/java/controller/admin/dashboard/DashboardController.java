@@ -47,17 +47,15 @@ public class DashboardController extends BaseAuthAdminController {
             throws ServletException, IOException {
         CalendarDBContext calendarDB = new CalendarDBContext();
         CategoryCalendarDBContext categoryDB = new CategoryCalendarDBContext();
-        StatusCalendarDBContext statusDB = new StatusCalendarDBContext();
         EventCalendarDBContext eventDB = new EventCalendarDBContext();
         UserDBContext userDB = new UserDBContext();
-
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("admin");
 
         ArrayList<Calendar> calendars = calendarDB.listByUser(user.getId());
         ArrayList<CategoryCalendar> listCategory = categoryDB.list();
-        ArrayList<StatusCalendar> listStatus = statusDB.list();
         ArrayList<EventCalendar> events = eventDB.list();
+        ArrayList<User> users = userDB.list();
         
         request.setAttribute("userSize", userDB.getSize());
         request.setAttribute("calendarSize", calendarDB.getSize());
@@ -65,8 +63,8 @@ public class DashboardController extends BaseAuthAdminController {
 
         request.setAttribute("calendars", calendars);
         request.setAttribute("listCategory", listCategory);
-        request.setAttribute("listStatus", listStatus);
         request.setAttribute("events", events);
+        request.setAttribute("users", users);
         request.getRequestDispatcher("/views/admin/dashboard/dashboard.jsp").forward(request, response);
     }
 

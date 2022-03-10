@@ -23,10 +23,10 @@
     <body>
         <jsp:include page="../base/header.jsp" />
         <div class="flex">
-            <div class="w-64  bg-gray-50">
+            <div class="w-64 bg-gray-50" style="min-width: 250px">
                 <jsp:include page="../base/navbar.jsp" />
             </div>
-            <div class="w-full px-10 py-5">
+            <div class="w-full px-5 py-5">
                 <div class="mb-6">
                     <nav class="flex" aria-label="Breadcrumb">
                         <ol class="inline-flex items-center space-x-1 md:space-x-3">
@@ -127,8 +127,8 @@
                                                 </td>
                                                 <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap">${event.getId()}</td>
                                                 <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap">${event.getTitle()}</td>
-                                                <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap">${event.getDescription()}</td>
-                                                <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap">${event.getLocation()}</td>
+                                                <td class="py-4 px-6 text-sm font-medium text-gray-900"><span style="overflow: hidden;text-overflow: ellipsis;display: -webkit-box;-webkit-line-clamp: 2;-webkit-box-orient: vertical;">${event.getDescription()}</span></td>
+                                                <td class="py-4 px-6 text-sm font-medium text-gray-900"><span style="overflow: hidden;text-overflow: ellipsis;display: -webkit-box;-webkit-line-clamp: 2;-webkit-box-orient: vertical;">${event.getLocation()}</span></td>
                                                 <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap">${event.getAdditional().getStatus().getName()}</td>
                                                 <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap" style="color: ${event.getAdditional().getCalendar().getColor()}">${event.getAdditional().getCalendar().getName()}</td>
                                                 <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap">${event.getAdditional().getCategory().getName()}</td>

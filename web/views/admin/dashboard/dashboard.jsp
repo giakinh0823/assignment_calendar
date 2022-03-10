@@ -4,22 +4,33 @@
     Author     : giaki
 --%>
 
+<%@page import="model.auth.User"%>
+<%@page import="model.calendar.CategoryCalendar"%>
+<%@page import="model.calendar.Calendar"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="model.calendar.EventCalendar"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Admin dashboard</title>
         <%
-            Integer userSize = (Integer)request.getAttribute("userSize");
-            Integer calendarSize = (Integer)request.getAttribute("calendarSize");
-            Integer eventSize = (Integer)request.getAttribute("eventSize");
+            Integer userSize = (Integer) request.getAttribute("userSize");
+            Integer calendarSize = (Integer) request.getAttribute("calendarSize");
+            Integer eventSize = (Integer) request.getAttribute("eventSize");
+            ArrayList<EventCalendar> events = (ArrayList<EventCalendar>) request.getAttribute("events");
+            ArrayList<Calendar> calendars = (ArrayList<Calendar>) request.getAttribute("calendars");
+            ArrayList<CategoryCalendar> listCategory = (ArrayList<CategoryCalendar>) request.getAttribute("listCategory");
+            ArrayList<User> users = (ArrayList<User>) request.getAttribute("users");
         %>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js"></script>
     </head>
     <jsp:include page="../base/header.jsp" />
     <body>
         <div class="flex">
-            <div class="w-64  bg-gray-50">
+            <div class="w-64  bg-gray-50" style="min-width: 250px">
                 <jsp:include page="../base/navbar.jsp" />
             </div>
             <div class="w-full p-5">
@@ -43,11 +54,59 @@
                         </div>
                     </div>
                 </div>
-                <div>
-                     <jsp:include page="calendar.jsp" />
+                <div >
+                    <div class="max-w-full">
+                        <canvas id="mainChart" style="max-width: 100%!important; max-height: 85vh!important"></canvas>
+                    </div>
+                    <div class="mt-20 w-full flex">
+                        <div class="max-w-full flex-1 p-20">
+                            <canvas id="userChart" style="max-width: 100%!important; height: 60vh!important"></canvas>
+                        </div>
+                        <div class="max-w-full flex-1 p-20">
+                            <canvas id="categoryChart" style="max-width: 100%!important; height: 60vh!important"></canvas>
+                        </div>
+                    </div>
+                    <div class="max-w-full mt-20">
+                        <h2 class="text-5xl mb-12 text-right">Calendar Admin</h2>
+                        <jsp:include page="calendar.jsp" />
+                    </div>
                 </div>
             </div>
         </div>
     </body>
+    <script>
+        var listCategoryQuantity = [];
+        var listCategoryLabel = [];
+        
+        <c:forEach items="${listCategory}" var="category">
+        listCategoryLabel.push("${category.name}");
+        listCategoryQuantity[${category.id}] = 0;
+        </c:forEach>
+
+        var events = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+        var calendars = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+        <c:forEach items="${events}" var="event">
+        if (new Date("${event.created_at}").getFullYear() == new Date().getFullYear()) {
+            events[new Date("${event.created_at}").getMonth()] += 1;
+            listCategoryQuantity[${event.additional.category.id}] += 1;
+        }
+        </c:forEach>
+        
+        listCategoryQuantity = listCategoryQuantity.filter(Number);
+
+        <c:forEach items="${calendars}" var="calendar">
+        if (new Date("${calendar.created_at}").getFullYear() == new Date().getFullYear()) {
+            calendars[new Date("${calendar.created_at}").getMonth()] += 1;
+        }
+        </c:forEach>
+
+        var users = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+        <c:forEach items="${users}" var="user">
+        if (new Date("${user.created_at}").getFullYear() == new Date().getFullYear()) {
+            users[new Date("${user.created_at}").getMonth()] += 1;
+        }
+        </c:forEach>
+    </script>
+    <script src="/assets/js/dashboard/dashboard.js"></script>
     <jsp:include page="../base/footer.jsp" />
 </html>

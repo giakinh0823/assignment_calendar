@@ -22,10 +22,10 @@
     <body>
         <jsp:include page="../base/header.jsp" />
         <div class="flex">
-            <div class="w-64  bg-gray-50">
+            <div class="w-64  bg-gray-50" style="min-width: 250px">
                 <jsp:include page="../base/navbar.jsp" />
             </div>
-            <div class="w-full px-10 py-5">
+            <div class="w-full px-5 py-5">
                 <div class="mb-6">
                     <nav class="flex" aria-label="Breadcrumb">
                         <ol class="inline-flex items-center space-x-1 md:space-x-3">
