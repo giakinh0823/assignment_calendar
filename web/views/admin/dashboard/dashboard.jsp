@@ -84,11 +84,11 @@
         listCategoryQuantity[${category.id}] = 0;
         </c:forEach>
 
-        var events = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+        var eventCalendars = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
         var calendars = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
         <c:forEach items="${events}" var="event">
         if (new Date("${event.created_at}").getFullYear() == new Date().getFullYear()) {
-            events[new Date("${event.created_at}").getMonth()] += 1;
+            eventCalendars[new Date("${event.created_at}").getMonth()] += 1;
             listCategoryQuantity[${event.additional.category.id}] += 1;
         }
         </c:forEach>

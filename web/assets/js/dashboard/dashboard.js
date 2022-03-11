@@ -27,10 +27,10 @@ const data = {
     labels: labels,
     datasets: [{
             label: 'Event',
-            fill: events,
+            fill: eventCalendars,
             backgroundColor: CHART_COLORS.blue,
             borderColor: CHART_COLORS.blue,
-            data: events,
+            data: eventCalendars,
         },
         {
             label: 'Calendar',
