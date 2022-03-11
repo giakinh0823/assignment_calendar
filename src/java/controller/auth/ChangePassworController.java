@@ -21,7 +21,7 @@ import utils.Validate;
  *
  * @author giaki
  */
-public class ChangePassworControllẻ extends HttpServlet {
+public class ChangePassworController extends HttpServlet {
 
     private final Validate validate = new Validate();
 
@@ -56,7 +56,7 @@ public class ChangePassworControllẻ extends HttpServlet {
 
                 }
             } else {
-                request.setAttribute("error", "Username or olđ password wrong!");
+                request.setAttribute("error", "Username or old password wrong!");
                 request.getRequestDispatcher("/views/auth/change.jsp").forward(request, response);
             }
         } catch (Exception e) {

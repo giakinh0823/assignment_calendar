@@ -50,7 +50,29 @@ public class UserPermissionDBContext extends DBContext<UserPermission> {
 
     @Override
     public UserPermission get(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String sql = "SELECT [id]\n"
+                + ",[licensed]\n"
+                + ",[userId]\n"
+                + ",[permissionId]\n"
+                + "  FROM [user_permission]\n"
+                + " WHERE id = ?";
+        PreparedStatement statement = null;
+        try {
+            statement = connection.prepareStatement(sql);
+            statement.setInt(1, id);
+            ResultSet result = statement.executeQuery();
+            while (result.next()) {
+                UserPermission userPermission = new UserPermission();
+                userPermission.setId(result.getInt("id"));
+                userPermission.setLicensed(result.getBoolean("licensed"));
+                userPermission.setUserId(result.getInt("userId"));
+                userPermission.setPermissionId(result.getInt("permissionId"));
+                return userPermission;
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return null;
     }
 
     @Override
