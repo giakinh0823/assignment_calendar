@@ -25,7 +25,7 @@ public class PermissionDBContext extends DBContext<Permission> {
         String sql = "SELECT [id]\n"
                 + "      ,[name]\n"
                 + "  FROM [permission]\n"
-                + " WHERE name = ?";
+                + " WHERE LOWER(name) = LOWER(?)";
         PreparedStatement statement = null;
         try {
             statement = connection.prepareStatement(sql);

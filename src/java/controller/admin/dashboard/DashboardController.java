@@ -52,7 +52,7 @@ public class DashboardController extends BaseAuthAdminController {
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("admin");
 
-        ArrayList<Calendar> calendars = calendarDB.listByUser(user.getId());
+        ArrayList<Calendar> calendars = calendarDB.list();
         ArrayList<CategoryCalendar> listCategory = categoryDB.list();
         ArrayList<EventCalendar> events = eventDB.list();
         ArrayList<User> users = userDB.list();

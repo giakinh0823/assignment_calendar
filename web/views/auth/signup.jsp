@@ -128,7 +128,7 @@
                     } else{
                         location.pathname = "/login";
                         $("#showErrorForm").addClass("hidden")
-                        $('#contentSuccessForm').text("Update success")
+                        $('#contentSuccessForm').text("Signup success")
                         $("#showSuccessForm").removeClass("hidden")
                    }
                 })

@@ -184,7 +184,7 @@
     </servlet>
     <servlet>
         <servlet-name>ChangePassworControllẻ</servlet-name>
-        <servlet-class>controller.auth.ChangePassworControllẻ</servlet-class>
+        <servlet-class>controller.auth.ChangePassworController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>ErrorHandler</servlet-name>

@@ -536,6 +536,18 @@ public class EventCalendarDBContext extends DBContext<EventCalendar> {
             Logger.getLogger(EventCalendarDBContext.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
+    public void deleteByUser(int id) {
+        try {
+            String sql = "DELETE FROM [event]\n"
+                    + "WHERE [userId] = ? ";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setInt(1, id);
+            statement.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(EventCalendarDBContext.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 
     public int getSize() {
         String sql = "SELECT COUNT([event].[id]) as 'size'  FROM [event]";

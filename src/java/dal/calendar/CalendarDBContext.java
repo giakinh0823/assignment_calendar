@@ -341,6 +341,19 @@ public class CalendarDBContext extends DBContext<Calendar> {
         }
     }
 
+    
+    public void deleteByUser(int id) {
+        try {
+            String sql = "DELETE FROM [calendar]\n"
+                    + "WHERE [userId] = ? ";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setInt(1, id);
+            statement.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(AdditionalCalendarDBContext.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
     public int getSize() {
         String sql = "SELECT COUNT([calendar].[id]) as 'size'  FROM [calendar]";
         PreparedStatement statement = null;

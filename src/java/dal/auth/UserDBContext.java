@@ -6,6 +6,9 @@
 package dal.auth;
 
 import dal.DBContext;
+import dal.calendar.AdditionalCalendarDBContext;
+import dal.calendar.CalendarDBContext;
+import dal.calendar.EventCalendarDBContext;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -15,6 +18,9 @@ import java.util.logging.Logger;
 import model.auth.Permission;
 import model.auth.User;
 import model.auth.UserPermission;
+import model.calendar.AdditionalCalendar;
+import model.calendar.Calendar;
+import model.calendar.EventCalendar;
 
 /**
  *
@@ -495,7 +501,6 @@ public class UserDBContext extends DBContext<User> {
     @Override
     public User insert(User user) {
         PreparedStatement statement = null;
-        UserPermissionDBContext userPermissionDB = new UserPermissionDBContext();
         try {
             String sql = "INSERT INTO [user]\n"
                     + "           ([username]\n"
@@ -530,12 +535,15 @@ public class UserDBContext extends DBContext<User> {
             ResultSet rs = statement.getGeneratedKeys();
             if (rs.next()) {
                 int id = rs.getInt(1);
-                User new_user = getUser(id);
+                user.setId(id);
+                 UserPermissionDBContext userPermissionDB = new UserPermissionDBContext();
                 UserPermission userPermission = new UserPermission();
-                userPermission.setUserId(new_user.getId());
+                userPermission.setUserId(id);
                 userPermission.setPermissionId(user.getUser_permission().getId());
-                userPermissionDB.insert(userPermission);
-                return new_user;
+                userPermission = userPermissionDB.insert(userPermission);
+                System.out.println(user.getUsername());
+                System.out.println(userPermission.getId());
+                return user;
             }
         } catch (SQLException ex) {
             Logger.getLogger(UserDBContext.class.getName()).log(Level.SEVERE, null, ex);
@@ -723,7 +731,19 @@ public class UserDBContext extends DBContext<User> {
     @Override
     public void delete(int id) {
         UserPermissionDBContext userPermissionDB = new UserPermissionDBContext();
+        CalendarDBContext calendarDB = new CalendarDBContext();
+        EventCalendarDBContext eventDB = new EventCalendarDBContext();
+        AdditionalCalendarDBContext additionalDB = new AdditionalCalendarDBContext();
         try {
+            ArrayList<Calendar> calendars = calendarDB.listByUser(id);
+            for (Calendar calendar : calendars) {
+                ArrayList<AdditionalCalendar> additionals = additionalDB.findMany("calendarId", calendar.getId() + "");
+                for (AdditionalCalendar additional : additionals) {
+                    eventDB.deleteByAdditional(additional.getId());
+                    additionalDB.delete(additional.getId());
+                }
+            }
+            calendarDB.deleteByUser(id);
             userPermissionDB.deleteByUser(id);
             String sql = "DELETE FROM [user]\n"
                     + "WHERE id = ? ";
