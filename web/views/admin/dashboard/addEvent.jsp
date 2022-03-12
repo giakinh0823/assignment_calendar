@@ -62,9 +62,11 @@
                                     m-0
                                     focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" aria-label="Default select example">
                                 <c:forEach items="${calendars}" var="calendar">
-                                    <option value="${calendar.getId()}" class="option-calendar-${calendar.getId()}" data-color="${calendar.getColor()}" class="font-semibold text-[${calendar.getColor()}]">
-                                        ${calendar.getName()}
-                                    </option>
+                                    <c:if test="${calendar.user.id==sessionScope.admin.id}">
+                                        <option value="${calendar.getId()}" class="option-calendar-${calendar.getId()}" data-color="${calendar.getColor()}" class="font-semibold text-[${calendar.getColor()}]">
+                                            ${calendar.getName()}
+                                        </option>
+                                    </c:if>
                                 </c:forEach>
                             </select>
                         </div>
@@ -86,7 +88,7 @@
                            ease-in-out
                            m-0
                            focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none disabled"
-                           placeholder="Color" name="color" value="<%=(calendars != null && calendars.size() > 0) ? calendars.get(0).getColor() : ""%>" style="color: <%=(calendars != null && calendars.size() > 0) ? calendars.get(0).getColor() : ""%>" id="colorEvent" disabled>
+                           placeholder="Color" name="color" id="colorEvent" disabled>
                 </div>
                 <div class="mb-3">
                     <div class="flex justify-center">

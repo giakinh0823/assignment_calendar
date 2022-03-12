@@ -59,11 +59,11 @@
                     <div class="max-w-full">
                         <canvas id="mainChart" style="max-width: 100%!important; max-height: 85vh!important"></canvas>
                     </div>
-                    <div class="mt-20 w-full flex">
-                        <div class="max-w-full flex-1 p-20">
+                    <div class="mt-20 w-full grid grid-cols-2 gap-10">
+                        <div class="max-w-full px-10 shadow-lg">
                             <canvas id="userChart" style="max-width: 100%!important; height: 60vh!important"></canvas>
                         </div>
-                        <div class="max-w-full flex-1 p-20">
+                        <div class="max-w-full px-10 shadow-lg">
                             <canvas id="categoryChart" style="max-width: 100%!important; height: 60vh!important"></canvas>
                         </div>
                     </div>

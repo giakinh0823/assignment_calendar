@@ -17,7 +17,7 @@
     </head>
     <jsp:include page="../base/header.jsp" />
     <body>
-        <aside class="w-64 fixed top-0 left-0 z-[10000]" aria-label="Sidebar" style="min-width: 250px">
+        <aside class="w-64 fixed top-0 left-0" aria-label="Sidebar" style="min-width: 250px">
             <div class="px-3 py-4 overflow-y-auto rounded bg-gray-50 min-h-screen">
                 <div class="mb-10 flex items-center justify-center flex-col">
                     <div class="rounded-full border-solid border-4 border-red-500 w-[150px] h-[150px] overflow-hidden" >
