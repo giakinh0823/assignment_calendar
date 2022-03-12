@@ -98,7 +98,7 @@ public class EditEventController extends BaseAuthController {
 
             // insert additional
             AdditionalCalendarDBContext additionalDB = new AdditionalCalendarDBContext();
-            AdditionalCalendar additional = additionalDB.get(field_id);
+            AdditionalCalendar additional = additionalDB.get(field_id_additional);
             additional.setStartDate(field_startDate);
             additional.setEndDate(field_endDate);
             additional.setOverlap(field_overlap);
@@ -113,7 +113,8 @@ public class EditEventController extends BaseAuthController {
             additionalDB.update(additional);
 
             //inser event
-            EventCalendar event = new EventCalendar();
+            EventCalendarDBContext eventDB = new EventCalendarDBContext();
+            EventCalendar event = eventDB.get(field_id);
             event.setAdditional(additional);
             event.setId(field_id);
             event.setTitle(title);
@@ -122,7 +123,6 @@ public class EditEventController extends BaseAuthController {
             event.setUserId(user.getId());
             event.setAdditionalId(additional.getId());
             event.setUpdated_at(updated_at);
-            EventCalendarDBContext eventDB = new EventCalendarDBContext();
             eventDB.update(event);
             
             String json = new Gson().toJson(event);

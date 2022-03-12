@@ -125,33 +125,42 @@ $("#form-edit-event").on("submit", function (e) {
         url: "/calendar/editEvent",
         data: event,
     }).done(function (data) {
-        const event = {
-            id: data.id,
-            title: data.title,
-            description: data.description,
-            location: data.location,
-            color: data.additional.calendar.color,
-            overlap: data.additional.overlap,
-            category: data.additional.category.id,
-            categoryName: data.additional.category.name,
-            status: data.additional.status.id,
-            statusName: data.additional.status.name,
-            calendarName: data.additional.calendar.name,
-            calendar: data.additional.calendar.id,
-            start: new Date(data.additional.startDate).toISOString(),
-            end: new Date(data.additional.endDate).toISOString(),
-            allDay: data.additional.isAllDay,
-            hasEnd: data.additional.isHasEnd,
-            additional: data.additional.id,
+        if (data.detailMessage || data.stackTrace) {
+            $("#showSuccessFormEdit").addClass("hidden")
+            $('#contentErrorFormEdit').text(data.detailMessage ? data.detailMessage : "Update error!");
+            $("#showErrorFormEdit").removeClass("hidden")
+        } else{
+            $("#showErrorFormEdit").addClass("hidden")
+            $('#contentSuccessFormEdit').text("Update success")
+            $("#showSuccessFormEdit").removeClass("hidden")
+            const event = {
+                id: data.id,
+                title: data.title,
+                description: data.description,
+                location: data.location,
+                color: data.additional.calendar.color,
+                overlap: data.additional.overlap,
+                category: data.additional.category.id,
+                categoryName: data.additional.category.name,
+                status: data.additional.status.id,
+                statusName: data.additional.status.name,
+                calendarName: data.additional.calendar.name,
+                calendar: data.additional.calendar.id,
+                start: new Date(data.additional.startDate).toISOString(),
+                end: new Date(data.additional.endDate).toISOString(),
+                allDay: data.additional.isAllDay,
+                hasEnd: data.additional.isHasEnd,
+                additional: data.additional.id,
+            }
+            if (data.additional.display){
+                event.display = data.additional.display;
+            }
+            var indexEvent = events.findIndex((item) => {
+                return item.id == event.id;
+            })
+            events[indexEvent] = event;
+            calendar.refetchEvents();
         }
-        if (data.additional.display){
-            event.display = data.additional.display;
-        }
-        var indexEvent = events.findIndex((item) => {
-            return item.id == event.id;
-        })
-        events[indexEvent] = event;
-        calendar.refetchEvents();
     });
 });
 // delete event
