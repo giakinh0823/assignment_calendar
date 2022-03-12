@@ -79,6 +79,13 @@
                                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>                                
                                 </button>
                                 <form action="/calendar/editEvent" name="form-edit-event" id="form-edit-event" method="POST">
+                                    <div id="showErrorFormEdit" class="hidden">
+                                        <div id="contentErrorFormEdit" class="bg-red-100 rounded-lg py-5 px-6 mb-4 text-base text-red-700 mb-3" role="alert">
+                                        </div>
+                                    </div>
+                                    <div id="showSuccessFormEdit" class="hidden p-4 mb-4 text-sm text-green-700 bg-green-100 rounded-lg" role="alert">
+                                        <span id="contentSuccessFormEdit" class="font-medium"></span>
+                                    </div>
                                     <input name="id" id="idEditEvent" type="hidden"/>
                                     <input id="idAdditional" name="additional" type="hidden"/>
                                     <div class="form-group mb-5">
@@ -237,11 +244,11 @@
                 $("#colorEditEvent").val(color);
                 $("#colorEditEvent").css("color", color);
             });
-            
+
             $("#buttonDeleteEvent").on('click', (e) => {
                 $("#buttonOpenModelDetailEvent").click();
             })
-            
+
             $("#cancel-delete-event").on('click', (e) => {
                 $("#buttonOpenModelDetailEvent").click();
             })

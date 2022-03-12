@@ -8,7 +8,7 @@ const calenderHandle = (events) => ({
             hour: '2-digit',
             minute: '2-digit',
             second: '2-digit',
-            meridiem: false
+            hour12: false,
         },
         buttonText: {
             today: 'Today',
