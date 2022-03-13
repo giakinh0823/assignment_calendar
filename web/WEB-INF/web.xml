@@ -183,7 +183,7 @@
         <servlet-class>controller.auth.ForgotPasswordController</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>ChangePassworControllẻ</servlet-name>
+        <servlet-name>ChangePassworController</servlet-name>
         <servlet-class>controller.auth.ChangePassworController</servlet-class>
     </servlet>
     <servlet>
@@ -335,7 +335,7 @@
         <url-pattern>/password/forgot</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>ChangePassworControllẻ</servlet-name>
+        <servlet-name>ChangePassworController</servlet-name>
         <url-pattern>/password/change</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
