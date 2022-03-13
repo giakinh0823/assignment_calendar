@@ -1,6 +1,6 @@
 USE [master]
 GO
-/****** Object:  Database [clife]    Script Date: 3/7/2022 9:55:33 AM ******/
+/****** Object:  Database [clife]    Script Date: 3/13/2022 7:05:29 PM ******/
 CREATE DATABASE [clife]
  CONTAINMENT = NONE
  ON  PRIMARY 
@@ -82,7 +82,7 @@ ALTER DATABASE [clife] SET QUERY_STORE = OFF
 GO
 USE [clife]
 GO
-/****** Object:  Table [dbo].[action]    Script Date: 3/7/2022 9:55:33 AM ******/
+/****** Object:  Table [dbo].[action]    Script Date: 3/13/2022 7:05:29 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -98,7 +98,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[additional_calendar]    Script Date: 3/7/2022 9:55:33 AM ******/
+/****** Object:  Table [dbo].[additional_calendar]    Script Date: 3/13/2022 7:05:29 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -122,7 +122,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[calendar]    Script Date: 3/7/2022 9:55:33 AM ******/
+/****** Object:  Table [dbo].[calendar]    Script Date: 3/13/2022 7:05:29 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -140,7 +140,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[category_calendar]    Script Date: 3/7/2022 9:55:33 AM ******/
+/****** Object:  Table [dbo].[category_calendar]    Script Date: 3/13/2022 7:05:29 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -154,7 +154,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[event]    Script Date: 3/7/2022 9:55:33 AM ******/
+/****** Object:  Table [dbo].[event]    Script Date: 3/13/2022 7:05:29 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -174,7 +174,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[permission]    Script Date: 3/7/2022 9:55:33 AM ******/
+/****** Object:  Table [dbo].[permission]    Script Date: 3/13/2022 7:05:29 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -188,7 +188,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[permission_action]    Script Date: 3/7/2022 9:55:33 AM ******/
+/****** Object:  Table [dbo].[permission_action]    Script Date: 3/13/2022 7:05:29 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -204,7 +204,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[status_calendar]    Script Date: 3/7/2022 9:55:33 AM ******/
+/****** Object:  Table [dbo].[status_calendar]    Script Date: 3/13/2022 7:05:29 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -218,7 +218,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[user]    Script Date: 3/7/2022 9:55:33 AM ******/
+/****** Object:  Table [dbo].[user]    Script Date: 3/13/2022 7:05:29 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -245,7 +245,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[user_permission]    Script Date: 3/7/2022 9:55:33 AM ******/
+/****** Object:  Table [dbo].[user_permission]    Script Date: 3/13/2022 7:05:29 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -307,327 +307,69 @@ SET IDENTITY_INSERT [dbo].[action] OFF
 GO
 SET IDENTITY_INSERT [dbo].[additional_calendar] ON 
 GO
-INSERT [dbo].[additional_calendar] ([id], [start_date], [end_date], [overlap], [display], [created_at], [updated_at], [isAllDay], [isHasEnd], [calendarId], [statusId], [categoryId]) VALUES (7, CAST(N'2022-01-31T07:00:00.000' AS DateTime), CAST(N'2022-02-05T07:00:00.000' AS DateTime), 1, N'background', CAST(N'2022-02-15T17:13:44.343' AS DateTime), CAST(N'2022-02-15T17:13:44.343' AS DateTime), 1, 0, 2, 1, 2)
+INSERT [dbo].[additional_calendar] ([id], [start_date], [end_date], [overlap], [display], [created_at], [updated_at], [isAllDay], [isHasEnd], [calendarId], [statusId], [categoryId]) VALUES (253, CAST(N'2022-03-12T03:45:00.000' AS DateTime), CAST(N'2022-03-12T03:50:00.000' AS DateTime), 1, N'auto', CAST(N'2022-03-12T03:39:43.590' AS DateTime), CAST(N'2022-03-12T03:39:43.590' AS DateTime), 0, 1, 40, 3, 1)
 GO
-INSERT [dbo].[additional_calendar] ([id], [start_date], [end_date], [overlap], [display], [created_at], [updated_at], [isAllDay], [isHasEnd], [calendarId], [statusId], [categoryId]) VALUES (10, CAST(N'2022-03-14T15:00:00.000' AS DateTime), CAST(N'1970-01-01T16:00:00.000' AS DateTime), 1, N'auto', CAST(N'2022-02-15T17:16:39.443' AS DateTime), CAST(N'2022-03-06T04:24:08.013' AS DateTime), 0, 1, 2, 1, 3)
+INSERT [dbo].[additional_calendar] ([id], [start_date], [end_date], [overlap], [display], [created_at], [updated_at], [isAllDay], [isHasEnd], [calendarId], [statusId], [categoryId]) VALUES (254, CAST(N'2022-03-12T03:45:00.000' AS DateTime), CAST(N'2022-03-12T03:50:00.000' AS DateTime), 1, N'auto', CAST(N'2022-03-12T03:40:18.393' AS DateTime), CAST(N'2022-03-12T03:40:18.393' AS DateTime), 0, 1, 39, 3, 1)
 GO
-INSERT [dbo].[additional_calendar] ([id], [start_date], [end_date], [overlap], [display], [created_at], [updated_at], [isAllDay], [isHasEnd], [calendarId], [statusId], [categoryId]) VALUES (11, CAST(N'2022-02-14T00:00:00.000' AS DateTime), CAST(N'2022-02-16T00:00:00.000' AS DateTime), 1, NULL, CAST(N'2022-02-15T17:17:50.507' AS DateTime), CAST(N'2022-02-19T15:57:24.657' AS DateTime), 1, 0, 3, 1, 3)
+INSERT [dbo].[additional_calendar] ([id], [start_date], [end_date], [overlap], [display], [created_at], [updated_at], [isAllDay], [isHasEnd], [calendarId], [statusId], [categoryId]) VALUES (255, CAST(N'2022-03-12T03:45:00.000' AS DateTime), CAST(N'2022-03-12T03:50:00.000' AS DateTime), 1, N'auto', CAST(N'2022-03-12T03:40:55.327' AS DateTime), CAST(N'2022-03-12T03:40:55.327' AS DateTime), 0, 1, 39, 3, 1)
 GO
-INSERT [dbo].[additional_calendar] ([id], [start_date], [end_date], [overlap], [display], [created_at], [updated_at], [isAllDay], [isHasEnd], [calendarId], [statusId], [categoryId]) VALUES (12, CAST(N'2022-02-18T07:30:00.000' AS DateTime), CAST(N'2022-02-18T20:00:00.000' AS DateTime), 1, NULL, CAST(N'2022-02-15T17:19:18.423' AS DateTime), CAST(N'2022-02-22T12:00:49.347' AS DateTime), 0, 0, 1, 1, 1)
+INSERT [dbo].[additional_calendar] ([id], [start_date], [end_date], [overlap], [display], [created_at], [updated_at], [isAllDay], [isHasEnd], [calendarId], [statusId], [categoryId]) VALUES (256, CAST(N'2022-03-21T07:30:00.000' AS DateTime), CAST(N'2022-03-21T09:30:00.000' AS DateTime), 1, N'auto', CAST(N'2022-03-12T23:24:34.227' AS DateTime), CAST(N'2022-03-12T23:24:34.227' AS DateTime), 0, 1, 41, 1, 2)
 GO
-INSERT [dbo].[additional_calendar] ([id], [start_date], [end_date], [overlap], [display], [created_at], [updated_at], [isAllDay], [isHasEnd], [calendarId], [statusId], [categoryId]) VALUES (14, CAST(N'2022-02-15T05:30:00.000' AS DateTime), CAST(N'2022-02-15T12:30:00.000' AS DateTime), 1, NULL, CAST(N'2022-02-15T17:22:37.060' AS DateTime), CAST(N'2022-03-06T16:50:37.480' AS DateTime), 0, 0, 1, 1, 2)
+INSERT [dbo].[additional_calendar] ([id], [start_date], [end_date], [overlap], [display], [created_at], [updated_at], [isAllDay], [isHasEnd], [calendarId], [statusId], [categoryId]) VALUES (257, CAST(N'2022-03-21T09:10:00.000' AS DateTime), CAST(N'2022-03-21T22:40:00.000' AS DateTime), 1, N'auto', CAST(N'2022-03-12T23:25:21.380' AS DateTime), CAST(N'2022-03-12T23:25:21.380' AS DateTime), 0, 1, 41, 1, 2)
 GO
-INSERT [dbo].[additional_calendar] ([id], [start_date], [end_date], [overlap], [display], [created_at], [updated_at], [isAllDay], [isHasEnd], [calendarId], [statusId], [categoryId]) VALUES (15, CAST(N'2022-02-21T07:00:00.000' AS DateTime), CAST(N'2022-02-25T07:00:00.000' AS DateTime), 0, N'background', CAST(N'2022-02-15T17:41:29.153' AS DateTime), CAST(N'2022-02-15T17:41:29.153' AS DateTime), 1, 0, 1, 1, 1)
+INSERT [dbo].[additional_calendar] ([id], [start_date], [end_date], [overlap], [display], [created_at], [updated_at], [isAllDay], [isHasEnd], [calendarId], [statusId], [categoryId]) VALUES (258, CAST(N'2022-03-21T10:50:00.000' AS DateTime), CAST(N'2022-03-21T00:15:00.000' AS DateTime), 1, N'auto', CAST(N'2022-03-12T23:26:35.730' AS DateTime), CAST(N'2022-03-12T23:26:35.730' AS DateTime), 0, 1, 41, 1, 2)
 GO
-INSERT [dbo].[additional_calendar] ([id], [start_date], [end_date], [overlap], [display], [created_at], [updated_at], [isAllDay], [isHasEnd], [calendarId], [statusId], [categoryId]) VALUES (16, CAST(N'2022-01-30T00:00:00.000' AS DateTime), CAST(N'2022-02-02T00:00:00.000' AS DateTime), 1, NULL, CAST(N'2022-02-15T17:42:21.517' AS DateTime), CAST(N'2022-02-21T23:18:44.580' AS DateTime), 1, 0, 3, 1, 2)
+INSERT [dbo].[additional_calendar] ([id], [start_date], [end_date], [overlap], [display], [created_at], [updated_at], [isAllDay], [isHasEnd], [calendarId], [statusId], [categoryId]) VALUES (259, CAST(N'2022-03-22T07:30:00.000' AS DateTime), CAST(N'2022-03-22T09:00:00.000' AS DateTime), 1, N'auto', CAST(N'2022-03-12T23:27:42.117' AS DateTime), CAST(N'2022-03-12T23:27:42.117' AS DateTime), 0, 1, 41, 1, 2)
 GO
-INSERT [dbo].[additional_calendar] ([id], [start_date], [end_date], [overlap], [display], [created_at], [updated_at], [isAllDay], [isHasEnd], [calendarId], [statusId], [categoryId]) VALUES (17, CAST(N'2022-02-09T00:00:00.000' AS DateTime), CAST(N'2022-02-13T00:00:00.000' AS DateTime), 1, NULL, CAST(N'2022-02-15T23:31:11.020' AS DateTime), CAST(N'2022-02-17T22:58:32.547' AS DateTime), 1, 0, 1, 1, 1)
+INSERT [dbo].[additional_calendar] ([id], [start_date], [end_date], [overlap], [display], [created_at], [updated_at], [isAllDay], [isHasEnd], [calendarId], [statusId], [categoryId]) VALUES (260, CAST(N'2022-03-22T09:10:00.000' AS DateTime), CAST(N'2022-03-22T10:40:00.000' AS DateTime), 1, N'auto', CAST(N'2022-03-12T23:29:05.137' AS DateTime), CAST(N'2022-03-12T23:29:05.137' AS DateTime), 0, 1, 41, 1, 2)
 GO
-INSERT [dbo].[additional_calendar] ([id], [start_date], [end_date], [overlap], [display], [created_at], [updated_at], [isAllDay], [isHasEnd], [calendarId], [statusId], [categoryId]) VALUES (18, CAST(N'2022-01-31T00:00:00.000' AS DateTime), CAST(N'2022-02-02T00:00:00.000' AS DateTime), 1, NULL, CAST(N'2022-02-17T22:26:22.957' AS DateTime), CAST(N'2022-02-18T15:27:56.553' AS DateTime), 1, 0, 1, 1, 1)
+INSERT [dbo].[additional_calendar] ([id], [start_date], [end_date], [overlap], [display], [created_at], [updated_at], [isAllDay], [isHasEnd], [calendarId], [statusId], [categoryId]) VALUES (261, CAST(N'2022-03-23T07:30:00.000' AS DateTime), CAST(N'2022-03-23T09:00:00.000' AS DateTime), 1, N'auto', CAST(N'2022-03-12T23:30:20.947' AS DateTime), CAST(N'2022-03-12T23:30:20.947' AS DateTime), 0, 1, 41, 1, 2)
 GO
-INSERT [dbo].[additional_calendar] ([id], [start_date], [end_date], [overlap], [display], [created_at], [updated_at], [isAllDay], [isHasEnd], [calendarId], [statusId], [categoryId]) VALUES (19, CAST(N'2022-02-21T00:00:00.000' AS DateTime), CAST(N'2022-02-22T00:00:00.000' AS DateTime), 1, NULL, CAST(N'2022-02-19T15:43:23.833' AS DateTime), CAST(N'2022-02-19T21:20:35.087' AS DateTime), 1, 0, 2, 1, 2)
+INSERT [dbo].[additional_calendar] ([id], [start_date], [end_date], [overlap], [display], [created_at], [updated_at], [isAllDay], [isHasEnd], [calendarId], [statusId], [categoryId]) VALUES (262, CAST(N'2022-03-23T09:10:00.000' AS DateTime), CAST(N'2022-03-23T10:40:00.000' AS DateTime), 1, N'auto', CAST(N'2022-03-12T23:30:56.887' AS DateTime), CAST(N'2022-03-12T23:30:56.887' AS DateTime), 0, 1, 41, 1, 2)
 GO
-INSERT [dbo].[additional_calendar] ([id], [start_date], [end_date], [overlap], [display], [created_at], [updated_at], [isAllDay], [isHasEnd], [calendarId], [statusId], [categoryId]) VALUES (21, CAST(N'2022-03-01T00:00:00.000' AS DateTime), CAST(N'2022-03-03T00:00:00.000' AS DateTime), 1, NULL, CAST(N'2022-02-19T15:55:04.787' AS DateTime), CAST(N'2022-02-19T21:20:26.123' AS DateTime), 1, 0, 3, 1, 3)
+INSERT [dbo].[additional_calendar] ([id], [start_date], [end_date], [overlap], [display], [created_at], [updated_at], [isAllDay], [isHasEnd], [calendarId], [statusId], [categoryId]) VALUES (263, CAST(N'2022-03-23T09:50:00.000' AS DateTime), CAST(N'2022-03-23T00:15:00.000' AS DateTime), 1, N'auto', CAST(N'2022-03-12T23:32:07.457' AS DateTime), CAST(N'2022-03-12T23:32:07.457' AS DateTime), 0, 1, 41, 1, 2)
 GO
-INSERT [dbo].[additional_calendar] ([id], [start_date], [end_date], [overlap], [display], [created_at], [updated_at], [isAllDay], [isHasEnd], [calendarId], [statusId], [categoryId]) VALUES (22, CAST(N'2022-02-15T00:00:00.000' AS DateTime), CAST(N'2022-02-20T00:00:00.000' AS DateTime), 1, NULL, CAST(N'2022-02-19T15:55:38.567' AS DateTime), CAST(N'2022-02-19T15:55:38.567' AS DateTime), 1, 1, 3, 1, 3)
+INSERT [dbo].[additional_calendar] ([id], [start_date], [end_date], [overlap], [display], [created_at], [updated_at], [isAllDay], [isHasEnd], [calendarId], [statusId], [categoryId]) VALUES (264, CAST(N'2022-03-24T07:30:00.000' AS DateTime), CAST(N'2022-03-24T09:00:00.000' AS DateTime), 1, N'auto', CAST(N'2022-03-12T23:32:42.277' AS DateTime), CAST(N'2022-03-12T23:32:42.277' AS DateTime), 0, 1, 41, 1, 2)
 GO
-INSERT [dbo].[additional_calendar] ([id], [start_date], [end_date], [overlap], [display], [created_at], [updated_at], [isAllDay], [isHasEnd], [calendarId], [statusId], [categoryId]) VALUES (23, CAST(N'2022-03-28T14:00:00.000' AS DateTime), CAST(N'2022-03-30T16:00:00.000' AS DateTime), 1, N'auto', CAST(N'2022-02-19T15:57:05.353' AS DateTime), CAST(N'2022-03-06T16:50:27.370' AS DateTime), 0, 0, 2, 1, 2)
+INSERT [dbo].[additional_calendar] ([id], [start_date], [end_date], [overlap], [display], [created_at], [updated_at], [isAllDay], [isHasEnd], [calendarId], [statusId], [categoryId]) VALUES (265, CAST(N'2022-03-25T07:30:00.000' AS DateTime), CAST(N'2022-03-25T09:00:00.000' AS DateTime), 1, N'auto', CAST(N'2022-03-12T23:33:26.437' AS DateTime), CAST(N'2022-03-12T23:33:26.437' AS DateTime), 0, 1, 41, 1, 2)
 GO
-INSERT [dbo].[additional_calendar] ([id], [start_date], [end_date], [overlap], [display], [created_at], [updated_at], [isAllDay], [isHasEnd], [calendarId], [statusId], [categoryId]) VALUES (24, CAST(N'2022-03-02T00:00:00.000' AS DateTime), CAST(N'2022-03-05T00:00:00.000' AS DateTime), 1, NULL, CAST(N'2022-02-19T15:57:08.143' AS DateTime), CAST(N'2022-02-19T15:57:18.153' AS DateTime), 1, 0, 3, 1, 3)
+INSERT [dbo].[additional_calendar] ([id], [start_date], [end_date], [overlap], [display], [created_at], [updated_at], [isAllDay], [isHasEnd], [calendarId], [statusId], [categoryId]) VALUES (266, CAST(N'2022-03-25T09:10:00.000' AS DateTime), CAST(N'2022-03-25T10:40:00.000' AS DateTime), 1, N'auto', CAST(N'2022-03-12T23:34:08.100' AS DateTime), CAST(N'2022-03-13T00:09:20.867' AS DateTime), 0, 1, 41, 1, 2)
 GO
-INSERT [dbo].[additional_calendar] ([id], [start_date], [end_date], [overlap], [display], [created_at], [updated_at], [isAllDay], [isHasEnd], [calendarId], [statusId], [categoryId]) VALUES (25, CAST(N'2022-03-02T00:00:00.000' AS DateTime), CAST(N'2022-03-04T00:00:00.000' AS DateTime), 1, NULL, CAST(N'2022-02-19T15:58:39.257' AS DateTime), CAST(N'2022-02-19T15:58:39.257' AS DateTime), 1, 1, 3, 1, 3)
+INSERT [dbo].[additional_calendar] ([id], [start_date], [end_date], [overlap], [display], [created_at], [updated_at], [isAllDay], [isHasEnd], [calendarId], [statusId], [categoryId]) VALUES (267, CAST(N'2022-03-25T10:50:00.000' AS DateTime), CAST(N'2022-03-25T12:15:00.000' AS DateTime), 1, N'auto', CAST(N'2022-03-12T23:35:07.670' AS DateTime), CAST(N'2022-03-13T00:07:35.247' AS DateTime), 0, 1, 41, 1, 2)
 GO
-INSERT [dbo].[additional_calendar] ([id], [start_date], [end_date], [overlap], [display], [created_at], [updated_at], [isAllDay], [isHasEnd], [calendarId], [statusId], [categoryId]) VALUES (26, CAST(N'2022-03-02T00:00:00.000' AS DateTime), CAST(N'2022-03-05T00:00:00.000' AS DateTime), 1, NULL, CAST(N'2022-02-19T16:00:36.540' AS DateTime), CAST(N'2022-02-19T16:00:36.540' AS DateTime), 1, 1, 3, 1, 3)
+INSERT [dbo].[additional_calendar] ([id], [start_date], [end_date], [overlap], [display], [created_at], [updated_at], [isAllDay], [isHasEnd], [calendarId], [statusId], [categoryId]) VALUES (268, CAST(N'2022-03-14T19:30:00.000' AS DateTime), CAST(N'2022-03-14T14:30:00.000' AS DateTime), 1, N'auto', CAST(N'2022-03-12T23:54:14.427' AS DateTime), CAST(N'2022-03-12T23:54:14.427' AS DateTime), 0, 1, 41, 1, 5)
 GO
-INSERT [dbo].[additional_calendar] ([id], [start_date], [end_date], [overlap], [display], [created_at], [updated_at], [isAllDay], [isHasEnd], [calendarId], [statusId], [categoryId]) VALUES (27, CAST(N'2022-03-02T00:00:00.000' AS DateTime), CAST(N'2022-03-06T00:00:00.000' AS DateTime), 1, NULL, CAST(N'2022-02-19T16:01:43.003' AS DateTime), CAST(N'2022-02-19T16:01:43.003' AS DateTime), 1, 1, 3, 1, 3)
+INSERT [dbo].[additional_calendar] ([id], [start_date], [end_date], [overlap], [display], [created_at], [updated_at], [isAllDay], [isHasEnd], [calendarId], [statusId], [categoryId]) VALUES (269, CAST(N'2022-03-17T19:30:00.000' AS DateTime), CAST(N'2022-03-18T22:00:00.000' AS DateTime), 1, N'auto', CAST(N'2022-03-12T23:58:47.667' AS DateTime), CAST(N'2022-03-12T23:58:47.667' AS DateTime), 0, 1, 44, 1, 3)
 GO
-INSERT [dbo].[additional_calendar] ([id], [start_date], [end_date], [overlap], [display], [created_at], [updated_at], [isAllDay], [isHasEnd], [calendarId], [statusId], [categoryId]) VALUES (28, CAST(N'2022-02-09T00:00:00.000' AS DateTime), CAST(N'2022-02-11T00:00:00.000' AS DateTime), 1, NULL, CAST(N'2022-02-19T16:04:38.770' AS DateTime), CAST(N'2022-02-19T16:04:38.770' AS DateTime), 1, 1, 1, 1, 1)
+INSERT [dbo].[additional_calendar] ([id], [start_date], [end_date], [overlap], [display], [created_at], [updated_at], [isAllDay], [isHasEnd], [calendarId], [statusId], [categoryId]) VALUES (270, CAST(N'2022-03-10T19:30:00.000' AS DateTime), CAST(N'2022-03-11T22:00:00.000' AS DateTime), 1, N'auto', CAST(N'2022-03-13T00:01:46.157' AS DateTime), CAST(N'2022-03-13T00:01:46.157' AS DateTime), 0, 1, 44, 1, 3)
 GO
-INSERT [dbo].[additional_calendar] ([id], [start_date], [end_date], [overlap], [display], [created_at], [updated_at], [isAllDay], [isHasEnd], [calendarId], [statusId], [categoryId]) VALUES (29, CAST(N'2022-02-14T00:00:00.000' AS DateTime), CAST(N'2022-02-17T00:00:00.000' AS DateTime), 1, NULL, CAST(N'2022-02-19T16:06:54.047' AS DateTime), CAST(N'2022-03-06T16:50:38.520' AS DateTime), 1, 0, 1, 1, 1)
+INSERT [dbo].[additional_calendar] ([id], [start_date], [end_date], [overlap], [display], [created_at], [updated_at], [isAllDay], [isHasEnd], [calendarId], [statusId], [categoryId]) VALUES (271, CAST(N'2022-03-09T19:30:00.000' AS DateTime), CAST(N'2022-03-09T22:00:00.000' AS DateTime), 1, N'auto', CAST(N'2022-03-13T00:06:03.097' AS DateTime), CAST(N'2022-03-13T00:06:03.097' AS DateTime), 0, 1, 41, 1, 5)
 GO
-INSERT [dbo].[additional_calendar] ([id], [start_date], [end_date], [overlap], [display], [created_at], [updated_at], [isAllDay], [isHasEnd], [calendarId], [statusId], [categoryId]) VALUES (30, CAST(N'2022-02-14T00:00:00.000' AS DateTime), CAST(N'2022-02-17T00:00:00.000' AS DateTime), 1, NULL, CAST(N'2022-02-19T16:08:44.170' AS DateTime), CAST(N'2022-02-19T16:08:44.170' AS DateTime), 1, 1, 3, 1, 3)
+INSERT [dbo].[additional_calendar] ([id], [start_date], [end_date], [overlap], [display], [created_at], [updated_at], [isAllDay], [isHasEnd], [calendarId], [statusId], [categoryId]) VALUES (272, CAST(N'2022-03-15T20:00:00.000' AS DateTime), CAST(N'2022-03-16T00:00:00.000' AS DateTime), 1, N'auto', CAST(N'2022-03-13T00:12:44.777' AS DateTime), CAST(N'2022-03-13T00:12:54.720' AS DateTime), 0, 1, 43, 1, 1)
 GO
-INSERT [dbo].[additional_calendar] ([id], [start_date], [end_date], [overlap], [display], [created_at], [updated_at], [isAllDay], [isHasEnd], [calendarId], [statusId], [categoryId]) VALUES (31, CAST(N'2022-02-14T00:00:00.000' AS DateTime), CAST(N'2022-02-18T00:00:00.000' AS DateTime), 1, NULL, CAST(N'2022-02-19T16:10:01.287' AS DateTime), CAST(N'2022-02-19T16:10:01.287' AS DateTime), 1, 1, 3, 1, 3)
+INSERT [dbo].[additional_calendar] ([id], [start_date], [end_date], [overlap], [display], [created_at], [updated_at], [isAllDay], [isHasEnd], [calendarId], [statusId], [categoryId]) VALUES (273, CAST(N'2022-03-16T20:00:00.000' AS DateTime), CAST(N'2022-03-16T23:00:00.000' AS DateTime), 1, N'auto', CAST(N'2022-03-13T00:16:26.987' AS DateTime), CAST(N'2022-03-13T00:16:26.987' AS DateTime), 0, 1, 43, 1, 1)
 GO
-INSERT [dbo].[additional_calendar] ([id], [start_date], [end_date], [overlap], [display], [created_at], [updated_at], [isAllDay], [isHasEnd], [calendarId], [statusId], [categoryId]) VALUES (32, CAST(N'2022-03-24T07:00:00.000' AS DateTime), CAST(N'2022-03-26T07:00:00.000' AS DateTime), 0, N'auto', CAST(N'2022-02-19T16:10:45.923' AS DateTime), CAST(N'2022-03-06T04:23:41.037' AS DateTime), 0, 0, 8, 1, 1)
-GO
-INSERT [dbo].[additional_calendar] ([id], [start_date], [end_date], [overlap], [display], [created_at], [updated_at], [isAllDay], [isHasEnd], [calendarId], [statusId], [categoryId]) VALUES (33, CAST(N'2022-03-02T00:00:00.000' AS DateTime), CAST(N'2022-03-05T00:00:00.000' AS DateTime), 1, NULL, CAST(N'2022-02-19T16:11:51.083' AS DateTime), CAST(N'2022-02-19T16:11:51.083' AS DateTime), 1, 1, 3, 1, 3)
-GO
-INSERT [dbo].[additional_calendar] ([id], [start_date], [end_date], [overlap], [display], [created_at], [updated_at], [isAllDay], [isHasEnd], [calendarId], [statusId], [categoryId]) VALUES (34, CAST(N'2022-03-02T00:00:00.000' AS DateTime), CAST(N'2022-03-06T00:00:00.000' AS DateTime), 1, NULL, CAST(N'2022-02-19T16:12:11.627' AS DateTime), CAST(N'2022-02-19T16:12:11.627' AS DateTime), 1, 1, 3, 1, 3)
-GO
-INSERT [dbo].[additional_calendar] ([id], [start_date], [end_date], [overlap], [display], [created_at], [updated_at], [isAllDay], [isHasEnd], [calendarId], [statusId], [categoryId]) VALUES (35, CAST(N'2022-03-02T00:00:00.000' AS DateTime), CAST(N'2022-03-05T00:00:00.000' AS DateTime), 1, NULL, CAST(N'2022-02-19T16:12:40.247' AS DateTime), CAST(N'2022-02-19T16:12:40.247' AS DateTime), 1, 1, 3, 1, 3)
-GO
-INSERT [dbo].[additional_calendar] ([id], [start_date], [end_date], [overlap], [display], [created_at], [updated_at], [isAllDay], [isHasEnd], [calendarId], [statusId], [categoryId]) VALUES (36, CAST(N'2022-03-02T00:00:00.000' AS DateTime), CAST(N'2022-03-06T00:00:00.000' AS DateTime), 1, NULL, CAST(N'2022-02-19T16:14:09.433' AS DateTime), CAST(N'2022-02-19T16:14:09.433' AS DateTime), 1, 1, 3, 1, 3)
-GO
-INSERT [dbo].[additional_calendar] ([id], [start_date], [end_date], [overlap], [display], [created_at], [updated_at], [isAllDay], [isHasEnd], [calendarId], [statusId], [categoryId]) VALUES (37, CAST(N'2022-01-31T00:00:00.000' AS DateTime), CAST(N'2022-02-04T00:00:00.000' AS DateTime), 1, NULL, CAST(N'2022-02-19T16:15:33.887' AS DateTime), CAST(N'2022-02-19T16:15:33.887' AS DateTime), 0, 1, 1, 1, 1)
-GO
-INSERT [dbo].[additional_calendar] ([id], [start_date], [end_date], [overlap], [display], [created_at], [updated_at], [isAllDay], [isHasEnd], [calendarId], [statusId], [categoryId]) VALUES (38, CAST(N'2022-01-31T00:00:00.000' AS DateTime), CAST(N'2022-02-03T00:00:00.000' AS DateTime), 1, NULL, CAST(N'2022-02-19T16:17:14.493' AS DateTime), CAST(N'2022-02-19T16:17:14.493' AS DateTime), 0, 1, 1, 1, 1)
-GO
-INSERT [dbo].[additional_calendar] ([id], [start_date], [end_date], [overlap], [display], [created_at], [updated_at], [isAllDay], [isHasEnd], [calendarId], [statusId], [categoryId]) VALUES (39, CAST(N'2022-01-31T00:00:00.000' AS DateTime), CAST(N'2022-02-09T00:00:00.000' AS DateTime), 1, NULL, CAST(N'2022-02-19T16:17:20.500' AS DateTime), CAST(N'2022-02-19T16:17:20.500' AS DateTime), 0, 1, 1, 1, 1)
-GO
-INSERT [dbo].[additional_calendar] ([id], [start_date], [end_date], [overlap], [display], [created_at], [updated_at], [isAllDay], [isHasEnd], [calendarId], [statusId], [categoryId]) VALUES (40, CAST(N'2022-01-31T00:00:00.000' AS DateTime), CAST(N'2022-02-05T00:00:00.000' AS DateTime), 1, NULL, CAST(N'2022-02-19T16:17:26.867' AS DateTime), CAST(N'2022-02-19T16:17:26.867' AS DateTime), 0, 1, 1, 1, 1)
-GO
-INSERT [dbo].[additional_calendar] ([id], [start_date], [end_date], [overlap], [display], [created_at], [updated_at], [isAllDay], [isHasEnd], [calendarId], [statusId], [categoryId]) VALUES (41, CAST(N'2022-01-31T00:00:00.000' AS DateTime), CAST(N'2022-02-03T00:00:00.000' AS DateTime), 1, NULL, CAST(N'2022-02-19T16:21:53.187' AS DateTime), CAST(N'2022-02-19T17:04:54.743' AS DateTime), 0, 0, 1, 1, 1)
-GO
-INSERT [dbo].[additional_calendar] ([id], [start_date], [end_date], [overlap], [display], [created_at], [updated_at], [isAllDay], [isHasEnd], [calendarId], [statusId], [categoryId]) VALUES (42, CAST(N'2022-03-02T00:00:00.000' AS DateTime), CAST(N'2022-03-06T00:00:00.000' AS DateTime), 1, NULL, CAST(N'2022-02-19T16:22:15.877' AS DateTime), CAST(N'2022-02-19T16:22:15.877' AS DateTime), 1, 1, 3, 1, 3)
-GO
-INSERT [dbo].[additional_calendar] ([id], [start_date], [end_date], [overlap], [display], [created_at], [updated_at], [isAllDay], [isHasEnd], [calendarId], [statusId], [categoryId]) VALUES (43, CAST(N'2022-03-02T00:00:00.000' AS DateTime), CAST(N'2022-03-06T00:00:00.000' AS DateTime), 1, NULL, CAST(N'2022-02-19T16:22:30.470' AS DateTime), CAST(N'2022-02-19T16:22:30.470' AS DateTime), 1, 1, 3, 1, 3)
-GO
-INSERT [dbo].[additional_calendar] ([id], [start_date], [end_date], [overlap], [display], [created_at], [updated_at], [isAllDay], [isHasEnd], [calendarId], [statusId], [categoryId]) VALUES (44, CAST(N'2022-03-02T00:00:00.000' AS DateTime), CAST(N'2022-03-06T00:00:00.000' AS DateTime), 1, NULL, CAST(N'2022-02-19T16:23:41.087' AS DateTime), CAST(N'2022-02-19T16:23:41.087' AS DateTime), 1, 1, 3, 1, 3)
-GO
-INSERT [dbo].[additional_calendar] ([id], [start_date], [end_date], [overlap], [display], [created_at], [updated_at], [isAllDay], [isHasEnd], [calendarId], [statusId], [categoryId]) VALUES (45, CAST(N'2022-03-02T00:00:00.000' AS DateTime), CAST(N'2022-03-06T00:00:00.000' AS DateTime), 1, NULL, CAST(N'2022-02-19T16:23:51.803' AS DateTime), CAST(N'2022-02-19T16:23:51.803' AS DateTime), 1, 1, 3, 1, 3)
-GO
-INSERT [dbo].[additional_calendar] ([id], [start_date], [end_date], [overlap], [display], [created_at], [updated_at], [isAllDay], [isHasEnd], [calendarId], [statusId], [categoryId]) VALUES (46, CAST(N'2022-03-08T15:00:00.000' AS DateTime), CAST(N'2022-03-09T17:00:00.000' AS DateTime), 1, N'auto', CAST(N'2022-02-19T16:23:57.280' AS DateTime), CAST(N'2022-03-06T16:50:16.923' AS DateTime), 0, 0, 1, 1, 2)
-GO
-INSERT [dbo].[additional_calendar] ([id], [start_date], [end_date], [overlap], [display], [created_at], [updated_at], [isAllDay], [isHasEnd], [calendarId], [statusId], [categoryId]) VALUES (47, CAST(N'2022-02-22T00:00:00.000' AS DateTime), CAST(N'2022-02-25T00:00:00.000' AS DateTime), 1, NULL, CAST(N'2022-02-19T16:26:09.673' AS DateTime), CAST(N'2022-02-21T23:27:17.807' AS DateTime), 1, 0, 3, 1, 3)
-GO
-INSERT [dbo].[additional_calendar] ([id], [start_date], [end_date], [overlap], [display], [created_at], [updated_at], [isAllDay], [isHasEnd], [calendarId], [statusId], [categoryId]) VALUES (50, CAST(N'2022-03-10T00:00:00.000' AS DateTime), CAST(N'2022-03-12T00:00:00.000' AS DateTime), 0, NULL, CAST(N'2022-02-19T16:36:45.133' AS DateTime), CAST(N'2022-02-19T21:20:27.477' AS DateTime), 1, 0, 1, 1, 1)
-GO
-INSERT [dbo].[additional_calendar] ([id], [start_date], [end_date], [overlap], [display], [created_at], [updated_at], [isAllDay], [isHasEnd], [calendarId], [statusId], [categoryId]) VALUES (51, CAST(N'2022-01-31T00:00:00.000' AS DateTime), CAST(N'2022-02-05T00:00:00.000' AS DateTime), 1, NULL, CAST(N'2022-02-19T16:51:47.087' AS DateTime), CAST(N'2022-02-19T16:51:47.087' AS DateTime), 0, 1, 2, 1, 2)
-GO
-INSERT [dbo].[additional_calendar] ([id], [start_date], [end_date], [overlap], [display], [created_at], [updated_at], [isAllDay], [isHasEnd], [calendarId], [statusId], [categoryId]) VALUES (52, CAST(N'2022-01-31T00:00:00.000' AS DateTime), CAST(N'2022-02-05T00:00:00.000' AS DateTime), 1, N'background', CAST(N'2022-02-19T16:51:53.943' AS DateTime), CAST(N'2022-02-19T16:51:53.943' AS DateTime), 1, 1, 2, 1, 2)
-GO
-INSERT [dbo].[additional_calendar] ([id], [start_date], [end_date], [overlap], [display], [created_at], [updated_at], [isAllDay], [isHasEnd], [calendarId], [statusId], [categoryId]) VALUES (53, CAST(N'2022-01-31T00:00:00.000' AS DateTime), CAST(N'2022-02-03T00:00:00.000' AS DateTime), 1, N'background', CAST(N'2022-02-19T17:05:04.193' AS DateTime), CAST(N'2022-02-19T17:05:04.193' AS DateTime), 1, 1, 1, 1, 1)
-GO
-INSERT [dbo].[additional_calendar] ([id], [start_date], [end_date], [overlap], [display], [created_at], [updated_at], [isAllDay], [isHasEnd], [calendarId], [statusId], [categoryId]) VALUES (54, CAST(N'2022-01-31T00:00:00.000' AS DateTime), CAST(N'2022-02-03T00:00:00.000' AS DateTime), 1, NULL, CAST(N'2022-02-19T17:05:10.050' AS DateTime), CAST(N'2022-02-19T20:08:21.803' AS DateTime), 0, 0, 1, 1, 1)
-GO
-INSERT [dbo].[additional_calendar] ([id], [start_date], [end_date], [overlap], [display], [created_at], [updated_at], [isAllDay], [isHasEnd], [calendarId], [statusId], [categoryId]) VALUES (56, CAST(N'2022-02-21T00:00:00.000' AS DateTime), CAST(N'2022-02-25T00:00:00.000' AS DateTime), 0, N'background', CAST(N'2022-02-19T20:08:42.740' AS DateTime), CAST(N'2022-02-19T20:08:42.740' AS DateTime), 1, 1, 1, 1, 1)
-GO
-INSERT [dbo].[additional_calendar] ([id], [start_date], [end_date], [overlap], [display], [created_at], [updated_at], [isAllDay], [isHasEnd], [calendarId], [statusId], [categoryId]) VALUES (58, CAST(N'2022-02-21T00:00:00.000' AS DateTime), CAST(N'2022-02-25T00:00:00.000' AS DateTime), 1, N'background', CAST(N'2022-02-19T20:08:53.030' AS DateTime), CAST(N'2022-02-19T20:08:53.030' AS DateTime), 1, 1, 1, 1, 1)
-GO
-INSERT [dbo].[additional_calendar] ([id], [start_date], [end_date], [overlap], [display], [created_at], [updated_at], [isAllDay], [isHasEnd], [calendarId], [statusId], [categoryId]) VALUES (59, CAST(N'2022-01-31T00:00:00.000' AS DateTime), CAST(N'2022-02-03T00:00:00.000' AS DateTime), 0, NULL, CAST(N'2022-02-19T20:24:25.113' AS DateTime), CAST(N'2022-02-19T20:24:25.113' AS DateTime), 0, 1, 1, 1, 1)
-GO
-INSERT [dbo].[additional_calendar] ([id], [start_date], [end_date], [overlap], [display], [created_at], [updated_at], [isAllDay], [isHasEnd], [calendarId], [statusId], [categoryId]) VALUES (60, CAST(N'2022-02-03T00:00:00.000' AS DateTime), CAST(N'2022-02-06T00:00:00.000' AS DateTime), 1, NULL, CAST(N'2022-02-19T20:25:37.897' AS DateTime), CAST(N'2022-02-21T23:18:23.807' AS DateTime), 0, 0, 1, 1, 1)
-GO
-INSERT [dbo].[additional_calendar] ([id], [start_date], [end_date], [overlap], [display], [created_at], [updated_at], [isAllDay], [isHasEnd], [calendarId], [statusId], [categoryId]) VALUES (62, CAST(N'2022-03-01T00:00:00.000' AS DateTime), CAST(N'2022-03-05T00:00:00.000' AS DateTime), 1, NULL, CAST(N'2022-02-21T23:28:04.407' AS DateTime), CAST(N'2022-02-22T11:48:30.813' AS DateTime), 1, 1, 2, 1, 2)
-GO
-INSERT [dbo].[additional_calendar] ([id], [start_date], [end_date], [overlap], [display], [created_at], [updated_at], [isAllDay], [isHasEnd], [calendarId], [statusId], [categoryId]) VALUES (64, CAST(N'2022-02-01T00:00:00.000' AS DateTime), CAST(N'2022-02-03T00:00:00.000' AS DateTime), 1, NULL, CAST(N'2022-02-21T23:29:13.373' AS DateTime), CAST(N'2022-02-22T11:50:33.753' AS DateTime), 1, 0, 2, 1, 2)
-GO
-INSERT [dbo].[additional_calendar] ([id], [start_date], [end_date], [overlap], [display], [created_at], [updated_at], [isAllDay], [isHasEnd], [calendarId], [statusId], [categoryId]) VALUES (65, CAST(N'2022-02-16T00:00:00.000' AS DateTime), CAST(N'2022-02-18T00:00:00.000' AS DateTime), 1, NULL, CAST(N'2022-02-21T23:29:56.427' AS DateTime), CAST(N'2022-02-22T14:01:11.597' AS DateTime), 1, 0, 1, 1, 2)
-GO
-INSERT [dbo].[additional_calendar] ([id], [start_date], [end_date], [overlap], [display], [created_at], [updated_at], [isAllDay], [isHasEnd], [calendarId], [statusId], [categoryId]) VALUES (67, CAST(N'2022-03-23T04:00:00.000' AS DateTime), CAST(N'2022-03-23T10:00:00.000' AS DateTime), 1, NULL, CAST(N'2022-02-22T00:52:17.997' AS DateTime), CAST(N'2022-03-06T16:30:06.160' AS DateTime), 0, 0, 7, 1, 1)
-GO
-INSERT [dbo].[additional_calendar] ([id], [start_date], [end_date], [overlap], [display], [created_at], [updated_at], [isAllDay], [isHasEnd], [calendarId], [statusId], [categoryId]) VALUES (68, CAST(N'2022-02-24T07:00:00.000' AS DateTime), CAST(N'2022-02-26T07:00:00.000' AS DateTime), 1, NULL, CAST(N'2022-02-22T00:53:00.017' AS DateTime), CAST(N'2022-02-22T00:53:00.017' AS DateTime), 1, 0, 1, 1, 1)
-GO
-INSERT [dbo].[additional_calendar] ([id], [start_date], [end_date], [overlap], [display], [created_at], [updated_at], [isAllDay], [isHasEnd], [calendarId], [statusId], [categoryId]) VALUES (71, CAST(N'2022-02-24T00:00:00.000' AS DateTime), CAST(N'2022-02-26T00:00:00.000' AS DateTime), 1, NULL, NULL, CAST(N'2022-02-22T00:54:09.837' AS DateTime), 1, 1, 6, 1, 1)
-GO
-INSERT [dbo].[additional_calendar] ([id], [start_date], [end_date], [overlap], [display], [created_at], [updated_at], [isAllDay], [isHasEnd], [calendarId], [statusId], [categoryId]) VALUES (72, CAST(N'2022-03-06T00:00:00.000' AS DateTime), CAST(N'2022-03-10T00:00:00.000' AS DateTime), 0, N'auto', NULL, CAST(N'2022-02-22T10:50:33.843' AS DateTime), 1, 0, 1, 1, 1)
-GO
-INSERT [dbo].[additional_calendar] ([id], [start_date], [end_date], [overlap], [display], [created_at], [updated_at], [isAllDay], [isHasEnd], [calendarId], [statusId], [categoryId]) VALUES (73, CAST(N'2022-03-06T00:00:00.000' AS DateTime), CAST(N'2022-03-10T00:00:00.000' AS DateTime), 0, N'background', NULL, CAST(N'2022-02-22T10:50:47.523' AS DateTime), 1, 1, 7, 1, 1)
-GO
-INSERT [dbo].[additional_calendar] ([id], [start_date], [end_date], [overlap], [display], [created_at], [updated_at], [isAllDay], [isHasEnd], [calendarId], [statusId], [categoryId]) VALUES (74, CAST(N'2022-03-06T00:00:00.000' AS DateTime), CAST(N'2022-03-10T00:00:00.000' AS DateTime), 0, N'auto', NULL, CAST(N'2022-02-22T10:50:54.103' AS DateTime), 1, 1, 7, 1, 1)
-GO
-INSERT [dbo].[additional_calendar] ([id], [start_date], [end_date], [overlap], [display], [created_at], [updated_at], [isAllDay], [isHasEnd], [calendarId], [statusId], [categoryId]) VALUES (75, CAST(N'2022-03-06T00:00:00.000' AS DateTime), CAST(N'2022-03-10T00:00:00.000' AS DateTime), 0, N'background', NULL, CAST(N'2022-02-22T10:51:02.237' AS DateTime), 1, 1, 6, 1, 1)
-GO
-INSERT [dbo].[additional_calendar] ([id], [start_date], [end_date], [overlap], [display], [created_at], [updated_at], [isAllDay], [isHasEnd], [calendarId], [statusId], [categoryId]) VALUES (76, CAST(N'2022-03-06T00:00:00.000' AS DateTime), CAST(N'2022-03-10T00:00:00.000' AS DateTime), 0, N'auto', NULL, CAST(N'2022-02-22T10:51:11.703' AS DateTime), 1, 1, 6, 1, 1)
-GO
-INSERT [dbo].[additional_calendar] ([id], [start_date], [end_date], [overlap], [display], [created_at], [updated_at], [isAllDay], [isHasEnd], [calendarId], [statusId], [categoryId]) VALUES (77, CAST(N'2022-03-06T00:00:00.000' AS DateTime), CAST(N'2022-03-10T00:00:00.000' AS DateTime), 0, N'background', NULL, CAST(N'2022-02-22T10:51:25.387' AS DateTime), 1, 1, 6, 1, 1)
-GO
-INSERT [dbo].[additional_calendar] ([id], [start_date], [end_date], [overlap], [display], [created_at], [updated_at], [isAllDay], [isHasEnd], [calendarId], [statusId], [categoryId]) VALUES (78, CAST(N'2022-03-06T00:00:00.000' AS DateTime), CAST(N'2022-03-10T00:00:00.000' AS DateTime), 0, N'auto', NULL, CAST(N'2022-02-22T10:51:34.203' AS DateTime), 1, 1, 6, 1, 1)
-GO
-INSERT [dbo].[additional_calendar] ([id], [start_date], [end_date], [overlap], [display], [created_at], [updated_at], [isAllDay], [isHasEnd], [calendarId], [statusId], [categoryId]) VALUES (79, CAST(N'2022-03-06T00:00:00.000' AS DateTime), CAST(N'2022-03-10T00:00:00.000' AS DateTime), 0, N'background', NULL, CAST(N'2022-02-22T10:52:41.700' AS DateTime), 1, 1, 6, 1, 1)
-GO
-INSERT [dbo].[additional_calendar] ([id], [start_date], [end_date], [overlap], [display], [created_at], [updated_at], [isAllDay], [isHasEnd], [calendarId], [statusId], [categoryId]) VALUES (80, CAST(N'2022-03-06T00:00:00.000' AS DateTime), CAST(N'2022-03-10T00:00:00.000' AS DateTime), 0, NULL, NULL, CAST(N'2022-02-22T10:52:46.863' AS DateTime), 1, 1, 6, 1, 1)
-GO
-INSERT [dbo].[additional_calendar] ([id], [start_date], [end_date], [overlap], [display], [created_at], [updated_at], [isAllDay], [isHasEnd], [calendarId], [statusId], [categoryId]) VALUES (81, CAST(N'2022-03-06T00:00:00.000' AS DateTime), CAST(N'2022-03-10T00:00:00.000' AS DateTime), 0, NULL, NULL, CAST(N'2022-02-22T11:01:18.953' AS DateTime), 1, 0, 6, 1, 1)
-GO
-INSERT [dbo].[additional_calendar] ([id], [start_date], [end_date], [overlap], [display], [created_at], [updated_at], [isAllDay], [isHasEnd], [calendarId], [statusId], [categoryId]) VALUES (82, CAST(N'2022-02-24T00:00:00.000' AS DateTime), CAST(N'2022-02-26T00:00:00.000' AS DateTime), 0, NULL, NULL, CAST(N'2022-02-22T10:53:07.887' AS DateTime), 1, 1, 6, 1, 1)
-GO
-INSERT [dbo].[additional_calendar] ([id], [start_date], [end_date], [overlap], [display], [created_at], [updated_at], [isAllDay], [isHasEnd], [calendarId], [statusId], [categoryId]) VALUES (83, CAST(N'2022-03-06T00:00:00.000' AS DateTime), CAST(N'2022-03-10T00:00:00.000' AS DateTime), 0, N'auto', NULL, CAST(N'2022-02-22T11:35:42.780' AS DateTime), 1, 1, 6, 1, 1)
-GO
-INSERT [dbo].[additional_calendar] ([id], [start_date], [end_date], [overlap], [display], [created_at], [updated_at], [isAllDay], [isHasEnd], [calendarId], [statusId], [categoryId]) VALUES (84, CAST(N'2022-03-06T00:00:00.000' AS DateTime), CAST(N'2022-03-10T00:00:00.000' AS DateTime), 0, N'inverse-background', NULL, CAST(N'2022-02-22T11:35:47.490' AS DateTime), 1, 1, 6, 1, 1)
-GO
-INSERT [dbo].[additional_calendar] ([id], [start_date], [end_date], [overlap], [display], [created_at], [updated_at], [isAllDay], [isHasEnd], [calendarId], [statusId], [categoryId]) VALUES (85, CAST(N'2022-03-06T00:00:00.000' AS DateTime), CAST(N'2022-03-15T00:00:00.000' AS DateTime), 0, N'list-item', NULL, CAST(N'2022-02-22T11:46:08.057' AS DateTime), 1, 0, 6, 1, 1)
-GO
-INSERT [dbo].[additional_calendar] ([id], [start_date], [end_date], [overlap], [display], [created_at], [updated_at], [isAllDay], [isHasEnd], [calendarId], [statusId], [categoryId]) VALUES (86, CAST(N'2022-02-13T00:00:00.000' AS DateTime), CAST(N'2022-02-16T00:00:00.000' AS DateTime), 0, N'block', NULL, CAST(N'2022-02-22T11:40:45.140' AS DateTime), 1, 0, 3, 1, 2)
-GO
-INSERT [dbo].[additional_calendar] ([id], [start_date], [end_date], [overlap], [display], [created_at], [updated_at], [isAllDay], [isHasEnd], [calendarId], [statusId], [categoryId]) VALUES (87, CAST(N'2022-02-21T00:00:00.000' AS DateTime), CAST(N'2022-02-22T00:00:00.000' AS DateTime), 1, N'block', NULL, CAST(N'2022-02-22T11:39:13.430' AS DateTime), 1, 1, 2, 1, 2)
-GO
-INSERT [dbo].[additional_calendar] ([id], [start_date], [end_date], [overlap], [display], [created_at], [updated_at], [isAllDay], [isHasEnd], [calendarId], [statusId], [categoryId]) VALUES (88, CAST(N'2022-02-21T00:00:00.000' AS DateTime), CAST(N'2022-02-22T00:00:00.000' AS DateTime), 1, N'list-item', NULL, CAST(N'2022-02-22T11:39:44.020' AS DateTime), 1, 1, 2, 1, 2)
-GO
-INSERT [dbo].[additional_calendar] ([id], [start_date], [end_date], [overlap], [display], [created_at], [updated_at], [isAllDay], [isHasEnd], [calendarId], [statusId], [categoryId]) VALUES (89, CAST(N'2022-02-21T00:00:00.000' AS DateTime), CAST(N'2022-02-22T00:00:00.000' AS DateTime), 1, N'background', NULL, CAST(N'2022-02-22T11:39:56.643' AS DateTime), 1, 1, 2, 1, 2)
-GO
-INSERT [dbo].[additional_calendar] ([id], [start_date], [end_date], [overlap], [display], [created_at], [updated_at], [isAllDay], [isHasEnd], [calendarId], [statusId], [categoryId]) VALUES (90, CAST(N'2022-02-21T00:00:00.000' AS DateTime), CAST(N'2022-02-22T00:00:00.000' AS DateTime), 1, N'inverse-background', NULL, CAST(N'2022-02-22T11:40:08.490' AS DateTime), 1, 1, 2, 1, 2)
-GO
-INSERT [dbo].[additional_calendar] ([id], [start_date], [end_date], [overlap], [display], [created_at], [updated_at], [isAllDay], [isHasEnd], [calendarId], [statusId], [categoryId]) VALUES (91, CAST(N'2022-02-11T00:00:00.000' AS DateTime), CAST(N'2022-02-13T00:00:00.000' AS DateTime), 0, N'auto', NULL, CAST(N'2022-02-22T11:49:09.347' AS DateTime), 1, 0, 2, 1, 2)
-GO
-INSERT [dbo].[additional_calendar] ([id], [start_date], [end_date], [overlap], [display], [created_at], [updated_at], [isAllDay], [isHasEnd], [calendarId], [statusId], [categoryId]) VALUES (92, CAST(N'2022-02-13T00:00:00.000' AS DateTime), CAST(N'2022-02-16T00:00:00.000' AS DateTime), 0, N'auto', NULL, CAST(N'2022-02-22T11:41:08.080' AS DateTime), 1, 1, 3, 1, 2)
-GO
-INSERT [dbo].[additional_calendar] ([id], [start_date], [end_date], [overlap], [display], [created_at], [updated_at], [isAllDay], [isHasEnd], [calendarId], [statusId], [categoryId]) VALUES (93, CAST(N'2022-02-13T00:00:00.000' AS DateTime), CAST(N'2022-02-16T00:00:00.000' AS DateTime), 0, N'background', NULL, CAST(N'2022-02-22T11:41:20.357' AS DateTime), 1, 1, 3, 1, 2)
-GO
-INSERT [dbo].[additional_calendar] ([id], [start_date], [end_date], [overlap], [display], [created_at], [updated_at], [isAllDay], [isHasEnd], [calendarId], [statusId], [categoryId]) VALUES (94, CAST(N'2022-02-13T00:00:00.000' AS DateTime), CAST(N'2022-02-16T00:00:00.000' AS DateTime), 0, N'block', NULL, CAST(N'2022-02-22T11:41:28.600' AS DateTime), 1, 1, 3, 1, 2)
-GO
-INSERT [dbo].[additional_calendar] ([id], [start_date], [end_date], [overlap], [display], [created_at], [updated_at], [isAllDay], [isHasEnd], [calendarId], [statusId], [categoryId]) VALUES (95, CAST(N'2022-03-06T00:00:00.000' AS DateTime), CAST(N'2022-03-15T00:00:00.000' AS DateTime), 0, N'block', NULL, CAST(N'2022-02-22T11:46:22.320' AS DateTime), 1, 1, 6, 1, 1)
-GO
-INSERT [dbo].[additional_calendar] ([id], [start_date], [end_date], [overlap], [display], [created_at], [updated_at], [isAllDay], [isHasEnd], [calendarId], [statusId], [categoryId]) VALUES (96, CAST(N'2022-03-06T00:00:00.000' AS DateTime), CAST(N'2022-03-15T00:00:00.000' AS DateTime), 0, N'list-item', NULL, CAST(N'2022-02-22T11:46:35.520' AS DateTime), 1, 1, 6, 1, 1)
-GO
-INSERT [dbo].[additional_calendar] ([id], [start_date], [end_date], [overlap], [display], [created_at], [updated_at], [isAllDay], [isHasEnd], [calendarId], [statusId], [categoryId]) VALUES (97, CAST(N'2022-03-06T00:00:00.000' AS DateTime), CAST(N'2022-03-15T00:00:00.000' AS DateTime), 0, N'block', NULL, CAST(N'2022-02-22T11:47:28.627' AS DateTime), 1, 1, 6, 1, 1)
-GO
-INSERT [dbo].[additional_calendar] ([id], [start_date], [end_date], [overlap], [display], [created_at], [updated_at], [isAllDay], [isHasEnd], [calendarId], [statusId], [categoryId]) VALUES (98, CAST(N'2022-03-06T00:00:00.000' AS DateTime), CAST(N'2022-03-15T00:00:00.000' AS DateTime), 0, N'list-item', NULL, CAST(N'2022-02-22T11:47:42.640' AS DateTime), 1, 1, 6, 1, 1)
-GO
-INSERT [dbo].[additional_calendar] ([id], [start_date], [end_date], [overlap], [display], [created_at], [updated_at], [isAllDay], [isHasEnd], [calendarId], [statusId], [categoryId]) VALUES (99, CAST(N'2022-03-06T00:00:00.000' AS DateTime), CAST(N'2022-03-15T00:00:00.000' AS DateTime), 0, N'list-item', NULL, CAST(N'2022-02-22T11:47:59.717' AS DateTime), 1, 1, 6, 1, 2)
-GO
-INSERT [dbo].[additional_calendar] ([id], [start_date], [end_date], [overlap], [display], [created_at], [updated_at], [isAllDay], [isHasEnd], [calendarId], [statusId], [categoryId]) VALUES (100, CAST(N'2022-03-06T00:00:00.000' AS DateTime), CAST(N'2022-03-15T00:00:00.000' AS DateTime), 0, N'block', NULL, CAST(N'2022-02-22T11:48:03.797' AS DateTime), 1, 1, 6, 1, 2)
-GO
-INSERT [dbo].[additional_calendar] ([id], [start_date], [end_date], [overlap], [display], [created_at], [updated_at], [isAllDay], [isHasEnd], [calendarId], [statusId], [categoryId]) VALUES (101, CAST(N'2022-02-04T00:00:00.000' AS DateTime), CAST(N'2022-03-01T00:00:00.000' AS DateTime), 0, N'block', NULL, CAST(N'2022-02-22T11:49:47.480' AS DateTime), 1, 1, 6, 1, 2)
-GO
-INSERT [dbo].[additional_calendar] ([id], [start_date], [end_date], [overlap], [display], [created_at], [updated_at], [isAllDay], [isHasEnd], [calendarId], [statusId], [categoryId]) VALUES (102, CAST(N'2022-03-06T00:00:00.000' AS DateTime), CAST(N'2022-03-07T00:00:00.000' AS DateTime), 0, N'block', NULL, CAST(N'2022-02-22T11:50:38.603' AS DateTime), 1, 0, 6, 1, 2)
-GO
-INSERT [dbo].[additional_calendar] ([id], [start_date], [end_date], [overlap], [display], [created_at], [updated_at], [isAllDay], [isHasEnd], [calendarId], [statusId], [categoryId]) VALUES (103, CAST(N'2022-03-06T00:00:00.000' AS DateTime), CAST(N'2022-03-07T00:00:00.000' AS DateTime), 0, N'inverse-background', NULL, CAST(N'2022-02-22T11:50:46.253' AS DateTime), 1, 1, 6, 1, 2)
-GO
-INSERT [dbo].[additional_calendar] ([id], [start_date], [end_date], [overlap], [display], [created_at], [updated_at], [isAllDay], [isHasEnd], [calendarId], [statusId], [categoryId]) VALUES (104, CAST(N'2022-02-20T08:00:00.000' AS DateTime), CAST(N'2022-02-22T08:00:00.000' AS DateTime), 0, N'inverse-background', NULL, CAST(N'2022-02-22T11:51:55.090' AS DateTime), 1, 1, 6, 1, 2)
-GO
-INSERT [dbo].[additional_calendar] ([id], [start_date], [end_date], [overlap], [display], [created_at], [updated_at], [isAllDay], [isHasEnd], [calendarId], [statusId], [categoryId]) VALUES (105, CAST(N'2022-02-20T08:00:00.000' AS DateTime), CAST(N'2022-02-22T08:00:00.000' AS DateTime), 0, N'background', NULL, CAST(N'2022-02-22T11:52:00.230' AS DateTime), 1, 1, 6, 1, 2)
-GO
-INSERT [dbo].[additional_calendar] ([id], [start_date], [end_date], [overlap], [display], [created_at], [updated_at], [isAllDay], [isHasEnd], [calendarId], [statusId], [categoryId]) VALUES (106, CAST(N'2022-03-06T00:00:00.000' AS DateTime), CAST(N'2022-03-08T00:00:00.000' AS DateTime), 0, N'list-item', NULL, CAST(N'2022-02-22T11:55:37.510' AS DateTime), 1, 0, 6, 1, 2)
-GO
-INSERT [dbo].[additional_calendar] ([id], [start_date], [end_date], [overlap], [display], [created_at], [updated_at], [isAllDay], [isHasEnd], [calendarId], [statusId], [categoryId]) VALUES (107, CAST(N'2022-02-23T07:00:00.000' AS DateTime), CAST(N'2022-02-24T07:00:00.000' AS DateTime), 1, N'list-item', CAST(N'2022-02-22T11:57:21.390' AS DateTime), CAST(N'2022-02-22T11:57:21.390' AS DateTime), 1, 0, 1, 1, 1)
-GO
-INSERT [dbo].[additional_calendar] ([id], [start_date], [end_date], [overlap], [display], [created_at], [updated_at], [isAllDay], [isHasEnd], [calendarId], [statusId], [categoryId]) VALUES (108, CAST(N'2022-02-23T02:00:00.000' AS DateTime), CAST(N'2022-02-24T17:00:00.000' AS DateTime), 1, N'list-item', NULL, CAST(N'2022-02-22T11:57:34.417' AS DateTime), 1, 1, 1, 1, 1)
-GO
-INSERT [dbo].[additional_calendar] ([id], [start_date], [end_date], [overlap], [display], [created_at], [updated_at], [isAllDay], [isHasEnd], [calendarId], [statusId], [categoryId]) VALUES (109, CAST(N'2022-02-23T02:00:00.000' AS DateTime), CAST(N'2022-02-24T16:00:00.000' AS DateTime), 1, N'list-item', NULL, CAST(N'2022-02-22T11:58:21.333' AS DateTime), 1, 1, 1, 1, 1)
-GO
-INSERT [dbo].[additional_calendar] ([id], [start_date], [end_date], [overlap], [display], [created_at], [updated_at], [isAllDay], [isHasEnd], [calendarId], [statusId], [categoryId]) VALUES (110, CAST(N'2022-02-23T00:00:00.000' AS DateTime), CAST(N'2022-02-24T00:00:00.000' AS DateTime), 1, N'auto', NULL, CAST(N'2022-02-22T11:58:38.257' AS DateTime), 1, 1, 1, 1, 1)
-GO
-INSERT [dbo].[additional_calendar] ([id], [start_date], [end_date], [overlap], [display], [created_at], [updated_at], [isAllDay], [isHasEnd], [calendarId], [statusId], [categoryId]) VALUES (111, CAST(N'2022-02-23T03:00:00.000' AS DateTime), CAST(N'2022-02-24T12:00:00.000' AS DateTime), 1, N'auto', NULL, CAST(N'2022-02-22T11:58:52.183' AS DateTime), 1, 1, 1, 1, 1)
-GO
-INSERT [dbo].[additional_calendar] ([id], [start_date], [end_date], [overlap], [display], [created_at], [updated_at], [isAllDay], [isHasEnd], [calendarId], [statusId], [categoryId]) VALUES (112, CAST(N'2022-02-10T22:30:00.000' AS DateTime), CAST(N'2022-02-10T15:30:00.000' AS DateTime), 1, N'auto', NULL, CAST(N'2022-02-22T11:59:16.863' AS DateTime), 1, 1, 2, 1, 3)
-GO
-INSERT [dbo].[additional_calendar] ([id], [start_date], [end_date], [overlap], [display], [created_at], [updated_at], [isAllDay], [isHasEnd], [calendarId], [statusId], [categoryId]) VALUES (113, CAST(N'2022-04-06T00:00:00.000' AS DateTime), CAST(N'1970-01-01T07:00:00.000' AS DateTime), 1, N'auto', NULL, CAST(N'2022-03-06T03:52:09.257' AS DateTime), 1, 0, 2, 1, 3)
-GO
-INSERT [dbo].[additional_calendar] ([id], [start_date], [end_date], [overlap], [display], [created_at], [updated_at], [isAllDay], [isHasEnd], [calendarId], [statusId], [categoryId]) VALUES (114, CAST(N'2022-02-18T20:31:00.000' AS DateTime), CAST(N'2022-02-18T12:00:00.000' AS DateTime), 0, N'auto', NULL, CAST(N'2022-02-22T12:01:03.053' AS DateTime), 1, 1, 1, 1, 1)
-GO
-INSERT [dbo].[additional_calendar] ([id], [start_date], [end_date], [overlap], [display], [created_at], [updated_at], [isAllDay], [isHasEnd], [calendarId], [statusId], [categoryId]) VALUES (115, CAST(N'2022-02-23T00:00:00.000' AS DateTime), CAST(N'2022-02-25T00:00:00.000' AS DateTime), 1, N'auto', NULL, CAST(N'2022-02-23T01:13:06.617' AS DateTime), 1, 0, 1, 1, 1)
-GO
-INSERT [dbo].[additional_calendar] ([id], [start_date], [end_date], [overlap], [display], [created_at], [updated_at], [isAllDay], [isHasEnd], [calendarId], [statusId], [categoryId]) VALUES (116, CAST(N'2022-02-26T05:46:00.000' AS DateTime), CAST(N'2022-02-26T20:47:00.000' AS DateTime), 0, N'auto', NULL, CAST(N'2022-02-22T12:03:56.577' AS DateTime), 1, 1, 2, 1, 2)
-GO
-INSERT [dbo].[additional_calendar] ([id], [start_date], [end_date], [overlap], [display], [created_at], [updated_at], [isAllDay], [isHasEnd], [calendarId], [statusId], [categoryId]) VALUES (117, CAST(N'2022-02-26T02:04:00.000' AS DateTime), CAST(N'1970-01-01T04:04:00.000' AS DateTime), 0, N'auto', NULL, CAST(N'2022-02-22T12:04:32.727' AS DateTime), 1, 1, 2, 1, 2)
-GO
-INSERT [dbo].[additional_calendar] ([id], [start_date], [end_date], [overlap], [display], [created_at], [updated_at], [isAllDay], [isHasEnd], [calendarId], [statusId], [categoryId]) VALUES (118, CAST(N'2022-03-08T00:00:00.000' AS DateTime), CAST(N'2022-03-10T00:00:00.000' AS DateTime), 0, N'auto', NULL, CAST(N'2022-02-22T12:05:14.857' AS DateTime), 1, 0, 2, 1, 2)
-GO
-INSERT [dbo].[additional_calendar] ([id], [start_date], [end_date], [overlap], [display], [created_at], [updated_at], [isAllDay], [isHasEnd], [calendarId], [statusId], [categoryId]) VALUES (119, CAST(N'2022-03-08T02:00:00.000' AS DateTime), CAST(N'2022-03-10T00:00:00.000' AS DateTime), 0, N'auto', NULL, CAST(N'2022-02-22T12:05:34.783' AS DateTime), 1, 1, 2, 1, 2)
-GO
-INSERT [dbo].[additional_calendar] ([id], [start_date], [end_date], [overlap], [display], [created_at], [updated_at], [isAllDay], [isHasEnd], [calendarId], [statusId], [categoryId]) VALUES (120, CAST(N'2022-02-13T00:00:00.000' AS DateTime), CAST(N'2022-02-16T15:00:00.000' AS DateTime), 0, N'block', NULL, CAST(N'2022-02-22T12:07:46.257' AS DateTime), 1, 1, 3, 1, 2)
-GO
-INSERT [dbo].[additional_calendar] ([id], [start_date], [end_date], [overlap], [display], [created_at], [updated_at], [isAllDay], [isHasEnd], [calendarId], [statusId], [categoryId]) VALUES (121, CAST(N'2022-02-13T00:00:00.000' AS DateTime), CAST(N'2022-02-16T15:00:00.000' AS DateTime), 0, N'block', NULL, CAST(N'2022-02-22T12:08:16.113' AS DateTime), 1, 1, 3, 1, 2)
-GO
-INSERT [dbo].[additional_calendar] ([id], [start_date], [end_date], [overlap], [display], [created_at], [updated_at], [isAllDay], [isHasEnd], [calendarId], [statusId], [categoryId]) VALUES (122, CAST(N'2022-02-13T00:00:00.000' AS DateTime), CAST(N'2022-02-16T16:00:00.000' AS DateTime), 0, N'block', NULL, CAST(N'2022-02-22T12:08:24.537' AS DateTime), 1, 1, 3, 1, 2)
-GO
-INSERT [dbo].[additional_calendar] ([id], [start_date], [end_date], [overlap], [display], [created_at], [updated_at], [isAllDay], [isHasEnd], [calendarId], [statusId], [categoryId]) VALUES (126, CAST(N'2022-02-24T00:00:00.000' AS DateTime), CAST(N'2022-02-26T00:00:00.000' AS DateTime), 0, NULL, NULL, CAST(N'2022-02-22T12:15:59.103' AS DateTime), 1, 1, 6, 1, 1)
-GO
-INSERT [dbo].[additional_calendar] ([id], [start_date], [end_date], [overlap], [display], [created_at], [updated_at], [isAllDay], [isHasEnd], [calendarId], [statusId], [categoryId]) VALUES (133, CAST(N'2022-03-10T00:00:00.000' AS DateTime), CAST(N'2022-03-12T00:00:00.000' AS DateTime), 1, N'auto', NULL, CAST(N'2022-02-22T12:21:12.803' AS DateTime), 1, 0, 2, 1, 2)
-GO
-INSERT [dbo].[additional_calendar] ([id], [start_date], [end_date], [overlap], [display], [created_at], [updated_at], [isAllDay], [isHasEnd], [calendarId], [statusId], [categoryId]) VALUES (134, CAST(N'2022-03-10T14:00:00.000' AS DateTime), CAST(N'2022-03-12T17:00:00.000' AS DateTime), 1, N'auto', NULL, CAST(N'2022-02-22T12:21:32.993' AS DateTime), 1, 1, 2, 1, 2)
-GO
-INSERT [dbo].[additional_calendar] ([id], [start_date], [end_date], [overlap], [display], [created_at], [updated_at], [isAllDay], [isHasEnd], [calendarId], [statusId], [categoryId]) VALUES (135, CAST(N'2022-04-03T14:00:00.000' AS DateTime), CAST(N'2022-04-05T16:00:00.000' AS DateTime), 1, N'auto', NULL, CAST(N'2022-03-06T02:28:17.907' AS DateTime), 0, 0, 2, 1, 2)
-GO
-INSERT [dbo].[additional_calendar] ([id], [start_date], [end_date], [overlap], [display], [created_at], [updated_at], [isAllDay], [isHasEnd], [calendarId], [statusId], [categoryId]) VALUES (136, CAST(N'2022-03-07T14:00:00.000' AS DateTime), CAST(N'2022-03-09T17:00:00.000' AS DateTime), 0, N'auto', NULL, CAST(N'2022-03-06T01:51:06.967' AS DateTime), 0, 0, 2, 1, 2)
-GO
-INSERT [dbo].[additional_calendar] ([id], [start_date], [end_date], [overlap], [display], [created_at], [updated_at], [isAllDay], [isHasEnd], [calendarId], [statusId], [categoryId]) VALUES (137, CAST(N'2022-02-18T14:00:00.000' AS DateTime), CAST(N'1970-01-01T14:00:00.000' AS DateTime), 0, N'auto', NULL, CAST(N'2022-02-22T12:23:34.253' AS DateTime), 0, 1, 1, 1, 1)
-GO
-INSERT [dbo].[additional_calendar] ([id], [start_date], [end_date], [overlap], [display], [created_at], [updated_at], [isAllDay], [isHasEnd], [calendarId], [statusId], [categoryId]) VALUES (138, CAST(N'2022-02-01T14:00:00.000' AS DateTime), CAST(N'2022-02-03T16:00:00.000' AS DateTime), 1, N'auto', NULL, CAST(N'2022-02-22T12:24:06.057' AS DateTime), 0, 1, 2, 1, 2)
-GO
-INSERT [dbo].[additional_calendar] ([id], [start_date], [end_date], [overlap], [display], [created_at], [updated_at], [isAllDay], [isHasEnd], [calendarId], [statusId], [categoryId]) VALUES (146, CAST(N'2022-02-24T07:00:00.000' AS DateTime), CAST(N'2022-02-26T07:00:00.000' AS DateTime), 1, N'inverse-background', CAST(N'2022-02-22T12:33:21.260' AS DateTime), CAST(N'2022-02-22T12:33:21.260' AS DateTime), 1, 0, 2, 1, 2)
-GO
-INSERT [dbo].[additional_calendar] ([id], [start_date], [end_date], [overlap], [display], [created_at], [updated_at], [isAllDay], [isHasEnd], [calendarId], [statusId], [categoryId]) VALUES (147, CAST(N'2022-02-24T08:00:00.000' AS DateTime), CAST(N'2022-02-26T08:00:00.000' AS DateTime), 1, N'background', NULL, CAST(N'2022-02-22T12:33:45.623' AS DateTime), 1, 1, 2, 1, 2)
-GO
-INSERT [dbo].[additional_calendar] ([id], [start_date], [end_date], [overlap], [display], [created_at], [updated_at], [isAllDay], [isHasEnd], [calendarId], [statusId], [categoryId]) VALUES (148, CAST(N'2022-03-16T00:00:00.000' AS DateTime), CAST(N'2022-03-18T00:00:00.000' AS DateTime), 1, N'list-item', NULL, CAST(N'2022-03-06T02:24:51.537' AS DateTime), 0, 0, 2, 1, 2)
-GO
-INSERT [dbo].[additional_calendar] ([id], [start_date], [end_date], [overlap], [display], [created_at], [updated_at], [isAllDay], [isHasEnd], [calendarId], [statusId], [categoryId]) VALUES (150, CAST(N'2022-03-14T07:00:00.000' AS DateTime), CAST(N'2022-03-18T07:00:00.000' AS DateTime), 1, N'auto', CAST(N'2022-02-22T13:01:58.053' AS DateTime), CAST(N'2022-03-06T02:14:21.787' AS DateTime), 0, 0, 8, 1, 1)
-GO
-INSERT [dbo].[additional_calendar] ([id], [start_date], [end_date], [overlap], [display], [created_at], [updated_at], [isAllDay], [isHasEnd], [calendarId], [statusId], [categoryId]) VALUES (152, CAST(N'2022-02-20T07:00:00.000' AS DateTime), CAST(N'2022-02-27T07:00:00.000' AS DateTime), 1, N'auto', CAST(N'2022-02-22T13:39:55.470' AS DateTime), CAST(N'2022-02-22T15:10:36.203' AS DateTime), 0, 0, 8, 1, 2)
-GO
-INSERT [dbo].[additional_calendar] ([id], [start_date], [end_date], [overlap], [display], [created_at], [updated_at], [isAllDay], [isHasEnd], [calendarId], [statusId], [categoryId]) VALUES (156, CAST(N'2022-02-21T00:00:00.000' AS DateTime), CAST(N'1970-01-01T07:00:00.000' AS DateTime), 1, N'auto', NULL, CAST(N'2022-02-23T01:13:08.397' AS DateTime), 0, 0, 1, 1, 1)
-GO
-INSERT [dbo].[additional_calendar] ([id], [start_date], [end_date], [overlap], [display], [created_at], [updated_at], [isAllDay], [isHasEnd], [calendarId], [statusId], [categoryId]) VALUES (157, CAST(N'2022-01-31T00:00:00.000' AS DateTime), CAST(N'2022-02-02T00:00:00.000' AS DateTime), 1, N'auto', NULL, CAST(N'2022-02-23T10:16:48.977' AS DateTime), 0, 0, 2, 1, 2)
-GO
-INSERT [dbo].[additional_calendar] ([id], [start_date], [end_date], [overlap], [display], [created_at], [updated_at], [isAllDay], [isHasEnd], [calendarId], [statusId], [categoryId]) VALUES (158, CAST(N'2022-02-01T14:00:00.000' AS DateTime), CAST(N'2022-02-03T16:00:00.000' AS DateTime), 0, N'auto', NULL, CAST(N'2022-02-22T14:50:05.510' AS DateTime), 0, 1, 2, 1, 2)
-GO
-INSERT [dbo].[additional_calendar] ([id], [start_date], [end_date], [overlap], [display], [created_at], [updated_at], [isAllDay], [isHasEnd], [calendarId], [statusId], [categoryId]) VALUES (159, CAST(N'2022-02-27T14:00:00.000' AS DateTime), CAST(N'2022-03-01T16:00:00.000' AS DateTime), 1, N'auto', NULL, CAST(N'2022-03-06T16:50:39.707' AS DateTime), 0, 0, 2, 1, 2)
-GO
-INSERT [dbo].[additional_calendar] ([id], [start_date], [end_date], [overlap], [display], [created_at], [updated_at], [isAllDay], [isHasEnd], [calendarId], [statusId], [categoryId]) VALUES (160, CAST(N'2022-02-10T00:00:00.000' AS DateTime), CAST(N'2022-02-12T00:00:00.000' AS DateTime), 1, N'auto', NULL, CAST(N'2022-02-22T15:42:34.150' AS DateTime), 0, 0, 6, 1, 1)
-GO
-INSERT [dbo].[additional_calendar] ([id], [start_date], [end_date], [overlap], [display], [created_at], [updated_at], [isAllDay], [isHasEnd], [calendarId], [statusId], [categoryId]) VALUES (161, CAST(N'2022-02-10T00:00:00.000' AS DateTime), CAST(N'2022-02-12T00:00:00.000' AS DateTime), 1, N'background', NULL, CAST(N'2022-02-22T15:42:44.023' AS DateTime), 1, 1, 6, 1, 1)
-GO
-INSERT [dbo].[additional_calendar] ([id], [start_date], [end_date], [overlap], [display], [created_at], [updated_at], [isAllDay], [isHasEnd], [calendarId], [statusId], [categoryId]) VALUES (162, CAST(N'2022-02-02T07:00:00.000' AS DateTime), CAST(N'2022-02-09T07:00:00.000' AS DateTime), 1, N'auto', NULL, CAST(N'2022-03-06T16:50:36.077' AS DateTime), 0, 0, 8, 1, 2)
-GO
-INSERT [dbo].[additional_calendar] ([id], [start_date], [end_date], [overlap], [display], [created_at], [updated_at], [isAllDay], [isHasEnd], [calendarId], [statusId], [categoryId]) VALUES (163, CAST(N'2022-03-28T00:00:00.000' AS DateTime), CAST(N'2022-03-29T00:00:00.000' AS DateTime), 1, N'list-item', CAST(N'2022-02-22T19:50:10.840' AS DateTime), CAST(N'2022-03-02T23:59:30.850' AS DateTime), 1, 0, 1, 1, 3)
-GO
-INSERT [dbo].[additional_calendar] ([id], [start_date], [end_date], [overlap], [display], [created_at], [updated_at], [isAllDay], [isHasEnd], [calendarId], [statusId], [categoryId]) VALUES (168, CAST(N'2022-01-30T07:00:00.000' AS DateTime), CAST(N'1970-01-01T07:00:00.000' AS DateTime), 1, N'list-item', CAST(N'2022-02-25T22:10:53.577' AS DateTime), CAST(N'2022-02-25T22:11:03.327' AS DateTime), 0, 0, 6, 1, 3)
-GO
-INSERT [dbo].[additional_calendar] ([id], [start_date], [end_date], [overlap], [display], [created_at], [updated_at], [isAllDay], [isHasEnd], [calendarId], [statusId], [categoryId]) VALUES (169, CAST(N'2022-01-30T07:00:00.000' AS DateTime), CAST(N'1970-01-01T07:00:00.000' AS DateTime), 1, N'list-item', NULL, CAST(N'2022-02-25T22:14:54.820' AS DateTime), 0, 0, 6, 1, 2)
-GO
-INSERT [dbo].[additional_calendar] ([id], [start_date], [end_date], [overlap], [display], [created_at], [updated_at], [isAllDay], [isHasEnd], [calendarId], [statusId], [categoryId]) VALUES (176, CAST(N'2022-02-10T07:00:00.000' AS DateTime), CAST(N'2022-02-18T07:00:00.000' AS DateTime), 1, N'auto', CAST(N'2022-02-26T00:41:32.490' AS DateTime), CAST(N'2022-02-26T00:41:32.490' AS DateTime), 1, 0, 19, 1, 2)
-GO
-INSERT [dbo].[additional_calendar] ([id], [start_date], [end_date], [overlap], [display], [created_at], [updated_at], [isAllDay], [isHasEnd], [calendarId], [statusId], [categoryId]) VALUES (177, CAST(N'2022-02-03T07:00:00.000' AS DateTime), CAST(N'2022-02-05T07:00:00.000' AS DateTime), 1, N'auto', CAST(N'2022-02-26T00:42:04.117' AS DateTime), CAST(N'2022-02-26T00:42:04.117' AS DateTime), 1, 0, 19, 1, 1)
-GO
-INSERT [dbo].[additional_calendar] ([id], [start_date], [end_date], [overlap], [display], [created_at], [updated_at], [isAllDay], [isHasEnd], [calendarId], [statusId], [categoryId]) VALUES (178, CAST(N'2022-02-07T00:00:00.000' AS DateTime), CAST(N'2022-02-10T00:00:00.000' AS DateTime), 1, N'auto', CAST(N'2022-02-26T00:43:17.817' AS DateTime), CAST(N'2022-02-26T00:43:33.497' AS DateTime), 1, 1, 20, 1, 2)
-GO
-INSERT [dbo].[additional_calendar] ([id], [start_date], [end_date], [overlap], [display], [created_at], [updated_at], [isAllDay], [isHasEnd], [calendarId], [statusId], [categoryId]) VALUES (179, CAST(N'2022-02-07T01:00:00.000' AS DateTime), CAST(N'2022-02-10T04:04:00.000' AS DateTime), 1, N'auto', NULL, CAST(N'2022-02-26T00:43:58.230' AS DateTime), 0, 0, 20, 1, 2)
-GO
-INSERT [dbo].[additional_calendar] ([id], [start_date], [end_date], [overlap], [display], [created_at], [updated_at], [isAllDay], [isHasEnd], [calendarId], [statusId], [categoryId]) VALUES (181, CAST(N'2022-02-16T01:47:00.000' AS DateTime), CAST(N'2022-02-16T14:48:00.000' AS DateTime), 1, N'list-item', CAST(N'2022-02-26T00:46:33.280' AS DateTime), CAST(N'2022-02-26T00:46:50.153' AS DateTime), 0, 0, 19, 1, 2)
-GO
-INSERT [dbo].[additional_calendar] ([id], [start_date], [end_date], [overlap], [display], [created_at], [updated_at], [isAllDay], [isHasEnd], [calendarId], [statusId], [categoryId]) VALUES (182, CAST(N'2022-03-14T00:00:00.000' AS DateTime), CAST(N'2022-03-18T00:00:00.000' AS DateTime), 1, N'auto', CAST(N'2022-03-02T23:57:16.833' AS DateTime), CAST(N'2022-03-02T23:57:29.227' AS DateTime), 1, 0, 1, 1, 2)
-GO
-INSERT [dbo].[additional_calendar] ([id], [start_date], [end_date], [overlap], [display], [created_at], [updated_at], [isAllDay], [isHasEnd], [calendarId], [statusId], [categoryId]) VALUES (183, CAST(N'2022-03-20T15:00:00.000' AS DateTime), CAST(N'2022-03-24T17:00:00.000' AS DateTime), 1, N'auto', NULL, CAST(N'2022-03-06T02:14:31.343' AS DateTime), 0, 0, 1, 1, 2)
-GO
-INSERT [dbo].[additional_calendar] ([id], [start_date], [end_date], [overlap], [display], [created_at], [updated_at], [isAllDay], [isHasEnd], [calendarId], [statusId], [categoryId]) VALUES (184, CAST(N'2022-03-14T07:00:00.000' AS DateTime), CAST(N'2022-03-20T07:00:00.000' AS DateTime), 1, N'auto', NULL, CAST(N'2022-03-06T02:15:56.813' AS DateTime), 0, 1, 8, 1, 1)
-GO
-INSERT [dbo].[additional_calendar] ([id], [start_date], [end_date], [overlap], [display], [created_at], [updated_at], [isAllDay], [isHasEnd], [calendarId], [statusId], [categoryId]) VALUES (185, CAST(N'2022-03-14T07:00:00.000' AS DateTime), CAST(N'2022-03-20T07:00:00.000' AS DateTime), 1, N'auto', NULL, CAST(N'2022-03-06T02:17:55.213' AS DateTime), 0, 1, 8, 1, 1)
-GO
-INSERT [dbo].[additional_calendar] ([id], [start_date], [end_date], [overlap], [display], [created_at], [updated_at], [isAllDay], [isHasEnd], [calendarId], [statusId], [categoryId]) VALUES (186, CAST(N'2022-03-14T07:00:00.000' AS DateTime), CAST(N'2022-03-23T07:00:00.000' AS DateTime), 1, N'auto', NULL, CAST(N'2022-03-06T02:18:08.400' AS DateTime), 0, 1, 8, 1, 1)
-GO
-INSERT [dbo].[additional_calendar] ([id], [start_date], [end_date], [overlap], [display], [created_at], [updated_at], [isAllDay], [isHasEnd], [calendarId], [statusId], [categoryId]) VALUES (187, CAST(N'2022-03-20T15:00:00.000' AS DateTime), CAST(N'2022-03-25T17:00:00.000' AS DateTime), 1, N'auto', NULL, CAST(N'2022-03-06T02:18:19.237' AS DateTime), 0, 1, 1, 1, 2)
-GO
-INSERT [dbo].[additional_calendar] ([id], [start_date], [end_date], [overlap], [display], [created_at], [updated_at], [isAllDay], [isHasEnd], [calendarId], [statusId], [categoryId]) VALUES (188, CAST(N'2022-03-30T15:00:00.000' AS DateTime), CAST(N'2022-04-02T17:00:00.000' AS DateTime), 1, N'auto', NULL, CAST(N'2022-03-06T02:28:16.547' AS DateTime), 0, 0, 1, 1, 2)
-GO
-INSERT [dbo].[additional_calendar] ([id], [start_date], [end_date], [overlap], [display], [created_at], [updated_at], [isAllDay], [isHasEnd], [calendarId], [statusId], [categoryId]) VALUES (189, CAST(N'2022-03-20T07:00:00.000' AS DateTime), CAST(N'2022-03-24T07:00:00.000' AS DateTime), 1, N'auto', NULL, CAST(N'2022-03-06T02:28:15.057' AS DateTime), 0, 0, 8, 1, 1)
-GO
-INSERT [dbo].[additional_calendar] ([id], [start_date], [end_date], [overlap], [display], [created_at], [updated_at], [isAllDay], [isHasEnd], [calendarId], [statusId], [categoryId]) VALUES (190, CAST(N'2022-03-19T15:00:00.000' AS DateTime), CAST(N'2022-03-26T17:00:00.000' AS DateTime), 1, N'auto', NULL, CAST(N'2022-03-06T03:49:51.017' AS DateTime), 0, 0, 1, 1, 2)
-GO
-INSERT [dbo].[additional_calendar] ([id], [start_date], [end_date], [overlap], [display], [created_at], [updated_at], [isAllDay], [isHasEnd], [calendarId], [statusId], [categoryId]) VALUES (191, CAST(N'2022-03-21T07:00:00.000' AS DateTime), CAST(N'2022-03-26T07:00:00.000' AS DateTime), 1, N'auto', NULL, CAST(N'2022-03-06T03:50:37.057' AS DateTime), 0, 0, 8, 1, 1)
-GO
-INSERT [dbo].[additional_calendar] ([id], [start_date], [end_date], [overlap], [display], [created_at], [updated_at], [isAllDay], [isHasEnd], [calendarId], [statusId], [categoryId]) VALUES (193, CAST(N'2022-03-19T00:00:00.000' AS DateTime), CAST(N'2022-03-26T00:00:00.000' AS DateTime), 1, N'auto', CAST(N'2022-03-06T02:31:18.337' AS DateTime), CAST(N'2022-03-06T03:39:58.483' AS DateTime), 1, 0, 3, 1, 3)
-GO
-INSERT [dbo].[additional_calendar] ([id], [start_date], [end_date], [overlap], [display], [created_at], [updated_at], [isAllDay], [isHasEnd], [calendarId], [statusId], [categoryId]) VALUES (194, CAST(N'2022-03-24T07:00:00.000' AS DateTime), CAST(N'2022-03-28T07:00:00.000' AS DateTime), 1, N'auto', CAST(N'2022-03-06T02:34:34.323' AS DateTime), CAST(N'2022-03-06T02:34:34.323' AS DateTime), 1, 0, 1, 1, 2)
-GO
-INSERT [dbo].[additional_calendar] ([id], [start_date], [end_date], [overlap], [display], [created_at], [updated_at], [isAllDay], [isHasEnd], [calendarId], [statusId], [categoryId]) VALUES (198, CAST(N'2022-03-17T07:00:00.000' AS DateTime), CAST(N'2022-03-20T07:00:00.000' AS DateTime), 1, N'auto', CAST(N'2022-03-06T02:43:09.303' AS DateTime), CAST(N'2022-03-06T02:43:09.303' AS DateTime), 1, 0, 7, 1, 1)
-GO
-INSERT [dbo].[additional_calendar] ([id], [start_date], [end_date], [overlap], [display], [created_at], [updated_at], [isAllDay], [isHasEnd], [calendarId], [statusId], [categoryId]) VALUES (201, CAST(N'2022-03-12T07:00:00.000' AS DateTime), CAST(N'2022-03-17T07:00:00.000' AS DateTime), 1, N'auto', CAST(N'2022-03-06T02:55:44.637' AS DateTime), CAST(N'2022-03-06T02:55:44.637' AS DateTime), 1, 0, 3, 1, 2)
-GO
-INSERT [dbo].[additional_calendar] ([id], [start_date], [end_date], [overlap], [display], [created_at], [updated_at], [isAllDay], [isHasEnd], [calendarId], [statusId], [categoryId]) VALUES (202, CAST(N'2022-03-29T00:00:00.000' AS DateTime), CAST(N'2022-04-01T00:00:00.000' AS DateTime), 1, N'auto', CAST(N'2022-03-06T03:02:00.683' AS DateTime), CAST(N'2022-03-06T03:51:39.420' AS DateTime), 1, 0, 8, 1, 2)
-GO
-INSERT [dbo].[additional_calendar] ([id], [start_date], [end_date], [overlap], [display], [created_at], [updated_at], [isAllDay], [isHasEnd], [calendarId], [statusId], [categoryId]) VALUES (204, CAST(N'2022-03-24T00:00:00.000' AS DateTime), CAST(N'2022-03-26T00:00:00.000' AS DateTime), 1, N'auto', NULL, CAST(N'2022-03-06T03:08:53.080' AS DateTime), 0, 1, 1, 1, 2)
-GO
-INSERT [dbo].[additional_calendar] ([id], [start_date], [end_date], [overlap], [display], [created_at], [updated_at], [isAllDay], [isHasEnd], [calendarId], [statusId], [categoryId]) VALUES (205, CAST(N'2022-03-24T00:00:00.000' AS DateTime), CAST(N'2022-03-26T00:00:00.000' AS DateTime), 1, N'auto', NULL, CAST(N'2022-03-06T03:09:01.103' AS DateTime), 0, 1, 1, 1, 2)
-GO
-INSERT [dbo].[additional_calendar] ([id], [start_date], [end_date], [overlap], [display], [created_at], [updated_at], [isAllDay], [isHasEnd], [calendarId], [statusId], [categoryId]) VALUES (206, CAST(N'2022-03-24T00:00:00.000' AS DateTime), CAST(N'2022-03-26T00:00:00.000' AS DateTime), 1, N'auto', NULL, CAST(N'2022-03-06T03:09:19.617' AS DateTime), 0, 1, 1, 1, 2)
-GO
-INSERT [dbo].[additional_calendar] ([id], [start_date], [end_date], [overlap], [display], [created_at], [updated_at], [isAllDay], [isHasEnd], [calendarId], [statusId], [categoryId]) VALUES (207, CAST(N'2022-03-24T00:00:00.000' AS DateTime), CAST(N'2022-03-26T00:00:00.000' AS DateTime), 1, N'auto', NULL, CAST(N'2022-03-06T03:09:55.993' AS DateTime), 0, 1, 1, 1, 2)
-GO
-INSERT [dbo].[additional_calendar] ([id], [start_date], [end_date], [overlap], [display], [created_at], [updated_at], [isAllDay], [isHasEnd], [calendarId], [statusId], [categoryId]) VALUES (208, CAST(N'2022-03-03T07:00:00.000' AS DateTime), CAST(N'2022-03-11T07:00:00.000' AS DateTime), 1, N'auto', CAST(N'2022-03-06T03:17:56.783' AS DateTime), CAST(N'2022-03-06T04:04:19.423' AS DateTime), 1, 0, 1, 1, 1)
-GO
-INSERT [dbo].[additional_calendar] ([id], [start_date], [end_date], [overlap], [display], [created_at], [updated_at], [isAllDay], [isHasEnd], [calendarId], [statusId], [categoryId]) VALUES (212, CAST(N'2022-03-01T00:00:00.000' AS DateTime), CAST(N'2022-03-04T00:00:00.000' AS DateTime), 1, N'auto', CAST(N'2022-03-06T16:30:55.270' AS DateTime), CAST(N'2022-03-06T16:31:06.897' AS DateTime), 1, 1, 1, 1, 1)
+INSERT [dbo].[additional_calendar] ([id], [start_date], [end_date], [overlap], [display], [created_at], [updated_at], [isAllDay], [isHasEnd], [calendarId], [statusId], [categoryId]) VALUES (274, CAST(N'2022-03-07T20:00:00.000' AS DateTime), CAST(N'2022-03-08T23:00:00.000' AS DateTime), 1, N'auto', CAST(N'2022-03-13T00:22:05.127' AS DateTime), CAST(N'2022-03-13T00:22:05.127' AS DateTime), 0, 1, 34, 1, 5)
 GO
 SET IDENTITY_INSERT [dbo].[additional_calendar] OFF
 GO
 SET IDENTITY_INSERT [dbo].[calendar] ON 
 GO
-INSERT [dbo].[calendar] ([id], [name], [color], [userId], [created_at], [updated_at]) VALUES (1, N'Home', N'#e01f1f', 1, CAST(N'2022-02-12T23:19:23.507' AS DateTime), CAST(N'2022-02-12T23:19:23.507' AS DateTime))
+INSERT [dbo].[calendar] ([id], [name], [color], [userId], [created_at], [updated_at]) VALUES (34, N'Home', N'#E0211F', 1030, CAST(N'2022-03-12T03:33:41.777' AS DateTime), CAST(N'2022-03-12T03:33:41.777' AS DateTime))
 GO
-INSERT [dbo].[calendar] ([id], [name], [color], [userId], [created_at], [updated_at]) VALUES (2, N'School', N'#0a12ff', 1, CAST(N'2022-02-12T23:19:32.250' AS DateTime), CAST(N'2022-02-22T17:08:14.870' AS DateTime))
+INSERT [dbo].[calendar] ([id], [name], [color], [userId], [created_at], [updated_at]) VALUES (38, N'Home', N'#000000', 1, CAST(N'2022-03-12T03:38:41.023' AS DateTime), CAST(N'2022-03-12T03:38:41.023' AS DateTime))
 GO
-INSERT [dbo].[calendar] ([id], [name], [color], [userId], [created_at], [updated_at]) VALUES (3, N'Company', N'#8136E0', 1, CAST(N'2022-02-13T00:23:58.253' AS DateTime), CAST(N'2022-02-13T00:23:58.253' AS DateTime))
+INSERT [dbo].[calendar] ([id], [name], [color], [userId], [created_at], [updated_at]) VALUES (39, N'Coder', N'#0e63ec', 1, CAST(N'2022-03-12T03:38:46.760' AS DateTime), CAST(N'2022-03-12T03:39:11.967' AS DateTime))
 GO
-INSERT [dbo].[calendar] ([id], [name], [color], [userId], [created_at], [updated_at]) VALUES (6, N'Play Game', N'#17e8da', 1, CAST(N'2022-02-22T00:49:53.733' AS DateTime), CAST(N'2022-02-22T17:10:43.733' AS DateTime))
+INSERT [dbo].[calendar] ([id], [name], [color], [userId], [created_at], [updated_at]) VALUES (40, N'FPT University', N'#e04f00', 1, CAST(N'2022-03-12T03:39:04.433' AS DateTime), CAST(N'2022-03-12T03:39:04.433' AS DateTime))
 GO
-INSERT [dbo].[calendar] ([id], [name], [color], [userId], [created_at], [updated_at]) VALUES (7, N'Sport', N'#3cff14', 1, CAST(N'2022-02-22T00:51:38.783' AS DateTime), CAST(N'2022-02-22T17:07:29.197' AS DateTime))
+INSERT [dbo].[calendar] ([id], [name], [color], [userId], [created_at], [updated_at]) VALUES (41, N'FPT University', N'#ff780a', 1030, CAST(N'2022-03-12T23:22:14.143' AS DateTime), CAST(N'2022-03-12T23:22:14.143' AS DateTime))
 GO
-INSERT [dbo].[calendar] ([id], [name], [color], [userId], [created_at], [updated_at]) VALUES (8, N'Good', N'#000000', 1, CAST(N'2022-02-22T13:01:30.633' AS DateTime), CAST(N'2022-02-22T13:01:30.633' AS DateTime))
+INSERT [dbo].[calendar] ([id], [name], [color], [userId], [created_at], [updated_at]) VALUES (42, N'Company', N'#1713ec', 1030, CAST(N'2022-03-12T23:22:50.363' AS DateTime), CAST(N'2022-03-12T23:22:50.363' AS DateTime))
 GO
-INSERT [dbo].[calendar] ([id], [name], [color], [userId], [created_at], [updated_at]) VALUES (19, N'Home', N'#ca1616', 7, CAST(N'2022-02-26T00:40:57.627' AS DateTime), CAST(N'2022-02-26T00:41:05.577' AS DateTime))
+INSERT [dbo].[calendar] ([id], [name], [color], [userId], [created_at], [updated_at]) VALUES (43, N'Đi chơi', N'#ec18be', 1030, CAST(N'2022-03-12T23:23:09.273' AS DateTime), CAST(N'2022-03-12T23:23:09.273' AS DateTime))
 GO
-INSERT [dbo].[calendar] ([id], [name], [color], [userId], [created_at], [updated_at]) VALUES (20, N'School', N'#3cf42f', 7, CAST(N'2022-02-26T00:42:25.863' AS DateTime), CAST(N'2022-02-26T00:42:25.863' AS DateTime))
+INSERT [dbo].[calendar] ([id], [name], [color], [userId], [created_at], [updated_at]) VALUES (44, N'Lịch dạy', N'#06cb90', 1030, CAST(N'2022-03-12T23:56:12.893' AS DateTime), CAST(N'2022-03-12T23:56:12.893' AS DateTime))
 GO
 SET IDENTITY_INSERT [dbo].[calendar] OFF
 GO
@@ -647,45 +389,66 @@ SET IDENTITY_INSERT [dbo].[category_calendar] OFF
 GO
 SET IDENTITY_INSERT [dbo].[event] ON 
 GO
-INSERT [dbo].[event] ([id], [title], [description], [location], [updated_at], [created_at], [userId], [additionalId]) VALUES (7, N'Đi học', N'FPT University', N'FPT University', CAST(N'2022-02-19T16:51:53.943' AS DateTime), CAST(N'2022-02-19T16:51:53.943' AS DateTime), 1, 52)
+INSERT [dbo].[event] ([id], [title], [description], [location], [updated_at], [created_at], [userId], [additionalId]) VALUES (103, N'Học code tại FPT', N'FPT University', N'FPT University', CAST(N'2022-03-12T03:39:43.590' AS DateTime), CAST(N'2022-03-12T03:39:43.590' AS DateTime), 1, 253)
 GO
-INSERT [dbo].[event] ([id], [title], [description], [location], [updated_at], [created_at], [userId], [additionalId]) VALUES (10, N'Họp nhóm', N'FPT University', N'FPT University', CAST(N'2022-03-06T04:24:08.013' AS DateTime), CAST(N'2022-02-20T21:41:38.357' AS DateTime), 1, 10)
+INSERT [dbo].[event] ([id], [title], [description], [location], [updated_at], [created_at], [userId], [additionalId]) VALUES (104, N'Xử lý email cho project', N'FPT University project assignment PRJ', N'FPT University', CAST(N'2022-03-12T03:40:18.393' AS DateTime), CAST(N'2022-03-12T03:40:18.393' AS DateTime), 1, 254)
 GO
-INSERT [dbo].[event] ([id], [title], [description], [location], [updated_at], [created_at], [userId], [additionalId]) VALUES (12, N'Đi nhậu', N'Đi nhậu với bạn bè', N'Home', CAST(N'2022-02-23T01:13:08.397' AS DateTime), CAST(N'2022-02-20T22:35:19.120' AS DateTime), 1, 156)
+INSERT [dbo].[event] ([id], [title], [description], [location], [updated_at], [created_at], [userId], [additionalId]) VALUES (105, N'Xử lý websocket cho dự án PRJ', N'FPT University PRJ301 project assignment', N'FPT University', CAST(N'2022-03-12T03:40:55.327' AS DateTime), CAST(N'2022-03-12T03:40:55.327' AS DateTime), 1, 255)
 GO
-INSERT [dbo].[event] ([id], [title], [description], [location], [updated_at], [created_at], [userId], [additionalId]) VALUES (14, N'Làm việc tại nhà', N'Home', N'Home', CAST(N'2022-03-06T16:50:37.480' AS DateTime), CAST(N'2022-02-20T21:41:33.707' AS DateTime), 1, 14)
+INSERT [dbo].[event] ([id], [title], [description], [location], [updated_at], [created_at], [userId], [additionalId]) VALUES (106, N'Học JPD123', N'FPT University google meet
+', N'FPT University google meet', CAST(N'2022-03-12T23:24:34.227' AS DateTime), CAST(N'2022-03-12T23:24:34.227' AS DateTime), 1030, 256)
 GO
-INSERT [dbo].[event] ([id], [title], [description], [location], [updated_at], [created_at], [userId], [additionalId]) VALUES (15, N'Đi ăn lẩu', N'Đi ăn lẩu nướng, thái, lẩu ếch', N'Home', CAST(N'2022-02-19T20:08:53.030' AS DateTime), CAST(N'2022-02-19T20:08:53.030' AS DateTime), 1, 58)
+INSERT [dbo].[event] ([id], [title], [description], [location], [updated_at], [created_at], [userId], [additionalId]) VALUES (107, N'Học IOT102', N'Học trên google meet bài quan trọng không đượ nghỉ
+', N'FPT University google meet', CAST(N'2022-03-12T23:25:21.380' AS DateTime), CAST(N'2022-03-12T23:25:21.380' AS DateTime), 1030, 257)
 GO
-INSERT [dbo].[event] ([id], [title], [description], [location], [updated_at], [created_at], [userId], [additionalId]) VALUES (17, N'Đi họp lớp', N'Lẩu nướng quảng bình', N'Quảng Bình', CAST(N'2022-03-06T16:50:38.520' AS DateTime), CAST(N'2022-02-20T22:27:17.160' AS DateTime), 1, 29)
+INSERT [dbo].[event] ([id], [title], [description], [location], [updated_at], [created_at], [userId], [additionalId]) VALUES (108, N'Học PRJ301', N'Học trên google meet bài quan trọng không đượ nghỉ', N'FPT University', CAST(N'2022-03-12T23:26:35.730' AS DateTime), CAST(N'2022-03-12T23:26:35.730' AS DateTime), 1030, 258)
 GO
-INSERT [dbo].[event] ([id], [title], [description], [location], [updated_at], [created_at], [userId], [additionalId]) VALUES (19, N'Họp câu lạc bộ', N'Đi học câu lạc bộ JS', N'FPT University', CAST(N'2022-02-23T10:16:48.977' AS DateTime), CAST(N'2022-02-19T21:20:35.087' AS DateTime), 1, 157)
+INSERT [dbo].[event] ([id], [title], [description], [location], [updated_at], [created_at], [userId], [additionalId]) VALUES (109, N'Học MAS291', N'Học trên google meet bài quan trọng không đượ nghỉ
+', N'FPT University google meet', CAST(N'2022-03-12T23:27:42.117' AS DateTime), CAST(N'2022-03-12T23:27:42.117' AS DateTime), 1030, 259)
 GO
-INSERT [dbo].[event] ([id], [title], [description], [location], [updated_at], [created_at], [userId], [additionalId]) VALUES (23, N'Đi take care', N'FPT University', N'FPT University', CAST(N'2022-03-06T16:50:27.370' AS DateTime), CAST(N'2022-02-21T23:28:04.407' AS DateTime), 1, 23)
+INSERT [dbo].[event] ([id], [title], [description], [location], [updated_at], [created_at], [userId], [additionalId]) VALUES (110, N'Học MAS292', N'Học trên google meet bài quan trọng không đượ nghỉ
+', N'FPT University google meet', CAST(N'2022-03-12T23:29:05.137' AS DateTime), CAST(N'2022-03-12T23:29:05.137' AS DateTime), 1030, 260)
 GO
-INSERT [dbo].[event] ([id], [title], [description], [location], [updated_at], [created_at], [userId], [additionalId]) VALUES (25, N'Đi học', N'FPT University', N'FPT University', CAST(N'2022-03-06T16:50:39.707' AS DateTime), CAST(N'2022-02-21T23:29:13.373' AS DateTime), 1, 159)
+INSERT [dbo].[event] ([id], [title], [description], [location], [updated_at], [created_at], [userId], [additionalId]) VALUES (111, N'Học JPD123', N'Học trên google meet bài quan trọng không được nghỉ
+', N'FPT University google meet', CAST(N'2022-03-12T23:30:20.947' AS DateTime), CAST(N'2022-03-12T23:30:20.947' AS DateTime), 1030, 261)
 GO
-INSERT [dbo].[event] ([id], [title], [description], [location], [updated_at], [created_at], [userId], [additionalId]) VALUES (27, N'Đi đá bóng', N'FPT University', N'FPT University', CAST(N'2022-03-06T16:30:06.160' AS DateTime), CAST(N'2022-02-22T00:52:17.997' AS DateTime), 1, 67)
+INSERT [dbo].[event] ([id], [title], [description], [location], [updated_at], [created_at], [userId], [additionalId]) VALUES (112, N'Học IOT102', N'Học trên google meet bài quan trọng không được nghỉ
+', N'FPT University google meet', CAST(N'2022-03-12T23:30:56.887' AS DateTime), CAST(N'2022-03-12T23:30:56.887' AS DateTime), 1030, 262)
 GO
-INSERT [dbo].[event] ([id], [title], [description], [location], [updated_at], [created_at], [userId], [additionalId]) VALUES (28, N'Đi chơi game', N'Home', N'Home', CAST(N'2022-02-22T15:42:44.023' AS DateTime), CAST(N'2022-02-22T00:53:00.017' AS DateTime), 1, 161)
+INSERT [dbo].[event] ([id], [title], [description], [location], [updated_at], [created_at], [userId], [additionalId]) VALUES (113, N'Học JPD123', N'Học trên google meet bài quan trọng không được nghỉ', N'FPT University google meet', CAST(N'2022-03-12T23:32:07.457' AS DateTime), CAST(N'2022-03-12T23:32:07.457' AS DateTime), 1030, 263)
 GO
-INSERT [dbo].[event] ([id], [title], [description], [location], [updated_at], [created_at], [userId], [additionalId]) VALUES (31, N'Đi ăn', N'FPT University', N'FPT University', CAST(N'2022-03-06T02:24:51.537' AS DateTime), CAST(N'2022-02-22T12:33:21.260' AS DateTime), 1, 148)
+INSERT [dbo].[event] ([id], [title], [description], [location], [updated_at], [created_at], [userId], [additionalId]) VALUES (114, N'Học MAS292', N'Học trên google meet bài quan trọng không được nghỉ
+', N'FPT University google meet', CAST(N'2022-03-12T23:32:42.277' AS DateTime), CAST(N'2022-03-12T23:32:42.277' AS DateTime), 1030, 264)
 GO
-INSERT [dbo].[event] ([id], [title], [description], [location], [updated_at], [created_at], [userId], [additionalId]) VALUES (32, N'Good', N'Home', N'Home', CAST(N'2022-03-06T04:23:41.037' AS DateTime), CAST(N'2022-02-22T13:01:58.053' AS DateTime), 1, 32)
+INSERT [dbo].[event] ([id], [title], [description], [location], [updated_at], [created_at], [userId], [additionalId]) VALUES (115, N'Học JPD123', N'Học trên google meet bài quan trọng không được nghỉ
+', N'FPT University google meet', CAST(N'2022-03-12T23:33:26.437' AS DateTime), CAST(N'2022-03-12T23:33:26.437' AS DateTime), 1030, 265)
 GO
-INSERT [dbo].[event] ([id], [title], [description], [location], [updated_at], [created_at], [userId], [additionalId]) VALUES (34, N'Đi lập trình js', N'Quảng Bình', N'Quảng Bình', CAST(N'2022-03-06T16:50:36.077' AS DateTime), CAST(N'2022-02-22T13:39:55.470' AS DateTime), 1, 162)
+INSERT [dbo].[event] ([id], [title], [description], [location], [updated_at], [created_at], [userId], [additionalId]) VALUES (116, N'Học IOT102', N'Học trên google meet bài quan trọng không được nghỉ
+', N'FPT University google meet', CAST(N'2022-03-13T00:09:20.867' AS DateTime), CAST(N'2022-03-12T23:34:08.100' AS DateTime), 1030, 266)
 GO
-INSERT [dbo].[event] ([id], [title], [description], [location], [updated_at], [created_at], [userId], [additionalId]) VALUES (35, N'Đi nấu ăn', N'Nấu ăn ngon', N'Home', CAST(N'2022-03-02T23:59:30.850' AS DateTime), CAST(N'2022-02-22T19:50:10.840' AS DateTime), 1, 163)
+INSERT [dbo].[event] ([id], [title], [description], [location], [updated_at], [created_at], [userId], [additionalId]) VALUES (117, N'Học PRJ301', N'Học trên google meet bài quan trọng không được nghỉ
+', N'FPT University google meet', CAST(N'2022-03-13T00:07:35.247' AS DateTime), CAST(N'2022-03-12T23:35:07.670' AS DateTime), 1030, 267)
 GO
-INSERT [dbo].[event] ([id], [title], [description], [location], [updated_at], [created_at], [userId], [additionalId]) VALUES (41, N'Đi chơi', N'Đi chơi cùng bạn bè', N'Home', CAST(N'2022-02-26T00:41:32.490' AS DateTime), CAST(N'2022-02-26T00:41:32.490' AS DateTime), 7, 176)
+INSERT [dbo].[event] ([id], [title], [description], [location], [updated_at], [created_at], [userId], [additionalId]) VALUES (118, N'Tham gia họp câu lạc bộ js', N'Tham gia họp về cộng tác viên tuyển member
+', N'FPT University google meet', CAST(N'2022-03-12T23:54:14.427' AS DateTime), CAST(N'2022-03-12T23:54:14.427' AS DateTime), 1030, 268)
 GO
-INSERT [dbo].[event] ([id], [title], [description], [location], [updated_at], [created_at], [userId], [additionalId]) VALUES (42, N'Đi ăn nhậu', N'Vui chơi giải tris', N'Ba vì', CAST(N'2022-02-26T00:42:04.117' AS DateTime), CAST(N'2022-02-26T00:42:04.117' AS DateTime), 7, 177)
+INSERT [dbo].[event] ([id], [title], [description], [location], [updated_at], [created_at], [userId], [additionalId]) VALUES (119, N'Dạy học python cơ bản', N'Dạy các em về python cơ bản và giải thuật
+', N'Google meet', CAST(N'2022-03-12T23:58:47.667' AS DateTime), CAST(N'2022-03-12T23:58:47.667' AS DateTime), 1030, 269)
 GO
-INSERT [dbo].[event] ([id], [title], [description], [location], [updated_at], [created_at], [userId], [additionalId]) VALUES (43, N'Đi học', N'FPT University', N'FPT University', CAST(N'2022-02-26T00:43:58.230' AS DateTime), CAST(N'2022-02-26T00:43:17.817' AS DateTime), 7, 179)
+INSERT [dbo].[event] ([id], [title], [description], [location], [updated_at], [created_at], [userId], [additionalId]) VALUES (120, N'Dạy học python cơ bản', N'Dạy các em về python cơ bản và giải thuật
+', N'Google meet', CAST(N'2022-03-13T00:01:46.157' AS DateTime), CAST(N'2022-03-13T00:01:46.157' AS DateTime), 1030, 270)
 GO
-INSERT [dbo].[event] ([id], [title], [description], [location], [updated_at], [created_at], [userId], [additionalId]) VALUES (45, N'Nấu cơm', N'Home', N'Home', CAST(N'2022-02-26T00:46:50.153' AS DateTime), CAST(N'2022-02-26T00:46:33.280' AS DateTime), 7, 181)
+INSERT [dbo].[event] ([id], [title], [description], [location], [updated_at], [created_at], [userId], [additionalId]) VALUES (121, N'Tham gia họp câu lạc bộ js', N'Traning member trong các ctv mà mình mentor
+', N'FPT University google meet', CAST(N'2022-03-13T00:06:03.097' AS DateTime), CAST(N'2022-03-13T00:06:03.097' AS DateTime), 1030, 271)
 GO
-INSERT [dbo].[event] ([id], [title], [description], [location], [updated_at], [created_at], [userId], [additionalId]) VALUES (46, N'Làm bài tập', N'Làm bài tập cho péo', N'Home', CAST(N'2022-03-06T16:50:16.923' AS DateTime), CAST(N'2022-03-02T23:57:16.833' AS DateTime), 1, 46)
+INSERT [dbo].[event] ([id], [title], [description], [location], [updated_at], [created_at], [userId], [additionalId]) VALUES (122, N'Đi ăn lẩu cùng với hội bạn', N'Đi nhậu cùng hội bạn 
+', N'Vincom Nguyễn Trãi', CAST(N'2022-03-13T00:12:54.720' AS DateTime), CAST(N'2022-03-13T00:12:44.777' AS DateTime), 1030, 272)
+GO
+INSERT [dbo].[event] ([id], [title], [description], [location], [updated_at], [created_at], [userId], [additionalId]) VALUES (123, N'Đi xem phim spider men', N'đi xem idol người nhện
+', N'Vincom Trần Duy Hưng', CAST(N'2022-03-13T00:16:26.987' AS DateTime), CAST(N'2022-03-13T00:16:26.987' AS DateTime), 1030, 273)
+GO
+INSERT [dbo].[event] ([id], [title], [description], [location], [updated_at], [created_at], [userId], [additionalId]) VALUES (124, N'Chơi game liên minh huyền thoại', N'Chơi game liên minh huyền thoại cùng bạn trọ
+', N'Ở nhà', CAST(N'2022-03-13T00:22:05.127' AS DateTime), CAST(N'2022-03-13T00:22:05.127' AS DateTime), 1030, 274)
 GO
 SET IDENTITY_INSERT [dbo].[event] OFF
 GO
@@ -801,7 +564,7 @@ SET IDENTITY_INSERT [dbo].[status_calendar] ON
 GO
 INSERT [dbo].[status_calendar] ([id], [name]) VALUES (1, N'Pending')
 GO
-INSERT [dbo].[status_calendar] ([id], [name]) VALUES (2, N'In Progress')
+INSERT [dbo].[status_calendar] ([id], [name]) VALUES (2, N'In progress')
 GO
 INSERT [dbo].[status_calendar] ([id], [name]) VALUES (3, N'Done')
 GO
@@ -811,45 +574,23 @@ SET IDENTITY_INSERT [dbo].[status_calendar] OFF
 GO
 SET IDENTITY_INSERT [dbo].[user] ON 
 GO
-INSERT [dbo].[user] ([id], [username], [password], [first_name], [last_name], [birthday], [email], [phone], [gender], [is_super], [is_active], [permission], [created_at], [updated_at], [avatar]) VALUES (1, N'giakinh0823', N'8C29CADC8781CE45B26752B996F12B5901E2E9521EF8FCC48BBF01E17D7955F8', N'Kính', N'Hà Gia', CAST(N'2001-08-23' AS Date), N'giakinh2000@gmail.com', N'+84972141556', 1, 1, 1, N'admin', CAST(N'2022-02-12T22:43:59.877' AS DateTime), CAST(N'2022-03-06T16:21:26.490' AS DateTime), N'14341879-tuyendung.jpg')
+INSERT [dbo].[user] ([id], [username], [password], [first_name], [last_name], [birthday], [email], [phone], [gender], [is_super], [is_active], [permission], [created_at], [updated_at], [avatar]) VALUES (1, N'giakinh0823', N'8C29CADC8781CE45B26752B996F12B5901E2E9521EF8FCC48BBF01E17D7955F8', N'Kính', N'Hà Gia', CAST(N'2001-08-23' AS Date), N'giakinh2000@gmail.com', N'+84972141556', 1, 1, 1, N'admin', CAST(N'2022-02-12T22:43:59.877' AS DateTime), CAST(N'2022-03-07T20:21:32.507' AS DateTime), N'274520968_5559444394072528_1376914856578898947_n (1).jpg')
 GO
-INSERT [dbo].[user] ([id], [username], [password], [first_name], [last_name], [birthday], [email], [phone], [gender], [is_super], [is_active], [permission], [created_at], [updated_at], [avatar]) VALUES (7, N'lanh0308', N'5CA91616403770D06B3144EFFDE425B30BD2A749BB9178C8090B0DFF1292E593', N'Lan Anh', N'Nguyễn Thị', CAST(N'2001-08-03' AS Date), N'anhntlhe150434@fpt.edu.vn', N'0983306694', 0, 0, 1, N'user', CAST(N'2022-02-14T02:06:03.207' AS DateTime), CAST(N'2022-02-25T14:31:09.797' AS DateTime), N'hero3.jpg')
-GO
-INSERT [dbo].[user] ([id], [username], [password], [first_name], [last_name], [birthday], [email], [phone], [gender], [is_super], [is_active], [permission], [created_at], [updated_at], [avatar]) VALUES (8, N'test1haha', N'8C29CADC8781CE45B26752B996F12B5901E2E9521EF8FCC48BBF01E17D7955F8', N'1', N'Test', CAST(N'2001-10-26' AS Date), N'test1@gmail.com', N'0972141556', 1, 0, 1, N'user', CAST(N'2022-02-12T22:43:59.877' AS DateTime), CAST(N'2022-02-25T17:13:45.713' AS DateTime), NULL)
-GO
-INSERT [dbo].[user] ([id], [username], [password], [first_name], [last_name], [birthday], [email], [phone], [gender], [is_super], [is_active], [permission], [created_at], [updated_at], [avatar]) VALUES (9, N'test2', N'8C29CADC8781CE45B26752B996F12B5901E2E9521EF8FCC48BBF01E17D7955F8', N'2', N'Test', CAST(N'2001-08-23' AS Date), N'test2@gmail.com', N'0972141556', 1, 0, 1, N'user', CAST(N'2022-02-12T22:43:59.877' AS DateTime), CAST(N'2022-02-26T13:23:40.007' AS DateTime), N'Screenshot 2022-02-13 010616.png')
-GO
-INSERT [dbo].[user] ([id], [username], [password], [first_name], [last_name], [birthday], [email], [phone], [gender], [is_super], [is_active], [permission], [created_at], [updated_at], [avatar]) VALUES (10, N'test3oke', N'8C29CADC8781CE45B26752B996F12B5901E2E9521EF8FCC48BBF01E17D7955F8', N'3-ok', N'Test', CAST(N'2001-08-23' AS Date), N'test3oke@gmail.com', N'0972141556', 0, 0, 1, N'user', CAST(N'2022-02-12T22:43:59.877' AS DateTime), CAST(N'2022-02-24T11:36:33.203' AS DateTime), NULL)
-GO
-INSERT [dbo].[user] ([id], [username], [password], [first_name], [last_name], [birthday], [email], [phone], [gender], [is_super], [is_active], [permission], [created_at], [updated_at], [avatar]) VALUES (11, N'test4', N'8C29CADC8781CE45B26752B996F12B5901E2E9521EF8FCC48BBF01E17D7955F8', N'4', N'Test', CAST(N'2001-08-23' AS Date), N'test4@gmail.com', N'0972141556', 1, 0, 1, N'user', CAST(N'2022-02-12T22:43:59.877' AS DateTime), CAST(N'2022-02-23T23:37:59.753' AS DateTime), NULL)
-GO
-INSERT [dbo].[user] ([id], [username], [password], [first_name], [last_name], [birthday], [email], [phone], [gender], [is_super], [is_active], [permission], [created_at], [updated_at], [avatar]) VALUES (12, N'test5', N'8C29CADC8781CE45B26752B996F12B5901E2E9521EF8FCC48BBF01E17D7955F8', N'5', N'Test', CAST(N'2001-08-23' AS Date), N'test5@gmail.com', N'0972141556', 1, 0, 1, N'user', CAST(N'2022-02-12T22:43:59.877' AS DateTime), CAST(N'2022-02-24T09:55:51.363' AS DateTime), N'avatar.jpg')
-GO
-INSERT [dbo].[user] ([id], [username], [password], [first_name], [last_name], [birthday], [email], [phone], [gender], [is_super], [is_active], [permission], [created_at], [updated_at], [avatar]) VALUES (13, N'test6', N'8C29CADC8781CE45B26752B996F12B5901E2E9521EF8FCC48BBF01E17D7955F8', N'6', N'Test', CAST(N'2001-08-23' AS Date), N'test6@gmail.com', N'0972141556', 1, 0, 1, N'user', CAST(N'2022-02-12T22:43:59.877' AS DateTime), CAST(N'2022-02-25T07:39:53.970' AS DateTime), N'tuyendung.jpg')
+INSERT [dbo].[user] ([id], [username], [password], [first_name], [last_name], [birthday], [email], [phone], [gender], [is_super], [is_active], [permission], [created_at], [updated_at], [avatar]) VALUES (11, N'test4', N'8C29CADC8781CE45B26752B996F12B5901E2E9521EF8FCC48BBF01E17D7955F8', N'4', N'Test', CAST(N'2001-08-23' AS Date), N'test4@gmail.com', N'0972141556', 1, 0, 1, N'user', CAST(N'2022-02-12T22:43:59.877' AS DateTime), CAST(N'2022-03-10T23:04:51.093' AS DateTime), NULL)
 GO
 INSERT [dbo].[user] ([id], [username], [password], [first_name], [last_name], [birthday], [email], [phone], [gender], [is_super], [is_active], [permission], [created_at], [updated_at], [avatar]) VALUES (14, N'test7', N'8C29CADC8781CE45B26752B996F12B5901E2E9521EF8FCC48BBF01E17D7955F8', N'7', N'Test', CAST(N'2001-08-23' AS Date), N'test7@gmail.com', N'0972141556', 1, 0, 1, N'user', CAST(N'2022-02-12T22:43:59.877' AS DateTime), CAST(N'2022-02-23T23:37:59.753' AS DateTime), NULL)
-GO
-INSERT [dbo].[user] ([id], [username], [password], [first_name], [last_name], [birthday], [email], [phone], [gender], [is_super], [is_active], [permission], [created_at], [updated_at], [avatar]) VALUES (15, N'test8hihi', N'8C29CADC8781CE45B26752B996F12B5901E2E9521EF8FCC48BBF01E17D7955F8', N'8', N'Test', CAST(N'2001-08-23' AS Date), N'test8@gmail.com', N'0972141556', 1, 0, 1, N'user', CAST(N'2022-02-12T22:43:59.877' AS DateTime), CAST(N'2022-02-25T07:40:40.143' AS DateTime), NULL)
-GO
-INSERT [dbo].[user] ([id], [username], [password], [first_name], [last_name], [birthday], [email], [phone], [gender], [is_super], [is_active], [permission], [created_at], [updated_at], [avatar]) VALUES (16, N'test9', N'8C29CADC8781CE45B26752B996F12B5901E2E9521EF8FCC48BBF01E17D7955F8', N'9', N'Test', CAST(N'2001-08-23' AS Date), N'test9@gmail.com', N'0972141556', 1, 0, 1, N'user', CAST(N'2022-02-12T22:43:59.877' AS DateTime), CAST(N'2022-02-25T07:39:23.660' AS DateTime), N'imag1.jpeg')
 GO
 INSERT [dbo].[user] ([id], [username], [password], [first_name], [last_name], [birthday], [email], [phone], [gender], [is_super], [is_active], [permission], [created_at], [updated_at], [avatar]) VALUES (17, N'test10', N'8C29CADC8781CE45B26752B996F12B5901E2E9521EF8FCC48BBF01E17D7955F8', N'10', N'Test', CAST(N'2001-08-23' AS Date), N'test10@gmail.com', N'0972141556', 1, 0, 1, N'user', CAST(N'2022-02-12T22:43:59.877' AS DateTime), CAST(N'2022-02-23T23:37:59.753' AS DateTime), NULL)
 GO
 INSERT [dbo].[user] ([id], [username], [password], [first_name], [last_name], [birthday], [email], [phone], [gender], [is_super], [is_active], [permission], [created_at], [updated_at], [avatar]) VALUES (18, N'test11', N'8C29CADC8781CE45B26752B996F12B5901E2E9521EF8FCC48BBF01E17D7955F8', N'11', N'Test', CAST(N'2001-08-23' AS Date), N'test11@gmail.com', N'0972141556', 1, 0, 1, N'user', CAST(N'2022-02-12T22:43:59.877' AS DateTime), CAST(N'2022-02-23T23:37:59.753' AS DateTime), NULL)
 GO
-INSERT [dbo].[user] ([id], [username], [password], [first_name], [last_name], [birthday], [email], [phone], [gender], [is_super], [is_active], [permission], [created_at], [updated_at], [avatar]) VALUES (19, N'test12ok', N'8C29CADC8781CE45B26752B996F12B5901E2E9521EF8FCC48BBF01E17D7955F8', N'12', N'Test', CAST(N'2001-08-23' AS Date), N'test12@gmail.com', N'0972141556', 1, 0, 1, N'user', CAST(N'2022-02-12T22:43:59.877' AS DateTime), CAST(N'2022-03-06T04:06:59.447' AS DateTime), N'abstract-swirl-art-4k-4i.jpg')
-GO
 INSERT [dbo].[user] ([id], [username], [password], [first_name], [last_name], [birthday], [email], [phone], [gender], [is_super], [is_active], [permission], [created_at], [updated_at], [avatar]) VALUES (20, N'test13', N'8C29CADC8781CE45B26752B996F12B5901E2E9521EF8FCC48BBF01E17D7955F8', N'13', N'Test', CAST(N'2001-08-23' AS Date), N'test13@gmail.com', N'0972141556', 1, 0, 1, N'user', CAST(N'2022-02-12T22:43:59.877' AS DateTime), CAST(N'2022-02-23T23:37:59.753' AS DateTime), NULL)
 GO
 INSERT [dbo].[user] ([id], [username], [password], [first_name], [last_name], [birthday], [email], [phone], [gender], [is_super], [is_active], [permission], [created_at], [updated_at], [avatar]) VALUES (21, N'test14', N'8C29CADC8781CE45B26752B996F12B5901E2E9521EF8FCC48BBF01E17D7955F8', N'14', N'Test', CAST(N'2001-08-23' AS Date), N'test14@gmail.com', N'0972141556', 1, 0, 1, N'user', CAST(N'2022-02-12T22:43:59.877' AS DateTime), CAST(N'2022-02-23T23:37:59.753' AS DateTime), NULL)
 GO
-INSERT [dbo].[user] ([id], [username], [password], [first_name], [last_name], [birthday], [email], [phone], [gender], [is_super], [is_active], [permission], [created_at], [updated_at], [avatar]) VALUES (22, N'test15', N'8C29CADC8781CE45B26752B996F12B5901E2E9521EF8FCC48BBF01E17D7955F8', N'15', N'Test', CAST(N'2001-08-23' AS Date), N'test15@gmail.com', N'0972141556', 1, 0, 1, N'user', CAST(N'2022-02-12T22:43:59.877' AS DateTime), CAST(N'2022-02-25T07:40:10.540' AS DateTime), N'159564777_1420131984999037_4140074952289360469_n.jpg')
-GO
 INSERT [dbo].[user] ([id], [username], [password], [first_name], [last_name], [birthday], [email], [phone], [gender], [is_super], [is_active], [permission], [created_at], [updated_at], [avatar]) VALUES (23, N'test16', N'8C29CADC8781CE45B26752B996F12B5901E2E9521EF8FCC48BBF01E17D7955F8', N'16', N'Test', CAST(N'2001-08-23' AS Date), N'test16@gmail.com', N'0972141556', 1, 0, 1, N'user', CAST(N'2022-02-12T22:43:59.877' AS DateTime), CAST(N'2022-02-23T23:37:59.753' AS DateTime), NULL)
 GO
 INSERT [dbo].[user] ([id], [username], [password], [first_name], [last_name], [birthday], [email], [phone], [gender], [is_super], [is_active], [permission], [created_at], [updated_at], [avatar]) VALUES (24, N'test17', N'8C29CADC8781CE45B26752B996F12B5901E2E9521EF8FCC48BBF01E17D7955F8', N'17', N'Test', CAST(N'2001-08-23' AS Date), N'test17@gmail.com', N'0972141556', 1, 0, 1, N'user', CAST(N'2022-02-12T22:43:59.877' AS DateTime), CAST(N'2022-02-23T23:37:59.753' AS DateTime), NULL)
-GO
-INSERT [dbo].[user] ([id], [username], [password], [first_name], [last_name], [birthday], [email], [phone], [gender], [is_super], [is_active], [permission], [created_at], [updated_at], [avatar]) VALUES (25, N'test18', N'8C29CADC8781CE45B26752B996F12B5901E2E9521EF8FCC48BBF01E17D7955F8', N'18', N'Test', CAST(N'2001-08-23' AS Date), N'test18@gmail.com', N'0972141556', 1, 0, 1, N'user', CAST(N'2022-02-12T22:43:59.877' AS DateTime), CAST(N'2022-02-24T09:56:05.530' AS DateTime), N'logo1.png')
 GO
 INSERT [dbo].[user] ([id], [username], [password], [first_name], [last_name], [birthday], [email], [phone], [gender], [is_super], [is_active], [permission], [created_at], [updated_at], [avatar]) VALUES (26, N'test19', N'8C29CADC8781CE45B26752B996F12B5901E2E9521EF8FCC48BBF01E17D7955F8', N'19', N'Test', CAST(N'2001-08-23' AS Date), N'test19@gmail.com', N'0972141556', 1, 0, 1, N'user', CAST(N'2022-02-12T22:43:59.877' AS DateTime), CAST(N'2022-02-23T23:37:59.753' AS DateTime), NULL)
 GO
@@ -2699,49 +2440,31 @@ INSERT [dbo].[user] ([id], [username], [password], [first_name], [last_name], [b
 GO
 INSERT [dbo].[user] ([id], [username], [password], [first_name], [last_name], [birthday], [email], [phone], [gender], [is_super], [is_active], [permission], [created_at], [updated_at], [avatar]) VALUES (1016, N'giakinh08232001', N'8C29CADC8781CE45B26752B996F12B5901E2E9521EF8FCC48BBF01E17D7955F8', N'Kính', N'Hà Gia', CAST(N'2022-02-10' AS Date), N'giakinh2001@gmail.com', N'+84972141556', 1, 0, 1, N'user', CAST(N'2022-02-26T13:22:01.323' AS DateTime), CAST(N'2022-02-26T13:22:01.323' AS DateTime), NULL)
 GO
+INSERT [dbo].[user] ([id], [username], [password], [first_name], [last_name], [birthday], [email], [phone], [gender], [is_super], [is_active], [permission], [created_at], [updated_at], [avatar]) VALUES (1021, N'giakinhfullstack', N'8C29CADC8781CE45B26752B996F12B5901E2E9521EF8FCC48BBF01E17D7955F8', N'Kính', N'Hà Gia', CAST(N'2001-03-07' AS Date), N'giakinhfullstack@gmail.com', N'+84972141556', 1, 0, 1, N'user', CAST(N'2022-03-09T23:41:02.977' AS DateTime), CAST(N'2022-03-09T23:41:29.733' AS DateTime), N'943965645-274520968_5559444394072528_1376914856578898947_n-(1).jpg')
+GO
+INSERT [dbo].[user] ([id], [username], [password], [first_name], [last_name], [birthday], [email], [phone], [gender], [is_super], [is_active], [permission], [created_at], [updated_at], [avatar]) VALUES (1030, N'lanh0308', N'5CA91616403770D06B3144EFFDE425B30BD2A749BB9178C8090B0DFF1292E593', N'Kính', N'Hà Gia', CAST(N'2001-08-23' AS Date), N'kinhhghe153111@fpt.edu.vn', N'0972141556', 1, 0, 1, N'user', CAST(N'2022-03-12T03:33:41.777' AS DateTime), CAST(N'2022-03-13T00:26:49.930' AS DateTime), N'blogImg.jpg')
+GO
 SET IDENTITY_INSERT [dbo].[user] OFF
 GO
 SET IDENTITY_INSERT [dbo].[user_permission] ON 
 GO
 INSERT [dbo].[user_permission] ([id], [licensed], [userId], [permissionId]) VALUES (1, 1, 1, 1)
 GO
-INSERT [dbo].[user_permission] ([id], [licensed], [userId], [permissionId]) VALUES (4, 1, 7, 3)
-GO
-INSERT [dbo].[user_permission] ([id], [licensed], [userId], [permissionId]) VALUES (7, 1, 8, 3)
-GO
-INSERT [dbo].[user_permission] ([id], [licensed], [userId], [permissionId]) VALUES (8, 1, 9, 3)
-GO
-INSERT [dbo].[user_permission] ([id], [licensed], [userId], [permissionId]) VALUES (9, 1, 10, 3)
-GO
 INSERT [dbo].[user_permission] ([id], [licensed], [userId], [permissionId]) VALUES (10, 1, 11, 3)
 GO
-INSERT [dbo].[user_permission] ([id], [licensed], [userId], [permissionId]) VALUES (11, 1, 12, 3)
-GO
-INSERT [dbo].[user_permission] ([id], [licensed], [userId], [permissionId]) VALUES (12, 1, 13, 3)
-GO
 INSERT [dbo].[user_permission] ([id], [licensed], [userId], [permissionId]) VALUES (13, 1, 14, 3)
-GO
-INSERT [dbo].[user_permission] ([id], [licensed], [userId], [permissionId]) VALUES (14, 1, 15, 3)
-GO
-INSERT [dbo].[user_permission] ([id], [licensed], [userId], [permissionId]) VALUES (15, 1, 16, 3)
 GO
 INSERT [dbo].[user_permission] ([id], [licensed], [userId], [permissionId]) VALUES (16, 1, 17, 3)
 GO
 INSERT [dbo].[user_permission] ([id], [licensed], [userId], [permissionId]) VALUES (17, 1, 18, 3)
 GO
-INSERT [dbo].[user_permission] ([id], [licensed], [userId], [permissionId]) VALUES (18, 1, 19, 3)
-GO
 INSERT [dbo].[user_permission] ([id], [licensed], [userId], [permissionId]) VALUES (19, 1, 20, 3)
 GO
 INSERT [dbo].[user_permission] ([id], [licensed], [userId], [permissionId]) VALUES (20, 1, 21, 3)
 GO
-INSERT [dbo].[user_permission] ([id], [licensed], [userId], [permissionId]) VALUES (21, 1, 22, 3)
-GO
 INSERT [dbo].[user_permission] ([id], [licensed], [userId], [permissionId]) VALUES (22, 1, 23, 3)
 GO
 INSERT [dbo].[user_permission] ([id], [licensed], [userId], [permissionId]) VALUES (23, 1, 24, 3)
-GO
-INSERT [dbo].[user_permission] ([id], [licensed], [userId], [permissionId]) VALUES (24, 1, 25, 3)
 GO
 INSERT [dbo].[user_permission] ([id], [licensed], [userId], [permissionId]) VALUES (25, 1, 26, 3)
 GO
@@ -4591,11 +4314,15 @@ INSERT [dbo].[user_permission] ([id], [licensed], [userId], [permissionId]) VALU
 GO
 INSERT [dbo].[user_permission] ([id], [licensed], [userId], [permissionId]) VALUES (1002, 1, 1016, 3)
 GO
+INSERT [dbo].[user_permission] ([id], [licensed], [userId], [permissionId]) VALUES (1003, 1, 1021, 3)
+GO
+INSERT [dbo].[user_permission] ([id], [licensed], [userId], [permissionId]) VALUES (1013, 1, 1030, 3)
+GO
 SET IDENTITY_INSERT [dbo].[user_permission] OFF
 GO
 SET ANSI_PADDING ON
 GO
-/****** Object:  Index [UQ__user__AB6E616407FC8304]    Script Date: 3/7/2022 9:55:33 AM ******/
+/****** Object:  Index [UQ__user__AB6E616407FC8304]    Script Date: 3/13/2022 7:05:29 PM ******/
 ALTER TABLE [dbo].[user] ADD UNIQUE NONCLUSTERED 
 (
 	[email] ASC
