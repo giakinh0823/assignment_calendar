@@ -12,10 +12,10 @@ Database
 
 Clone git
 ```bash
-git clone https://github.com/giakinh0823/assignment_Clife.git
+git clone https://github.com/giakinh0823/assignment_calendar
 ```
 
-After run file script sql server in folder [sql](https://github.com/giakinh0823/assignment_Clife/tree/main/sql) in project
+After run file script sql server in folder [sql](https://github.com/giakinh0823/assignment_calendar/tree/main/sql) in project
 
 
 ## Contributing
