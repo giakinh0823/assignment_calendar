@@ -31,6 +31,8 @@ const calenderHandle = (events) => ({
         },
         eventClick: function (info) {
             console.log(info.event);
+            $("#showErrorFormEdit").addClass("hidden")
+            $("#showSuccessFormEdit").addClass("hidden")
             $("#titleDetailEvent").text(info.event.title);
             $("#timeDetailEvent").text(`${new Date(info.event.start).toLocaleString()} - ${new Date(info.event.end).toLocaleString()}`);
             $("#descriptionDetailEvent").text(info.event.extendedProps.description);
