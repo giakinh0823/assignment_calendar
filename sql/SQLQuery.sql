@@ -1,6 +1,6 @@
 USE [master]
 GO
-/****** Object:  Database [clife]    Script Date: 3/13/2022 7:05:29 PM ******/
+/****** Object:  Database [clife]    Script Date: 3/15/2022 3:39:21 PM ******/
 CREATE DATABASE [clife]
  CONTAINMENT = NONE
  ON  PRIMARY 
@@ -82,7 +82,7 @@ ALTER DATABASE [clife] SET QUERY_STORE = OFF
 GO
 USE [clife]
 GO
-/****** Object:  Table [dbo].[action]    Script Date: 3/13/2022 7:05:29 PM ******/
+/****** Object:  Table [dbo].[action]    Script Date: 3/15/2022 3:39:21 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -98,7 +98,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[additional_calendar]    Script Date: 3/13/2022 7:05:29 PM ******/
+/****** Object:  Table [dbo].[additional_calendar]    Script Date: 3/15/2022 3:39:21 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -122,7 +122,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[calendar]    Script Date: 3/13/2022 7:05:29 PM ******/
+/****** Object:  Table [dbo].[calendar]    Script Date: 3/15/2022 3:39:21 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -140,7 +140,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[category_calendar]    Script Date: 3/13/2022 7:05:29 PM ******/
+/****** Object:  Table [dbo].[category_calendar]    Script Date: 3/15/2022 3:39:21 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -154,7 +154,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[event]    Script Date: 3/13/2022 7:05:29 PM ******/
+/****** Object:  Table [dbo].[event]    Script Date: 3/15/2022 3:39:21 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -174,7 +174,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[permission]    Script Date: 3/13/2022 7:05:29 PM ******/
+/****** Object:  Table [dbo].[permission]    Script Date: 3/15/2022 3:39:21 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -188,7 +188,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[permission_action]    Script Date: 3/13/2022 7:05:29 PM ******/
+/****** Object:  Table [dbo].[permission_action]    Script Date: 3/15/2022 3:39:21 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -204,7 +204,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[status_calendar]    Script Date: 3/13/2022 7:05:29 PM ******/
+/****** Object:  Table [dbo].[status_calendar]    Script Date: 3/15/2022 3:39:21 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -218,7 +218,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[user]    Script Date: 3/13/2022 7:05:29 PM ******/
+/****** Object:  Table [dbo].[user]    Script Date: 3/15/2022 3:39:21 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -245,7 +245,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[user_permission]    Script Date: 3/13/2022 7:05:29 PM ******/
+/****** Object:  Table [dbo].[user_permission]    Script Date: 3/15/2022 3:39:21 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -347,9 +347,21 @@ INSERT [dbo].[additional_calendar] ([id], [start_date], [end_date], [overlap], [
 GO
 INSERT [dbo].[additional_calendar] ([id], [start_date], [end_date], [overlap], [display], [created_at], [updated_at], [isAllDay], [isHasEnd], [calendarId], [statusId], [categoryId]) VALUES (272, CAST(N'2022-03-15T20:00:00.000' AS DateTime), CAST(N'2022-03-16T00:00:00.000' AS DateTime), 1, N'auto', CAST(N'2022-03-13T00:12:44.777' AS DateTime), CAST(N'2022-03-13T00:12:54.720' AS DateTime), 0, 1, 43, 1, 1)
 GO
-INSERT [dbo].[additional_calendar] ([id], [start_date], [end_date], [overlap], [display], [created_at], [updated_at], [isAllDay], [isHasEnd], [calendarId], [statusId], [categoryId]) VALUES (273, CAST(N'2022-03-16T20:00:00.000' AS DateTime), CAST(N'2022-03-16T23:00:00.000' AS DateTime), 1, N'auto', CAST(N'2022-03-13T00:16:26.987' AS DateTime), CAST(N'2022-03-13T00:16:26.987' AS DateTime), 0, 1, 43, 1, 1)
+INSERT [dbo].[additional_calendar] ([id], [start_date], [end_date], [overlap], [display], [created_at], [updated_at], [isAllDay], [isHasEnd], [calendarId], [statusId], [categoryId]) VALUES (273, CAST(N'2022-03-16T20:00:00.000' AS DateTime), CAST(N'2022-03-16T23:00:00.000' AS DateTime), 1, N'auto', CAST(N'2022-03-13T00:16:26.987' AS DateTime), CAST(N'2022-03-14T20:15:32.980' AS DateTime), 0, 0, 43, 1, 1)
 GO
 INSERT [dbo].[additional_calendar] ([id], [start_date], [end_date], [overlap], [display], [created_at], [updated_at], [isAllDay], [isHasEnd], [calendarId], [statusId], [categoryId]) VALUES (274, CAST(N'2022-03-07T20:00:00.000' AS DateTime), CAST(N'2022-03-08T23:00:00.000' AS DateTime), 1, N'auto', CAST(N'2022-03-13T00:22:05.127' AS DateTime), CAST(N'2022-03-13T00:22:05.127' AS DateTime), 0, 1, 34, 1, 5)
+GO
+INSERT [dbo].[additional_calendar] ([id], [start_date], [end_date], [overlap], [display], [created_at], [updated_at], [isAllDay], [isHasEnd], [calendarId], [statusId], [categoryId]) VALUES (275, CAST(N'2022-02-28T02:30:00.000' AS DateTime), CAST(N'2022-03-04T02:30:00.000' AS DateTime), 1, N'auto', CAST(N'2022-03-15T00:06:10.453' AS DateTime), CAST(N'2022-03-15T00:07:35.500' AS DateTime), 0, 0, 41, 1, 3)
+GO
+INSERT [dbo].[additional_calendar] ([id], [start_date], [end_date], [overlap], [display], [created_at], [updated_at], [isAllDay], [isHasEnd], [calendarId], [statusId], [categoryId]) VALUES (276, CAST(N'2022-03-28T00:00:00.000' AS DateTime), CAST(N'2022-04-02T00:00:00.000' AS DateTime), 1, N'auto', CAST(N'2022-03-15T00:08:10.717' AS DateTime), CAST(N'2022-03-15T00:08:12.713' AS DateTime), 1, 0, 42, 1, 3)
+GO
+INSERT [dbo].[additional_calendar] ([id], [start_date], [end_date], [overlap], [display], [created_at], [updated_at], [isAllDay], [isHasEnd], [calendarId], [statusId], [categoryId]) VALUES (277, CAST(N'2022-03-20T00:08:00.000' AS DateTime), CAST(N'2022-03-20T17:13:00.000' AS DateTime), 1, N'auto', CAST(N'2022-03-15T00:08:51.437' AS DateTime), CAST(N'2022-03-15T00:11:59.903' AS DateTime), 0, 1, 34, 1, 2)
+GO
+INSERT [dbo].[additional_calendar] ([id], [start_date], [end_date], [overlap], [display], [created_at], [updated_at], [isAllDay], [isHasEnd], [calendarId], [statusId], [categoryId]) VALUES (278, CAST(N'2022-03-06T07:00:00.000' AS DateTime), CAST(N'1970-01-01T07:00:00.000' AS DateTime), 1, N'auto', CAST(N'2022-03-15T00:09:17.267' AS DateTime), CAST(N'2022-03-15T00:09:26.690' AS DateTime), 0, 0, 34, 1, 2)
+GO
+INSERT [dbo].[additional_calendar] ([id], [start_date], [end_date], [overlap], [display], [created_at], [updated_at], [isAllDay], [isHasEnd], [calendarId], [statusId], [categoryId]) VALUES (279, CAST(N'2022-03-13T13:14:00.000' AS DateTime), CAST(N'2022-03-13T20:18:00.000' AS DateTime), 1, N'auto', CAST(N'2022-03-15T00:14:01.037' AS DateTime), CAST(N'2022-03-15T00:14:03.327' AS DateTime), 0, 0, 43, 1, 1)
+GO
+INSERT [dbo].[additional_calendar] ([id], [start_date], [end_date], [overlap], [display], [created_at], [updated_at], [isAllDay], [isHasEnd], [calendarId], [statusId], [categoryId]) VALUES (280, CAST(N'2022-03-27T13:15:00.000' AS DateTime), CAST(N'2022-03-27T17:19:00.000' AS DateTime), 1, N'auto', CAST(N'2022-03-15T00:14:43.540' AS DateTime), CAST(N'2022-03-15T00:14:48.483' AS DateTime), 0, 0, 43, 1, 1)
 GO
 SET IDENTITY_INSERT [dbo].[additional_calendar] OFF
 GO
@@ -445,10 +457,22 @@ INSERT [dbo].[event] ([id], [title], [description], [location], [updated_at], [c
 ', N'Vincom Nguyễn Trãi', CAST(N'2022-03-13T00:12:54.720' AS DateTime), CAST(N'2022-03-13T00:12:44.777' AS DateTime), 1030, 272)
 GO
 INSERT [dbo].[event] ([id], [title], [description], [location], [updated_at], [created_at], [userId], [additionalId]) VALUES (123, N'Đi xem phim spider men', N'đi xem idol người nhện
-', N'Vincom Trần Duy Hưng', CAST(N'2022-03-13T00:16:26.987' AS DateTime), CAST(N'2022-03-13T00:16:26.987' AS DateTime), 1030, 273)
+', N'Vincom Trần Duy Hưng', CAST(N'2022-03-14T20:15:32.980' AS DateTime), CAST(N'2022-03-13T00:16:26.987' AS DateTime), 1030, 273)
 GO
 INSERT [dbo].[event] ([id], [title], [description], [location], [updated_at], [created_at], [userId], [additionalId]) VALUES (124, N'Chơi game liên minh huyền thoại', N'Chơi game liên minh huyền thoại cùng bạn trọ
 ', N'Ở nhà', CAST(N'2022-03-13T00:22:05.127' AS DateTime), CAST(N'2022-03-13T00:22:05.127' AS DateTime), 1030, 274)
+GO
+INSERT [dbo].[event] ([id], [title], [description], [location], [updated_at], [created_at], [userId], [additionalId]) VALUES (125, N'Làm dự án prj', N'Làm dự án cuối kỳ prj', N'Home', CAST(N'2022-03-15T00:07:35.500' AS DateTime), CAST(N'2022-03-15T00:06:10.453' AS DateTime), 1030, 275)
+GO
+INSERT [dbo].[event] ([id], [title], [description], [location], [updated_at], [created_at], [userId], [additionalId]) VALUES (126, N'Đi làm tại FPT Software', N'Đi làm tại Hà Nội', N'FPT Software', CAST(N'2022-03-15T00:08:12.713' AS DateTime), CAST(N'2022-03-15T00:08:10.717' AS DateTime), 1030, 276)
+GO
+INSERT [dbo].[event] ([id], [title], [description], [location], [updated_at], [created_at], [userId], [additionalId]) VALUES (127, N'Đi ngủ', N'Đi ngủ, nghỉ ngơi', N'Home', CAST(N'2022-03-15T00:11:59.903' AS DateTime), CAST(N'2022-03-15T00:08:51.437' AS DateTime), 1030, 277)
+GO
+INSERT [dbo].[event] ([id], [title], [description], [location], [updated_at], [created_at], [userId], [additionalId]) VALUES (128, N'Đi ngủ', N'Nghỉ ngơi', N'Home', CAST(N'2022-03-15T00:09:26.690' AS DateTime), CAST(N'2022-03-15T00:09:17.267' AS DateTime), 1030, 278)
+GO
+INSERT [dbo].[event] ([id], [title], [description], [location], [updated_at], [created_at], [userId], [additionalId]) VALUES (129, N'Đi xuống Hà Nội chơi', N'Đi chơi cùng với bạn', N'Phố đi bộ', CAST(N'2022-03-15T00:14:03.327' AS DateTime), CAST(N'2022-03-15T00:14:01.037' AS DateTime), 1030, 279)
+GO
+INSERT [dbo].[event] ([id], [title], [description], [location], [updated_at], [created_at], [userId], [additionalId]) VALUES (130, N'Đi bắn bia cùng bạn', N'Bắn bia cùng bạn', N'Hòa Lạc', CAST(N'2022-03-15T00:14:48.483' AS DateTime), CAST(N'2022-03-15T00:14:43.540' AS DateTime), 1030, 280)
 GO
 SET IDENTITY_INSERT [dbo].[event] OFF
 GO
@@ -576,7 +600,7 @@ SET IDENTITY_INSERT [dbo].[user] ON
 GO
 INSERT [dbo].[user] ([id], [username], [password], [first_name], [last_name], [birthday], [email], [phone], [gender], [is_super], [is_active], [permission], [created_at], [updated_at], [avatar]) VALUES (1, N'giakinh0823', N'8C29CADC8781CE45B26752B996F12B5901E2E9521EF8FCC48BBF01E17D7955F8', N'Kính', N'Hà Gia', CAST(N'2001-08-23' AS Date), N'giakinh2000@gmail.com', N'+84972141556', 1, 1, 1, N'admin', CAST(N'2022-02-12T22:43:59.877' AS DateTime), CAST(N'2022-03-07T20:21:32.507' AS DateTime), N'274520968_5559444394072528_1376914856578898947_n (1).jpg')
 GO
-INSERT [dbo].[user] ([id], [username], [password], [first_name], [last_name], [birthday], [email], [phone], [gender], [is_super], [is_active], [permission], [created_at], [updated_at], [avatar]) VALUES (11, N'test4', N'8C29CADC8781CE45B26752B996F12B5901E2E9521EF8FCC48BBF01E17D7955F8', N'4', N'Test', CAST(N'2001-08-23' AS Date), N'test4@gmail.com', N'0972141556', 1, 0, 1, N'user', CAST(N'2022-02-12T22:43:59.877' AS DateTime), CAST(N'2022-03-10T23:04:51.093' AS DateTime), NULL)
+INSERT [dbo].[user] ([id], [username], [password], [first_name], [last_name], [birthday], [email], [phone], [gender], [is_super], [is_active], [permission], [created_at], [updated_at], [avatar]) VALUES (11, N'test4', N'8C29CADC8781CE45B26752B996F12B5901E2E9521EF8FCC48BBF01E17D7955F8', N'4', N'Test', CAST(N'2001-08-23' AS Date), N'test4@gmail.com', N'0972141556', 1, 0, 1, N'user', CAST(N'2022-02-12T22:43:59.877' AS DateTime), CAST(N'2022-03-15T00:38:35.230' AS DateTime), N'878303746-blogImg.jpg')
 GO
 INSERT [dbo].[user] ([id], [username], [password], [first_name], [last_name], [birthday], [email], [phone], [gender], [is_super], [is_active], [permission], [created_at], [updated_at], [avatar]) VALUES (14, N'test7', N'8C29CADC8781CE45B26752B996F12B5901E2E9521EF8FCC48BBF01E17D7955F8', N'7', N'Test', CAST(N'2001-08-23' AS Date), N'test7@gmail.com', N'0972141556', 1, 0, 1, N'user', CAST(N'2022-02-12T22:43:59.877' AS DateTime), CAST(N'2022-02-23T23:37:59.753' AS DateTime), NULL)
 GO
@@ -4322,7 +4346,7 @@ SET IDENTITY_INSERT [dbo].[user_permission] OFF
 GO
 SET ANSI_PADDING ON
 GO
-/****** Object:  Index [UQ__user__AB6E616407FC8304]    Script Date: 3/13/2022 7:05:29 PM ******/
+/****** Object:  Index [UQ__user__AB6E616407FC8304]    Script Date: 3/15/2022 3:39:21 PM ******/
 ALTER TABLE [dbo].[user] ADD UNIQUE NONCLUSTERED 
 (
 	[email] ASC
