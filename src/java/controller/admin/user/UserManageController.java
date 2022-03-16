@@ -7,6 +7,9 @@ package controller.admin.user;
 
 import controller.admin.auth.BaseAuthAdminController;
 import dal.auth.UserDBContext;
+import dal.calendar.CalendarDBContext;
+import dal.calendar.CategoryCalendarDBContext;
+import dal.calendar.StatusCalendarDBContext;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -16,6 +19,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import model.auth.User;
+import model.calendar.Calendar;
+import model.calendar.CategoryCalendar;
+import model.calendar.StatusCalendar;
 import model.common.Pagination;
 import utils.Validate;
 
@@ -67,13 +73,18 @@ public class UserManageController extends BaseAuthAdminController {
             UserDBContext userDB = new UserDBContext();
             Pagination pagination = new Pagination(pageIndex, pageSize, userDB.getSize());
             ArrayList<User> users = new ArrayList<User>();
-            if(search!=null && !search.equals("")){
+            if (search != null && !search.equals("")) {
                 users = userDB.findUsers(search, pageIndex, pageSize);
                 pagination.setSize(userDB.getSizeSearch(search));
-            }else{
+            } else {
                 users = userDB.getUsers(pageIndex, pageSize);
             }
-            
+            CategoryCalendarDBContext categoryDB = new CategoryCalendarDBContext();
+            StatusCalendarDBContext statusDB = new StatusCalendarDBContext();
+            ArrayList<CategoryCalendar> listCategory = categoryDB.list();
+            ArrayList<StatusCalendar> listStatus = statusDB.list();
+            request.setAttribute("listCategory", listCategory);
+            request.setAttribute("listStatus", listStatus);
             request.setAttribute("users", users);
             request.setAttribute("pagination", pagination);
             request.getRequestDispatcher("/views/admin/user/manageUser.jsp").forward(request, response);

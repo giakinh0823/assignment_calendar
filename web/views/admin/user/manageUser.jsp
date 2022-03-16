@@ -14,6 +14,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Admin user</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.2/main.min.css">
         <%
             ArrayList<User> users = (ArrayList<User>) request.getAttribute("users");
             Pagination pagination = (Pagination) request.getAttribute("pagination");
@@ -92,11 +93,11 @@
                                             <th scope="col" class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase">
                                                 gender
                                             </th>
-                                            <th scope="col" class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase">
+                                            <th scope="col" class="py-3 px-6 text-xs font-medium tracking-wider text-center text-gray-700 uppercase">
                                                 permission
                                             </th>
-                                            <th scope="col" class="p-4">
-                                                <span class="sr-only">Edit</span>
+                                            <th scope="col" class="py-3 px-6 text-xs font-medium tracking-wider text-center text-gray-700 uppercase">
+                                                action
                                             </th>
                                         </tr>
                                     </thead>
@@ -133,8 +134,9 @@
                                                         Female
                                                     </c:if>
                                                 </td>
-                                                <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap">${user.getPermission()}</td>
-                                                <td class="py-4 px-6 text-sm font-medium text-center whitespace-nowrap">
+                                                <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap text-center">${user.getPermission()}</td>
+                                                <td class="py-4 px-6 text-sm font-medium whitespace-nowrap text-center">
+                                                    <button onclick="showCalendar(${user.id})" class="mr-3 text-green-600 font-medium text-sm hover:underline">calendar</button>
                                                     <a href="/admin/users/edit?id=${user.getId()}" class="text-blue-600 hover:underline">Edit</a>
                                                     <a href="/admin/users/delete?id=${user.getId()}" class="ml-3 text-red-600 hover:underline">Delete</button>
                                                 </td>
@@ -181,6 +183,29 @@
                         </ul>
                     </nav>
                 </div>
+                <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.2/main.min.js"></script>
+                <button id="button-calendar-model" data-modal-toggle="calendar-modal" class="hidden block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button" >
+                    Toggle modal
+                </button>
+                <div id="calendar-modal" class="hidden overflow-y-auto overflow-x-hidden fixed right-0 left-0 top-2 z-50 justify-center items-center h-modal" >
+                    <div class="relative px-4 w-[90%]">
+                        <!-- Modal content -->
+                        <div class="relative bg-white  min-h-[83vh] rounded-lg shadow">
+                            <!-- Modal header -->
+                            <div class="flex justify-end p-2">
+                                <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white" data-modal-toggle="calendar-modal">
+                                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>  
+                                </button>
+                            </div>
+                            <!-- Modal body -->
+                            <div class="p-6 pt-0 text-center" id="calendar-user-contenr">
+                                <div class="max-h-[83vh]">
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>     
         <script>
@@ -198,6 +223,20 @@
                     params.page = page;
                     const href = new URLSearchParams(params).toString();
                     item.setAttribute("href", "?" + href);
+                })
+            }
+        </script>
+        <script>
+
+            function showCalendar(id) {
+                $("#button-calendar-model").click();
+                $.ajax({
+                    method: "GET",
+                    url: "/admin/users/calendar",
+                    data: {id: id},
+                }).done(function (data) {
+                    console.log(data);
+                    $("#calendar-user-contenr").html(data);
                 })
             }
         </script>

@@ -38,7 +38,7 @@
                                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>                        
                             </a>
                             <a href="/signup" type="button" class="flex items-center ml-2 text-black bg-gray-200 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">
-                                <span class="text-lg mr-2">Singup</span>
+                                <span class="text-lg mr-2">Signup</span>
                                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>                        
                             </a>
                         </c:if>
@@ -46,7 +46,7 @@
                     </div>
                 </div>
                 <div class="lg:max-w-[700px] lg:w-full md:w-1/2 w-5/6">
-                    <img class="object-cover object-center rounded" alt="hero" src="/assets/images/banner.png">
+                    <img class="object-cover object-center rounded" alt="hero" src="/assets/images/banner.jpg">
                 </div>
             </div>
         </section>
@@ -126,7 +126,7 @@
         <section class="text-gray-700 body-font border-t border-gray-200">
             <div class="container px-5 py-24 mx-auto flex flex-wrap">
                 <div class="lg:w-1/2 w-full mb-10 lg:mb-0 rounded-lg overflow-hidden">
-                    <img alt="feature" class="object-cover object-center h-full w-full" src="/assets/images/banner.png">
+                    <img alt="feature" class="object-cover object-center h-full w-full" src="/assets/images/hero.jpg">
                 </div>
                 <div class="flex flex-col flex-wrap lg:py-6 -mb-10 lg:w-1/2 lg:pl-12 lg:text-left text-center">
                     <div class="flex flex-col mb-10 lg:items-start items-center">

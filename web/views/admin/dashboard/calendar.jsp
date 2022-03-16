@@ -183,7 +183,7 @@
         <script src="/assets/js/calendar/calendar.js"></script>
         <script>
             var events = []
-            <c:forEach items="${events}" var="event">
+            <c:forEach items="${eventAdmins}" var="event">
                 <c:if test="${event.user.id==sessionScope.admin.id}">
                     events.push({
                         id: ${event.getId()},

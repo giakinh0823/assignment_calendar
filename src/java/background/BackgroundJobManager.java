@@ -32,11 +32,12 @@ public class BackgroundJobManager {
 
     private String host = "smtp.gmail.com";
     private String port = "587";
-    private String email = "giakinhfullstack@gmail.com";
+    private String email = "calendargiakinh@gmail.com";
     private String pass = "giakinh0823";
 
     @Schedule(hour = "*", minute = "*", second = "*/20", persistent = false)
     public void someFiveSecondelyJob() {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
         Timestamp stamp = new Timestamp(System.currentTimeMillis());
         Date now = new Date(stamp.getTime());
         EventCalendarDBContext eventDB = new EventCalendarDBContext();
@@ -45,7 +46,7 @@ public class BackgroundJobManager {
             Date start_time = new Date(event.getAdditional().getStartDate().getTime());
             Date end_time = new Date(event.getAdditional().getEndDate().getTime());
             if (event.getAdditional().getStatus().getName().equalsIgnoreCase("pending")
-                    && start_time.toString().equalsIgnoreCase(now.toString())) {
+                    && simpleDateFormat.format(start_time).equalsIgnoreCase(simpleDateFormat.format(now))) {
 
                 // update additional
                 System.out.println(event.getTitle() + " " + event.getDescription());
@@ -59,8 +60,8 @@ public class BackgroundJobManager {
                 //send email 
                 Runnable task = new Runnable() {
                     public void run() {
-                        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
                         if (event.getUser().getEmail() != null) {
+                            System.out.println("Send Email!!");
                             try {
                                 EmailUtility.sendEmail(host, port, email, pass, event.getUser().getEmail(), event.getAdditional().getCategory().getName() + " - " + event.getTitle(),
                                         "<p>" + event.getAdditional().getCategory().getName() + " start time: <span style=\"font-weight: bold\">" + simpleDateFormat.format(start_time) + "</span><p/>\n"
@@ -90,7 +91,7 @@ public class BackgroundJobManager {
             }
 
             if ((event.getAdditional().getStatus().getName().equalsIgnoreCase("in progress") || event.getAdditional().getStatus().getName().equalsIgnoreCase("pending"))
-                    && end_time.toString().equalsIgnoreCase(now.toString())) {
+                    && simpleDateFormat.format(end_time).equalsIgnoreCase(simpleDateFormat.format(now))) {
 
                 // update additional
                 System.out.println(event.getTitle() + " " + event.getDescription());
@@ -104,7 +105,6 @@ public class BackgroundJobManager {
                 //send email 
                 Runnable task = new Runnable() {
                     public void run() {
-                        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
                         if (event.getUser().getEmail() != null) {
                             try {
                                 EmailUtility.sendEmail(host, port, email, pass, event.getUser().getEmail(), event.getAdditional().getCategory().getName() + " finish - " + event.getTitle(),
