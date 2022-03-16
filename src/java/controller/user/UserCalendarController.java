@@ -3,16 +3,19 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package controller.admin.user;
+package controller.user;
 
 import controller.admin.auth.BaseAuthAdminController;
 import dal.auth.UserDBContext;
 import dal.calendar.CalendarDBContext;
 import dal.calendar.CategoryCalendarDBContext;
+import dal.calendar.EventCalendarDBContext;
 import dal.calendar.StatusCalendarDBContext;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -21,22 +24,22 @@ import javax.servlet.http.HttpSession;
 import model.auth.User;
 import model.calendar.Calendar;
 import model.calendar.CategoryCalendar;
+import model.calendar.EventCalendar;
 import model.calendar.StatusCalendar;
-import model.common.Pagination;
 import utils.Validate;
 
 /**
  *
  * @author giaki
  */
-public class UserManageController extends BaseAuthAdminController {
+public class UserCalendarController extends BaseAuthAdminController {
 
     @Override
     protected boolean isPermissionGet(HttpServletRequest request) {
         UserDBContext userDB = new UserDBContext();
         HttpSession session = request.getSession();
-        User user = (User) session.getAttribute("admin");
-        int numRead = userDB.getNumberOfPermission(user.getId(), "USER", "READ");
+        User user = (User) session.getAttribute("user");
+        int numRead = userDB.getNumberOfPermission(user.getId(), "EVENT", "READ");
         return numRead >= 1;
     }
 
@@ -44,59 +47,50 @@ public class UserManageController extends BaseAuthAdminController {
     protected boolean isPermissionPost(HttpServletRequest request) {
         UserDBContext userDB = new UserDBContext();
         HttpSession session = request.getSession();
-        User user = (User) session.getAttribute("admin");
-        int numEdit = userDB.getNumberOfPermission(user.getId(), "USER", "EDIT");
-        int numDelete = userDB.getNumberOfPermission(user.getId(), "USER", "DELETE");
-        return numEdit >= 1 && numDelete >= 1;
+        User user = (User) session.getAttribute("user");
+        int numRead = userDB.getNumberOfPermission(user.getId(), "EVENT", "READ");
+        return numRead >= 1;
     }
-
-    @Override
-    protected void processGet(HttpServletRequest request, HttpServletResponse response)
+  
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
             Validate validate = new Validate();
-            int pageSize = 24;
-            String page = validate.getField(request, "page", false);
-            String search = validate.getField(request, "q", false);
-            if (page == null || page.trim().length() == 0) {
-                page = "1";
-            }
-            int pageIndex = 0;
-            try {
-                pageIndex = validate.fieldInt(page, "Something error!");
-                if (pageIndex <= 0) {
-                    pageIndex = 1;
-                }
-            } catch (Exception e) {
-                pageIndex = 1;
-            }
-            UserDBContext userDB = new UserDBContext();
-            Pagination pagination = new Pagination(pageIndex, pageSize, userDB.getSize());
-            ArrayList<User> users = new ArrayList<User>();
-            if (search != null && !search.equals("")) {
-                users = userDB.findUsers(search, pageIndex, pageSize);
-                pagination.setSize(userDB.getSizeSearch(search));
-            } else {
-                users = userDB.getUsers(pageIndex, pageSize);
-            }
+            String idString = validate.getFieldAjax(request, "id", true);
+            int id = validate.fieldInt(idString, "Error get field id");
+            CalendarDBContext calendarDB = new CalendarDBContext();
             CategoryCalendarDBContext categoryDB = new CategoryCalendarDBContext();
             StatusCalendarDBContext statusDB = new StatusCalendarDBContext();
+            EventCalendarDBContext eventDB = new EventCalendarDBContext();
+            
+            HttpSession session = request.getSession();
+            User user = (User) session.getAttribute("user");
+            
+            ArrayList<Calendar> calendars = calendarDB.listByUser(id);
             ArrayList<CategoryCalendar> listCategory = categoryDB.list();
             ArrayList<StatusCalendar> listStatus = statusDB.list();
+            ArrayList<EventCalendar> events = eventDB.list();
+            
+            request.setAttribute("calendars", calendars);
             request.setAttribute("listCategory", listCategory);
             request.setAttribute("listStatus", listStatus);
-            request.setAttribute("users", users);
-            request.setAttribute("pagination", pagination);
-            request.getRequestDispatcher("/views/admin/user/manageUser.jsp").forward(request, response);
-        } catch (Exception e) {
-            request.getRequestDispatcher("/views/error/accessDenied.jsp").forward(request, response);
+            request.setAttribute("events", events);
+        } catch (Exception ex) {
+            Logger.getLogger(UserCalendarController.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    
+    @Override
+    protected void processGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        processRequest(request, response);
     }
 
     @Override
     protected void processPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+        processRequest(request, response);
     }
 
     /**

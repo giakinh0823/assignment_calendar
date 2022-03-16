@@ -23,9 +23,9 @@ public abstract class DBContext<T extends BaseModel> {
 
     public DBContext() {
         try {
-            String username = "sa";
-            String password = "Giakinh0823";
-            String url = "jdbc:sqlserver://localhost:1433;databaseName=clife";
+            String username = "giakinh0823";
+            String password = "giakinh0823";
+            String url = "jdbc:sqlserver://GIAKINH0823:1433;databaseName=clife";
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             connection = DriverManager.getConnection(url, username, password);
         } catch (ClassNotFoundException ex) {

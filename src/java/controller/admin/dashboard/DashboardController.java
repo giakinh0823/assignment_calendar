@@ -55,6 +55,7 @@ public class DashboardController extends BaseAuthAdminController {
         ArrayList<Calendar> calendars = calendarDB.list();
         ArrayList<CategoryCalendar> listCategory = categoryDB.list();
         ArrayList<EventCalendar> events = eventDB.list();
+        ArrayList<EventCalendar> eventAdmins = eventDB.findByUser(user.getId());
         ArrayList<User> users = userDB.list();
         
         request.setAttribute("userSize", userDB.getSize());
@@ -64,6 +65,7 @@ public class DashboardController extends BaseAuthAdminController {
         request.setAttribute("calendars", calendars);
         request.setAttribute("listCategory", listCategory);
         request.setAttribute("events", events);
+        request.setAttribute("eventAdmins", eventAdmins);
         request.setAttribute("users", users);
         request.getRequestDispatcher("/views/admin/dashboard/dashboard.jsp").forward(request, response);
     }

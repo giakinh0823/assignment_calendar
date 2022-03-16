@@ -61,7 +61,7 @@ public class CalendarController extends BaseAuthController {
         ArrayList<Calendar> calendars = calendarDB.listByUser(user.getId());
         ArrayList<CategoryCalendar> listCategory = categoryDB.list();
         ArrayList<StatusCalendar> listStatus = statusDB.list();
-        ArrayList<EventCalendar> events = eventDB.list();
+        ArrayList<EventCalendar> events = eventDB.findByUser(user.getId());
 
         request.setAttribute("calendars", calendars);
         request.setAttribute("listCategory", listCategory);

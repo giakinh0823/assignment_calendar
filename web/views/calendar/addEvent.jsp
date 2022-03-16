@@ -24,6 +24,13 @@
                 </button>
             </div>
             <form action="/calendar/addEvent" name="form-add-event" id="form-add-event" method="POST">
+                <div id="showErrorFormAdd" class="hidden">
+                    <div id="contentErrorFormAdd" class="bg-red-100 rounded-lg py-5 px-6 mb-4 text-base text-red-700 mb-3" role="alert">
+                    </div>
+                </div>
+                <div id="showSuccessFormAdd" class="hidden p-4 mb-4 text-sm text-green-700 bg-green-100 rounded-lg" role="alert">
+                    <span id="contentSuccessFormAdd" class="font-medium"></span>
+                </div>
                 <div class="form-group mb-5">
                     <label for="titleEvent" class="block text-sm font-medium text-gray-900 mr-2">Title</label>
                     <input type="text" class="form-control block
