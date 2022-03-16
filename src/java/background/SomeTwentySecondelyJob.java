@@ -15,8 +15,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.ejb.Schedule;
-import javax.ejb.Singleton;
 import javax.mail.MessagingException;
 import model.calendar.EventCalendar;
 import model.calendar.StatusCalendar;
@@ -27,16 +25,17 @@ import websocket.NotificationCalendar;
  *
  * @author giaki
  */
-@Singleton
-public class BackgroundJobManager {
-
-    private String host = "smtp.gmail.com";
-    private String port = "587";
-    private String email = "giakinhfullstack@gmail.com";
-    private String pass = "giakinh0823";
-
-    @Schedule(hour = "*", minute = "*", second = "*/20", persistent = false)
-    public void someFiveSecondelyJob() {
+// 20 second
+public class SomeTwentySecondelyJob implements Runnable {
+    
+    @Override
+    public void run() {
+        System.out.println("Run task");
+        String host = "smtp.gmail.com";
+        String port = "587";
+        String email = "giakinhfullstack@gmail.com";
+        String pass = "giakinh0823";
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
         Timestamp stamp = new Timestamp(System.currentTimeMillis());
         Date now = new Date(stamp.getTime());
         EventCalendarDBContext eventDB = new EventCalendarDBContext();
@@ -45,7 +44,7 @@ public class BackgroundJobManager {
             Date start_time = new Date(event.getAdditional().getStartDate().getTime());
             Date end_time = new Date(event.getAdditional().getEndDate().getTime());
             if (event.getAdditional().getStatus().getName().equalsIgnoreCase("pending")
-                    && start_time.toString().equalsIgnoreCase(now.toString())) {
+                    && simpleDateFormat.format(start_time).equalsIgnoreCase(simpleDateFormat.format(now))) {
 
                 // update additional
                 System.out.println(event.getTitle() + " " + event.getDescription());
@@ -59,8 +58,8 @@ public class BackgroundJobManager {
                 //send email 
                 Runnable task = new Runnable() {
                     public void run() {
-                        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
                         if (event.getUser().getEmail() != null) {
+                            System.out.println("Send Email!!");
                             try {
                                 EmailUtility.sendEmail(host, port, email, pass, event.getUser().getEmail(), event.getAdditional().getCategory().getName() + " - " + event.getTitle(),
                                         "<p>" + event.getAdditional().getCategory().getName() + " start time: <span style=\"font-weight: bold\">" + simpleDateFormat.format(start_time) + "</span><p/>\n"
@@ -68,7 +67,7 @@ public class BackgroundJobManager {
                                         + "<p>" + event.getAdditional().getCategory().getName() + " location: <span style=\"font-weight: bold\">" + event.getLocation() + "</span><p/>\n"
                                         + "<p>" + event.getAdditional().getCategory().getName() + " description: " + event.getDescription() + "<p/>\n");
                             } catch (MessagingException ex) {
-                                Logger.getLogger(BackgroundJobManager.class.getName()).log(Level.SEVERE, null, ex);
+                                Logger.getLogger(SomeTwentySecondelyJob.class.getName()).log(Level.SEVERE, null, ex);
                             }
                         }
                     }
@@ -90,7 +89,7 @@ public class BackgroundJobManager {
             }
 
             if ((event.getAdditional().getStatus().getName().equalsIgnoreCase("in progress") || event.getAdditional().getStatus().getName().equalsIgnoreCase("pending"))
-                    && end_time.toString().equalsIgnoreCase(now.toString())) {
+                    && simpleDateFormat.format(end_time).equalsIgnoreCase(simpleDateFormat.format(now))) {
 
                 // update additional
                 System.out.println(event.getTitle() + " " + event.getDescription());
@@ -104,7 +103,6 @@ public class BackgroundJobManager {
                 //send email 
                 Runnable task = new Runnable() {
                     public void run() {
-                        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
                         if (event.getUser().getEmail() != null) {
                             try {
                                 EmailUtility.sendEmail(host, port, email, pass, event.getUser().getEmail(), event.getAdditional().getCategory().getName() + " finish - " + event.getTitle(),
@@ -113,7 +111,7 @@ public class BackgroundJobManager {
                                         + "<p>" + event.getAdditional().getCategory().getName() + " location: <span style=\"font-weight: bold\">" + event.getLocation() + "</span><p/>\n"
                                         + "<p>" + event.getAdditional().getCategory().getName() + " description: " + event.getDescription() + "<p/>\n");
                             } catch (MessagingException ex) {
-                                Logger.getLogger(BackgroundJobManager.class.getName()).log(Level.SEVERE, null, ex);
+                                Logger.getLogger(SomeTwentySecondelyJob.class.getName()).log(Level.SEVERE, null, ex);
                             }
                         }
                     }
@@ -135,18 +133,4 @@ public class BackgroundJobManager {
         }
     }
 
-//     @Schedule(hour="0", minute="0", second="0", persistent=false)
-//    public void someDailyJob() {
-//        // Do your job here which should run every start of day.
-//    }
-//
-//    @Schedule(hour="*/1", minute="0", second="0", persistent=false)
-//    public void someHourlyJob() {
-//        // Do your job here which should run every hour of day.
-//    }
-//
-//    @Schedule(hour="*", minute="*/15", second="0", persistent=false)
-//    public void someQuarterlyJob() {
-//        // Do your job here which should run every 15 minute of hour.
-//    }
 }

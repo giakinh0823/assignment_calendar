@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
     <!-- SMTP settings -->
+    <listener>
+        <listener-class>background.BackgroundJob</listener-class>
+    </listener>
     <context-param>
         <param-name>host</param-name>
         <param-value>smtp.gmail.com</param-value>
@@ -38,6 +41,10 @@
         <url-pattern>/profile/*</url-pattern>
         <url-pattern>/calendar/*</url-pattern>
     </filter-mapping>
+    <listener>
+        <description>ServletContextListener</description>
+        <listener-class>background.BackgroundJob</listener-class>
+    </listener>
     <servlet>
         <servlet-name>LoginController</servlet-name>
         <servlet-class>controller.auth.LoginController</servlet-class>
