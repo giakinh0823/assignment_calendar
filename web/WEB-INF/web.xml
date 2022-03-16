@@ -197,6 +197,10 @@
         <servlet-name>ErrorHandler</servlet-name>
         <servlet-class>controller.error.ErrorHandler</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>UserCalendarController</servlet-name>
+        <servlet-class>controller.admin.user.UserCalendarController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginController</servlet-name>
         <url-pattern>/login</url-pattern>
@@ -348,6 +352,10 @@
     <servlet-mapping>
         <servlet-name>ErrorHandler</servlet-name>
         <url-pattern>/error</url-pattern>
+    </servlet-mapping>
+     <servlet-mapping>
+        <servlet-name>UserCalendarController</servlet-name>
+        <url-pattern>/admin/users/calendar</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
