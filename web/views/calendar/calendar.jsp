@@ -208,7 +208,8 @@
         </script>
         <script src="/assets/js/calendar/event.js"></script>
         <script>
-            const socketUrl = 'ws://' + window.location.host + '/ws/calendar/${sessionScope.user.username}'
+            const ws_schema = window.location.protocol === "https:" ? "wss" : "ws";
+            const socketUrl = ws_schema+'://' + window.location.host + '/ws/calendar/${sessionScope.user.username}'
         </script>
         <script src="/assets/js/calendar/websocket.js"></script>
     </body>
