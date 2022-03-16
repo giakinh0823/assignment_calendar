@@ -24,7 +24,7 @@
             </div>
             <form action="/admin/event/edit" name="form-add-event" id="form-edit-event" method="POST">
                 <div id="showErrorForm" class="hidden">
-                <div id="contentErrorForm" class="bg-red-100 rounded-lg py-5 px-6 mb-4 text-base text-red-700 mb-3" role="alert">
+                    <div id="contentErrorForm" class="bg-red-100 rounded-lg py-5 px-6 mb-4 text-base text-red-700 mb-3" role="alert">
                     </div>
                 </div>
                 <div id="showSuccessForm" class="hidden p-4 mb-4 text-sm text-green-700 bg-green-100 rounded-lg" role="alert">
@@ -250,40 +250,41 @@
             </form>
         </div>
         <script>
+            window.addEventListener('DOMContentLoaded', (event) => {
             $("#description").val("<%=event.getDescription()%>");
             $("#colorEvent").val("<%=event.getAdditional().getCalendar().getColor()%>");
             $("#colorEvent").css("color", "<%=event.getAdditional().getCalendar().getColor()%>");
             $("#calendarGroup").val(<%=event.getAdditional().getCalendar().getId()%>);
             $("#category").val(<%=event.getAdditional().getCategory().getId()%>);
-            if (<%=event.getAdditional().getDisplay()!=null?true:false%>) {
-                $("#display").val("<%=event.getAdditional().getDisplay()%>");
+            if (<%=event.getAdditional().getDisplay() != null ? true : false%>) {
+            $("#display").val("<%=event.getAdditional().getDisplay()%>");
             }
             const startDate = new Date("<%=event.getAdditional().getStartDate()%>");
-            var startDay = ("0" + startDate.getDate()).slice(-2);
-            var startMonth = ("0" + (startDate.getMonth() + 1)).slice(-2);
+            var startDay = ("0" + startDate.getDate()).slice( - 2);
+            var startMonth = ("0" + (startDate.getMonth() + 1)).slice( - 2);
             var start = startDate.getFullYear() + "-" + (startMonth) + "-" + (startDay);
             $('#startDate').val(start);
             const endDate = new Date("<%=event.getAdditional().getEndDate()%>");
-            var endDay = ("0" + endDate.getDate()).slice(-2);
-            var endMonth = ("0" + (endDate.getMonth() + 1)).slice(-2);
+            var endDay = ("0" + endDate.getDate()).slice( - 2);
+            var endMonth = ("0" + (endDate.getMonth() + 1)).slice( - 2);
             var end = endDate.getFullYear() + "-" + (endMonth) + "-" + (endDay);
             $('#endDate').val(end);
             if (<%=event.getAdditional().isIsHasEnd()%>) {
-                const startHours = ("0" + startDate.getHours()).slice(-2);
-                const startMinutes = ("0" + startDate.getMinutes()).slice(-2);
-                const endHours = ("0" + endDate.getHours()).slice(-2);
-                const endMinutes = ("0" + endDate.getMinutes()).slice(-2);
-                const startTime = startHours + ":" + startMinutes;
-                const endTime = endHours + ":" + endMinutes;
-                $("#startTime").val(startTime);
-                $("#endTime").val(endTime);
+            const startHours = ("0" + startDate.getHours()).slice( - 2);
+            const startMinutes = ("0" + startDate.getMinutes()).slice( - 2);
+            const endHours = ("0" + endDate.getHours()).slice( - 2);
+            const endMinutes = ("0" + endDate.getMinutes()).slice( - 2);
+            const startTime = startHours + ":" + startMinutes;
+            const endTime = endHours + ":" + endMinutes;
+            $("#startTime").val(startTime);
+            $("#endTime").val(endTime);
             }
-            
-            
+
+
             $("#form-edit-event").on("submit", function (e) {
-                e.preventDefault();
-                const event = {
-                    id: $("#idEvent").val(),
+            e.preventDefault();
+            const event = {
+            id: $("#idEvent").val(),
                     title: $("#titleEvent").val(),
                     description: $("#description").val(),
                     start: $("#startDate").val(),
@@ -295,70 +296,71 @@
                     hasEnd: false,
                     display: $("#display").val(),
                     additional: $("#idAdditional").val(),
-                }
-                if ($("#startTime").val()) {
-                    event.start = event.start + "T" + $("#startTime").val();
-                    event.allDay=false;
-                }
-                if ($("#endDate").val()) {
-                    event.end = $("#endDate").val();
-                    if ($("#endTime").val()) {
-                        event.end = event.end + "T" + $("#endTime").val();
-                        event.hasEnd = true;
-                        event.allDay=false;
-                    }
-                }   
-                if ($("#location").val() && $("#location").val() != "" && $("#location").val() != null) {
-                    event.location = $("#location").val();
-                }
-                if(new Date(event.end).getDate()-new Date(event.start).getDate()<=0){
-                    event.allDay=false;
-                }
-                if(event.display == 'background' || event.display == 'inverse-background'){
-                    event.allDay=true;
-                }
-                event.start = new Date(event.start).getTime();
-                event.end = new Date(event.end).getTime();
-                console.log(event);
-                $.ajax({
-                    method: "POST",
+            }
+            if ($("#startTime").val()) {
+            event.start = event.start + "T" + $("#startTime").val();
+            event.allDay = false;
+            }
+            if ($("#endDate").val()) {
+            event.end = $("#endDate").val();
+            if ($("#endTime").val()) {
+            event.end = event.end + "T" + $("#endTime").val();
+            event.hasEnd = true;
+            event.allDay = false;
+            }
+            }
+            if ($("#location").val() && $("#location").val() != "" && $("#location").val() != null) {
+            event.location = $("#location").val();
+            }
+            if (new Date(event.end).getDate() - new Date(event.start).getDate() <= 0){
+            event.allDay = false;
+            }
+            if (event.display == 'background' || event.display == 'inverse-background'){
+            event.allDay = true;
+            }
+            event.start = new Date(event.start).getTime();
+            event.end = new Date(event.end).getTime();
+            console.log(event);
+            $.ajax({
+            method: "POST",
                     url: "/admin/event/edit",
                     data: event,
-                }).done(function (data) {
-                    if (data?.detailMessage) {
-                        $("#showSuccessForm").addClass("hidden")
-                        $('#contentErrorForm').text(data?.detailMessage);
-                        $("#showErrorForm").removeClass("hidden")
-                    } else{
-                        const event = {
-                            id: data?.id,
-                            title: data?.title,
-                            description: data?.description,
-                            location: data?.location,
-                            color: data?.additional?.calendar.color,
-                            overlap: data?.additional?.overlap,
-                            category:data?.additional?.category?.id,
-                            categoryName:data?.additional?.category?.name,
-                            status: data?.additional?.status?.id,
-                            statusName:data?.additional?.status?.name,
-                            calendarName: data?.additional?.calendar?.name,
-                            calendar: data?.additional?.calendar?.id,
-                            start: new Date(data?.additional?.startDate).toISOString(),
-                            end: new Date(data?.additional?.endDate).toISOString(),
-                            allDay: data?.additional?.isAllDay,
-                            hasEnd: data?.additional?.isHasEnd,
-                        }
-                        if (data?.additional?.display){
-                            event.display = data?.additional?.display;
-                        }
-                        $("#showErrorForm").addClass("hidden")
-                        $('#contentSuccessForm').text("Update success")
-                          
-                        $("#showSuccessForm").removeClass("hidden")
-                        $("#event-show-name").text(data?.title)
-                    }
-                });
+            }).done(function (data) {
+            if (data?.detailMessage) {
+            $("#showSuccessForm").addClass("hidden")
+                    $('#contentErrorForm').text(data?.detailMessage);
+            $("#showErrorForm").removeClass("hidden")
+            } else{
+            const event = {
+            id: data?.id,
+                    title: data?.title,
+                    description: data?.description,
+                    location: data?.location,
+                    color: data?.additional?.calendar.color,
+                    overlap: data?.additional?.overlap,
+                    category:data?.additional?.category?.id,
+                    categoryName:data?.additional?.category?.name,
+                    status: data?.additional?.status?.id,
+                    statusName:data?.additional?.status?.name,
+                    calendarName: data?.additional?.calendar?.name,
+                    calendar: data?.additional?.calendar?.id,
+                    start: new Date(data?.additional?.startDate).toISOString(),
+                    end: new Date(data?.additional?.endDate).toISOString(),
+                    allDay: data?.additional?.isAllDay,
+                    hasEnd: data?.additional?.isHasEnd,
+            }
+            if (data?.additional?.display){
+            event.display = data?.additional?.display;
+            }
+            $("#showErrorForm").addClass("hidden")
+                    $('#contentSuccessForm').text("Update success")
+
+                    $("#showSuccessForm").removeClass("hidden")
+                    $("#event-show-name").text(data?.title)
+            }
             });
+            });
+            })
         </script>
     </body>
 </html>
