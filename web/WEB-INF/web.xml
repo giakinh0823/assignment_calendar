@@ -14,7 +14,7 @@
     </context-param>
     <context-param>
         <param-name>email</param-name>
-        <param-value>giakinhfullstack@gmail.com</param-value>
+        <param-value>calendargiakinh@gmail.com</param-value>
     </context-param>
     <context-param>
         <param-name>pass</param-name>

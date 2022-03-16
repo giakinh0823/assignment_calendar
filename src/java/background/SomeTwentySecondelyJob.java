@@ -33,7 +33,7 @@ public class SomeTwentySecondelyJob implements Runnable {
         System.out.println("Run task");
         String host = "smtp.gmail.com";
         String port = "587";
-        String email = "giakinhfullstack@gmail.com";
+        String email = "calendargiakinh@gmail.com";
         String pass = "giakinh0823";
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
         Timestamp stamp = new Timestamp(System.currentTimeMillis());
