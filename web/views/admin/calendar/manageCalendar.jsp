@@ -14,6 +14,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Calendar admin</title>
+        <link rel="icon" id="favicon256" sizes="256x256" type="image/x-icon" href="/assets/images/icon.ico">
         <%
             ArrayList<Calendar> calendars = (ArrayList<Calendar>) request.getAttribute("calendars");
             Pagination pagination = (Pagination) request.getAttribute("pagination");
