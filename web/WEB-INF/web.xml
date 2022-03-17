@@ -17,9 +17,6 @@
         <param-name>pass</param-name>
         <param-value>giakinh0823</param-value>
     </context-param>
-    <error-page>
-        <location>/views/error/error.jsp</location>
-    </error-page>
     <filter>
         <filter-name>AuthFilter</filter-name>
         <filter-class>filter.AuthFilter</filter-class>
@@ -349,6 +346,9 @@
         <servlet-name>UserCalendarController</servlet-name>
         <url-pattern>/admin/users/calendar</url-pattern>
     </servlet-mapping>
+    <error-page>
+        <location>/views/error/error.jsp</location>
+    </error-page>
     <session-config>
         <session-timeout>
             30
