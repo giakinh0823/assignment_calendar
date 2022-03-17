@@ -15,6 +15,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Event admin</title>
+        <link rel="icon" id="favicon256" sizes="256x256" type="image/x-icon" href="/assets/images/icon.ico">
         <%
             ArrayList<EventCalendar> events = (ArrayList<EventCalendar>) request.getAttribute("events");
             Pagination pagination = (Pagination) request.getAttribute("pagination");
