@@ -18,8 +18,7 @@
         <param-value>giakinh0823</param-value>
     </context-param>
     <error-page>
-        <exception-type>java.io.IOException</exception-type>
-        <location>/error</location>
+        <location>/views/error/error.jsp</location>
     </error-page>
     <filter>
         <filter-name>AuthFilter</filter-name>

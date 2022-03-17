@@ -24,44 +24,62 @@ import javax.servlet.http.HttpSession;
  * @author giaki
  */
 public class AdminFilter implements Filter {
-    
+
     private static final boolean debug = true;
 
     // The filter configuration object we are associated with.  If
     // this value is null, this filter instance is not currently
     // configured. 
     private FilterConfig filterConfig = null;
-    
+
     public AdminFilter() {
     }
-    
+
     public void doFilter(ServletRequest request, ServletResponse response,
             FilterChain chain)
             throws IOException, ServletException {
-        
+
         if (debug) {
             log("AdminFilter:doFilter()");
         }
-        
-        HttpServletRequest req = (HttpServletRequest) request;
-        HttpServletResponse res = (HttpServletResponse) response;
-        HttpSession session = req.getSession(false);
-        String loginURI = req.getContextPath() + "/admin/login";
+        Throwable problem = null;
+        try {
+            HttpServletRequest req = (HttpServletRequest) request;
+            HttpServletResponse res = (HttpServletResponse) response;
+            HttpSession session = req.getSession(false);
+            String loginURI = req.getContextPath() + "/admin/login";
 
-        boolean loggedInUser = session != null && session.getAttribute("user") != null;
-        boolean loggedInAdmin = session != null && session.getAttribute("admin") != null;
-        boolean loginRequest = req.getRequestURI().equals(loginURI);    
+            boolean loggedInUser = session != null && session.getAttribute("user") != null;
+            boolean loggedInAdmin = session != null && session.getAttribute("admin") != null;
+            boolean loginRequest = req.getRequestURI().equals(loginURI);
 
-        if (loggedInAdmin || loginRequest) {
-            chain.doFilter(request, response);
-        } else {
-            if(loggedInUser){
-                request.getRequestDispatcher("/views/error/accessDenied.jsp").forward(request, response);
-            }else{
-                res.sendRedirect(loginURI);
+            if (loggedInAdmin || loginRequest) {
+                chain.doFilter(request, response);
+            } else {
+                if (loggedInUser) {
+                    request.getRequestDispatcher("/views/error/accessDenied.jsp").forward(request, response);
+                } else {
+                    res.sendRedirect(loginURI);
+                }
             }
+        } catch (Throwable t) {
+            // If an exception is thrown somewhere down the filter chain,
+            // we still want to execute our after processing, and then
+            // rethrow the problem after that.
+            problem = t;
+            t.printStackTrace();
         }
-        
+
+        if (problem != null) {
+            if (problem instanceof ServletException) {
+                throw (ServletException) problem;
+            }
+            if (problem instanceof IOException) {
+                throw (IOException) problem;
+            }
+            sendProcessingError(problem, response);
+        }
+
     }
 
     /**
@@ -83,16 +101,16 @@ public class AdminFilter implements Filter {
     /**
      * Destroy method for this filter
      */
-    public void destroy() {        
+    public void destroy() {
     }
 
     /**
      * Init method for this filter
      */
-    public void init(FilterConfig filterConfig) {        
+    public void init(FilterConfig filterConfig) {
         this.filterConfig = filterConfig;
         if (filterConfig != null) {
-            if (debug) {                
+            if (debug) {
                 log("AdminFilter:Initializing filter");
             }
         }
@@ -111,20 +129,20 @@ public class AdminFilter implements Filter {
         sb.append(")");
         return (sb.toString());
     }
-    
+
     private void sendProcessingError(Throwable t, ServletResponse response) {
-        String stackTrace = getStackTrace(t);        
-        
+        String stackTrace = getStackTrace(t);
+
         if (stackTrace != null && !stackTrace.equals("")) {
             try {
                 response.setContentType("text/html");
                 PrintStream ps = new PrintStream(response.getOutputStream());
-                PrintWriter pw = new PrintWriter(ps);                
+                PrintWriter pw = new PrintWriter(ps);
                 pw.print("<html>\n<head>\n<title>Error</title>\n</head>\n<body>\n"); //NOI18N
 
                 // PENDING! Localize this for next official release
-                pw.print("<h1>The resource did not process correctly</h1>\n<pre>\n");                
-                pw.print(stackTrace);                
+                pw.print("<h1>The resource did not process correctly</h1>\n<pre>\n");
+                pw.print(stackTrace);
                 pw.print("</pre></body>\n</html>"); //NOI18N
                 pw.close();
                 ps.close();
@@ -141,7 +159,7 @@ public class AdminFilter implements Filter {
             }
         }
     }
-    
+
     public static String getStackTrace(Throwable t) {
         String stackTrace = null;
         try {
@@ -155,9 +173,9 @@ public class AdminFilter implements Filter {
         }
         return stackTrace;
     }
-    
+
     public void log(String msg) {
-        filterConfig.getServletContext().log(msg);        
+        filterConfig.getServletContext().log(msg);
     }
-    
+
 }
