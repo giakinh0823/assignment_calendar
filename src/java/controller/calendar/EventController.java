@@ -85,6 +85,10 @@ public class EventController extends BaseAuthController {
             Timestamp field_endDate = validate.fieldTimestamp(endDate, "Error set field end date");
             boolean field_isAllDay = validate.fieldBoolean(isAllDay, "Error set field AllDay");
             boolean field_isHasEnd = validate.fieldBoolean(isHasEnd, "Error set field HasEnd");
+            
+            if(field_startDate.getTime()>=field_endDate.getTime()){
+                throw new Exception("start date cannot be greater than end date");
+            }
 
             Timestamp created_at = new Timestamp(System.currentTimeMillis());
             Timestamp updated_at = new Timestamp(System.currentTimeMillis());
