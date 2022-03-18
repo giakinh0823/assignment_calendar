@@ -7,17 +7,19 @@ package controller.admin.event;
 
 import controller.admin.auth.BaseAuthAdminController;
 import dal.auth.UserDBContext;
+import dal.calendar.CategoryCalendarDBContext;
 import dal.calendar.EventCalendarDBContext;
+import dal.calendar.StatusCalendarDBContext;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import model.auth.User;
+import model.calendar.CategoryCalendar;
 import model.calendar.EventCalendar;
+import model.calendar.StatusCalendar;
 import model.common.Pagination;
 import utils.Validate;
 
@@ -53,6 +55,17 @@ public class EventManageController extends BaseAuthAdminController {
             int pageSize = 24;
             String page = validate.getField(request, "page", false);
             String search = validate.getField(request, "q", false);
+            String category_string = validate.getField(request, "category", false);
+            String status_string = validate.getField(request, "status", false);
+            int category = -1;
+            int status = -1;
+            if (category_string != null && !category_string.trim().isEmpty()) {
+                category = validate.fieldInt(category_string, "Error get field category");
+            }
+            if (status_string != null && !category_string.trim().isEmpty()) {
+                status = validate.fieldInt(status_string, "Error get field status");
+            }
+            if (search == null) search = "";
             if (page == null || page.trim().length() == 0) {
                 page = "1";
             }
@@ -66,17 +79,19 @@ public class EventManageController extends BaseAuthAdminController {
                 pageIndex = 1;
             }
             EventCalendarDBContext eventDB = new EventCalendarDBContext();
-            Pagination pagination = new Pagination(pageIndex, pageSize, eventDB.getSize());
-            ArrayList<EventCalendar> events = new ArrayList<EventCalendar>();
-            if(search!=null && !search.equals("")){
-                events = eventDB.findEvents(search, pageIndex, pageSize);
-                pagination.setSize(eventDB.getSizeSearch(search));
-            }else{
-                events = eventDB.getEvents(pageIndex, pageSize);
-            }
-            
+            Pagination pagination = new Pagination(pageIndex, pageSize, eventDB.getSizeSearch(search,category, status));
+            ArrayList<EventCalendar> events = eventDB.findEvents(search,category, status, pageIndex, pageSize);
+            StatusCalendarDBContext statusCalendarDB = new StatusCalendarDBContext();
+            ArrayList<StatusCalendar> statuss = statusCalendarDB.list();
+            request.setAttribute("statuss", statuss);
+            CategoryCalendarDBContext calendarDB = new CategoryCalendarDBContext();
+            ArrayList<CategoryCalendar> categorys = calendarDB.list();
+            request.setAttribute("categorys", categorys);
             request.setAttribute("events", events);
             request.setAttribute("pagination", pagination);
+            request.setAttribute("q", search);
+            request.setAttribute("category", category);
+            request.setAttribute("status", status);
             request.getRequestDispatcher("/views/admin/event/manageEvent.jsp").forward(request, response);
         } catch (Exception e) {
             request.getRequestDispatcher("/views/error/accessDenied.jsp").forward(request, response);

@@ -159,7 +159,7 @@ public class EventCalendarDBContext extends DBContext<EventCalendar> {
         }
         return null;
     }
-    
+
     public ArrayList<EventCalendar> findByUser(int userid) {
         UserDBContext userDB = new UserDBContext();
         ArrayList<EventCalendar> events = new ArrayList<>();
@@ -426,7 +426,7 @@ public class EventCalendarDBContext extends DBContext<EventCalendar> {
     @Override
     public EventCalendar get(int id) {
         UserDBContext userDB = new UserDBContext();
-       String sql = "SELECT [event].[id]\n"
+        String sql = "SELECT [event].[id]\n"
                 + "      ,[event].[title]\n"
                 + "      ,[event].[description]\n"
                 + "      ,[event].[location]\n"
@@ -475,7 +475,7 @@ public class EventCalendarDBContext extends DBContext<EventCalendar> {
                 + "  INNER JOIN [calendar] ON [calendar].[id] = [additional_calendar].[calendarId]\n"
                 + "  INNER JOIN [status_calendar] ON [status_calendar].[id] = [additional_calendar].[statusId]\n"
                 + "  INNER JOIN [category_calendar] ON [category_calendar].[id] = [additional_calendar].[categoryId]\n"
-               + " WHERE [event].[id] = ? ";
+                + " WHERE [event].[id] = ? ";
         PreparedStatement statement = null;
         try {
             statement = connection.prepareStatement(sql);
@@ -568,7 +568,7 @@ public class EventCalendarDBContext extends DBContext<EventCalendar> {
                     + "           ,[userId]\n"
                     + "           ,[additionalId])\n"
                     + "     VALUES(?, ?, ?, ?, ?, ?, ?)";
-            statement = connection.prepareStatement(sql,statement.RETURN_GENERATED_KEYS);
+            statement = connection.prepareStatement(sql, statement.RETURN_GENERATED_KEYS);
             statement.setString(1, model.getTitle());
             statement.setString(2, model.getDescription());
             statement.setString(3, model.getLocation());
@@ -668,7 +668,7 @@ public class EventCalendarDBContext extends DBContext<EventCalendar> {
             Logger.getLogger(EventCalendarDBContext.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
     public void deleteByUser(int id) {
         try {
             String sql = "DELETE FROM [event]\n"
@@ -697,11 +697,23 @@ public class EventCalendarDBContext extends DBContext<EventCalendar> {
         return 0;
     }
 
-    public int getSizeSearch(String value) {
+    public int getSizeSearch(String value, int categoryId, int statusId) {
         String sql = "SELECT COUNT([event].[id]) as 'size' FROM [event]\n"
-                + " INNER JOIN [user] on [user].id = [event].[userId]\n"
-                + " WHERE [event].[title] LIKE ? or [event].[location] LIKE ? or \n"
-                + " [user].[username] LIKE ? or [user].[email] LIKE ?\n";
+                + " INNER JOIN [user] ON [user].[id] = [event].[userId]\n"
+                + "  INNER JOIN [user_permission] ON [user_permission].[userId] = [user].[id]\n"
+                + "  INNER JOIN [permission]  ON [permission].[id] = [user_permission].[permissionId]\n"
+                + "  INNER JOIN [additional_calendar] ON [additional_calendar].[id] = [event].[additionalId]\n"
+                + "  INNER JOIN [calendar] ON [calendar].[id] = [additional_calendar].[calendarId]\n"
+                + "  INNER JOIN [status_calendar] ON [status_calendar].[id] = [additional_calendar].[statusId]\n"
+                + "  INNER JOIN [category_calendar] ON [category_calendar].[id] = [additional_calendar].[categoryId]\n"
+                + " WHERE (LOWER([event].[title]) LIKE LOWER(?) or LOWER([event].[location]) LIKE LOWER(?) or \n"
+                + " LOWER([user].[username]) LIKE LOWER(?) or LOWER([user].[email]) LIKE LOWER(?)) \n";
+        if (categoryId != -1) {
+            sql += " AND [additional_calendar].[categoryId] = ? \n";
+        }
+        if (statusId != -1) {
+            sql += " AND [additional_calendar].[statusId] = ? \n";
+        }
         PreparedStatement statement = null;
         try {
             statement = connection.prepareStatement(sql);
@@ -709,6 +721,14 @@ public class EventCalendarDBContext extends DBContext<EventCalendar> {
             statement.setString(2, "%" + value + "%");
             statement.setString(3, "%" + value + "%");
             statement.setString(4, "%" + value + "%");
+            if (categoryId != -1) {
+                statement.setInt(5, categoryId);
+                if (statusId != -1) {
+                    statement.setInt(6, statusId);
+                }
+            }else if (statusId != -1) {
+                statement.setInt(5, statusId);
+            }
             ResultSet result = statement.executeQuery();
             while (result.next()) {
                 int size = result.getInt("size");
@@ -789,6 +809,179 @@ public class EventCalendarDBContext extends DBContext<EventCalendar> {
             statement.setInt(6, pageSize);
             statement.setInt(7, pageIndex);
             statement.setInt(8, pageSize);
+            ResultSet result = statement.executeQuery();
+            while (result.next()) {
+                EventCalendar eventCalendar = new EventCalendar();
+                eventCalendar.setId(result.getInt("id"));
+                eventCalendar.setTitle(result.getString("title"));
+                eventCalendar.setDescription(result.getString("description"));
+                eventCalendar.setLocation(result.getString("location"));
+                eventCalendar.setCreated_at(result.getTimestamp("created_at"));
+                eventCalendar.setUpdated_at(result.getTimestamp("updated_at"));
+                eventCalendar.setUserId(result.getInt("userId"));
+                eventCalendar.setAdditionalId(result.getInt("additionalId"));
+
+                User user = new User();
+                user.setId(result.getInt("userId"));
+                user.setUsername(result.getString("username"));
+                user.setPassword(result.getString("password"));
+                user.setEmail(result.getString("email"));
+                user.setFirst_name(result.getString("first_name"));
+                user.setLast_name(result.getString("last_name"));
+                user.setBirthday(result.getDate("birthday"));
+                user.setPhone(result.getString("phone"));
+                user.setGender(result.getBoolean("gender"));
+                user.setPermission(result.getString("permission"));
+                user.setIs_active(result.getBoolean("is_active"));
+                user.setIs_super(result.getBoolean("is_super"));
+                user.setCreated_at(result.getTimestamp("user_created_at"));
+                user.setUpdated_at(result.getTimestamp("user_updated_at"));
+                user.setAvatar(result.getString("avatar"));
+
+                Permission permission = new Permission();
+                permission.setId(result.getInt("permissionId"));
+                permission.setName(result.getString("permissionName"));
+                user.setUser_permission(permission);
+
+                AdditionalCalendar additional = new AdditionalCalendar();
+                additional.setId(result.getInt("additionalId"));
+                additional.setStartDate(result.getTimestamp("start_date"));
+                additional.setEndDate(result.getTimestamp("end_date"));
+                additional.setOverlap(result.getBoolean("overlap"));
+                additional.setDisplay(result.getString("display"));
+                additional.setIsAllDay(result.getBoolean("isAllDay"));
+                additional.setIsHasEnd(result.getBoolean("isHasEnd"));
+                additional.setCreated_at(result.getTimestamp("additional_created_at"));
+                additional.setUpdated_at(result.getTimestamp("additional_updated_at"));
+                additional.setCalendarId(result.getInt("calendarId"));
+                additional.setStatusId(result.getInt("statusId"));
+                additional.setCategoryId(result.getInt("categoryId"));
+
+                Calendar calendar = new Calendar();
+                calendar.setId(result.getInt("calendarId"));
+                calendar.setName(result.getString("calendarName"));
+                calendar.setColor(result.getString("color"));
+                calendar.setUserId(result.getInt("userId"));
+                calendar.setCreated_at(result.getTimestamp("calendar_created_at"));
+                calendar.setUpdated_at(result.getTimestamp("calendar_updated_at"));
+                additional.setCalendar(calendar);
+                CategoryCalendar category = new CategoryCalendar();
+                category.setId(result.getInt("categoryId"));
+                category.setName(result.getString("categoryName"));
+                additional.setCategory(category);
+                StatusCalendar status = new StatusCalendar();
+                status.setId(result.getInt("statusId"));
+                status.setName(result.getString("statusName"));
+                additional.setStatus(status);
+
+                eventCalendar.setUser(user);
+                eventCalendar.setAdditional(additional);
+                events.add(eventCalendar);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(AdditionalCalendarDBContext.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return events;
+    }
+
+    public ArrayList<EventCalendar> findEvents(String value, int categoryId, int statusId, int pageIndex, int pageSize) {
+        UserDBContext userDB = new UserDBContext();
+        ArrayList<EventCalendar> events = new ArrayList<>();
+        String sql = "SELECT * FROM (SELECT [event].[id]\n"
+                + "      ,[event].[title]\n"
+                + "      ,[event].[description]\n"
+                + "      ,[event].[location]\n"
+                + "      ,[event].[updated_at]\n"
+                + "      ,[event].[created_at]\n"
+                + "      ,[event].[userId]\n"
+                + "      ,[event].[additionalId]\n"
+                + "	  ,[user].[username]\n"
+                + "      ,[user].[password]\n"
+                + "      ,[user].[first_name]\n"
+                + "      ,[user].[last_name]\n"
+                + "      ,[user].[birthday]\n"
+                + "      ,[user].[email]\n"
+                + "      ,[user].[phone]\n"
+                + "      ,[user].[gender]\n"
+                + "      ,[user].[is_super]\n"
+                + "      ,[user].[is_active]\n"
+                + "      ,[user].[permission]\n"
+                + "      ,[user].[created_at] as 'user_created_at'\n"
+                + "      ,[user].[updated_at] as 'user_updated_at'\n"
+                + "      ,[user].[avatar]\n"
+                + "	  ,[permission].[id] as 'permissionId'\n"
+                + "	  ,[permission].[name] as 'permissionName'\n"
+                + "	  ,[additional_calendar].[start_date]\n"
+                + "      ,[additional_calendar].[end_date]\n"
+                + "      ,[additional_calendar].[overlap]\n"
+                + "      ,[additional_calendar].[display]\n"
+                + "      ,[additional_calendar].[created_at] as 'additional_created_at'\n"
+                + "      ,[additional_calendar].[updated_at] as 'additional_updated_at'\n"
+                + "      ,[additional_calendar].[isAllDay]\n"
+                + "      ,[additional_calendar].[isHasEnd]\n"
+                + "      ,[additional_calendar].[calendarId]\n"
+                + "      ,[additional_calendar].[statusId]\n"
+                + "      ,[additional_calendar].[categoryId]\n"
+                + "	 ,[calendar].[name] as 'calendarName' \n"
+                + "      ,[calendar].[color]\n"
+                + "      ,[calendar].[created_at] as 'calendar_created_at'\n"
+                + "      ,[calendar].[updated_at] as 'calendar_updated_at'\n"
+                + "	 ,[status_calendar].[name] as 'statusName'\n"
+                + "	 ,[category_calendar].[name] as 'categoryName'\n"
+                + "      ,ROW_NUMBER() OVER (ORDER BY [event].[id] DESC) as row_index\n"
+                + "  FROM [event]\n"
+                + "  INNER JOIN [user] ON [user].[id] = [event].[userId]\n"
+                + "  INNER JOIN [user_permission] ON [user_permission].[userId] = [user].[id]\n"
+                + "  INNER JOIN [permission]  ON [permission].[id] = [user_permission].[permissionId]\n"
+                + "  INNER JOIN [additional_calendar] ON [additional_calendar].[id] = [event].[additionalId]\n"
+                + "  INNER JOIN [calendar] ON [calendar].[id] = [additional_calendar].[calendarId]\n"
+                + "  INNER JOIN [status_calendar] ON [status_calendar].[id] = [additional_calendar].[statusId]\n"
+                + "  INNER JOIN [category_calendar] ON [category_calendar].[id] = [additional_calendar].[categoryId]\n"
+                + " WHERE (LOWER([event].[title]) LIKE LOWER(?) or LOWER([event].[location]) LIKE LOWER(?) or \n"
+                + " LOWER([user].[username]) LIKE LOWER(?) or LOWER([user].[email]) LIKE LOWER(?)) \n";
+        if (categoryId != -1) {
+            sql += " AND [additional_calendar].[categoryId] = ? \n";
+        }
+        if (statusId != -1) {
+            sql += " AND [additional_calendar].[statusId] = ? \n";
+        }
+        sql += ") [event]\n"
+                + "  WHERE row_index >= (? - 1) * ? + 1 AND row_index <= ? * ?";
+
+        PreparedStatement statement = null;
+        try {
+            statement = connection.prepareStatement(sql);
+            statement.setString(1, "%" + value + "%");
+            statement.setString(2, "%" + value + "%");
+            statement.setString(3, "%" + value + "%");
+            statement.setString(4, "%" + value + "%");
+
+            if (categoryId != -1) {
+                statement.setInt(5, categoryId);
+                if (statusId != -1) {
+                    statement.setInt(6, statusId);
+                    statement.setInt(7, pageIndex);
+                    statement.setInt(8, pageSize);
+                    statement.setInt(9, pageIndex);
+                    statement.setInt(10, pageSize);
+                } else {
+                    statement.setInt(6, pageIndex);
+                    statement.setInt(7, pageSize);
+                    statement.setInt(8, pageIndex);
+                    statement.setInt(9, pageSize);
+                }
+            }else if (statusId != -1) {
+                statement.setInt(5, statusId);
+                statement.setInt(6, pageIndex);
+                statement.setInt(7, pageSize);
+                statement.setInt(8, pageIndex);
+                statement.setInt(9, pageSize);
+            } else{
+                statement.setInt(5, pageIndex);
+                statement.setInt(6, pageSize);
+                statement.setInt(7, pageIndex);
+                statement.setInt(8, pageSize);
+            }
             ResultSet result = statement.executeQuery();
             while (result.next()) {
                 EventCalendar eventCalendar = new EventCalendar();
@@ -981,12 +1174,12 @@ public class EventCalendarDBContext extends DBContext<EventCalendar> {
                 calendar.setCreated_at(result.getTimestamp("calendar_created_at"));
                 calendar.setUpdated_at(result.getTimestamp("calendar_updated_at"));
                 additional.setCalendar(calendar);
-                
+
                 CategoryCalendar category = new CategoryCalendar();
                 category.setId(result.getInt("categoryId"));
                 category.setName(result.getString("categoryName"));
                 additional.setCategory(category);
-                
+
                 StatusCalendar status = new StatusCalendar();
                 status.setId(result.getInt("statusId"));
                 status.setName(result.getString("statusName"));
