@@ -33,6 +33,22 @@ public class Validate {
         return value;
     }
     
+    public String getFieldParams(HttpServletRequest request, String fieldName, boolean required) throws Exception {
+        String value = null;
+        try {
+            value = new String(request.getParameter(fieldName).getBytes("iso-8859-1"), "iso-8859-2");
+        } catch (Exception e) {
+            if (value == null || value.trim().isEmpty() || value.equals("")) {
+                if (required) {
+                    throw new Exception("Field "+fieldName+" is required");
+                } else {
+                    value = null; // Make empty string null so that you don't need to hassle with equals("") afterwards.
+                }
+            }
+        }
+        return value;
+    }
+    
     public Part getFieldAjaxFile(HttpServletRequest request, String fieldName, boolean required) throws Exception {
         Part value = null;
         value = request.getPart(fieldName);
