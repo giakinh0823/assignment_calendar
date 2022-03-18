@@ -62,7 +62,7 @@ public class EventManageController extends BaseAuthAdminController {
             if (category_string != null && !category_string.trim().isEmpty()) {
                 category = validate.fieldInt(category_string, "Error get field category");
             }
-            if (status_string != null && !category_string.trim().isEmpty()) {
+            if (status_string != null && !status_string.trim().isEmpty()) {
                 status = validate.fieldInt(status_string, "Error get field status");
             }
             if (search == null) search = "";
