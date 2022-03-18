@@ -13,6 +13,7 @@ import dal.calendar.EventCalendarDBContext;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Timestamp;
+import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -73,6 +74,16 @@ public class UpdateEventController extends BaseAuthController {
             Timestamp field_endDate = validate.fieldTimestamp(endDate, "Error set field end date");
             boolean field_isAllDay = validate.fieldBoolean(isAllDay, "Error set field AllDay");
             boolean field_isHasEnd = validate.fieldBoolean(isHasEnd, "Error set field HasEnd");
+            
+            if(field_startDate.getTime()>=field_endDate.getTime()){
+                throw new Exception("start date cannot be greater than end date");
+            }
+            
+            if(field_isAllDay){
+                if(TimeUnit.MILLISECONDS.toDays(field_endDate.getTime() - field_startDate.getTime()) < 1){
+                    throw new Exception("start date cannot be greater than end date one day");
+                }
+            }
              
             Timestamp updated_at = new Timestamp(System.currentTimeMillis());
             
