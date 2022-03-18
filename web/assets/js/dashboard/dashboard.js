@@ -44,34 +44,17 @@ const data = {
 
 
 const config = {
-    type: 'line',
+    type: 'bar',
     data: data,
     options: {
         responsive: true,
         plugins: {
+            legend: {
+                position: 'top',
+            },
             title: {
                 display: true,
-                text: 'Calendar'
-            },
-        },
-        interaction: {
-            mode: 'index',
-            intersect: false
-        },
-        scales: {
-            x: {
-                display: true,
-                title: {
-                    display: true,
-                    text: 'Month'
-                }
-            },
-            y: {
-                display: true,
-                title: {
-                    display: true,
-                    text: 'Value'
-                }
+                text: 'Event and Calendar'
             }
         }
     },
@@ -83,7 +66,7 @@ const myChart = new Chart(document.getElementById('mainChart'), config);
 
 var colors = Object.values(CHART_COLORS);
 listCategoryColor = listCategoryLabel.map((item, index) => {
-    return colors[index%colors.length];
+    return colors[index % colors.length];
 })
 
 const dataCategory = {
@@ -128,33 +111,55 @@ const configCategory = {
 
 const categoryChart = new Chart(document.getElementById('categoryChart'), configCategory);
 
+categoryChart.canvas.parentNode.style.height = '728px';
+categoryChart.canvas.parentNode.style.width = '70%';
+
 const dataUser = {
-  labels: labels,
-  datasets: [
-    {
-      label: 'Dataset 1',
-      data: users,
-      borderColor: CHART_COLORS.red,
-      backgroundColor: CHART_COLORS.red,
-    },
-  ]
+    labels: labels,
+    datasets: [
+        {
+            label: 'Dataset 1',
+            data: users,
+            borderColor: CHART_COLORS.red,
+            backgroundColor: CHART_COLORS.red,
+        },
+    ]
 };
 
 const configUser = {
-  type: 'bar',
-  data: dataUser,
-  options: {
-    responsive: true,
-    plugins: {
-      legend: {
-        position: 'top',
-      },
-      title: {
-        display: true,
-        text: 'User'
-      }
-    }
-  }
+    type: 'line',
+    data: dataUser,
+    options: {
+        responsive: true,
+        interaction: {
+            mode: 'index',
+            intersect: false,
+        },
+        stacked: false,
+        plugins: {
+            title: {
+                display: true,
+                text: 'User'
+            }
+        },
+        scales: {
+            y: {
+                type: 'linear',
+                display: true,
+                position: 'left',
+            },
+            y1: {
+                type: 'linear',
+                display: true,
+                position: 'right',
+
+                // grid line settings
+                grid: {
+                    drawOnChartArea: false, // only want the grid lines for one axis to show up
+                },
+            },
+        }
+    },
 };
 
 

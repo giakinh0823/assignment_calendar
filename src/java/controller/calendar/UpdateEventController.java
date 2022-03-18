@@ -86,6 +86,7 @@ public class UpdateEventController extends BaseAuthController {
             additional.setEndDate(field_endDate);
             additional.setIsAllDay(field_isAllDay);
             additional.setIsHasEnd(field_isHasEnd);
+            additional.setStatusId(1);
             additional.setUpdated_at(updated_at);
             
             additionalDB.update(additional);
