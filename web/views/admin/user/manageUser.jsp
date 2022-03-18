@@ -60,7 +60,12 @@
                                 </form>
                             </div>
                             <div class="overflow-hidden">
-                                <table class="min-w-full divide-y divide-gray-200 table-fixed">
+                                <c:if test="${users.size()<=0}">
+                                    <div class="min-h-[80vh] text-center flex justify-center items-center">
+                                        <h3 class="text-5xl">Not Found!</h3>
+                                    </div>
+                                </c:if>
+                                <table class="${users.size()<=0?"hidden":""} min-w-full divide-y divide-gray-200 table-fixed">
                                     <thead class="bg-gray-100">
                                         <tr>
                                             <th scope="col" class="p-4">
@@ -221,7 +226,7 @@
                     console.log(params);
                     const page = item.getAttribute("data"); // lấy số number page
                     params.page = page;
-                    const href = new URLSearchParams(params).toString();
+                    const href = decodeURIComponent(new URLSearchParams(params).toString());
                     item.setAttribute("href", "?" + href);
                 })
             }

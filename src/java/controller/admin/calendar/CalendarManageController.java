@@ -8,9 +8,11 @@ package controller.admin.calendar;
 import controller.admin.auth.BaseAuthAdminController;
 import dal.auth.UserDBContext;
 import dal.calendar.CalendarDBContext;
+import dal.calendar.StatusCalendarDBContext;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import javafx.animation.Animation;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -18,6 +20,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import model.auth.User;
 import model.calendar.Calendar;
+import model.calendar.StatusCalendar;
 import model.common.Pagination;
 import utils.Validate;
 
@@ -50,8 +53,10 @@ public class CalendarManageController extends BaseAuthAdminController {
             throws ServletException, IOException {
         try {
             Validate validate = new Validate();
-            int pageSize = 24;
+            int pageSize = 12;
             String page = validate.getField(request, "page", false);
+            String search = validate.getField(request, "q", false);
+            if(search==null) search="";
             if (page == null || page.trim().length() == 0) {
                 page = "1";
             }
@@ -65,8 +70,8 @@ public class CalendarManageController extends BaseAuthAdminController {
                 pageIndex = 1;
             }
             CalendarDBContext calendarDB = new CalendarDBContext();
-            Pagination pagination = new Pagination(pageIndex, pageSize, calendarDB.getSize());
-            ArrayList<Calendar> calendars = calendarDB.getCalendars(pageIndex, pageSize);
+            Pagination pagination = new Pagination(pageIndex, pageSize, calendarDB.getSize(search));
+            ArrayList<Calendar> calendars = calendarDB.getCalendars(search,pageIndex, pageSize);
             request.setAttribute("calendars", calendars);
             request.setAttribute("pagination", pagination);
             request.getRequestDispatcher("/views/admin/calendar/manageCalendar.jsp").forward(request, response);

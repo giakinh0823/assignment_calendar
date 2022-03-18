@@ -18,6 +18,9 @@
         <link rel="icon" id="favicon256" sizes="256x256" type="image/x-icon" href="/assets/images/icon.ico">
         <%
             ArrayList<EventCalendar> events = (ArrayList<EventCalendar>) request.getAttribute("events");
+            if (events == null) {
+                events = new ArrayList<EventCalendar>();
+            }
             Pagination pagination = (Pagination) request.getAttribute("pagination");
         %>
     </head>
@@ -51,17 +54,35 @@
                         <div class="inline-block min-w-full align-middle">
                             <div class="p-4">
                                 <label for="table-search" class="sr-only">Search</label>
-                                <form form="/admin/event" method="GET">
+                                <form form="/admin/event" method="GET" class="flex space-x-2">
                                     <div class="relative mt-1">
-                                    <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
-                                        <svg class="w-5 h-5 text-gray-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"></path></svg>
+                                        <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
+                                            <svg class="w-5 h-5 text-gray-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"></path></svg>
+                                        </div>
+                                        <input type="text" name="q" value="${requestScope.q}" id="search" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-80 pl-10 p-2.5" placeholder="Search for items">
                                     </div>
-                                    <input type="text" name="q" id="search" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-80 pl-10 p-2.5" placeholder="Search for items">
-                                    </div>
+                                    <select id="category" name="category" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-[200px] p-2.5">
+                                        <option value="">-------category-------</option>
+                                        <c:forEach items="${requestScope.categorys}" var="category">
+                                            <option ${requestScope.category!=null && requestScope.category == category.id?"selected":""} value="${category.id}">${category.name}</option>
+                                        </c:forEach>
+                                    </select>
+                                    <select id="status" name="status" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-[200px] p-2.5">
+                                        <option value="">-------status-------</option>
+                                        <c:forEach items="${requestScope.statuss}" var="status">
+                                            <option ${requestScope.status!=null && requestScope.status == status.id?"selected":""} value="${status.id}">${status.name}</option>
+                                        </c:forEach>
+                                    </select>
+                                    <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">Search</button>
                                 </form>
                             </div>
                             <div class="overflow-hidden">
-                                <table class="min-w-full divide-y divide-gray-200 table-fixed">
+                                <c:if test="${events.size()<=0}">
+                                    <div class="min-h-[80vh] text-center flex justify-center items-center">
+                                        <h3 class="text-5xl">Not Found!</h3>
+                                    </div>
+                                </c:if>
+                                <table class="${events.size()<=0?"hidden":""} min-w-full divide-y divide-gray-200 table-fixed">
                                     <thead class="bg-gray-100">
                                         <tr>
                                             <th scope="col" class="p-4">
@@ -210,7 +231,7 @@
                             .replace(/&/g, '","').replace(/=/g, '":"') + '"}') : {};
                     const page = item.getAttribute("data");
                     params.page = page;
-                    const href = new URLSearchParams(params).toString();
+                    const href = decodeURIComponent(new URLSearchParams(params).toString());
                     item.setAttribute("href", "?" + href);
                 })
             }
