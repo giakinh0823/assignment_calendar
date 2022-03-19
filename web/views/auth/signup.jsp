@@ -16,7 +16,7 @@
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     </head>
     <body>
-        <div class="flex items-center justify-center min-h-screen bg-gray-5z0">
+        <div class="flex items-center justify-center min-h-screen bg-gray-5z0 py-30">
             <div class="px-10 py-10 mt-4 text-left bg-white shadow-lg rounded-lg">
                 <div class="flex justify-center">
                      <img src="/assets/images/icon.ico" style="width: 50px"/>

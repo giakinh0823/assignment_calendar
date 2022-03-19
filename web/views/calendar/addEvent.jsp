@@ -15,8 +15,27 @@
         ArrayList<Calendar> calendars = (ArrayList<Calendar>) request.getAttribute("calendars");
         ArrayList<CategoryCalendar> listCategory = (ArrayList<CategoryCalendar>) request.getAttribute("listCategory");
     %>
+    <style>
+        #add-event-form::-webkit-scrollbar-track
+        {
+            border-radius: 10px;
+            background-color: #F5F5F5;
+        }
+
+        #add-event-form::-webkit-scrollbar
+        {
+            width: 6px;
+            background-color: #F5F5F5;
+        }
+
+        #add-event-form::-webkit-scrollbar-thumb
+        {
+            border-radius: 10px;
+            background-color: #bebebe;
+        }
+    </style>
     <body>
-        <div class="block p-6 rounded-lg shadow-lg bg-white max-w-md">
+        <div class="block p-6 rounded-lg shadow-lg bg-white max-w-[250px] 2xl:max-w-md max-h-[85vh] 2xl:max-h-[90vh] overflow-auto" id="add-event-form">
             <div class="mb-5 flex justify-between items-center">
                 <h1 class="text-2xl">Add event</h1>
                 <button type="button" id="buttonCloseAddFormEvent" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center">

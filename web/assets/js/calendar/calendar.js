@@ -1,4 +1,5 @@
 const calenderHandle = (events) => ({
+        height: '100vh',
         headerToolbar: {
             left: 'prevYear,prev,next,nextYear today',
             center: 'title',

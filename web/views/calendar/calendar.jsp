@@ -29,6 +29,7 @@
             color: black!important;
             padding: 10px 15px!important;
             box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+            font-size: 16px;
         }
 
         .fc-button-primary:focus{
@@ -38,10 +39,11 @@
             margin: 0 2px!important;
             border-radius: 10px!important;
         }
-
-        .fc-view .fc-col-header-cell{
-            padding-top: 10px!important;
-            padding-bottom: 10px!important;
+        .fc-toolbar-chunk{
+            display:flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
         }
 
         .fc-theme-standard td, .fc-theme-standard th{
@@ -56,39 +58,82 @@
             font-size: 18px;
         }
 
-        .fc-col-header-cell-cushion {
-            font-size: 20px;
-            font-weight: 400!important;
-        }
-
-        .fc-event-time{
-            font-size: 16px;
-        }
-
-        .fc-event-title{
-            font-size: 16px;
-        }
-
         .fc .fc-bg-event{
             opacity: 0.4!important;
         }
-        .fc-bg-event.fc-event .fc-event-title{
-            font-weight: bold;
-            font-size: 16px;
-        }
+       
+        
         a.fc-event.hidden {
             display: none;
         }
-        @media only screen and (max-width: 800px) {
+
+        @media only screen and (min-width: 1501px) {
+            .fc-view .fc-col-header-cell{
+                padding-top: 10px!important;
+                padding-bottom: 10px!important;
+            }
+
+            .fc-col-header-cell-cushion {
+                font-size: 20px;
+                font-weight: 400!important;
+            }
+            
+            .fc-event-time{
+                font-size: 16px;
+            }
+
+            .fc-event-title{
+                font-size: 16px;
+            }
+
+            .fc-bg-event.fc-event .fc-event-title{
+                font-weight: bold;
+                font-size: 16px;
+            }
+        }
+
+        @media only screen and (max-width: 1500px) {
+            .fc .fc-toolbar.fc-header-toolbar {
+                margin-bottom: 0.3rem!important;
+            }
+            .fc-event-time{
+                font-size: 12px;
+            }
+
+            .fc-event-title{
+                font-size: 12px;
+            }
+
+            .fc-bg-event.fc-event .fc-event-title{
+                font-weight: bold;
+                font-size: 14px;
+            }
+
+            .fc-button-primary{
+                padding: 7px 10px!important;
+                font-size: 12px!important;
+            }
+
+            .fc-col-header-cell-cushion {
+                font-weight: 400!important;
+            }
+
+            .fc-view .fc-col-header-cell{
+                padding-top: 5px!important;
+                padding-bottom: 5px!important;
+            }
+        }
+
+        @media only screen and (max-width: 1200px) {
             #navBarCalendar {
                 display: none;
             }
         }
     </style>
     <body>
-        <div class="ml-auto pt-4 max-h-screen">
+        <div class="ml-auto max-h-screen">
             <div class="flex" >
-                <div class="w-60 md:w-64 lg:w-80 px-6 pt-3" id="navBarCalendar">
+                <div class="w-64 2xl:w-80 px-6 pt-3" id="navBarCalendar">
                     <div class="mb-5">
                         <div class="mb-5 flex justify-between">
                             <h2 class="text-xl">Category</h2>
@@ -98,7 +143,7 @@
                                 <div class="flex justify-between items-center  mb-2">
                                     <div class="flex items-center">
                                         <input id="category-${category.getId()}" value="${category.getId()}" name="filter-event-category" aria-describedby="checkbox-1" type="checkbox" class="w-4 h-4 border-[#1c64f2] bg-white checked:bg-[#1c64f2] checked:border-[#1c64f2] bg-gray-100 rounded border-gray-300 focus:ring-blue-500" checked>
-                                        <label for="category-${category.getId()}" class="ml-3 text-md font-medium">${category.getName()}</label>
+                                        <label for="category-${category.getId()}" class="ml-3 font-medium">${category.getName()}</label>
                                     </div>
                                 </div>
                             </c:forEach>
@@ -106,11 +151,11 @@
                     </div>
                     <div class="mb-5 w-full relative">
                         <div class="flex lg:justify-center">
-                            <button type="button" id="buttonOpenAddEvent" class="flex items-center text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">
+                            <button type="button" id="buttonOpenAddEvent" class="flex items-center text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm py-1 px-2.5 2xl:px-4 2xl:py-2 text-center mr-2 mb-2">
                                 <span class="text-lg mr-2">Add Event</span><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path></svg>
                             </button>
                         </div>
-                        <div id="addEventFormContainer" class="hidden w-60 md:w-64 lg:w-80 absolute -top-[400%] left-[90%] z-[1000]">
+                        <div id="addEventFormContainer" class="hidden w-60 md:w-64 lg:w-80 absolute -top-[480%] 2xl:-top-[400%] left-[90%] z-[1000]">
                             <div>
                                 <jsp:include page="addEvent.jsp" />
                             </div>
@@ -128,14 +173,14 @@
                                 <div class="flex justify-between items-center  mb-2 calendar-item-${calendar.getId()}">
                                     <div class="flex items-center">
                                         <input id="calendar-${calendar.getId()}" value="${calendar.getId()}" name="filter-event-calendar" aria-describedby="checkbox-1" type="checkbox" class="w-4 h-4 border-[${calendar.getColor()}] bg-white checked:bg-[${calendar.getColor()}] checked:border-[${calendar.getColor()}] bg-gray-100 rounded border-gray-300 focus:ring-blue-500" checked>
-                                        <label for="calendar-${calendar.getId()}" class="ml-3 text-md font-medium">${calendar.getName()}</label>
+                                        <label for="calendar-${calendar.getId()}" class="ml-3 font-medium">${calendar.getName()}</label>
                                     </div>
                                     <div class="flex justify-end items-center">
                                         <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm inline-flex items-center p-1.5" data-modal-toggle="confirm-delete-calendar-modal" onclick="deleteCalendar(${calendar.getId()})">
-                                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>  
+                                            <svg class="w-4 h-4 xl:w-5 xl:h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>  
                                         </button>
-                                        <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm inline-flex items-center p-1.5" data-modal-toggle="editCalendar-modal" onclick="editSetValueCalendar({id: ${calendar.getId()}, name:'${calendar.getName()}', color: '${calendar.getColor()}' })">
-                                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z"></path></svg>
+                                        <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm inline-flex items-center p-1.5" data-modal-toggle="editCalendar-modal" onclick="editSetValueCalendar({id: ${calendar.getId()}, name: '${calendar.getName()}', color: '${calendar.getColor()}'})">
+                                            <svg class="w-4 h-4 xl:w-5 xl:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z"></path></svg>
                                         </button>
                                     </div>
                                 </div>
@@ -144,7 +189,7 @@
                     </div>
                 </div>
                 <div class="w-full">
-                    <div id="calendar" class="max-h-[93vh] w-full"></div>
+                    <div id="calendar" class="max-h-[92vh] 2xl:max-h-[94vh] w-full"></div>
                 </div>
             </div>
         </div>
@@ -180,36 +225,36 @@
         <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.2/main.min.js"></script>
         <script src="/assets/js/calendar/calendar.js"></script>
         <script>
-            var events = []
+                                            var events = []
             <c:forEach items="${events}" var="event">
-                events.push({
-                id: ${event.getId()},
-                title: `${event.getTitle()}`,
-                start: new Date("${event.getAdditional().getStartDate()}").toISOString(),
-                end: new Date("${event.getAdditional().getEndDate()}").toISOString(),
-                color: `${event.getAdditional().getCalendar().getColor()}`,
-                description: `${event.getDescription()}`,
-                location: `${event.getLocation()}`,
-                overlap: ${event.getAdditional().isOverlap()},
-                category: ${event.getAdditional().getCategory().getId()},
-                categoryName: "${event.getAdditional().getCategory().getName()}",
-                status: "${event.getAdditional().getStatus().getId()}",
-                statusName: "${event.getAdditional().getStatus().getName()}",
-                allDay: ${event.getAdditional().isIsAllDay()},
-                hasEnd: ${event.getAdditional().isIsHasEnd()},
-                calendarName: "${event.getAdditional().getCalendar().getName()}",
-                calendar: ${event.getAdditional().getCalendar().getId()},
-                additional: ${event.getAdditional().getId()},
+                                            events.push({
+                                                id: ${event.getId()},
+                                                title: `${event.getTitle()}`,
+                                                start: new Date("${event.getAdditional().getStartDate()}").toISOString(),
+                                                end: new Date("${event.getAdditional().getEndDate()}").toISOString(),
+                                                color: `${event.getAdditional().getCalendar().getColor()}`,
+                                                description: `${event.getDescription()}`,
+                                                location: `${event.getLocation()}`,
+                                                overlap: ${event.getAdditional().isOverlap()},
+                                                category: ${event.getAdditional().getCategory().getId()},
+                                                categoryName: "${event.getAdditional().getCategory().getName()}",
+                                                status: "${event.getAdditional().getStatus().getId()}",
+                                                statusName: "${event.getAdditional().getStatus().getName()}",
+                                                allDay: ${event.getAdditional().isIsAllDay()},
+                                                hasEnd: ${event.getAdditional().isIsHasEnd()},
+                                                calendarName: "${event.getAdditional().getCalendar().getName()}",
+                                                calendar: ${event.getAdditional().getCalendar().getId()},
+                                                additional: ${event.getAdditional().getId()},
                 <c:if test="${event.getAdditional().getDisplay() != null}">
-                display: "${event.getAdditional().getDisplay()}",    
+                                                display: "${event.getAdditional().getDisplay()}",
                 </c:if>
-            })
+                                            })
             </c:forEach>
         </script>
         <script src="/assets/js/calendar/event.js"></script>
         <script>
-            const ws_schema = window.location.protocol === "https:" ? "wss" : "ws";
-            const socketUrl = ws_schema+'://' + window.location.host + '/ws/calendar/${sessionScope.user.username}'
+                                            const ws_schema = window.location.protocol === "https:" ? "wss" : "ws";
+                                            const socketUrl = ws_schema + '://' + window.location.host + '/ws/calendar/${sessionScope.user.username}'
         </script>
         <script src="/assets/js/calendar/websocket.js"></script>
     </body>
