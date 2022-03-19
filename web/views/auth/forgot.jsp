@@ -10,7 +10,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Calendar Page</title>
-        <link rel="icon" id="favicon256" sizes="256x256" type="image/x-icon" href="/assets/images/icon.ico">S
+        <link rel="icon" id="favicon256" sizes="256x256" type="image/x-icon" href="/assets/images/icon.ico">
         <script src="https://cdn.tailwindcss.com"></script>
         <link rel="stylesheet" href="https://unpkg.com/flowbite@1.3.3/dist/flowbite.min.css" />
         <%
@@ -20,7 +20,10 @@
     <body>
         <div class="flex items-center justify-center min-h-screen bg-gray-5z0">
             <div class="px-10 py-10 mt-4 text-left bg-white shadow-lg rounded-lg">
-                <h3 class="text-4xl font-bold text-center mt-3">Forgot password</h3>
+                <div class="flex justify-center">
+                     <img src="/assets/images/icon.ico" style="width: 50px"/>
+                </div>
+                <h3 class="text-3xl font-bold text-center mt-5">Forgot password</h3>
                 <form action="/password/forgot" autocomplete="off" method="POST">
                     <div class="mt-6 sm:w-80 md:w-96">
                         <c:if test="${error!=null}">

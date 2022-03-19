@@ -47,7 +47,7 @@
                 </div>
             </div>
         </div>
-        <div class="mt-[160px] max-w-lg mx-auto">
+        <div class="mt-[160px] max-w-lg mx-auto pb-10 px-10">
             <form action="/profile" method="post" id="form-profile-edit">
                 <div id="showErrorForm" class="hidden">
                     <div id="contentErrorForm" class="bg-red-100 rounded-lg py-5 px-6 mb-4 text-base text-red-700 mb-3" role="alert">
@@ -101,9 +101,9 @@
                     <input class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                            type="date" id="birthday" name="birthday" required value="<%=user.getBirthday()%>"/>
                 </div>
-                <div class="flex justify-between items-center">
+                <div class="flex justify-center sm:justify-between items-center flex-wrap ">
                     <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center">Submit</button>
-                    <a href="/password/change" class="text-blue-500">change password</a>
+                    <a href="/password/change" class="text-blue-500 whitespace-nowrap text-center mt-2">Change password</a>
                 </div>
             </form>
         </div>

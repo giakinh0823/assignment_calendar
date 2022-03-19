@@ -25,8 +25,8 @@
         </button>
 
         <!-- Main modal -->
-        <div id="modelCalendarEvent" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed right-0 left-0 top-4 z-50 justify-center items-center h-modal md:h-full md:inset-0">
-            <div class="relative px-4 w-full max-w-2xl h-full md:h-auto">
+        <div id="modelCalendarEvent" aria-hidden="true" class="py-[30px] 2xl:py-[100px] hidden overflow-y-auto overflow-x-hidden fixed right-0 left-0 top-4 z-50 justify-center items-center h-modal md:h-full md:inset-0">
+            <div class="relative px-4 w-[600px] h-full">
                 <!-- Modal content -->
                 <div class="relative bg-white rounded-lg shadow">
                     <!-- Modal header -->
@@ -42,7 +42,7 @@
                     <div class="space-y-6">
                         <div class="p-5 space-y-5" id="infoEventContent">
                             <div class="flex items-center justify-between">
-                                <p class="text-3xl" id="titleDetailEvent">Đi họp lớp</p>
+                                <p class="text-2xl 2xl:text-3xl" id="titleDetailEvent">Đi họp lớp</p>
                                 <div class="flex justify-end items-center">
                                     <button type="button" id="buttonDeleteEvent" data-modal-toggle="confirm-delete-event-modal" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center">
                                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>                                    </button>
@@ -53,24 +53,24 @@
                             </div>
                             <p class="text-lg flex items-center">
                                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg> 
-                                <span class="ml-2" id="timeDetailEvent"> </span>
+                                <span class="ml-2 text-md 2xl:text-lg" id="timeDetailEvent"> </span>
                             </p>
                             <p class="text-lg flex items-center">
                                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
-                                <span class="ml-2" id="locationDetailEvent"></span>
+                                <span class="ml-2 text-md 2xl:text-lg" id="locationDetailEvent"></span>
                             </p>
                             <p class="text-lg" id="descriptionDetailEvent"></p>
                             <p class="text-lg flex items-center">
                                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13"></path></svg>                            
-                                <span class="ml-2" id="categoryDetailEvent"></span>
+                                <span class="ml-2 text-md 2xl:text-lg" id="categoryDetailEvent"></span>
                             </p>
                             <p class="text-lg flex items-center">
                                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
-                                <span class="ml-2" id="calendarDetailEvent"></span>
+                                <span class="ml-2 text-md 2xl:text-lg" id="calendarDetailEvent"></span>
                             </p>
                             <p class="text-lg flex items-center">
                                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.636 18.364a9 9 0 010-12.728m12.728 0a9 9 0 010 12.728m-9.9-2.829a5 5 0 010-7.07m7.072 0a5 5 0 010 7.07M13 12a1 1 0 11-2 0 1 1 0 012 0z"></path></svg>
-                                <span class="ml-2" id="statusDetailEvent"></span>
+                                <span class="ml-2 text-md 2xl:text-lg" id="statusDetailEvent"></span>
                             </p>
                         </div>
                         <div class="hidden flex justify-center pl-5 pr-5" id="editEventContent">

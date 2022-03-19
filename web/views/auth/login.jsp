@@ -45,7 +45,7 @@
                         </div>
                         <div class="flex items-baseline justify-between mt-4">
                             <button class="px-6 py-2 mt-4 text-white bg-blue-600 rounded-lg hover:bg-blue-900">Login</button>
-                            <div>
+                            <div class="ml-5">
                                 <a href="/signup" class="text-sm text-blue-600 hover:underline">Signup</a>
                                 <span>/</span>
                                 <a href="/password/forgot" class="text-sm text-blue-600 hover:underline">Forgot password?</a>
