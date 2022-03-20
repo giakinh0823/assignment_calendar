@@ -188,8 +188,8 @@
                     events.push({
                         id: ${event.getId()},
                         title: `${event.getTitle()}`,
-                        start: new Date("${event.getAdditional().getStartDate()}").getTime(),
-                        end: new Date("${event.getAdditional().getEndDate()}").getTime(),
+                        start: new Date("${event.getAdditional().getStartDate()}"),
+                        end: new Date("${event.getAdditional().getEndDate()}"),
                         color: `${event.getAdditional().getCalendar().getColor()}`,
                         description: `${event.getDescription()}`,
                         location: `${event.getLocation()}`,
