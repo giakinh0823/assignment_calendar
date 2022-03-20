@@ -15,7 +15,8 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Calendar</title>
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.2/main.min.css">
+        <!--        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.2/main.min.css">-->
+        <link rel="stylesheet" href="/assets/lib/fullcalendar/main.min.css">
         <%
             ArrayList<EventCalendar> events = (ArrayList<EventCalendar>) request.getAttribute("events");
             ArrayList<Calendar> calendars = (ArrayList<Calendar>) request.getAttribute("calendars");
@@ -61,8 +62,8 @@
         .fc .fc-bg-event{
             opacity: 0.4!important;
         }
-       
-        
+
+
         a.fc-event.hidden {
             display: none;
         }
@@ -77,7 +78,7 @@
                 font-size: 20px;
                 font-weight: 400!important;
             }
-            
+
             .fc-event-time{
                 font-size: 16px;
             }
@@ -222,7 +223,7 @@
         </div>
         <jsp:include page="infoEvent.jsp" />
         <jsp:include page="editCalendar.jsp" />
-        <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.2/main.min.js"></script>
+        <script src="/assets/lib/fullcalendar/main.min.js"></script>
         <script src="/assets/js/calendar/calendar.js"></script>
         <script>
                                             var events = []
