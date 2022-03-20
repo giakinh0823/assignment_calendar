@@ -23,45 +23,146 @@ const labels = [
     'Tháng 12',
 ];
 
-const data = {
-    labels: labels,
-    datasets: [{
-            label: 'Event',
-            fill: eventCalendars,
-            backgroundColor: CHART_COLORS.blue,
-            borderColor: CHART_COLORS.blue,
-            data: eventCalendars,
-        },
-        {
-            label: 'Calendar',
-            backgroundColor: CHART_COLORS.red,
-            borderColor: CHART_COLORS.red,
-            data: calendars,
-            fill: true,
-        }
-    ]
-};
 
 
-const config = {
-    type: 'bar',
-    data: data,
-    options: {
-        responsive: true,
-        plugins: {
-            legend: {
-                position: 'top',
-            },
-            title: {
-                display: true,
-                text: 'Event and Calendar'
-            }
+var options = {
+    series: [{
+            name: 'Calendar',
+            type: 'column',
+            data: calendars
+        }, {
+            name: 'Events',
+            type: 'area',
+            data: eventCalendars
+        }],
+    chart: {
+        height: 850,
+        type: 'line',
+        stacked: false,
+    },
+    stroke: {
+        width: [0, 2, 5],
+        curve: 'smooth'
+    },
+    plotOptions: {
+        bar: {
+            columnWidth: '50%'
         }
     },
+
+    fill: {
+        opacity: [0.85, 0.25, 1],
+        gradient: {
+            inverseColors: false,
+            shade: 'light',
+            type: "vertical",
+            opacityFrom: 0.85,
+            opacityTo: 0.55,
+            stops: [0, 100, 100, 100]
+        }
+    },
+    labels: labels,
+    markers: {
+        size: 0
+    },
+    xaxis: {
+        type: 'string'
+    },
+    yaxis: {
+        title: {
+            text: 'Points',
+        },
+        min: 0
+    },
+    tooltip: {
+        shared: true,
+        intersect: false,
+        y: {
+            formatter: function (y) {
+                if (typeof y !== "undefined") {
+                    return y.toFixed(0) + " points";
+                }
+                return y;
+
+            }
+        }
+    }
+};
+
+var chart = new ApexCharts(document.querySelector("#chart"), options);
+chart.render();
+
+
+var optionsUser = {
+    series: [{
+            name: "User",
+            data: users
+        }],
+    chart: {
+        type: 'area',
+        height: 550,
+        zoom: {
+            enabled: false
+        }
+    },
+    dataLabels: {
+        enabled: false
+    },
+    stroke: {
+        curve: 'straight'
+    },
+
+    title: {
+        text: 'User',
+        align: 'left'
+    },
+    subtitle: {
+        text: 'Register user',
+        align: 'left'
+    },
+    labels: labels,
+    xaxis: {
+        type: 'string',
+    },
+    yaxis: {
+        opposite: true
+    },
+    legend: {
+        horizontalAlign: 'left'
+    }
 };
 
 
-const myChart = new Chart(document.getElementById('mainChart'), config);
+
+var chartUser = new ApexCharts(document.querySelector("#chartUser"), optionsUser);
+chartUser.render();
+
+var optionsCategory = {
+    series: listCategoryQuantity,
+    chart: {
+        width: 380,
+        type: 'pie',
+    },
+    labels: listCategoryLabel,
+    responsive: [{
+            breakpoint: 480,
+            options: {
+                chart: {
+                    width: 200
+                },
+                legend: {
+                    position: 'bottom'
+                }
+            }
+        }]
+};
+
+var chartCategory = new ApexCharts(document.querySelector("#chartCategory"), optionsCategory);
+chartCategory.render();
+
+
+var colors = Object.values(CHART_COLORS);
+
 
 
 var colors = Object.values(CHART_COLORS);
@@ -110,57 +211,5 @@ const configCategory = {
 
 
 const categoryChart = new Chart(document.getElementById('categoryChart'), configCategory);
-
 categoryChart.canvas.parentNode.style.height = '728px';
 categoryChart.canvas.parentNode.style.width = '70%';
-
-const dataUser = {
-    labels: labels,
-    datasets: [
-        {
-            label: 'Dataset 1',
-            data: users,
-            borderColor: CHART_COLORS.red,
-            backgroundColor: CHART_COLORS.red,
-        },
-    ]
-};
-
-const configUser = {
-    type: 'line',
-    data: dataUser,
-    options: {
-        responsive: true,
-        interaction: {
-            mode: 'index',
-            intersect: false,
-        },
-        stacked: false,
-        plugins: {
-            title: {
-                display: true,
-                text: 'User'
-            }
-        },
-        scales: {
-            y: {
-                type: 'linear',
-                display: true,
-                position: 'left',
-            },
-            y1: {
-                type: 'linear',
-                display: true,
-                position: 'right',
-
-                // grid line settings
-                grid: {
-                    drawOnChartArea: false, // only want the grid lines for one axis to show up
-                },
-            },
-        }
-    },
-};
-
-
-const userChart = new Chart(document.getElementById('userChart'), configUser);
