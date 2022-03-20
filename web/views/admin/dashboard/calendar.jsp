@@ -188,8 +188,8 @@
                     events.push({
                         id: ${event.getId()},
                         title: `${event.getTitle()}`,
-                        start: new Date("${event.getAdditional().getStartDate()}"+" UTC").toISOString(),
-                        end: new Date("${event.getAdditional().getEndDate()}"+" UTC").toISOString(),
+                        start: new Date("${event.getAdditional().getStartDate()}").toISOString(),
+                        end: new Date("${event.getAdditional().getEndDate()}").toISOString(),
                         color: `${event.getAdditional().getCalendar().getColor()}`,
                         description: `${event.getDescription()}`,
                         location: `${event.getLocation()}`,
