@@ -1,7 +1,11 @@
 // init calendar rerender
-var calendarEl = document.getElementById("calendar");
-var calendar = new FullCalendar.Calendar(calendarEl, calenderHandle(events));
-calendar.render();
+var calendar;
+$(window).ready(function () {
+    var calendarEl = document.getElementById("calendar");
+    calendar = new FullCalendar.Calendar(calendarEl, calenderHandle(events.length > 0 ? events: []));
+    calendar.render();
+})
+
 // change event calendar form
 $("#calendarGroup").on('change', (e) => {
     const color = event.target[event.target.selectedIndex].getAttribute("data-color");
