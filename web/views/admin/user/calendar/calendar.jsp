@@ -131,31 +131,30 @@
         <script src="/assets/lib/fullcalendar/main.min.js"></script>
         <script src="/assets/js/calendar/calendarUser.js"></script>
         <script>
-            var events = []
+            var events = [
             <c:forEach items="${events}" var="event">
-                events.push({
-                id: ${event.getId()},
-                title: `${event.getTitle()}`,
-                start: new Date("${event.getAdditional().getStartDate()}"),
-                end: new Date("${event.getAdditional().getEndDate()}"),
-                color: `${event.getAdditional().getCalendar().getColor()}`,
-                description: `${event.getDescription()}`,
-                location: `${event.getLocation()}`,
-                overlap: ${event.getAdditional().isOverlap()},
-                category: ${event.getAdditional().getCategory().getId()},
-                categoryName: "${event.getAdditional().getCategory().getName()}",
-                status: "${event.getAdditional().getStatus().getId()}",
-                statusName: "${event.getAdditional().getStatus().getName()}",
-                allDay: ${event.getAdditional().isIsAllDay()},
-                hasEnd: ${event.getAdditional().isIsHasEnd()},
-                calendarName: "${event.getAdditional().getCalendar().getName()}",
-                calendar: ${event.getAdditional().getCalendar().getId()},
-                additional: ${event.getAdditional().getId()},
-                <c:if test="${event.getAdditional().getDisplay() != null}">
-                display: "${event.getAdditional().getDisplay()}",    
-                </c:if>
-            })
+                {
+                    id: ${event.id},
+                    title: `${event.title}`,
+                    start: "${event.additional.startDate}",
+                    end: "${event.additional.endDate}",
+                    color: `${event.additional.calendar.color}`,
+                    description: `${event.description}`,
+                    location: `${event.location}`,
+                    overlap: ${event.additional.overlap},
+                    category: ${event.additional.category.id},
+                    categoryName: "${event.additional.category.name}",
+                    status: "${event.additional.status.id}",
+                    statusName: "${event.additional.status.name}",
+                    allDay: ${event.additional.isAllDay},
+                    hasEnd: ${event.additional.isHasEnd},
+                    calendarName: "${event.additional.calendar.name}",
+                    calendar: ${event.additional.calendar.id},
+                    additional: ${event.additional.id},
+                    display: "${event.additional.display}",
+                },
             </c:forEach>
+            ]
         </script>
         <script src="/assets/js/calendar/eventUser.js"></script>
     </body>
