@@ -15,7 +15,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.2/main.min.css">
+        <link rel="stylesheet" href="/assets/lib/fullcalendar/main.min.css">
         <%
             ArrayList<EventCalendar> events = (ArrayList<EventCalendar>) request.getAttribute("events");
             ArrayList<Calendar> calendars = (ArrayList<Calendar>) request.getAttribute("calendars");
@@ -179,7 +179,7 @@
         </div>
         <jsp:include page="infoEvent.jsp" />
         <jsp:include page="editCalendar.jsp" />
-        <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.2/main.min.js"></script>
+        <script src="/assets/lib/fullcalendar/main.min.js"></script>
         <script src="/assets/js/calendar/calendar.js"></script>
         <script>
             var events = []
