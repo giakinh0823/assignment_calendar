@@ -54,13 +54,13 @@
                         </div>
                     </div>
                 </div>
-                <div >
+                <div class="mt-10">
                     <div class="max-w-full">
-                        <canvas id="mainChart" style="max-width: 100%!important; max-height: 85vh!important"></canvas>
+                        <div id="chart"></div>
                     </div>
                     <div class="mt-20 w-full grid grid-cols-5 gap-10">
                         <div class="max-w-full col-span-3 px-10 shadow-lg">
-                            <canvas id="userChart"></canvas>
+                            <div id="chartUser"></div>
                         </div>
                         <div class="mx-auto col-span-2 shadow-lg flex justify-center items-center">
                             <canvas id="categoryChart"></canvas>
@@ -74,10 +74,11 @@
             </div>
         </div>
     </body>
+    <script src="/assets/lib/apexcharts/main.js"></script>
     <script>
         var listCategoryQuantity = [];
         var listCategoryLabel = [];
-        
+
         <c:forEach items="${listCategory}" var="category">
         listCategoryLabel.push("${category.name}");
         listCategoryQuantity[${category.id}] = 0;
@@ -91,7 +92,7 @@
             listCategoryQuantity[${event.additional.category.id}] += 1;
         }
         </c:forEach>
-        
+
         listCategoryQuantity = listCategoryQuantity.filter(Number);
 
         <c:forEach items="${calendars}" var="calendar">
