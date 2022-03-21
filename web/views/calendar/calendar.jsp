@@ -137,13 +137,14 @@
         #navBarCalendar::-webkit-scrollbar-track
         {
             border-radius: 10px;
-            background-color: #F5F5F5;
+            background-color: #fff;
         }
 
         #navBarCalendar::-webkit-scrollbar
         {
             width: 5px;
-            background-color: #F5F5F5;
+            background-color: #fff;
+            border-radius: 10px;
         }
 
         #navBarCalendar::-webkit-scrollbar-thumb
@@ -154,6 +155,7 @@
 
         .mbsc-ios.mbsc-datepicker-inline{
             border-color: #fff;
+            border-radius: 10px;
         }
 
         .mbsc-calendar-title, .mbsc-calendar-button{
@@ -166,13 +168,14 @@
             $("#category-list").sortable();
             $("#calendar-list").sortable();
             $("#navBarCalendar-content").sortable();
+            $("#content-main").sortable();
         });
     </script>
     <body>
-        <div class="ml-auto max-h-screen max-w-full max-h-screen">
-            <div class="flex" >
-                <div class="w-64 2xl:w-80 px-2 2xl:px-6 pt-3 max-h-[93vh] overflow-y-scroll" id="navBarCalendar">
-                    <div class="w-full" id="navBarCalendar-content">
+        <div class="ml-auto max-h-screen max-w-full max-h-screen bg-white">
+            <div class="flex bg-white overflow-x-hidden max-w-full" id="content-main">
+                <div class="w-[20rem] 2xl:w-80 px-2 2xl:px-3 pt-3 max-h-[93vh] overflow-y-scroll bg-white rounded-xl" id="navBarCalendar">
+                    <div class="w-full rounded-xl" id="navBarCalendar-content">
                         <div class="mb-5 w-full mt-5">
                             <input id="demo-marked" class="hidden"/>
                         </div>
@@ -226,8 +229,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="w-full">
-                    <div id="calendar" class="max-h-[93vh] 2xl:max-h-[94vh] w-full"></div>
+                <div class="w-full bg-white rounded-xl overflow-hidden">
+                    <div id="calendar" class="max-h-[93vh] lg:max-h-[94vh] 2xl:max-h-[95vh] w-full"></div>
                 </div>
             </div>
             <div id="addEventFormContainer" class="hidden w-60 md:w-64 lg:w-80 absolute z-[1000] cursor-pointer ui-widget-content">
