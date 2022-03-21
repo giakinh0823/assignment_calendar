@@ -17,6 +17,8 @@
         <title>Calendar</title>
         <!--        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.2/main.min.css">-->
         <link rel="stylesheet" href="/assets/lib/fullcalendar/main.min.css">
+        <link href="/assets/lib/calendar/css/mobiscroll.javascript.min.css" rel="stylesheet" />
+        <script src="/assets/lib/calendar/js/mobiscroll.javascript.min.js"></script>
         <%
             ArrayList<EventCalendar> events = (ArrayList<EventCalendar>) request.getAttribute("events");
             ArrayList<Calendar> calendars = (ArrayList<Calendar>) request.getAttribute("calendars");
@@ -130,12 +132,25 @@
                 display: none;
             }
         }
+
+        .mbsc-ios.mbsc-datepicker-inline{
+            border-color: #fff;
+        }
+        
+        .mbsc-calendar-title, .mbsc-calendar-button{
+            color: #1d4ed8;
+            font-weight: bold;
+        }
+
     </style>
     <body>
         <div class="ml-auto max-h-screen">
             <div class="flex" >
-                <div class="w-64 2xl:w-80 px-6 pt-3" id="navBarCalendar">
-                    <div class="mb-5">
+                <div class="w-64 2xl:w-80 px-2 2xl:px-6 pt-3" id="navBarCalendar">
+                    <div class="mb-5 w-full mt-5">
+                        <input id="demo-marked" class="hidden"/>
+                    </div>
+                    <div class="mb-5 px-3">
                         <div class="mb-5 flex justify-between">
                             <h2 class="text-xl">Category</h2>
                         </div>
@@ -156,13 +171,13 @@
                                 <span class="text-lg mr-2">Add Event</span><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path></svg>
                             </button>
                         </div>
-                        <div id="addEventFormContainer" class="hidden w-60 md:w-64 lg:w-80 absolute -top-[480%] 2xl:-top-[400%] left-[90%] z-[1000]">
+                        <div id="addEventFormContainer" class="hidden w-60 md:w-64 lg:w-80 absolute -top-[1280%] 2xl:-top-[1120%] left-[90%] z-[1000]">
                             <div>
                                 <jsp:include page="addEvent.jsp" />
                             </div>
                         </div>
                     </div>
-                    <div class="mb-5">
+                    <div class="mb-5 px-3">
                         <div class="mb-5 flex justify-between">
                             <h2 class="text-xl">My Calendars</h2>
                             <button type="button" data-modal-toggle="addCalendar-modal">
@@ -227,28 +242,38 @@
         <script src="/assets/js/calendar/calendar.js"></script>
         <script type="text/javascript">
                                             var events = [
-                                                <c:forEach items="${events}" var="event">
+            <c:forEach items="${events}" var="event">
                                                 {
                                                     id: ${event.id},
-                                                    title: `${event.title}`,
+                                                            title: `${event.title}`,
                                                     start: "${event.additional.startDate}",
-                                                    end: "${event.additional.endDate}",
+                                                            end: "${event.additional.endDate}",
                                                     color: `${event.additional.calendar.color}`,
-                                                    description: `${event.description}`,
+                                                            description: `${event.description}`,
                                                     location: `${event.location}`,
-                                                    overlap: ${event.additional.overlap},
+                                                            overlap: ${event.additional.overlap},
                                                     category: ${event.additional.category.id},
-                                                    categoryName: "${event.additional.category.name}",
+                                                            categoryName: "${event.additional.category.name}",
                                                     status: "${event.additional.status.id}",
-                                                    statusName: "${event.additional.status.name}",
+                                                            statusName: "${event.additional.status.name}",
                                                     allDay: ${event.additional.isAllDay},
-                                                    hasEnd: ${event.additional.isHasEnd},
+                                                            hasEnd: ${event.additional.isHasEnd},
                                                     calendarName: "${event.additional.calendar.name}",
-                                                    calendar: ${event.additional.calendar.id},
+                                                            calendar: ${event.additional.calendar.id},
                                                     additional: ${event.additional.id},
-                                                    display: "${event.additional.display}",
+                                                            display: "${event.additional.display}",
                                                 },
-                                                </c:forEach>
+            </c:forEach>
+                                            ]
+                                            var marked = [
+            <c:forEach items="${events}" var="event">
+                                            {
+                                            start: new Date("${event.additional.startDate}"),
+                                                    end: new Date("${event.additional.endDate}"),
+                                            color: `${event.additional.calendar.color}`,
+                                            }
+                                            ,
+            </c:forEach>
                                             ]
         </script>
         <script  src="/assets/js/calendar/event.js"></script>
@@ -257,6 +282,22 @@
                                             const socketUrl = ws_schema + '://' + window.location.host + '/ws/calendar/${sessionScope.user.username}'
         </script>
         <script src="/assets/js/calendar/websocket.js"></script>
+        <script>
+                                            mobiscroll.setOptions({
+                                                theme: 'ios',
+                                                themeVariant: 'light',
+                                            });
+                                            var now = new Date();
+                                            mobiscroll.datepicker('#demo-marked', {
+                                                controls: ['calendar'],
+                                                display: 'inline',
+                                                marked: marked,
+                                            });
+                                            $("#demo-marked").on('change', function () {
+                                                calendar.gotoDate(new Date($(this).val()));
+                                            })
+
+        </script>
     </body>
 </html>
 <jsp:include page="../base/footer.jsp" />
