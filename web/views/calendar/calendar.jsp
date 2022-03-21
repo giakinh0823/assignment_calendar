@@ -132,7 +132,25 @@
                 display: none;
             }
         }
+        
+        #navBarCalendar::-webkit-scrollbar-track
+        {
+            border-radius: 10px;
+            background-color: #F5F5F5;
+        }
 
+        #navBarCalendar::-webkit-scrollbar
+        {
+            width: 5px;
+            background-color: #F5F5F5;
+        }
+
+        #navBarCalendar::-webkit-scrollbar-thumb
+        {
+            border-radius: 10px;
+            background-color: #bebebe;
+        }
+        
         .mbsc-ios.mbsc-datepicker-inline{
             border-color: #fff;
         }
@@ -146,7 +164,7 @@
     <body>
         <div class="ml-auto max-h-screen">
             <div class="flex" >
-                <div class="w-64 2xl:w-80 px-2 2xl:px-6 pt-3" id="navBarCalendar">
+                <div class="w-64 2xl:w-80 px-2 2xl:px-6 pt-3 max-h-[93vh] overflow-y-auto" id="navBarCalendar">
                     <div class="mb-5 w-full mt-5">
                         <input id="demo-marked" class="hidden"/>
                     </div>
@@ -205,7 +223,7 @@
                     </div>
                 </div>
                 <div class="w-full">
-                    <div id="calendar" class="max-h-[92vh] 2xl:max-h-[94vh] w-full"></div>
+                    <div id="calendar" class="max-h-[93vh] 2xl:max-h-[94vh] w-full"></div>
                 </div>
             </div>
         </div>
