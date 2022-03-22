@@ -268,3 +268,5 @@ $("#buttonMenuNavBarCalendar").on("click", function (e) {
         calendar.render();
     }
 })
+
+

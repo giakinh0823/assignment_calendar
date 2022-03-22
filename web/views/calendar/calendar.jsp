@@ -227,7 +227,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="w-full bg-white rounded-xl overflow-hidden">
+                <div class="w-full bg-white rounded-xl overflow-hidden relative">
                     <div id="calendar" class="max-h-[93vh] lg:max-h-[94vh] 2xl:max-h-[95vh] w-full"></div>
                 </div>
             </div>
@@ -316,7 +316,7 @@
                                                     themeVariant: 'light',
                                                 });
                                                 var now = new Date();
-                                                mobiscroll.datepicker('#demo-marked', {
+                                                var instance = mobiscroll.datepicker('#demo-marked', {
                                                     controls: ['calendar'],
                                                     display: 'inline',
                                                     marked: marked,
@@ -324,6 +324,7 @@
                                                 $("#demo-marked").on('change', function () {
                                                     calendar.gotoDate(new Date($(this).val()));
                                                 })
+
 
         </script>
     </body>
