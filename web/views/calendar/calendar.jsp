@@ -167,8 +167,6 @@
         $(function () {
             $("#category-list").sortable();
             $("#calendar-list").sortable();
-            $("#navBarCalendar-content").sortable();
-            $("#content-main").sortable();
         });
     </script>
     <body>
