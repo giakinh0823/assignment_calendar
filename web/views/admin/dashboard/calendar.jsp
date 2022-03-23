@@ -110,11 +110,6 @@
                                 <span class="text-lg mr-2">Add Event</span><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path></svg>
                             </button>
                         </div>
-                        <div id="addEventFormContainer" class="hidden w-60 md:w-64 lg:w-80 absolute -top-[400%] left-[90%] z-[1000]">
-                            <div>
-                                <jsp:include page="addEvent.jsp" />
-                            </div>
-                        </div>
                     </div>
                     <div class="mb-5">
                         <div class="mb-5 flex justify-between">
@@ -208,10 +203,6 @@
                                                 ]
         </script>
         <script src="/assets/js/calendar/event.js"></script>
-        <script>
-                                                const socketUrl = 'ws://' + window.location.host + '/ws/calendar/${sessionScope.user.username}'
-        </script>
-        <script src="/assets/js/calendar/websocket.js"></script>
     </body>
 </html>
 <jsp:include page="../base/footer.jsp" />
