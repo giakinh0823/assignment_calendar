@@ -2,7 +2,7 @@
 var calendar;
 $(window).ready(function () {
     var calendarEl = document.getElementById("calendar");
-    calendar = new FullCalendar.Calendar(calendarEl, calenderHandle(events.length > 0 ? events: []));
+    calendar = new FullCalendar.Calendar(calendarEl, calenderHandle(events.length > 0 ? events : []));
     calendar.render();
 })
 
@@ -229,9 +229,16 @@ $("input[name='filter-event-calendar']").on("change", function () {
 })
 
 // Event handle form add event
-$("#buttonOpenAddEvent").on('click', () => {
+$("#buttonOpenAddEvent").on('click', function () {
     $("#addEventFormContainer").removeClass("hidden")
+    $("#addEventFormContainer").css({top: $("#buttonOpenAddEvent").offset().top - 560, left: $("#buttonOpenAddEvent").offset().left + 160}).show();
 });
+
+$(function () {
+    $("#addEventFormContainer").draggable();
+     $("#addEventFormContainer").resizable();
+});
+
 $("#buttonCloseAddFormEvent").on('click', () => {
     $("#addEventFormContainer").addClass("hidden");
 })
@@ -261,3 +268,5 @@ $("#buttonMenuNavBarCalendar").on("click", function (e) {
         calendar.render();
     }
 })
+
+

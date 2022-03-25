@@ -148,7 +148,7 @@
                                                     </div>
                                                 </td>
                                                 <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap">${event.getId()}</td>
-                                                <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap">${event.getTitle()}</td>
+                                                <td class="py-4 px-6 text-sm font-medium text-gray-900">${event.getTitle()}</td>
                                                 <td class="py-4 px-6 text-sm font-medium text-gray-900"><span style="overflow: hidden;text-overflow: ellipsis;display: -webkit-box;-webkit-line-clamp: 2;-webkit-box-orient: vertical;">${event.getDescription()}</span></td>
                                                 <td class="py-4 px-6 text-sm font-medium text-gray-900"><span style="overflow: hidden;text-overflow: ellipsis;display: -webkit-box;-webkit-line-clamp: 2;-webkit-box-orient: vertical;">${event.getLocation()}</span></td>
                                                 <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap">${event.getAdditional().getStatus().getName()}</td>

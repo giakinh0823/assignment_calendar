@@ -2,9 +2,46 @@ const calenderHandle = (events) => ({
         height: '100vh',
         timeZone: 'local',
         headerToolbar: {
-            left: 'prevYear,prev,next,nextYear today',
+            left: 'prev,next today',
             center: 'title',
             right: 'dayGridMonth,timeGridWeek,timeGridDay,listMonth',
+        },
+        customButtons: {
+            next: {
+                text: 'next',
+                click: function () {
+                    calendar.next();
+                    if(instance){
+                        if(new Date(calendar.getDate()).getMonth()== new Date().getMonth()){
+                            instance.setVal(new Date(),false)
+                        }else{
+                            instance.setVal(calendar.getDate(),true)
+                        }
+                    }
+                }
+            },
+            prev: {
+                text: 'prev',
+                click: function () {
+                    calendar.prev();
+                   if(instance){
+                        if(new Date(calendar.getDate()).getMonth()== new Date().getMonth()){
+                            instance.setVal(new Date(),true)
+                        }else{
+                            instance.setVal(calendar.getDate(),true)
+                        }
+                    }
+                }
+            },
+            today: {
+                text: 'today',
+                click: function () {
+                    calendar.today();
+                    if(instance){
+                        instance.setVal(new Date(),true)
+                    }
+                }
+            }
         },
         eventTimeFormat: {// like '14:30:00'
             hour: '2-digit',
@@ -28,6 +65,7 @@ const calenderHandle = (events) => ({
         selectable: true,
         droppable: true,
         dayMaxEventRows: true,
+        nowIndicator: true,
         selectOverlap: function (event) {
             return event.rendering === 'background';
         },
